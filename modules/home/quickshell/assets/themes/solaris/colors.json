@@ -1,0 +1,21 @@
+{
+    "name": "Solaris",
+    "base00": "#14141a",
+    "base01": "#1a1a24",
+    "base02": "#23232d",
+    "base03": "#6a6a7a",
+    "base04": "#7f7f92",
+    "base05": "#e0e0e6",
+    "base06": "#f9f9fd",
+    "base07": "#fdfdff",
+    "base08": "#c27d7d",
+    "base09": "#d4a76a",
+    "base0A": "#ebd1a0",
+    "base0B": "#93a68a",
+    "base0C": "#b4bd7d",
+    "base0D": "#d4a76a",
+    "base0E": "#bc8a5f",
+    "base0F": "#909764",
+    "primaryIdx": "base09",
+    "secondaryIdx": "base0E"
+}

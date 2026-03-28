@@ -1,0 +1,32 @@
+/*
+ * Quickshell Steam Theme Template
+ * Designed for use with Millenium (https://millenium.sh/)
+ */
+
+:root {
+    /* NEVKO-UI Specific Variables */
+    --custom-accent: {{primary}} !important;
+    --green-color: {{success}} !important;
+    --idle-status: {{secondary}} !important;
+    --ingame-status: {{success}} !important;
+    --ingameidle-status: {{success}} !important;
+    --main-background: {{background}} !important;
+    --offline-status: {{muted}} !important;
+    --online-status: {{primary}} !important;
+    --purple-color: {{accent}} !important;
+    
+    /* Fallback/Additional Tweaks for UI blending */
+    --SystemAccent: {{primary}} !important;
+    --SystemAccentLight: {{primary}} !important;
+    --SystemAccentDark: {{secondary}} !important;
+    --Focus-Color: {{primary}} !important;
+    --Hover-Color: {{surfaceAlt}} !important;
+    
+    /* Typical Steam variable fallbacks just in case */
+    --ClientBG: {{background}} !important;
+}
+
+/* Force body background to match in case NEVKO misses edge cases */
+html, body {
+    background-color: var(--main-background) !important;
+}

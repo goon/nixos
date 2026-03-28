@@ -1,0 +1,21 @@
+{
+    "name": "Gruvbox",
+    "base00": "#282828",
+    "base01": "#282828",
+    "base02": "#32302f",
+    "base03": "#7c6f64",
+    "base04": "#948577",
+    "base05": "#d4be98",
+    "base06": "#e9ddc8",
+    "base07": "#fef9f0",
+    "base08": "#ea6962",
+    "base09": "#e78a4e",
+    "base0A": "#d8a657",
+    "base0B": "#63887a",
+    "base0C": "#9eb96a",
+    "base0D": "#ea6962",
+    "base0E": "#e78a4e",
+    "base0F": "#7e9454",
+    "primaryIdx": "base08",
+    "secondaryIdx": "base09"
+}

@@ -1,0 +1,60 @@
+//  FIREFOX PICTURE-IN-PICTURE FLOATING 
+window-rule {
+    open-floating true
+    match app-id=r#"firefox$"# title="^Picture-in-Picture$"
+    match title="floating-terminal"
+    default-column-width { fixed 1250; }
+    default-window-height { fixed 800; }
+}
+
+//  VISUAL INDICATOR FOR SCREENCASTED WINDOWS 
+window-rule {
+    match is-window-cast-target=true
+    border {
+        width 2
+        active-gradient from="#E93939" to="#A12442" angle=0
+        inactive-gradient from="#E93939" to="#A12422" angle=0
+    }
+}
+
+window-rule {
+    match app-id="vesktop"
+    open-on-workspace "static"
+}
+
+//  WINDOW ROUNDING 
+window-rule {
+    clip-to-geometry true 
+    geometry-corner-radius 12
+}
+
+//  BLUR 
+window-rule {
+    draw-border-with-background false 
+    background-effect {
+      blur true
+      xray false
+    }
+
+  }
+
+  layer-rule {
+      match namespace="(?i)^quickshell.*"
+      background-effect {
+          blur true 
+          xray false
+        }
+}
+// PLACES WALLPAPER WITHIN OVERVIEW 
+layer-rule {
+    match namespace="^wallpaper$"
+    place-within-backdrop true
+}
+
+//  AUTOSTART
+spawn-at-startup "vesktop"
+spawn-at-startup "spotify"
+spawn-at-startup "quickshell"
+spawn-at-startup "/usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1"
+
+

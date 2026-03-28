@@ -1,0 +1,115 @@
+module qs
+
+# Singletons
+singleton Config config/Config.qml
+singleton Theme config/Theme.qml
+
+# Services (Singletons)
+singleton ThemeService services/ThemeService.qml
+singleton ThemeRegistration assets/themes/ThemeRegistration.qml
+singleton Calendar services/Calendar.qml
+singleton ProcessService services/ProcessService.qml
+
+singleton LauncherService services/LauncherService.qml
+singleton Media services/Media.qml
+singleton Niri services/compositor/Niri.qml
+singleton Compositor services/compositor/Compositor.qml
+
+
+singleton PopoutService services/PopoutService.qml
+
+singleton Power services/Power.qml
+singleton TrayService services/TrayService.qml
+singleton Stats services/Stats.qml
+singleton Preferences services/Preferences.qml
+singleton SystemInfo services/SystemInfo.qml
+singleton Volume services/Volume.qml
+singleton Wallpaper services/Wallpaper.qml
+singleton Weather services/Weather.qml
+singleton Network services/Network.qml
+singleton Clipboard services/Clipboard.qml
+singleton Bluetooth services/Bluetooth.qml
+singleton Display services/Display.qml
+singleton Battery services/Battery.qml
+
+singleton Gowall services/Gowall.qml
+
+
+# Services (Types)
+Commander services/Commander.qml
+NotificationManager modules/notifications/NotificationManager.qml
+
+# Components (Root)
+AppList modules/panels/launcher/AppList.qml
+ClipboardHistory modules/panels/launcher/ClipboardHistory.qml
+WallpaperSwitcher modules/panels/launcher/wallpaper/WallpaperSwitcher.qml
+WallpaperCarousel modules/panels/launcher/wallpaper/WallpaperCarousel.qml
+ThemeSwitcher modules/panels/launcher/ThemeSwitcher.qml
+
+NotificationCard modules/notifications/NotificationCard.qml
+Toast modules/notifications/Toast.qml
+
+VolumeToast modules/notifications/VolumeToast.qml
+
+
+# Components (Base)
+BaseBackground modules/components/BaseBackground.qml
+BaseBlock modules/components/BaseBlock.qml
+BaseButton modules/components/BaseButton.qml
+BaseMultiButton modules/components/BaseMultiButton.qml
+BaseIcon modules/components/BaseIcon.qml
+BaseInput modules/components/BaseInput.qml
+BasePopoutWindow modules/components/BasePopoutWindow.qml
+BaseScrollBar modules/components/BaseScrollBar.qml
+BaseScroller modules/components/BaseScroller.qml
+BaseSeparator modules/components/BaseSeparator.qml
+BaseSlider modules/components/BaseSlider.qml
+BaseText modules/components/BaseText.qml
+BaseComboBox modules/components/BaseComboBox.qml
+BaseSwitch modules/components/BaseSwitch.qml
+BaseLazyLoader modules/components/BaseLazyLoader.qml
+BaseAnimation modules/components/BaseAnimation.qml
+BaseSpinBox modules/components/BaseSpinBox.qml
+BaseFolderDialog modules/components/BaseFolderDialog.qml
+BaseTooltip modules/components/BaseTooltip.qml
+
+
+# Modules
+Launcher modules/panels/launcher/Launcher.qml
+LauncherSearch modules/panels/launcher/LauncherSearch.qml
+LauncherTab modules/panels/launcher/LauncherTab.qml
+LauncherListView modules/panels/launcher/LauncherListView.qml
+LauncherItemDelegate modules/panels/launcher/LauncherItemDelegate.qml
+
+WallpaperBackground modules/WallpaperBackground.qml
+Bar modules/bar/Bar.qml
+
+# Bar Components
+Clock modules/bar/components/Clock.qml
+Tray modules/bar/components/Tray.qml
+BarVolume modules/bar/components/Volume.qml
+Workspaces modules/bar/components/Workspaces.qml
+BarNotifications modules/bar/components/Notifications.qml
+BarDock modules/bar/components/Dock.qml
+
+
+
+# Appearance (Consolidated)
+SettingsPage modules/panels/settings/SettingsPage.qml
+# Control Panel
+Settings modules/panels/settings/Settings.qml
+# Sidebar deleted
+BaseGraph modules/components/BaseGraph.qml
+
+# Popouts
+
+MediaPopout modules/panels/MediaPopout.qml
+NotificationPopout modules/panels/NotificationPopout.qml
+SystemPopout modules/panels/SystemPopout.qml
+AudioPopout modules/panels/AudioPopout.qml
+CalendarPopout modules/panels/CalendarPopout.qml
+TrayPopout modules/panels/TrayPopout.qml
+NetworkContent modules/panels/system/NetworkContent.qml
+BatteryContent modules/panels/system/BatteryContent.qml
+BluetoothContent modules/panels/system/BluetoothContent.qml
+SystemControlPopout modules/panels/system/SystemControlPopout.qml

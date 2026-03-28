@@ -1,0 +1,80 @@
+include "keybinds.kdl"
+include "rules.kdl"
+include "variables.kdl"
+include "animations.kdl"
+
+layout {
+    background-color "transparent"
+    gaps 10
+    center-focused-column "never"
+    always-center-single-column
+
+     preset-column-widths {
+        proportion 0.33333
+        proportion 0.5
+        proportion 0.66667
+        proportion 1.0
+    }
+    preset-window-heights {
+        proportion 0.33333
+        proportion 0.5
+        proportion 0.66667
+        proportion 1.0
+    }
+
+    default-column-width { proportion 0.5; }
+
+    insert-hint {
+         off
+    }
+
+    focus-ring {
+      off
+    }
+
+    border {
+        off
+        width 2
+        active-gradient from="#7c6f64" to="#d4be98" angle=0
+        inactive-color "#252535"
+    }
+
+    shadow {
+        on
+        color "#1F1F28"
+        spread 1
+        softness 4
+        draw-behind-window false
+        offset x=0 y=0
+    }
+}
+
+blur { 
+    passes 4
+    offset 4
+    noise 0.05
+    saturation 1.5
+}
+
+overview {
+    workspace-shadow {
+        off
+    }
+}
+
+recent-windows {
+    debounce-ms 750
+    open-delay-ms 175
+
+    highlight {
+        active-color "#727169"
+        urgent-color "#C34043"
+        padding 0
+        corner-radius 2
+    }
+
+    previews {
+        max-height 350
+        max-scale 0.5
+    }
+}

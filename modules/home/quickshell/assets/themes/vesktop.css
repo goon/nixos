@@ -1,0 +1,49 @@
+@import url('https://refact0r.github.io/midnight-discord/build/midnight.css');
+
+body {
+	--font: '{{font}}';
+	--code-font: '{{code_font}}';
+  --small-user-panel: on;
+}
+
+:root {
+	/* Font */
+	--font: '{{font}}';
+	--code-font: '{{code_font}}';
+	--corner-text: '{{name}}';
+  
+	/* Status Indicators */
+	--online-indicator: {{success}};
+	--dnd-indicator: {{error}};
+	--idle-indicator: {{warning}};
+	--streaming-indicator: {{secondary}};
+
+	/* Accent Colors */
+	--accent-1: {{primary}};     /* links */
+	--accent-2: {{secondary}};   /* unread/mention elements */
+	--accent-3: {{primary}};     /* accent buttons */
+	--accent-4: {{surface}};     /* accent buttons hover */
+	--accent-5: {{accent}};      /* accent buttons clicked */
+	
+	--mention:  {{surface}};
+	--mention-hover: {{background}};
+
+	/* Text Colors */
+	--text-0: {{base}};          /* text on colored elements */
+	--text-1: {{text}};          /* standard white text */
+	--text-2: {{text}};          /* headings */
+	--text-3: {{muted}};         /* normal text */
+	--text-4: {{muted}};         /* icons/channels */
+	--text-5: {{muted}};         /* muted timestamps */
+
+	/* Background Colors */
+	--bg-1: {{surface}};         /* dark buttons clicked */
+	--bg-2: {{background}};      /* dark buttons */
+	--bg-3: {{background}};      /* spacing/secondary */
+	--bg-4: {{surface}};            /* main background */
+	
+	/* Interactions */
+	--hover: {{surface}};        /* channels/buttons hover */
+	--active: {{surface}};       /* channels/buttons clicked */
+	--message-hover: {{background}};
+}

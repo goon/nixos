@@ -1,0 +1,4 @@
+cd ~/Dotfiles/.config/quickshell
+layout splits
+launch nvim
+launch --location=vsplit --bias=40 opencode

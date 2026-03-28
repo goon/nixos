@@ -1,0 +1,21 @@
+{
+    "name": "Kanagawa",
+    "base00": "#16161D",
+    "base01": "#1F1F28",
+    "base02": "#2A2A37",
+    "base03": "#727169",
+    "base04": "#88877d",
+    "base05": "#DCD7BA",
+    "base06": "#f2efdf",
+    "base07": "#fffdf7",
+    "base08": "#C34043",
+    "base09": "#DCA561",
+    "base0A": "#E6C384",
+    "base0B": "#76946A",
+    "base0C": "#76b6a2",
+    "base0D": "#7E9CD8",
+    "base0E": "#957FB8",
+    "base0F": "#5e9181",
+    "primaryIdx": "base0D",
+    "secondaryIdx": "base0E"
+}

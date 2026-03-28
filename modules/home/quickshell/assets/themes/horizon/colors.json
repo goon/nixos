@@ -1,0 +1,21 @@
+{
+    "name": "Horizon",
+    "base00": "#1c1e26",
+    "base01": "#1c1e26",
+    "base02": "#232530",
+    "base03": "#6f6f70",
+    "base04": "#858586",
+    "base05": "#d5d8da",
+    "base06": "#edeeef",
+    "base07": "#fdfeff",
+    "base08": "#e95678",
+    "base09": "#fab38e",
+    "base0A": "#21bfc2",
+    "base0B": "#29d398",
+    "base0C": "#603ede",
+    "base0D": "#e95678",
+    "base0E": "#fab38e",
+    "base0F": "#4c32b1",
+    "primaryIdx": "base08",
+    "secondaryIdx": "base09"
+}
