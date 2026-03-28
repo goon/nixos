@@ -4,35 +4,41 @@
   environment.systemPackages = with pkgs; [
 
     # ------- Command Line Utilities
-    kitty
-    fd # Fast file finder
-    ripgrep # Grep replacement
-    fzf # Fuzzy finder
-    zoxide # Smarter cd
-    fastfetch
-    btop # Resource monitor
-    cava # Audio visualizer
-    yazi # File Explorer
-    starship # Shell prompt
-    krabby # Pokemon Sprites 
 
+    kitty                     # Terminal Emulator 
+    fd                        # File Finder 
+    ripgrep                   # Improved Grep 
+    fzf                       # Fuzzy Finder
+    zoxide                    # cd 
+    fastfetch                 # System Info 
+    btop                      # Resource Monitor 
+    cava                      # Audio Visualizer
+    yazi                      # File Explorer
+    starship                  # Shell Prompt 
+    krabby                    # Pokemon Sprites
+    wget                      # Web Downloads 
+    curl                      # Curl 
+    
     # ------- Development Tools
-    neovim
-    nodejs
-    python3
-    unzip
-    opencode
+
+    neovim                    # Terminal Editor 
+    nodejs                    # Javascript Runtime 
+    python3                   # Python 
+    unzip                     
+    opencode                  # Opencode TUI
 
     # ------- Applications
-    vesktop
-    obsidian
-    obs-studio
-    gowall
-    antigravity
-    google-chrome
+
+    vesktop                   # Discord Client 
+    obsidian                  # Notes 
+    obs-studio                # Screen Recording & Streaming 
+    gowall                    # Wallpaper Themer 
+    antigravity               # Google IDE 
+    google-chrome             # Google Web Browser 
 
     # ------- Theme Tools
-    pywal16
-    pywalfox-native
+
+    pywal16                   # Colour Palette Generator 
+    pywalfox-native           # Pywalfox Bridge for Firefox 
   ];
 }
