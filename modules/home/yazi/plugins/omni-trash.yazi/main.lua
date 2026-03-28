@@ -151,10 +151,10 @@ function M:entry(job)
 					:arg({ "-c", 'echo "0" | trash-restore "$1"', "--", item.path })
 					:output()
 				if out and out.status.success then
-					ya.notify { title = "Unified Trash", content = "Restored: " .. item.name, timeout = 3 }
+					ya.notify { title = "Omni Trash", content = "Restored: " .. item.name, timeout = 3 }
 					update_items(self.obtain())
 				else
-					ya.notify { title = "Unified Trash", content = "Restore failed: " .. (err or "unknown"), timeout = 5, level = "error" }
+					ya.notify { title = "Omni Trash", content = "Restore failed: " .. (err or "unknown"), timeout = 5, level = "error" }
 				end
 			end
 		elseif run == "purge" then
@@ -169,13 +169,13 @@ function M:entry(job)
 				}
 				if ok == 1 then
 					local out, err = Command("sh")
-						:arg({ "-c", 'trash-rm "$1"', "--", item.name })
+						:arg({ "-c", 'trash-rm "$1"', "--", item.path })
 						:output()
 					if out and out.status.success then
-						ya.notify { title = "Unified Trash", content = "Purged: " .. item.name, timeout = 3 }
+						ya.notify { title = "Omni Trash", content = "Purged: " .. item.name, timeout = 3 }
 						update_items(self.obtain())
 					else
-						ya.notify { title = "Unified Trash", content = "Purge failed: " .. (err or "unknown"), timeout = 5, level = "error" }
+						ya.notify { title = "Omni Trash", content = "Purge failed: " .. (err or "unknown"), timeout = 5, level = "error" }
 					end
 				end
 			end
@@ -192,10 +192,10 @@ function M:entry(job)
 					:arg({ "-c", 'echo "y" | trash-empty' })
 					:output()
 				if out and out.status.success then
-					ya.notify { title = "Unified Trash", content = "All trash cleared.", timeout = 3 }
+					ya.notify { title = "Omni Trash", content = "All trash cleared.", timeout = 3 }
 					update_items(self.obtain())
 				else
-					ya.notify { title = "Unified Trash", content = "Empty failed: " .. (err or "unknown"), timeout = 5, level = "error" }
+					ya.notify { title = "Omni Trash", content = "Empty failed: " .. (err or "unknown"), timeout = 5, level = "error" }
 				end
 			end
 		end

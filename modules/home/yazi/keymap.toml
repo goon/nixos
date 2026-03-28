@@ -3,11 +3,11 @@ on   = "!"
 run  = 'shell "kitty" --orphan --confirm'
 desc = "Open Terminal in CWD"
 
-# Unified Trash
+# Omni Trash
 [[mgr.prepend_keymap]]
 on = "R"
-run = "plugin unified-trash"
-desc = "Open Unified Trash menu"
+run = "plugin omni-trash"
+desc = "Open Omni Trash menu"
 
 # Mount
 [[mgr.prepend_keymap]]
