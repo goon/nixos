@@ -3,6 +3,11 @@ use = "yazi-rs/plugins:mount"
 rev = "1962818"
 hash = "91937a4a9b779eabc6983e258befdfe9"
 
+[[plugin.deps]]
+use = "goon/omni-trash"
+rev = "08d7139"
+hash = "b13c5181604fb0d8bc01ab3229015212"
+
 [[flavor.deps]]
 use = "matt-dong-123/base16"
 rev = "b02b7a8"
