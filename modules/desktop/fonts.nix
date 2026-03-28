@@ -3,6 +3,7 @@
 {
   fonts.packages = with pkgs; [
     google-fonts
+    material-symbols
   ];
 
   fonts.fontconfig = {
