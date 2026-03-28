@@ -34,7 +34,8 @@
     obs-studio                # Screen Recording & Streaming 
     gowall                    # Wallpaper Themer 
     antigravity               # Google IDE 
-    google-chrome             # Google Web Browser 
+    google-chrome             # Google Web Browser
+    youtube-music             # Youtube Music Wrapper (Electron) 
 
     # ------- Theme Tools
 
