@@ -1,0 +1,215 @@
+# Base16 Color Scheme Flavor for Yazi
+# Uses standard terminal color names (black, red, green, yellow, blue, magenta, cyan, white, gray, and their "light" variants)
+
+# : Manager {{{
+
+[mgr]
+cwd = { fg = "cyan" }
+
+# Find
+find_keyword  = { fg = "yellow", bold = true, italic = true, underline = true }
+find_position = { fg = "magenta", bg = "reset", bold = true, italic = true }
+
+# Marker
+marker_copied   = { fg = "green", bg = "green" }
+marker_cut      = { fg = "red", bg = "red" }
+marker_marked   = { fg = "cyan", bg = "cyan" }
+marker_selected = { fg = "yellow", bg = "yellow" }
+
+# Count
+count_copied   = { fg = "black", bg = "green" }
+count_cut      = { fg = "black", bg = "red" }
+count_selected = { fg = "black", bg = "yellow" }
+
+# Border
+border_symbol = "│"
+border_style  = { fg = "gray" }
+
+# : }}}
+
+
+# : Tabs {{{
+
+[tabs]
+active   = { fg = "black", bg = "blue", bold = true }
+inactive = { fg = "blue", bg = "darkgray" }
+
+# : }}}
+
+
+# : Mode {{{
+
+[mode]
+
+normal_main = { fg = "black", bg = "blue", bold = true }
+normal_alt  = { fg = "blue", bg = "darkgray" }
+
+# Select mode
+select_main = { fg = "black", bg = "cyan", bold = true }
+select_alt  = { fg = "cyan", bg = "darkgray" }
+
+# Unset mode
+unset_main = { fg = "black", bg = "lightmagenta", bold = true }
+unset_alt  = { fg = "lightmagenta", bg = "darkgray" }
+
+# : }}}
+
+
+# : Status bar {{{
+
+[status]
+# Permissions
+perm_sep   = { fg = "gray" }
+perm_type  = { fg = "blue" }
+perm_read  = { fg = "yellow" }
+perm_write = { fg = "red" }
+perm_exec  = { fg = "green" }
+
+# Progress
+progress_label  = { fg = "white", bold = true }
+progress_normal = { fg = "green", bg = "darkgray" }
+progress_error  = { fg = "yellow", bg = "red" }
+
+# : }}}
+
+
+# : Pick {{{
+
+[pick]
+border   = { fg = "blue" }
+active   = { fg = "magenta", bold = true }
+inactive = {}
+
+# : }}}
+
+
+# : Input {{{
+
+[input]
+border   = { fg = "blue" }
+title    = {}
+value    = {}
+selected = { reversed = true }
+
+# : }}}
+
+
+# : Completion {{{
+
+[cmp]
+border = { fg = "blue" }
+
+# : }}}
+
+
+# : Tasks {{{
+
+[tasks]
+border  = { fg = "blue" }
+title   = {}
+hovered = { fg = "magenta", bold = true }
+
+# : }}}
+
+
+# : Which {{{
+
+[which]
+mask            = { bg = "black" }
+cand            = { fg = "cyan" }
+rest            = { fg = "darkgray" }
+desc            = { fg = "magenta" }
+separator       = " -> "
+separator_style = { fg = "gray" }
+
+# : }}}
+
+
+# : Help {{{
+
+[help]
+on      = { fg = "cyan" }
+run     = { fg = "magenta" }
+hovered = { reversed = true, bold = true }
+footer  = { fg = "darkgray", bg = "white" }
+
+# : }}}
+
+
+# : Spotter {{{
+
+[spot]
+border   = { fg = "blue" }
+title    = { fg = "blue" }
+tbl_col  = { fg = "cyan" }
+tbl_cell = { fg = "magenta", bg = "darkgray" }
+
+# : }}}
+
+
+# : Notification {{{
+
+[notify]
+title_info  = { fg = "green" }
+title_warn  = { fg = "yellow" }
+title_error = { fg = "red" }
+
+# : }}}
+
+
+# : File-specific styles {{{
+
+[filetype]
+
+rules = [
+	# Image
+	{ mime = "image/*", fg = "cyan" },
+	# Media
+	{ mime = "{audio,video}/*", fg = "yellow" },
+	# Archive
+	{ mime = "application/{zip,rar,7z*,tar,gzip,xz,zstd,bzip*,lzma,compress,archive,cpio,arj,xar,ms-cab*}", fg = "magenta" },
+	# Document
+	{ mime = "application/{pdf,doc,rtf}", fg = "green" },
+	# Virtual file system
+	{ mime = "vfs/{absent,stale}", fg = "gray" },
+	# Fallback
+	{ url = "*", fg = "white" },
+	{ url = "*/", fg = "blue" },
+]
+
+# : }}}
+
+[icon]
+
+dirs = [
+	{ name = ".config", text = "", fg = "magenta" },
+	{ name = ".git", text = "", fg = "cyan" },
+	{ name = ".github", text = "", fg = "blue" },
+	{ name = ".npm", text = "", fg = "blue" },
+	{ name = "Desktop", text = "", fg = "cyan" },
+	{ name = "Development", text = "", fg = "cyan" },
+	{ name = "Documents", text = "", fg = "cyan" },
+	{ name = "Downloads", text = "", fg = "cyan" },
+	{ name = "Library", text = "", fg = "cyan" },
+	{ name = "Movies", text = "", fg = "cyan" },
+	{ name = "Music", text = "", fg = "cyan" },
+	{ name = "Pictures", text = "", fg = "cyan" },
+	{ name = "Public", text = "", fg = "cyan" },
+	{ name = "Videos", text = "", fg = "cyan" },
+]
+conds = [
+	# Special files
+	{ if = "orphan", text = "", fg = "white" },
+	{ if = "link", text = "", fg = "gray" },
+	{ if = "block", text = "", fg = "lightmagenta" },
+	{ if = "char", text = "", fg = "lightmagenta" },
+	{ if = "fifo", text = "", fg = "lightmagenta" },
+	{ if = "sock", text = "", fg = "lightmagenta" },
+	{ if = "sticky", text = "", fg = "lightmagenta" },
+	{ if = "dummy", text = "", fg = "red" },
+
+	# Fallback
+	{ if = "dir", text = "", fg = "blue" },
+	{ if = "exec", text = "", fg = "green" },
+	{ if = "!dir", text = "", fg = "white" },
+]

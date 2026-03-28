@@ -16,6 +16,7 @@ in
     "quickshell".source = config.lib.file.mkOutOfStoreSymlink "${repoPath}/quickshell";
     "starship".source = config.lib.file.mkOutOfStoreSymlink "${repoPath}/starship";
     "nvim".source = config.lib.file.mkOutOfStoreSymlink "${repoPath}/nvim";
+    "yazi".source = config.lib.file.mkOutOfStoreSymlink "${repoPath}/yazi";
     "mpv".source = config.lib.file.mkOutOfStoreSymlink "${repoPath}/mpv";
     "opencode/opencode.json".source =
       config.lib.file.mkOutOfStoreSymlink "${repoPath}/opencode/opencode.json";

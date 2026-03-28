@@ -1,0 +1,16 @@
+[[mgr.prepend_keymap]]
+on   = "!"
+run  = 'shell "kitty" --orphan --confirm'
+desc = "Open Terminal in CWD"
+
+# Unified Trash
+[[mgr.prepend_keymap]]
+on = "R"
+run = "plugin unified-trash"
+desc = "Open Unified Trash menu"
+
+# Mount
+[[mgr.prepend_keymap]]
+on   = "M"
+run  = "plugin mount"
+desc = "Open Mount menu"

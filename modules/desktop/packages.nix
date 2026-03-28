@@ -18,7 +18,8 @@
     krabby                    # Pokemon Sprites
     wget                      # Web Downloads 
     curl                      # Curl 
-    
+    trash-cli                 # CLI Trash Manager
+
     # ------- Development Tools
 
     neovim                    # Terminal Editor 
@@ -35,7 +36,7 @@
     gowall                    # Wallpaper Themer 
     antigravity               # Google IDE 
     google-chrome             # Google Web Browser
-    youtube-music             # Youtube Music Wrapper (Electron) 
+    pear-desktop              # Youtube Music Wrapper (Electron) 
 
     # ------- Theme Tools
 

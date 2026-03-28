@@ -1,0 +1,9 @@
+[[plugin.deps]]
+use = "yazi-rs/plugins:mount"
+rev = "1962818"
+hash = "91937a4a9b779eabc6983e258befdfe9"
+
+[[flavor.deps]]
+use = "matt-dong-123/base16"
+rev = "b02b7a8"
+hash = "fdb3a7d76f51c0a46bde55322ede9171"
