@@ -37,6 +37,7 @@
     antigravity               # Google IDE 
     google-chrome             # Google Web Browser
     pear-desktop              # Youtube Music Wrapper (Electron) 
+    nicotine-plus             # GUI client for Soulseek Network
 
     # ------- Theme Tools
 
