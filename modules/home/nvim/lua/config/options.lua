@@ -36,4 +36,15 @@ opt.swapfile = false          -- Disable swap files
 opt.splitright = true         -- Put new windows to the right of current
 opt.splitbelow = true         -- Put new windows below current
 opt.wrap = false              -- Disable line wrapping
+
+-- Enable line wrapping for markdown files only
+vim.api.nvim_create_autocmd("FileType", {
+  pattern = "markdown",
+  callback = function()
+    vim.opt_local.wrap = true
+    vim.opt_local.linebreak = true
+    vim.opt_local.breakindent = true
+  end,
+})
+
 opt.autoread = true           -- Automatically re-read files if changed outside Neovim

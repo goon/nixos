@@ -6,6 +6,11 @@ return {
     ---@type render.md.UserConfig
     opts = {
       file_types = { "markdown", "opencode_output" },
+      heading = {
+        icons = { "# ", "## ", "### ", "#### ", "##### ", "###### " },
+        signs = { "" },
+        backgrounds = { "", "", "", "", "", "" },
+      },
     },
   },
 }
