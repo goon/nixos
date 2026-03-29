@@ -47,6 +47,10 @@ alias v='nvim'
 alias nv='nvim'
 alias vim='nvim'
 
+alias ls='eza --icons --git'
+alias cat='bat'
+alias cd='z'
+
 alias rm='rm -i'
 
 alias rqs='pkill quickshell; quickshell & disown'
@@ -69,6 +73,10 @@ cheat() {
 
 export STARSHIP_CONFIG=$HOME/.config/starship/starship.toml
 eval "$(starship init bash)"
+
+# ----- Zoxide 
+
+eval "$(zoxide init bash)"
 
 # ----- Auto Run 
 
