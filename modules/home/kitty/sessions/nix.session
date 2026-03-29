@@ -1,0 +1,3 @@
+cd ~/.nixos/
+layout splits
+launch nvim
