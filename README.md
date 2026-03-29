@@ -21,5 +21,5 @@ This repository reflects my current **NixOS** configuration and is prone to **dr
 
 3. **Rebuild:**
    ```bash
-   sudo nixos-rebuild switch --flake .#nixos
+   sudo nixos-rebuild switch --flake .#desktop 
    ```
