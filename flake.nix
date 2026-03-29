@@ -14,6 +14,10 @@
     nix-gaming.url = "github:fufexan/nix-gaming";
     nix-gaming.inputs.nixpkgs.follows = "nixpkgs";
 
+    # Affinity creative suite
+    affinity-nix.url = "github:mrshmllow/affinity-nix";
+    affinity-nix.inputs.nixpkgs.follows = "nixpkgs";
+
     # Declarative flatpaks for managing Flatpak applications
     flatpaks.url = "github:in-a-dil-emma/declarative-flatpak/latest";
 

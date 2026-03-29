@@ -4,6 +4,7 @@ let
   spicePkgs = inputs.spicetify-nix.legacyPackages.${pkgs.stdenv.system};
 in
 {
+  imports = [ ./affinity.nix ];
   # Home-Manager configuration (system-level)
   home-manager.useGlobalPkgs = true;
   home-manager.useUserPackages = true;
