@@ -49,7 +49,6 @@ alias vim='nvim'
 
 alias rm='rm -i'
 
-alias gcli='$HOME/.local/bin/gcli'
 alias rqs='pkill quickshell; quickshell & disown'
 
 # ----- Initialises 'fzf' 
