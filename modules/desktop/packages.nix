@@ -19,6 +19,7 @@
     wget                      # Web Downloads 
     curl                      # Curl 
     trash-cli                 # CLI Trash Manager
+    rmpc                      # Music Player
 
     # ------- Development Tools
 
