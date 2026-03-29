@@ -1,4 +1,3 @@
-cd ~/Dotfiles/.config/quickshell
+cd ~/.nixos/modules/home/quickshell
 layout splits
 launch nvim
-launch --location=vsplit --bias=40 opencode
