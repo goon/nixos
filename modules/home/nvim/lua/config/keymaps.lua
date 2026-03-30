@@ -1,13 +1,9 @@
 local map = vim.keymap.set
 
--- General mappings
-map("n", "<leader>fn", ":nohlsearch<CR>", { desc = "Clear search highlights" })
-
 -- Paste from system clipboard in insert mode
 map("i", "<C-v>", '<C-r>+', { desc = "Paste from system clipboard" })
 
--- Neo-tree (Sidebar)
-map("n", "<leader>e", ":Neotree toggle<CR>", { desc = "Toggle File Explorer" })
+
 
 -- Snacks Picker (Fuzzy Finder replacements)
 map("n", "<leader>ff", function() Snacks.picker.files() end, { desc = "Find Files" })
@@ -56,14 +52,16 @@ map("n", "<leader>tv", function() Snacks.terminal.toggle(nil, { win = { position
  map("n", "<leader>bo", "<cmd>%bd|e#|bd#<cr>", { desc = "Delete Other Buffers" })
  map("n", "<leader>bf", function() require("conform").format({ async = true, lsp_fallback = true }) end, { desc = "Format Buffer" })
 
- -- General/Misc
- map({ "i", "x", "n", "s" }, "<C-s>", "<cmd>w<cr><esc>", { desc = "Save File" })
- map("n", "<leader>w", "<cmd>wa<cr>", { desc = "Save All Files" })
- map("n", "<leader>q", "<cmd>qa<cr>", { desc = "Quit All" })
- map("n", "<leader>wq", "<cmd>wqa<cr>", { desc = "Save and Quit All" })
- 
- map("n", "<leader>fn", "<cmd>enew<cr>", { desc = "New File" })
- map("n", "<esc>", "<cmd>nohlsearch<cr>", { desc = "Clear hlsearch in Normal mode" })
+  -- General/Misc
+  map({ "i", "x", "n", "s" }, "<C-s>", "<cmd>w<cr><esc>", { desc = "Save File" })
+  map("n", "<leader>q", "<cmd>qa<cr>", { desc = "Quit All" })
+  map("n", "<leader>wq", "<cmd>wqa<cr>", { desc = "Save and Quit All" })
+  
+  map("n", "<leader>fn", "<cmd>enew<cr>", { desc = "New File" })
+  map("n", "<esc>", "<cmd>nohlsearch<cr>", { desc = "Clear hlsearch in Normal mode" })
+
+  -- Save All Files
+  map("n", "<leader>s", "<cmd>wa<cr>", { desc = "Save All Files" })
 
   -- Git
   map("n", "<leader>gg", function() Snacks.lazygit.open() end, { desc = "Open LazyGit" })
@@ -80,6 +78,4 @@ map("n", "<leader>tv", function() Snacks.terminal.toggle(nil, { win = { position
 
   -- Toggle indent guides
   map("n", "<leader>ti", function() Snacks.toggle.indent():toggle() end, { desc = "Toggle Indent Guides" })
-
-
 

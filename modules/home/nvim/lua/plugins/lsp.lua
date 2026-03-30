@@ -34,6 +34,9 @@ return {
       -- QML (requires qtdeclarative typically)
       vim.lsp.config("qmlls", {})
 
+      -- Nix
+      vim.lsp.config("nixd", {})
+
       -- LSP keymaps (set when LSP attaches to buffer)
       vim.api.nvim_create_autocmd("LspAttach", {
         group = vim.api.nvim_create_augroup("lsp_keymaps", { clear = true }),

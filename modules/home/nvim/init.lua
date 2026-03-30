@@ -1,11 +1,7 @@
--- Set leader keys before lazy.nvim
-vim.g.mapleader = " "
-vim.g.maplocalleader = "\\"
-
--- Add Quickshell cache to the Lua search path (takes priority for 'colors')
+-- Add Quickshell cache to the Lua search path
 package.path = vim.fn.expand("$HOME/.cache/quickshell/themes/?.lua;") .. package.path
 
--- 1. General Options
+-- 1. General Options & Keys (must be set before lazy.nvim)
 require("config.options")
 require("config.autocmds")
 
@@ -39,26 +35,4 @@ require("lazy").setup({
 require("config.keymaps")
 
 -- 5. Integrated Theming Bridge (Quickshell)
-vim.opt.termguicolors = true
-local function apply_qs_theme()
-	package.loaded["nvim"] = nil
-	package.loaded["theme"] = nil
-	local status, bridge = pcall(require, "theme")
-	if status then
-		bridge.apply()
-	end
-end
-
--- Setup signal listener for live reload (SIGUSR1)
-local signal = vim.uv.new_signal()
-if signal then
-	vim.uv.signal_start(signal, "sigusr1", function()
-		vim.schedule(function()
-			apply_qs_theme()
-			print("Theme reloaded")
-		end)
-	end)
-end
-
--- Initial application
-apply_qs_theme()
+require("config.theme").setup()

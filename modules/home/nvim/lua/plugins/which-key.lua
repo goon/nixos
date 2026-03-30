@@ -21,7 +21,6 @@ return {
       { "<leader>w", group = "window" },
       { "<leader>c", group = "code" },
       { "<leader>b", group = "buffer" },
-      { "<leader>S", group = "session" },
       { "<leader>g", group = "git" },
       { "<leader>s", group = "search" },
       { "<leader>x", group = "diagnostics" },

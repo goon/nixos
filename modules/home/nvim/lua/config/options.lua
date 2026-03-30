@@ -1,3 +1,11 @@
+-- Set leader keys (must be set before lazy.nvim)
+vim.g.mapleader = " "
+vim.g.maplocalleader = "\\"
+
+-- Disable netrw (default file explorer)
+vim.g.loaded_netrw = 1
+vim.g.loaded_netrwPlugin = 1
+
 -- Detailed Neovim Options Configuration
 
 local opt = vim.opt
@@ -12,7 +20,7 @@ opt.scrolloff = 10            -- Keep at least 10 lines above/below cursor when 
 opt.showmode = false          -- Don't show mode in command line (Lualine handles it)
 opt.laststatus = 3            -- Global statusline (one statusline for all windows)
 opt.fillchars = "eob: "       -- Hide ~ at the end of the buffer
-opt.showtabline = 2           -- Always show tabline
+opt.showtabline = 0           -- Completely hide tabline
 
 -- [[ Indentation ]]
 opt.expandtab = true          -- Convert tabs to spaces

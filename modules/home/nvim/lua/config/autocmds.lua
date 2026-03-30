@@ -21,11 +21,10 @@ autocmd("BufReadPost", {
   end,
 })
 
--- Transparency: Force inheritance of terminal background
+  -- Transparency: Force inheritance of terminal background
 local function transparent_bg()
   local groups = {
-    "Normal", "NormalFloat", "SignColumn", "NeoTreeNormal", 
-    "NeoTreeNormalNC", "EndOfBuffer", "MsgArea",
+    "Normal", "NormalFloat", "SignColumn", "EndOfBuffer", "MsgArea",
     "SnacksDashboardNormal", "SnacksPickerNormal", "SnacksPickerList"
   }
   for _, group in ipairs(groups) do
@@ -39,24 +38,24 @@ autocmd({ "ColorScheme", "VimEnter" }, {
 
 -- Disable line numbers and filler lines for specific filetypes
 autocmd({ "FileType", "BufEnter" }, {
-  pattern = { "lazy", "mason", "neo-tree", "snacks_dashboard", "snacks_terminal" },
+  pattern = { "lazy", "mason", "snacks_dashboard", "snacks_terminal" },
   callback = function()
-    if vim.tbl_contains({ "lazy", "mason", "neo-tree", "snacks_dashboard", "snacks_terminal" }, vim.bo.filetype) then
+    if vim.tbl_contains({ "lazy", "mason", "snacks_dashboard", "snacks_terminal" }, vim.bo.filetype) then
       vim.opt_local.number = false
       vim.opt_local.relativenumber = false
       vim.opt_local.fillchars = "eob: "
+      if vim.bo.filetype == "snacks_dashboard" then
+        vim.keymap.set("n", "q", "<nop>", { buffer = true, nowait = true })
+      end
     end
   end,
 })
 
--- Watch filesystem for changes and refresh neo-tree + check for external file changes
+-- Watch filesystem for changes and check for external file changes
 local function setup_file_watch()
   local function do_refresh()
     vim.schedule(function()
       vim.cmd("checktime")
-      pcall(function()
-        require("neo-tree.sources.manager").refresh(require("neo-tree.sources.filesystem"))
-      end)
     end)
   end
 
@@ -79,3 +78,4 @@ end
 vim.api.nvim_create_autocmd("VimEnter", {
   callback = setup_file_watch,
 })
+
