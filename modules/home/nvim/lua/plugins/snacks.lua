@@ -53,6 +53,7 @@ return {
     },
     terminal = { enabled = true },
     input = { enabled = true },
+    explorer = { enabled = false },
     picker = {
       enabled = true,
       actions = {
