@@ -32,7 +32,6 @@ alias nht='nh os test'
 alias nhc='nh clean all --keep 8'
 alias nhu='nh os switch -u'
 
-alias y='yazi'
 alias f='fzf'
 
 alias partitions='lsblk -f'
@@ -67,6 +66,16 @@ alias rqs='pkill quickshell; quickshell & disown'
 
 cheat() {
     curl "https://cheat.sh/$1"
+}
+
+# ----- Yazi 
+
+function y() {
+	local tmp="$(mktemp -t "yazi-cwd.XXXXXX")" cwd
+	command yazi "$@" --cwd-file="$tmp"
+	IFS= read -r -d '' cwd < "$tmp"
+	[ "$cwd" != "$PWD" ] && [ -d "$cwd" ] && builtin cd -- "$cwd"
+	rm -f -- "$tmp"
 }
 
 # ----- Starship 
