@@ -8,6 +8,11 @@ use = "goon/omni-trash"
 rev = "08d7139"
 hash = "b13c5181604fb0d8bc01ab3229015212"
 
+[[plugin.deps]]
+use = "yazi-rs/plugins:git"
+rev = "1962818"
+hash = "26db011a778f261d730d4f5f8bf24b3f"
+
 [[flavor.deps]]
 use = "matt-dong-123/base16"
 rev = "b02b7a8"
