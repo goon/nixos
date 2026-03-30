@@ -1,5 +1,8 @@
 # goon/nixos 
 
+
+![preview](.github/assets/goonix.png)
+
 **NixOS** configuration designed for a single host featuring flakes and home manager.
 
 This repository reflects my current **NixOS** configuration and is prone to **drastic change** as it constantly evolves.
