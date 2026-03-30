@@ -1,21 +1,27 @@
 # omni-trash.yazi
 
-A [Yazi](https://github.com/sxyazi/yazi) plugin for managing your trash across all drives from a single modal interface.
+`omni-trash.yazi` is a [Yazi](https://github.com/sxyazi/yazi) plugin for managing your trash across **all drives** from a single, unified interface.
 
-## Features
+---
 
-- **Unified view** — lists trashed files from your home drive and any mounted external drives (`/run/media/…`, `/mnt/…`)
-- **Table UI** — shows name, drive, deletion timestamp, and original path
-- **Restore** — sends a file back to its original location
-- **Purge** — permanently deletes a single item (with confirmation)
-- **Empty** — clears all trash across every drive (with confirmation)
-- **Non-blocking** — fully async; the Yazi UI stays responsive at all times
+## ✨ Features
 
-## Requirements
+- **Unified View** — See trashed files from your home drive and all mounted volumes (`/run/media/…`, `/mnt/…`, `/volumes/…`) in one place.
+- **Table UI** — Rich display showing filename, drive/volume label, deletion time, and original path.
+- **Restore** — Instantly send files back to their original locations with a single keypress.
+- **Delete** — Permanently delete items with a safety confirmation.
+- **Deep Clean** — Empty your entire trash system across every connected drive.
 
-- [`trash-cli`](https://github.com/andreafrancia/trash-cli) (`trash-list`, `trash-restore`, `trash-rm`, `trash-empty` must be on `$PATH`)
 
-## Installation
+
+## 📋 Requirements
+
+- [`trash-cli`](https://github.com/andreafrancia/trash-cli) 
+  - **Linux**: `sudo apt/dnf/pacman install trash-cli`
+  - **macOS**: `brew install trash-cli`
+  
+
+## 📦 Installation
 
 **Via `ya pkg`:**
 
@@ -30,9 +36,9 @@ git clone https://github.com/goon/omni-trash.yazi \
   ~/.config/yazi/plugins/omni-trash.yazi
 ```
 
-## Setup
+## ⚙️ Setup
 
-Add a keybinding to your `keymap.toml`:
+Add a keybinding to your `~/.config/yazi/keymap.toml`:
 
 ```toml
 [[mgr.prepend_keymap]]
@@ -45,13 +51,9 @@ desc = "Open Omni Trash"
 
 | Key | Action |
 |-----|--------|
-| `j` / `↓` | Move down |
-| `k` / `↑` | Move up |
-| `r` | Restore selected item |
-| `d` | Permanently delete selected item |
-| `E` | Empty **all** trash (all drives) |
-| `q` / `Esc` | Close |
-
-## License
-
-MIT
+| `j` / `↓` | Move cursor down |
+| `k` / `↑` | Move cursor up |
+| `r` | **Restore** selected item |
+| `d` | **Purge** (Permanently delete) |
+| `E` | **Empty** all trash (Across all drives) |
+| `q` / `Esc` | Close Modal |
