@@ -4,6 +4,7 @@
   fonts.packages = with pkgs; [
     google-fonts
     material-symbols
+    nerd-fonts.symbols-only
   ];
 
   fonts.fontconfig = {
