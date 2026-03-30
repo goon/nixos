@@ -1,20 +1,9 @@
 return {
   {
-    "williamboman/mason.nvim",
-    config = function()
-      require("mason").setup()
-    end,
-  },
-  {
-    "williamboman/mason-lspconfig.nvim",
-    config = function()
-      require("mason-lspconfig").setup({
-        ensure_installed = { "lua_ls", "basedpyright", "bashls", "qmlls" },
-      })
-    end,
-  },
-  {
     "neovim/nvim-lspconfig",
+    dependencies = {
+      { "dundalek/lazy-lsp.nvim", dependencies = { "neovim/nvim-lspconfig" } },
+    },
     config = function()
       -- Lua
       vim.lsp.config("lua_ls", {
@@ -36,6 +25,11 @@ return {
 
       -- Nix
       vim.lsp.config("nixd", {})
+
+      -- Setup lazy-lsp.nvim with the new vim.lsp.config API
+      require("lazy-lsp").setup({
+        use_vim_lsp_config = true,
+      })
 
       -- LSP keymaps (set when LSP attaches to buffer)
       vim.api.nvim_create_autocmd("LspAttach", {
