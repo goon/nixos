@@ -34,7 +34,7 @@ CORE_PKGS=(
     "xdg-utils"
     "pciutils"
     "glib2"
-    "niri"
+    "mesa-utils"
     "mpv"
 )
 
