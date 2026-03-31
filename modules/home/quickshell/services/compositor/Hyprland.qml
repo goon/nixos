@@ -168,7 +168,9 @@ Singleton {
     }
 
     function focusWindow(windowId) {
-        Hyprland.dispatch("focuswindow address:" + windowId);
+        var addr = windowId;
+        if (!addr.startsWith("0x")) addr = "0x" + addr;
+        Hyprland.dispatch("focuswindow address:" + addr);
     }
 
     function quit() {
