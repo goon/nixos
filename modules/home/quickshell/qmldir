@@ -111,6 +111,5 @@ AudioPopout modules/panels/AudioPopout.qml
 CalendarPopout modules/panels/CalendarPopout.qml
 TrayPopout modules/panels/TrayPopout.qml
 NetworkContent modules/panels/system/NetworkContent.qml
-BatteryContent modules/panels/system/BatteryContent.qml
 BluetoothContent modules/panels/system/BluetoothContent.qml
 SystemControlPopout modules/panels/system/SystemControlPopout.qml
