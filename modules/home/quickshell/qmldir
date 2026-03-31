@@ -13,6 +13,7 @@ singleton ProcessService services/ProcessService.qml
 singleton LauncherService services/LauncherService.qml
 singleton Media services/Media.qml
 singleton Niri services/compositor/Niri.qml
+singleton Hyprland services/compositor/Hyprland.qml
 singleton Compositor services/compositor/Compositor.qml
 
 
