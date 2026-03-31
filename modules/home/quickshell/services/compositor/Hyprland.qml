@@ -35,11 +35,10 @@ Singleton {
     property var _wsIdToIdx: ({})
 
     // --- Event Stream ---
-    // Hyprland doesn't have a JSON event stream command. 
-    // We use socat to connect to the raw event socket.
+    // Using native hyprctl event-stream which is standard in recent Hyprland versions.
     Process {
         id: eventStream
-        command: ["sh", "-c", "socat -u UNIX-CONNECT:$XDG_RUNTIME_DIR/hypr/$HYPRLAND_INSTANCE_SIGNATURE/.socket2.sock -"]
+        command: ["hyprctl", "event-stream"]
         running: true
         
         stdout: SplitParser {
