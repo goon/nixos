@@ -48,9 +48,6 @@ BasePopoutWindow {
                     }, {
                         "text": "Network",
                         "icon": "wifi"
-                    }, {
-                        "text": "Battery",
-                        "icon": "battery_full"
                     }]
                     selectedIndex: root.currentTabIndex
                     buttonCustomRadius: tabBlock.blockRadius - tabBlock.padding
@@ -105,6 +102,74 @@ BasePopoutWindow {
 
                         }
 
+                    }
+
+                    // --- QUICK ACTIONS (Power Profile + Battery) ---
+                    BaseBlock {
+                        id: quickActionsRow
+                        Layout.fillWidth: true
+                        padding: 6
+                        blockRadius: Theme.geometry.radius
+
+                        RowLayout {
+                            Layout.fillWidth: true
+                            spacing: Theme.geometry.spacing.large
+
+                            // Power Profile Selector
+                            BaseMultiButton {
+                                id: profileSelector
+                                Layout.fillWidth: true
+                                model: [
+                                    { text: "Power Saving" },
+                                    { text: "Balanced" },
+                                    { text: "Performance" }
+                                ]
+                                selectedIndex: {
+                                    if (Battery.powerProfile === "power-saver") return 0;
+                                    if (Battery.powerProfile === "balanced") return 1;
+                                    return 2;
+                                }
+                                buttonCustomRadius: quickActionsRow.blockRadius - quickActionsRow.padding
+                                onButtonClicked: (index) => {
+                                    var profiles = ["power-saver", "balanced", "performance"];
+                                    Battery.setPowerProfile(profiles[index]);
+                                }
+                            }
+
+                            // Battery Reporting (Right side)
+                            RowLayout {
+                                spacing: Theme.geometry.spacing.medium
+                                visible: Battery.hasBattery
+                                Layout.alignment: Qt.AlignVCenter
+
+                                BaseIcon {
+                                    icon: Battery.batteryIcon
+                                    size: Theme.dimensions.iconLarge
+                                    color: Battery.batteryColor
+                                }
+
+                                ColumnLayout {
+                                    spacing: 0
+                                    Layout.alignment: Qt.AlignVCenter
+
+                                    BaseText {
+                                        text: Battery.percentage + "%"
+                                        pixelSize: Theme.typography.size.large
+                                        weight: Theme.typography.weights.bold
+                                    }
+
+                                    BaseText {
+                                        text: Battery.timeRemaining
+                                        color: Theme.colors.muted
+                                        pixelSize: Theme.typography.size.small
+                                        visible: Battery.timeRemaining !== ""
+                                    }
+                                }
+
+                                // Add a small spacer to prevent it from hugging the edge too tightly if needed
+                                Item { Layout.preferredWidth: 4 }
+                            }
+                        }
                     }
 
                     BaseBlock {
@@ -197,10 +262,7 @@ BasePopoutWindow {
                     Layout.fillWidth: true
                 }
 
-                // Battery Tab
-                BatteryContent {
-                    Layout.fillWidth: true
-                }
+
 
             }
 
