@@ -14,6 +14,9 @@ Item {
     implicitWidth: Math.min(background.implicitWidth, 350)
     implicitHeight: Theme.dimensions.barItemHeight
 
+    Component.onCompleted: PopoutService.nowPlayingItem = root
+    Component.onDestruction: PopoutService.nowPlayingItem = null
+
     BaseBlock {
         id: background
 
@@ -26,24 +29,7 @@ Item {
         // Left-click opens media popout anchored to this widget
         clickable: true
         onClicked: {
-            // Get widget position within the bar window
-            var posInWindow = root.mapToItem(null, root.width / 2, 0);
-
-            // Walk up to the bar window's root item to get bar width
-            var topParent = root;
-            while (topParent.parent) topParent = topParent.parent;
-            var barWidth = topParent.width;
-
-            var screen = Quickshell.screens[0];
-            var barScreenX;
-            if (Preferences.barFitToContent) {
-                barScreenX = (screen.width - barWidth) / 2;
-            } else {
-                barScreenX = Preferences.barMarginSide;
-            }
-
-            var screenX = barScreenX + posInWindow.x;
-            PopoutService.toggleMediaPopout(screenX, barScreenX, barScreenX + barWidth);
+            PopoutService.toggleMediaPopout();
         }
 
         // Match standard capsule look

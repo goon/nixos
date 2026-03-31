@@ -12,6 +12,9 @@ Item {
     implicitWidth: background.implicitWidth
     implicitHeight: Theme.dimensions.barItemHeight
 
+    Component.onCompleted: PopoutService.systemControlItem = root
+    Component.onDestruction: PopoutService.systemControlItem = null
+
     BaseBlock {
         id: background
 
@@ -22,15 +25,7 @@ Item {
         clickable: true
         hoverEnabled: false
         onClicked: {
-            // We'll pass some positioning data to help the popout anchor correctly
-            var globalPos = root.mapToItem(null, root.width / 2, 0);
-            var topParent = root;
-            while (topParent.parent)topParent = topParent.parent
-            var barWidth = topParent.width;
-            var screen = Quickshell.screens[0];
-            var barScreenX = Preferences.barFitToContent ? (screen.width - barWidth) / 2 : Preferences.barMarginSide;
-            var screenX = barScreenX + globalPos.x;
-            PopoutService.toggleSystemControl(screenX, barScreenX, barScreenX + barWidth, 0);
+            PopoutService.toggleSystemControl();
         }
 
         BaseIcon {

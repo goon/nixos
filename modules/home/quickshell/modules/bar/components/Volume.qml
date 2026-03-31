@@ -15,19 +15,12 @@ BaseBlock {
     blockRadius: Theme.geometry.radius
     clickable: true
     hoverEnabled: false
+
+    Component.onCompleted: PopoutService.volumeItem = root
+    Component.onDestruction: PopoutService.volumeItem = null
+
     onClicked: {
-        var posInWindow = root.mapToItem(null, root.width / 2, 0);
-        var topParent = root;
-        while (topParent.parent)topParent = topParent.parent
-        var barWidth = topParent.width;
-        var screen = Quickshell.screens[0];
-        var barScreenX;
-        if (Preferences.barFitToContent)
-            barScreenX = (screen.width - barWidth) / 2;
-        else
-            barScreenX = Preferences.barMarginSide;
-        var screenX = barScreenX + posInWindow.x;
-        PopoutService.toggleAudioPopout(screenX, barScreenX, barScreenX + barWidth);
+        PopoutService.toggleAudioPopout();
     }
     onRightClicked: Volume.toggleMute()
 

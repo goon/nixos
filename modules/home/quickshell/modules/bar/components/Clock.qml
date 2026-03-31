@@ -14,22 +14,11 @@ BaseBlock {
     hoverEnabled: false
     clickable: true
     
+    Component.onCompleted: PopoutService.clockItem = root
+    Component.onDestruction: PopoutService.clockItem = null
+
     onClicked: {
-        var posInWindow = root.mapToItem(null, root.width / 2, 0);
-        var topParent = root;
-        while (topParent.parent) topParent = topParent.parent;
-        var barWidth = topParent.width;
-
-        var screen = Quickshell.screens[0];
-        var barScreenX;
-        if (Preferences.barFitToContent) {
-            barScreenX = (screen.width - barWidth) / 2;
-        } else {
-            barScreenX = Preferences.barMarginSide;
-        }
-
-        var screenX = barScreenX + posInWindow.x;
-        PopoutService.toggleCalendarPopout(screenX, barScreenX, barScreenX + barWidth);
+        PopoutService.toggleCalendarPopout();
     }
 
     // Now supported natively by BaseBlock

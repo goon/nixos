@@ -14,6 +14,9 @@ Item {
     implicitWidth: background.implicitWidth
     implicitHeight: Theme.dimensions.barItemHeight
 
+    Component.onCompleted: PopoutService.notificationsItem = root
+    Component.onDestruction: PopoutService.notificationsItem = null
+
     BaseBlock {
         id: background
 
@@ -24,19 +27,7 @@ Item {
         clickable: true
         hoverEnabled: false
         onClicked: {
-            // Calculate position for popout anchoring
-            var posInWindow = root.mapToItem(null, root.width / 2, 0);
-            var topParent = root;
-            while (topParent.parent)topParent = topParent.parent
-            var barWidth = topParent.width;
-            var screen = Quickshell.screens[0];
-            var barScreenX;
-            if (Preferences.barFitToContent)
-                barScreenX = (screen.width - barWidth) / 2;
-            else
-                barScreenX = Preferences.barMarginSide;
-            var screenX = barScreenX + posInWindow.x;
-            PopoutService.toggleNotificationPopout(screenX, barScreenX, barScreenX + barWidth);
+            PopoutService.toggleNotificationPopout();
         }
         onRightClicked: {
             Preferences.notificationMode = root.dndActive ? 0 : 1;
