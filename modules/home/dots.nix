@@ -12,6 +12,7 @@ in
   xdg.configFile = {
     "kitty".source = config.lib.file.mkOutOfStoreSymlink "${repoPath}/kitty";
     "niri".source = config.lib.file.mkOutOfStoreSymlink "${repoPath}/niri";
+    "hypr".source = config.lib.file.mkOutOfStoreSymlink "${repoPath}/hyprland";
     "fastfetch".source = config.lib.file.mkOutOfStoreSymlink "${repoPath}/fastfetch";
     "quickshell".source = config.lib.file.mkOutOfStoreSymlink "${repoPath}/quickshell";
     "starship".source = config.lib.file.mkOutOfStoreSymlink "${repoPath}/starship";
