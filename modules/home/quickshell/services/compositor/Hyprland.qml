@@ -1,201 +1,212 @@
 import QtQuick
 import Quickshell
-import Quickshell.Io
+import Quickshell.Hyprland
 import qs
 pragma Singleton
 
 Singleton {
     id: root
 
-    // Unified runner for Hyprland commands with error handling
-    function runHyprJson(args, callback) {
-        ProcessService.run(["hyprctl", "-j"].concat(args), function(data) {
-            if (!data || data.trim() === "") {
-                if (callback) callback([]);
-                return;
-            }
-            try {
-                var json = JSON.parse(data);
-                if (callback) callback(json);
-            } catch (e) {
-                console.warn("Hyprland: Failed to parse JSON for", args, e);
-                if (callback) callback([]);
-            }
-        });
-    }
-
-    // Signals for real-time updates
+    // Signals for real-time updates (Unified interface)
     signal workspacesUpdated(var workspaces, int activeId)
     signal windowsUpdated(var windows)
     signal focusedWindowUpdated(var window)
 
-    // Internal state
     property var _currentWorkspaces: []
-    property int _activeWorkspaceId: -1
-    property var _wsIdToIdx: ({})
 
-    // --- Event Stream ---
-    // Using native hyprctl event-stream which is standard in recent Hyprland versions.
-    Process {
-        id: eventStream
-        command: ["hyprctl", "event-stream"]
-        running: true
-        
-        stdout: SplitParser {
-            onRead: (line) => {
-                if (line.trim()) processEvent(line.trim());
-            }
+    // Helper to map native workspaces to our unified format
+    function mapWorkspaces() {
+        var res = [];
+        var activeId = -1;
+        var maxId = 0;
+        var focusedWs = Hyprland.focusedWorkspace;
+        if (focusedWs) {
+            activeId = focusedWs.id;
+            if (activeId > 0) maxId = activeId;
         }
-    }
 
-    function processEvent(line) {
-        var parts = line.split(">>");
-        if (parts.length < 2) return;
-        
-        var event = parts[0];
-        var data = parts[1];
-        
-        switch (event) {
-            case "workspace":
-            case "focusedmon":
-                // data is workspace name or monitor name
-                queryWorkspaces();
-                break;
-            case "activewindow":
-            case "activewindowv2":
-                queryFocusedWindow();
-                break;
-            case "openwindow":
-            case "closewindow":
-            case "movewindow":
-            case "windowtitle":
-            case "windowtitlev2":
-                queryWindows();
-                break;
-            case "createworkspace":
-            case "destroyworkspace":
-            case "moveworkspace":
-                queryWorkspaces();
-                break;
+        var wsMap = {};
+        var wsList = Hyprland.workspaces.values;
+        for (var i = 0; i < wsList.length; i++) {
+            var ws = wsList[i];
+            if (ws.id < 0) continue; // Skip special
+            
+            wsMap[ws.id] = {
+                "id": ws.id,
+                "idx": ws.id,
+                "name": ws.name || ws.id.toString(),
+                "isActive": ws.active,
+                "isFocused": ws.focused,
+                "hasWindows": ws.toplevels.values.length > 0,
+                "monitor": ws.monitor ? ws.monitor.name : ""
+            };
+            if (ws.id > maxId) maxId = ws.id;
         }
-    }
 
-    // --- State Mapping ---
-
-    function queryWorkspaces(callback) {
-        runHyprJson(["workspaces"], function(wsJson) {
-            if (!Array.isArray(wsJson)) {
-                if (callback) callback([], -1);
-                return;
-            }
-            
-            // Hyprland returns workspaces with name and id.
-            // In Hyprland, 'id' is chronological/assigned, 'name' can be anything.
-            // We'll treat numeric IDs as indices if possible.
-            wsJson.sort((a, b) => a.id - b.id);
-            
-            var workspaces = wsJson.map(ws => {
-                return {
-                    "id": ws.id,
-                    "idx": ws.id, // Using ID as index for simplicity
-                    "name": ws.name || ws.id.toString(),
-                    "isActive": false, // Updated by activeworkspace query
+        // Pad the list up to maxId
+        for (var id = 1; id <= maxId; id++) {
+            if (wsMap[id]) {
+                res.push(wsMap[id]);
+            } else {
+                res.push({
+                    "id": id,
+                    "idx": id,
+                    "name": id.toString(),
+                    "isActive": false,
                     "isFocused": false,
-                    "hasWindows": (ws.windows || 0) > 0,
-                    "monitor": ws.monitor || ""
-                };
-            });
-
-            // Now get active workspace
-            runHyprJson(["activeworkspace"], function(activeJson) {
-                var activeId = activeJson.id || -1;
-                workspaces.forEach(ws => {
-                    if (ws.id === activeId) {
-                        ws.isActive = true;
-                        ws.isFocused = true;
-                    }
+                    "hasWindows": false,
+                    "monitor": ""
                 });
-                
-                root._activeWorkspaceId = activeId;
-                root._currentWorkspaces = workspaces;
-                
-                // Update ID to Index mapping for windows
-                var mapping = {};
-                workspaces.forEach(ws => mapping[ws.id] = ws.idx);
-                root._wsIdToIdx = mapping;
+            }
+        }
 
-                root.workspacesUpdated(workspaces, activeId);
-                if (callback) callback(workspaces, activeId);
-            });
-        });
+        res.sort((a, b) => a.id - b.id);
+        return { list: res, activeId: activeId };
     }
 
-    function queryWindows(callback) {
-        runHyprJson(["clients"], function(clientsJson) {
-            if (!Array.isArray(clientsJson)) {
-                if (callback) callback([]);
-                return;
+    // Helper to map native toplevels to our unified format
+    function mapWindows() {
+        var res = [];
+        var tlList = Hyprland.toplevels.values;
+        
+        for (var i = 0; i < tlList.length; i++) {
+            var win = tlList[i];
+            
+            // Collect appId from multiple sources. 
+            // We'll prioritize the IPC class as it's the standard for Hyprland rules/icons.
+            var appId = "";
+            if (win.lastIpcObject && win.lastIpcObject.class) {
+                appId = win.lastIpcObject.class;
+            } else if (win.wayland && win.wayland.appId) {
+                appId = win.wayland.appId;
+            } else if (win["class"]) {
+                appId = win["class"];
             }
 
-            var windows = clientsJson.map(win => {
-                return {
-                    "id": win.address, // Hyprland uses Hex addresses as unique IDs
-                    "title": win.title || "",
-                    "appId": win.class || "",
-                    "pid": win.pid || -1,
-                    "workspaceId": win.workspace.id || -1,
-                    "workspaceIdx": win.workspace.id || -1,
-                    "isFocused": false // Updated by activewindow query
-                };
-            });
+            // If appId is still empty, skip this window for now.
+            // This prevents Dock.qml from showing a fallback icon and getting stuck with poor scaling.
+            // The retry timer will pick it up once metadata is populated.
+            if (appId === "") continue;
 
-            // Get active window to mark focus
-            runHyprJson(["activewindow"], function(activeWin) {
-                var activeAddr = activeWin.address || "";
-                windows.forEach(w => {
-                    if (w.id === activeAddr) w.isFocused = true;
-                });
-                
-                root.windowsUpdated(windows);
-                if (callback) callback(windows);
+            res.push({
+                "id": win.address,
+                "title": win.title || "",
+                "appId": appId,
+                "pid": 0,
+                "workspaceId": win.workspace ? win.workspace.id : -1,
+                "workspaceIdx": win.workspace ? win.workspace.id : -1,
+                "isFocused": win.activated
             });
-        });
+        }
+        return res;
     }
 
-    function queryFocusedWindow(callback) {
-        runHyprJson(["activewindow"], function(win) {
-            var mapped = null;
-            if (win && win.address) {
-                mapped = {
-                    "id": win.address,
-                    "title": win.title || "",
-                    "app": win.class || ""
-                };
-            }
-            root.focusedWindowUpdated(mapped);
-            if (callback) callback(mapped);
-        });
+    // --- State Bridging ---
+    Connections {
+        target: Hyprland.workspaces
+        function onObjectInsertedPost() { triggerWorkspacesUpdate(); }
+        function onObjectRemovedPost() { triggerWorkspacesUpdate(); }
     }
 
-    // --- Actions ---
+    Connections {
+        target: Hyprland.toplevels
+        function onObjectInsertedPost() { 
+            Hyprland.refreshToplevels(); 
+            triggerWindowsUpdate(); 
+            retryUpdateTimer.restart();
+        }
+        function onObjectRemovedPost() { triggerWindowsUpdate(); }
+    }
 
+    Connections {
+        target: Hyprland
+        function onFocusedWorkspaceChanged() { triggerWorkspacesUpdate(); }
+        function onActiveToplevelChanged() { 
+            triggerWindowsUpdate(); 
+            triggerFocusedWindowUpdate();
+            retryUpdateTimer.restart();
+        }
+    }
+
+    Timer {
+        id: retryUpdateTimer
+        interval: 300
+        repeat: false
+        onTriggered: {
+            triggerWindowsUpdate();
+            triggerFocusedWindowUpdate();
+        }
+    }
+
+    function triggerWorkspacesUpdate() {
+        var data = mapWorkspaces();
+        root._currentWorkspaces = data.list;
+        root.workspacesUpdated(data.list, data.activeId);
+    }
+
+    function triggerWindowsUpdate() {
+        var data = mapWindows();
+        root.windowsUpdated(data);
+    }
+
+    function triggerFocusedWindowUpdate() {
+        var win = Hyprland.activeToplevel;
+        var mapped = null;
+        if (win) {
+            mapped = {
+                "id": win.address,
+                "title": win.title || "",
+                "app": (win.lastIpcObject && win.lastIpcObject.class) ? win.lastIpcObject.class : (win.wayland ? win.wayland.appId : "")
+            };
+        }
+        root.focusedWindowUpdated(mapped);
+    }
+
+    // --- Actions (Unified Interface) ---
     function switchToWorkspace(workspaceIdx) {
-        // Hyprland handles workspace switching via dispatcher
-        ProcessService.runDetached(["hyprctl", "dispatch", "workspace", workspaceIdx.toString()]);
+        Hyprland.dispatch("workspace " + workspaceIdx);
     }
 
     function focusWindow(windowId) {
-        // In Hyprland windowId is the address (e.g. 0x55...)
-        ProcessService.runDetached(["hyprctl", "dispatch", "focuswindow", "address:" + windowId]);
+        Hyprland.dispatch("focuswindow address:" + windowId);
     }
 
     function quit() {
-        ProcessService.runDetached(["hyprctl", "dispatch", "exit"]);
+        Hyprland.dispatch("exit");
+    }
+
+    // --- Initial Polling / Manual Refresh ---
+    function queryWorkspaces(callback) {
+        var data = mapWorkspaces();
+        if (callback) callback(data.list, data.activeId);
+        root.workspacesUpdated(data.list, data.activeId);
+    }
+
+    function queryWindows(callback) {
+        var data = mapWindows();
+        if (callback) callback(data);
+        root.windowsUpdated(data);
+    }
+
+    function queryFocusedWindow(callback) {
+        var win = Hyprland.activeToplevel;
+        var mapped = null;
+        if (win) {
+            mapped = {
+                "id": win.address,
+                "title": win.title || "",
+                "app": (win.lastIpcObject && win.lastIpcObject.class) ? win.lastIpcObject.class : (win.wayland ? win.wayland.appId : "")
+            };
+        }
+        if (callback) callback(mapped);
+        root.focusedWindowUpdated(mapped);
     }
 
     Component.onCompleted: {
-        queryWorkspaces();
-        queryWindows();
-        queryFocusedWindow();
+        Hyprland.refreshWorkspaces();
+        Hyprland.refreshToplevels();
+        triggerWorkspacesUpdate();
+        triggerWindowsUpdate();
+        triggerFocusedWindowUpdate();
     }
 }
