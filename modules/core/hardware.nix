@@ -4,6 +4,7 @@
   # AMD GPU configuration
   boot.initrd.kernelModules = [ "amdgpu" ];
   boot.kernelModules = [ "i2c_dev" ];
+  hardware.i2c.enable = true;
   services.xserver.videoDrivers = [ "amdgpu" ];
 
   hardware.graphics = {
