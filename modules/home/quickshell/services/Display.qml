@@ -60,7 +60,6 @@ Item {
                     var match = line.match(/\/dev\/i2c-(\d+)/);
                     if (match && match[1]) {
                         root.monitorBus = match[1];
-                        console.log("[Display] Detected DDC/CI on bus:", root.monitorBus);
                         root.getBrightness();
                         return;
                     }
