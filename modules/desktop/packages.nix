@@ -29,6 +29,7 @@
     neovim                    # Terminal Editor 
     nodejs                    # Javascript Runtime 
     python3                   # Python 
+    go                        # Go 
     unzip                     
     opencode                  # Opencode TUI
 
