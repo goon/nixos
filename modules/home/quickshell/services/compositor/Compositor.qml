@@ -102,8 +102,22 @@ QtObject {
     }
 
     Component.onCompleted: {
-        root.name = "niri";
-        root.backend = Niri;
+        // Dynamic Detection
+        var isHyprland = !!Quickshell.env("HYPRLAND_INSTANCE_SIGNATURE");
+        var isNiri = !!Quickshell.env("NIRI_SOCKET");
+        
+        if (isHyprland) {
+            root.name = "hyprland";
+            root.backend = Hyprland;
+        } else if (isNiri) {
+            root.name = "niri";
+            root.backend = Niri;
+        } else {
+            console.warn("Compositor: Unknown environment. Defaulting to Niri.");
+            root.name = "niri";
+            root.backend = Niri;
+        }
+
         root.isReady = true;
 
         // Connect to real-time signals
