@@ -1,7 +1,7 @@
 { pkgs, lib, config, ... }:
 
 let
-  cfg = config.desktop.wm;
+  cfg = config.desktop.windowmanager;
 in
 {
   config = lib.mkIf (cfg.name == "hyprland") {
@@ -9,6 +9,12 @@ in
       enable = true;
       xwayland.enable = true;
     };
+
+    environment.systemPackages = with pkgs; [
+      hyprpolkitagent
+      grim
+      slurp
+    ];
 
     xdg.portal = {
       enable = true;

@@ -1,7 +1,7 @@
 { pkgs, inputs, lib, config, ... }:
 
 let
-  cfg = config.desktop.wm;
+  cfg = config.desktop.windowmanager;
 in
 {
   config = lib.mkIf (cfg.name == "niri") {

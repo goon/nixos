@@ -19,6 +19,7 @@
     ../../modules/core/user.nix
 
     # ========== Desktop ==========
+    ../../modules/desktop/wm
     ../../modules/desktop/desktop.nix
     ../../modules/desktop/flatpak.nix
     ../../modules/desktop/fonts.nix
@@ -31,6 +32,9 @@
 
   # ========== Host Identity ==========
   networking.hostName = "desktop";
+
+  # ========== Window Manager Selection ==========
+  desktop.windowmanager.name = "hyprland";
 
   # ========== System Version ==========
   system.stateVersion = "25.11";
