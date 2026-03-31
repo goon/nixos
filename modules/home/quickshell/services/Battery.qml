@@ -6,11 +6,11 @@ import qs
 QtObject {
     id: root
 
-    // Main battery properties (MOCKED for testing)
-    property bool hasBattery: true
-    property int percentage: 85
-    property bool isCharging: true
-    property string timeRemaining: "1h 30m"
+    // Main battery properties
+    property bool hasBattery: false
+    property int percentage: 0
+    property bool isCharging: false
+    property string timeRemaining: ""
     
     // Power profile
     property bool hasPowerProfilesCtl: false
@@ -119,7 +119,7 @@ QtObject {
     // Timers
     property Timer batteryCheckTimer: Timer {
         interval: 15000 // 15 seconds
-        running: false // Disabled while mocking
+        running: root.hasBattery
         repeat: true
         triggeredOnStart: false
         onTriggered: root.updateBatteryStatus()
@@ -135,7 +135,7 @@ QtObject {
     }
     
     Component.onCompleted: {
-        // checkBatteryPresence(); // Mocked for now
+        checkBatteryPresence();
         
         // Initial detection of power-profiles-ctl
         ProcessService.run(["which", "powerprofilesctl"], function(output) {
@@ -147,9 +147,7 @@ QtObject {
         
         // Initial battery check
         Qt.callLater(() => {
-            if (root.hasBattery) {
-                // root.updateBatteryStatus(); // Mocked
-            }
+                root.updateBatteryStatus();
         });
     }
 }
