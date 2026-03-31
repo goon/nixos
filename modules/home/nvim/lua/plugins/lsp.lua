@@ -26,6 +26,9 @@ return {
       -- Nix
       vim.lsp.config("nixd", {})
 
+      -- Go
+      vim.lsp.config("gopls", {})
+
       -- Setup lazy-lsp.nvim with the new vim.lsp.config API
       require("lazy-lsp").setup({
         use_vim_lsp_config = true,
