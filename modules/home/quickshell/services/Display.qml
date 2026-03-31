@@ -15,8 +15,8 @@ Item {
     property bool _brightnessUpdating: false
     // Detected backend: "ddcutil" or "brightnessctl"
     property string backend: "ddcutil"
-    // Constant for the detected monitor bus to speed up ddcutil
-    readonly property string monitorBus: "20"
+    // Detected monitor bus
+    property string monitorBus: ""
 
     function getBrightness() {
         if (root.backend === "brightnessctl") {
@@ -29,16 +29,16 @@ Item {
                         root.brightness = current / max;
                 }
             });
-        } else {
+        } else if (root.monitorBus !== "") {
             // Explicit bus and fast read flags
-            ProcessService.run(["ddcutil", "--bus", root.monitorBus, "getvcp", "10", "--terse", "--sleep-multiplier", "0.01"], function(output) {
+            ProcessService.run(["ddcutil", "getvcp", "10", "--bus", root.monitorBus, "--terse", "--sleep-multiplier", "0.01"], function(output) {
                 var parts = output.trim().split(" ");
+                // Terse output for getvcp 10 (brightness) is: VCP 10 C <current> M <max>
                 if (parts.length >= 5) {
                     var current = parseInt(parts[3]);
                     var max = parseInt(parts[4]);
                     if (max > 0)
                         root.brightness = current / max;
-
                 }
             });
         }
@@ -48,6 +48,25 @@ Item {
         root.brightness = value;
         root._targetBrightness = Math.round(value * 100);
         brightnessUpdateTimer.restart();
+    }
+
+    function detectMonitor() {
+        ProcessService.run(["ddcutil", "detect", "--terse"], function(output) {
+            var lines = output.split("\n");
+            for (var i = 0; i < lines.length; i++) {
+                var line = lines[i].trim();
+                // Terse ddcutil output looks like: I2C bus: /dev/i2c-9
+                if (line.includes("I2C bus:")) {
+                    var match = line.match(/\/dev\/i2c-(\d+)/);
+                    if (match && match[1]) {
+                        root.monitorBus = match[1];
+                        console.log("[Display] Detected DDC/CI on bus:", root.monitorBus);
+                        root.getBrightness();
+                        return;
+                    }
+                }
+            }
+        });
     }
 
     function detectBackend() {
@@ -60,12 +79,12 @@ Item {
                         root.getBrightness();
                     } else {
                         root.backend = "ddcutil";
-                        root.getBrightness();
+                        root.detectMonitor();
                     }
                 });
             } else {
                 root.backend = "ddcutil";
-                root.getBrightness();
+                root.detectMonitor();
             }
         });
     }
@@ -92,13 +111,15 @@ Item {
                     if (root._targetBrightness !== -1)
                         brightnessUpdateTimer.restart();
                 });
-            } else {
-                ProcessService.run(["ddcutil", "--bus", root.monitorBus, "setvcp", "10", val.toString(), "--sleep-multiplier", "0.05", "--noverify", "--async"], function() {
+            } else if (root.monitorBus !== "") {
+                ProcessService.run(["ddcutil", "setvcp", "10", val.toString(), "--bus", root.monitorBus, "--sleep-multiplier", "0.05", "--noverify", "--async"], function() {
                     root._brightnessUpdating = false;
                     if (root._targetBrightness !== -1)
                         brightnessUpdateTimer.restart();
 
                 });
+            } else {
+                root._brightnessUpdating = false;
             }
         }
     }
