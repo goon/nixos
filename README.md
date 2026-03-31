@@ -7,7 +7,20 @@
 
 This repository reflects my current **NixOS** configuration and is prone to **drastic change** as it constantly evolves.
 
+## Features 
 
+- **OS** - Nix OS 
+- **WM** - Niri 
+- **Shell** - Bash 
+- **Term** - Kitty 
+- **Editor** - Neovim 
+
+## Structure 
+
+- `flake.nix` & `flake.lock` define the entry point and lock dependencies. 
+- `hosts/` contains host specific configuration e.g. `hardware-configuration`. 
+- `modules/` houses nix and home manager modules. 
+- `treefmt.nix` defines formatting standards for the codebase. 
 
 ## Setup
 
@@ -25,4 +38,9 @@ This repository reflects my current **NixOS** configuration and is prone to **dr
 3. **Rebuild:**
    ```bash
    sudo nixos-rebuild switch --flake .#desktop 
+   ```
+
+4. **Update:**
+   ```bash
+   sudo nix flake update
    ```
