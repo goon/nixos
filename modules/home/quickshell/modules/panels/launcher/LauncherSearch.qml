@@ -70,6 +70,7 @@ BaseBlock {
                 focus: true
                 activeFocusOnTab: false
                 backgroundColor: Theme.colors.transparent
+                borderWidth: 0
 
                 Keys.onPressed: (event) => {
                     if (event.key === Qt.Key_Down) {
