@@ -26,10 +26,6 @@ in
     "$HOME/.local/bin"
   ];
 
-  # [[ Custom Packages ]]
-  home.packages = [
-    cheat-cmd
-  ];
 
   programs.bash = {
     enable = true;
@@ -95,4 +91,10 @@ in
       ${pkgs.krabby}/bin/krabby random 1-3 --no-title
     '';
   };
+
+  # [[ Custom Packages - Managed alongside their configurations ]]
+  home.packages = [
+    cheat-cmd
+    pkgs.krabby
+  ];
 }
