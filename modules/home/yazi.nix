@@ -1,6 +1,8 @@
 { pkgs, ... }:
 
 {
+  home.packages = [ pkgs.trash-cli ];
+
   programs.yazi = {
     enable = true;
     shellWrapperName = "y";
