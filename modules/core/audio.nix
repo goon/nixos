@@ -1,4 +1,4 @@
-{ pkgs, ... }:
+{ pkgs, user, ... }:
 
 {
   # PipeWire audio server
@@ -27,9 +27,9 @@
   # MPD Music Player Daemon
   services.mpd = {
     enable = true;
-    user = "michael";
+    inherit user;
     settings = {
-      music_directory = "/home/michael/Music";
+      music_directory = "/home/${user}/Music";
       audio_output = [
         {
           type = "pulse";
