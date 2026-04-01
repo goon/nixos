@@ -1,19 +1,19 @@
-{ config, pkgs, inputs, fonts, user, repoName, ... }:
+{ pkgs, ... }:
 
 {
   programs.nvf = {
     enable = true;
     settings = {
       vim = {
-        # ----- Leader Keys
+        # ----- Leader
         globals.mapleader = " ";
 
-        # ----- General Options
+        # ----- General
         viAlias = true;
         vimAlias = true;
 
         options = {
-          # ----- UI Settings
+          # ----- UI
           number = true;
           relativenumber = true;
           signcolumn = "yes";
@@ -36,7 +36,7 @@
           smartcase = true;
           hlsearch = false;
 
-          # ----- Performance & UX
+          # ----- Performance
           mouse = "a";
           clipboard = "unnamedplus";
           updatetime = 250;
@@ -51,49 +51,237 @@
 
         # ----- Keymaps
         keymaps = [
-          # ----- Paste from system clipboard in insert mode
-          { mode = "i"; key = "<C-v>"; action = "<C-r>+"; silent = true; desc = "Paste from system clipboard"; }
-
-          # ----- Window Navigation
-          { mode = ["n" "t"]; key = "<C-h>"; action = "<C-\\><C-n><C-w>h"; silent = true; desc = "Go to Left Window"; }
-          { mode = ["n" "t"]; key = "<C-j>"; action = "<C-\\><C-n><C-w>j"; silent = true; desc = "Go to Lower Window"; }
-          { mode = ["n" "t"]; key = "<C-k>"; action = "<C-\\><C-n><C-w>k"; silent = true; desc = "Go to Upper Window"; }
-          { mode = ["n" "t"]; key = "<C-l>"; action = "<C-\\><C-n><C-w>l"; silent = true; desc = "Go to Right Window"; }
-
-          # ----- Window Management
-          { mode = "n"; key = "<leader>v"; action = "<C-w>v"; silent = true; desc = "Vertical Split"; }
-          { mode = "n"; key = "<leader>h"; action = "<C-w>s"; silent = true; desc = "Horizontal Split"; }
-          { mode = "n"; key = "<leader>cw"; action = "<C-w>c"; silent = true; desc = "Close Window"; }
-          { mode = "n"; key = "<A-j>"; action = "<C-w>J"; silent = true; desc = "Move Window Down"; }
-          { mode = "n"; key = "<A-k>"; action = "<C-w>K"; silent = true; desc = "Move Window Up"; }
-          { mode = "n"; key = "<C-Up>"; action = "<cmd>resize +2<cr>"; silent = true; desc = "Increase Window Height"; }
-          { mode = "n"; key = "<C-Down>"; action = "<cmd>resize -2<cr>"; silent = true; desc = "Decrease Window Height"; }
-          { mode = "n"; key = "<C-Left>"; action = "<cmd>vertical resize -2<cr>"; silent = true; desc = "Decrease Window Width"; }
-          { mode = "n"; key = "<C-Right>"; action = "<cmd>vertical resize +2<cr>"; silent = true; desc = "Increase Window Width"; }
-
-          # ----- Buffer Management
-          { mode = ["n" "t"]; key = "<A-[>"; action = "<cmd>bprevious<cr>"; silent = true; desc = "Previous Buffer"; }
-          { mode = ["n" "t"]; key = "<A-]>"; action = "<cmd>bnext<cr>"; silent = true; desc = "Next Buffer"; }
-          { mode = "n"; key = "[b"; action = ":bprevious<cr>"; silent = true; desc = "Previous Buffer"; }
-          { mode = "n"; key = "]b"; action = ":bnext<cr>"; silent = true; desc = "Next Buffer"; }
-          { mode = "n"; key = "<Tab>"; action = ":bnext<cr>"; silent = true; desc = "Next Buffer"; }
-          { mode = "n"; key = "<S-Tab>"; action = ":bprevious<cr>"; silent = true; desc = "Previous Buffer"; }
-          { mode = "n"; key = "<leader>bb"; action = "<cmd>e #<cr>"; silent = true; desc = "Switch to Other Buffer"; }
-          { mode = "n"; key = "<leader>bd"; action = ":bdelete<cr>"; silent = true; desc = "Delete Buffer"; }
-          { mode = "n"; key = "<leader>bo"; action = "<cmd>%bd|e#|bd#<cr>"; silent = true; desc = "Delete Other Buffers"; }
-
-          # ----- General/Misc
-          { mode = ["i" "x" "n" "s"]; key = "<C-s>"; action = "<cmd>w<cr><esc>"; silent = true; desc = "Save File"; }
-          { mode = "n"; key = "<leader>q"; action = "<cmd>qa<cr>"; silent = true; desc = "Quit All"; }
-          { mode = "n"; key = "<leader>wq"; action = "<cmd>wqa<cr>"; silent = true; desc = "Save and Quit All"; }
-          { mode = "n"; key = "<leader>fn"; action = "<cmd>enew<cr>"; silent = true; desc = "New File"; }
-          { mode = "n"; key = "<esc>"; action = "<cmd>nohlsearch<cr>"; silent = true; desc = "Clear hlsearch"; }
-          { mode = "n"; key = "<leader>s"; action = "<cmd>wa<cr>"; silent = true; desc = "Save All Files"; }
+          {
+            mode = "i";
+            key = "<C-v>";
+            action = "<C-r>+";
+            silent = true;
+            desc = "Paste from system clipboard";
+          }
+          {
+            mode = [
+              "n"
+              "t"
+            ];
+            key = "<C-h>";
+            action = "<C-\\><C-n><C-w>h";
+            silent = true;
+            desc = "Go to Left Window";
+          }
+          {
+            mode = [
+              "n"
+              "t"
+            ];
+            key = "<C-j>";
+            action = "<C-\\><C-n><C-w>j";
+            silent = true;
+            desc = "Go to Lower Window";
+          }
+          {
+            mode = [
+              "n"
+              "t"
+            ];
+            key = "<C-k>";
+            action = "<C-\\><C-n><C-w>k";
+            silent = true;
+            desc = "Go to Upper Window";
+          }
+          {
+            mode = [
+              "n"
+              "t"
+            ];
+            key = "<C-l>";
+            action = "<C-\\><C-n><C-w>l";
+            silent = true;
+            desc = "Go to Right Window";
+          }
+          {
+            mode = "n";
+            key = "<leader>v";
+            action = "<C-w>v";
+            silent = true;
+            desc = "Vertical Split";
+          }
+          {
+            mode = "n";
+            key = "<leader>h";
+            action = "<C-w>s";
+            silent = true;
+            desc = "Horizontal Split";
+          }
+          {
+            mode = "n";
+            key = "<leader>cw";
+            action = "<C-w>c";
+            silent = true;
+            desc = "Close Window";
+          }
+          {
+            mode = "n";
+            key = "<A-j>";
+            action = "<C-w>J";
+            silent = true;
+            desc = "Move Window Down";
+          }
+          {
+            mode = "n";
+            key = "<A-k>";
+            action = "<C-w>K";
+            silent = true;
+            desc = "Move Window Up";
+          }
+          {
+            mode = "n";
+            key = "<C-Up>";
+            action = "<cmd>resize +2<cr>";
+            silent = true;
+            desc = "Increase Window Height";
+          }
+          {
+            mode = "n";
+            key = "<C-Down>";
+            action = "<cmd>resize -2<cr>";
+            silent = true;
+            desc = "Decrease Window Height";
+          }
+          {
+            mode = "n";
+            key = "<C-Left>";
+            action = "<cmd>vertical resize -2<cr>";
+            silent = true;
+            desc = "Decrease Window Width";
+          }
+          {
+            mode = "n";
+            key = "<C-Right>";
+            action = "<cmd>vertical resize +2<cr>";
+            silent = true;
+            desc = "Increase Window Width";
+          }
+          {
+            mode = [
+              "n"
+              "t"
+            ];
+            key = "<A-[>";
+            action = "<cmd>bprevious<cr>";
+            silent = true;
+            desc = "Previous Buffer";
+          }
+          {
+            mode = [
+              "n"
+              "t"
+            ];
+            key = "<A-]>";
+            action = "<cmd>bnext<cr>";
+            silent = true;
+            desc = "Next Buffer";
+          }
+          {
+            mode = "n";
+            key = "[b";
+            action = ":bprevious<cr>";
+            silent = true;
+            desc = "Previous Buffer";
+          }
+          {
+            mode = "n";
+            key = "]b";
+            action = ":bnext<cr>";
+            silent = true;
+            desc = "Next Buffer";
+          }
+          {
+            mode = "n";
+            key = "<Tab>";
+            action = ":bnext<cr>";
+            silent = true;
+            desc = "Next Buffer";
+          }
+          {
+            mode = "n";
+            key = "<S-Tab>";
+            action = ":bprevious<cr>";
+            silent = true;
+            desc = "Previous Buffer";
+          }
+          {
+            mode = "n";
+            key = "<leader>bb";
+            action = "<cmd>e #<cr>";
+            silent = true;
+            desc = "Switch to Other Buffer";
+          }
+          {
+            mode = "n";
+            key = "<leader>bd";
+            action = ":bdelete<cr>";
+            silent = true;
+            desc = "Delete Buffer";
+          }
+          {
+            mode = "n";
+            key = "<leader>bo";
+            action = "<cmd>%bd|e#|bd#<cr>";
+            silent = true;
+            desc = "Delete Other Buffers";
+          }
+          {
+            mode = [
+              "i"
+              "x"
+              "n"
+              "s"
+            ];
+            key = "<C-s>";
+            action = "<cmd>w<cr><esc>";
+            silent = true;
+            desc = "Save File";
+          }
+          {
+            mode = "n";
+            key = "<leader>q";
+            action = "<cmd>qa<cr>";
+            silent = true;
+            desc = "Quit All";
+          }
+          {
+            mode = "n";
+            key = "<leader>wq";
+            action = "<cmd>wqa<cr>";
+            silent = true;
+            desc = "Save and Quit All";
+          }
+          {
+            mode = "n";
+            key = "<leader>fn";
+            action = "<cmd>enew<cr>";
+            silent = true;
+            desc = "New File";
+          }
+          {
+            mode = "n";
+            key = "<esc>";
+            action = "<cmd>nohlsearch<cr>";
+            silent = true;
+            desc = "Clear hlsearch";
+          }
+          {
+            mode = "n";
+            key = "<leader>s";
+            action = "<cmd>wa<cr>";
+            silent = true;
+            desc = "Save All Files";
+          }
         ];
 
         # ----- Binds
         binds.whichKey.enable = true;
-        
+
         # ----- Languages
         languages = {
           nix = {
@@ -132,13 +320,13 @@
         # ----- Formatting
         formatter.conform-nvim.enable = true;
 
-        # ----- Telescope (Fuzzy Finder)
+        # ----- Telescope
         telescope.enable = false;
 
         # ----- Git
         git.gitsigns.enable = true;
 
-        # ----- UI & Visuals
+        # ----- UI
         statusline.lualine.enable = true;
 
         visuals = {
@@ -148,7 +336,7 @@
 
         comments.comment-nvim.enable = true;
 
-        # ----- Mini.nvim
+        # ----- Mini
         mini = {
           surround = {
             enable = true;
@@ -169,52 +357,52 @@
           pairs.enable = true;
         };
 
-        # ----- Extra Plugins
+        # ----- Extra
         extraPlugins = with pkgs.vimPlugins; {
           snacks = {
             package = snacks-nvim;
             setup = ''
-              require("snacks").setup({
-                dashboard = {
-                  enabled = true,
-                  sections = {
-                    { section = "header" },
-                    { section = "keys", gap = 1, padding = 1 },
-                  },
-                  preset = {
-                    header = [[
-                                                                       
-                                                                     
-       ████ ██████           █████      ██                     
-      ███████████             █████                             
-      █████████ ███████████████████ ███   ███████████   
-     █████████  ███    █████████████ █████ ██████████████   
-    █████████ ██████████ █████████ █████ █████ ████ █████   
-  ███████████ ███    ███ █████████ █████ █████ ████ █████  
- ██████  █████████████████████ ████ █████ █████ ████ ██████ 
-                                                                       ]];
-                    keys = {
-                      { key = "f", desc = "Find File",       action = ":lua Snacks.picker.files()" },
-                      { key = "n", desc = "New File",        action = ":ene | startinsert" },
-                      { key = "g", desc = "Find Text",       action = ":lua Snacks.picker.grep()" },
-                      { key = "r", desc = "Recent Files",    action = ":lua Snacks.picker.recent()" },
-                      { key = "c", desc = "Config",          action = ":e $MYVIMRC" },
-                      { key = "q", desc = "Quit",            action = ":q", hidden = true },
-                    },
-                  },
-                },
-                notifier = { enabled = true, },
-                indent = { enabled = true, },
-                scroll = { enabled = true, },
-                bigfile = { enabled = true, },
-                quickfile = { enabled = true, },
-                statuscolumn = { enabled = true, },
-                words = { enabled = true, },
-                terminal = { enabled = true, },
-                input = { enabled = true, },
-                lazygit = { enabled = true, },
-                picker = { enabled = true, },
-              })
+                           require("snacks").setup({
+                             dashboard = {
+                               enabled = true,
+                               sections = {
+                                 { section = "header" },
+                                 { section = "keys", gap = 1, padding = 1 },
+                               },
+                               preset = {
+                                 header = [[
+                                                                                    
+                                                                                  
+                    ████ ██████           █████      ██                     
+                   ███████████             █████                             
+                   █████████ ███████████████████ ███   ███████████   
+                  █████████  ███    █████████████ █████ ██████████████   
+                 █████████ ██████████ █████████ █████ █████ ████ █████   
+               ███████████ ███    ███ █████████ █████ █████ ████ █████  
+              ██████  █████████████████████ ████ █████ █████ ████ ██████ 
+                                                                                    ]];
+                                 keys = {
+                                   { key = "f", desc = "Find File",       action = ":lua Snacks.picker.files()" },
+                                   { key = "n", desc = "New File",        action = ":ene | startinsert" },
+                                   { key = "g", desc = "Find Text",       action = ":lua Snacks.picker.grep()" },
+                                   { key = "r", desc = "Recent Files",    action = ":lua Snacks.picker.recent()" },
+                                   { key = "c", desc = "Config",          action = ":e $MYVIMRC" },
+                                   { key = "q", desc = "Quit",            action = ":q", hidden = true },
+                                 },
+                               },
+                             },
+                             notifier = { enabled = true, },
+                             indent = { enabled = true, },
+                             scroll = { enabled = true, },
+                             bigfile = { enabled = true, },
+                             quickfile = { enabled = true, },
+                             statuscolumn = { enabled = true, },
+                             words = { enabled = true, },
+                             terminal = { enabled = true, },
+                             input = { enabled = true, },
+                             lazygit = { enabled = true, },
+                             picker = { enabled = true, },
+                           })
             '';
           };
           trouble = {
@@ -223,7 +411,6 @@
           };
           opencode = {
             package = opencode-nvim;
-            # setup = ""; # ----- No setup function
           };
           flash = {
             package = flash-nvim;
@@ -257,7 +444,7 @@
           package.path = vim.fn.expand("$HOME/.cache/quickshell/themes/?.lua;") .. package.path
 
           -- [[ Dynamic Theme Logic (Consolidated from Lua files) ]]
-          
+
           local function get_palette()
             local status, c = pcall(require, "nvim")
             if not status then return nil end
@@ -413,10 +600,10 @@
           map("n", "<leader>fh", function() Snacks.picker.help() end, { desc = "Find Help" })
           map("n", "<leader>fs", function() Snacks.picker.smart() end, { desc = "Smart Find Files" })
           map("n", "<leader>fw", function() Snacks.picker.grep_word() end, { desc = "Search Word" })
-          
+
           map("n", "<leader>th", function() Snacks.terminal.toggle(nil, { win = { position = "bottom" } }) end, { desc = "Toggle Horizontal Terminal" })
           map("n", "<leader>tv", function() Snacks.terminal.toggle(nil, { win = { position = "right" } }) end, { desc = "Toggle Vertical Terminal" })
-          
+
           map("n", "<leader>gg", function() Snacks.lazygit.open() end, { desc = "Open LazyGit" })
           map("n", "<leader>gb", function() Snacks.picker.git_branches() end, { desc = "Git Branches" })
           map("n", "<leader>gs", function() Snacks.picker.git_status() end, { desc = "Git Status" })
@@ -430,7 +617,7 @@
           map("n", "<leader>xx", "<cmd>Trouble diagnostics toggle<cr>", { desc = "Diagnostics (Trouble)" })
 
           -- [[ Autocommands and Utilities ]]
-          
+
           -- Highlight on yank
           vim.api.nvim_create_autocmd("TextYankPost", {
             callback = function() vim.highlight.on_yank() end,
@@ -482,7 +669,7 @@
           vim.api.nvim_create_autocmd("VimEnter", {
             callback = setup_file_watch,
           })
-          
+
           -- Mini.hipatterns extra config (hex colors)
           pcall(function() 
             local hipatterns = require("mini.hipatterns")
@@ -495,7 +682,7 @@
 
           -- Mini.icons mocking nvim-web-devicons
           pcall(function() require("mini.icons").mock_nvim_web_devicons() end)
-          
+
           -- Toggle indent guides
           map("n", "<leader>ti", function() Snacks.toggle.indent():toggle() end, { desc = "Toggle Indent Guides" })
 

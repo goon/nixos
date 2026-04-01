@@ -1,11 +1,10 @@
-{ pkgs, ... }:
+_:
 
 {
   programs.git = {
     enable = true;
-    
-    # ----- Global ignore patterns
-    ignores = [ 
+
+    ignores = [
       "AGENTS.md"
     ];
 
@@ -14,7 +13,7 @@
         name = "goon";
         email = "hayhurst@protonmail.com";
       };
-      
+
       init.defaultBranch = "main";
       push.autoSetupRemote = true;
       pull.rebase = true;
@@ -22,6 +21,6 @@
     };
   };
 
-  programs.delta.enable = true; # ----- advanced 'diff' tool and syntax highlighting 
-  programs.lazygit.enable = true; # ----- lazy git tui 
+  programs.delta.enable = true;
+  programs.lazygit.enable = true;
 }

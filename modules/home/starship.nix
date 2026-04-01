@@ -1,13 +1,12 @@
-{ lib, ... }:
+_:
 
 {
-  # ----- Starship Configuration (100% Declarative)
   programs.starship = {
     enable = true;
     settings = {
       "$schema" = "https://starship.rs/config-schema.json";
       format = "$username$hostname$directory$git_branch$git_state$git_status$cmd_duration$line_break$python$character";
-      
+
       directory = {
         style = "blue";
       };

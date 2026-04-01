@@ -7,26 +7,40 @@
     enable = true;
     shellWrapperName = "y";
 
-    # ----- Main Settings (yazi.toml)
+    # ----- Settings
     settings = {
       mgr = {
-        ratio = [ 2 4 3 ];
+        ratio = [
+          2
+          4
+          3
+        ];
         show_hidden = true;
       };
       plugin.prepend_fetchers = [
-        { id = "git"; url = "*"; run = "git"; }
-        { id = "git"; url = "*/"; run = "git"; }
+        {
+          id = "git";
+          url = "*";
+          run = "git";
+        }
+        {
+          id = "git";
+          url = "*/";
+          run = "git";
+        }
       ];
     };
 
-    # ----- Theme / UI (theme.toml)
+    # ----- Theme
     theme = {
       flavor.dark = "base16";
       flavor.light = "base16";
-      indicator.preview = { hidden = true; };
+      indicator.preview = {
+        hidden = true;
+      };
     };
 
-    # ----- Keybindings (keymap.toml)
+    # ----- Binds
     keymap.mgr.prepend_keymap = [
       {
         on = "!";
@@ -45,7 +59,7 @@
       }
     ];
 
-    # ----- Initialization (init.lua)
+    # ----- Initialization
     initLua = ''
       require ("git"):setup {
         order = 1500,
@@ -56,8 +70,8 @@
 
     # ----- Plugins
     plugins = {
-      git = pkgs.yaziPlugins.git;
-      mount = pkgs.yaziPlugins.mount;
+      inherit (pkgs.yaziPlugins) git;
+      inherit (pkgs.yaziPlugins) mount;
       omni-trash = pkgs.fetchFromGitHub {
         owner = "goon";
         repo = "omni-trash.yazi";

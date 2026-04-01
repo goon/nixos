@@ -1,10 +1,15 @@
-{ pkgs, user, repoName, ... }:
+{
+  pkgs,
+  user,
+  repoName,
+  ...
+}:
 
 {
   home.packages = with pkgs; [
     nautilus
-    sushi # ----- File Preview for Nautilus
-    ffmpegthumbnailer # ----- Video thumbnails for Nautilus
+    sushi # --- File Preview 
+    ffmpegthumbnailer # --- Thumbnails
   ];
 
   dconf.settings = {
@@ -15,7 +20,7 @@
     };
   };
 
-  # ----- GTK Bookmarks
+  # ----- Bookmarks
   xdg.configFile."gtk-3.0/bookmarks" = {
     force = true;
     text = ''

@@ -1,13 +1,13 @@
-{ config, pkgs, lib, ... }:
+{ pkgs, repoName, ... }:
 
 let
-  # ----- Standalone cheat command (shell-agnostic)
+  # ----- Cheat 
   cheat-cmd = pkgs.writeShellScriptBin "cheat" ''
     curl "https://cheat.sh/$1"
   '';
 in
 {
-  # ----- CLI Tools enabled via Home Manager modules
+  # ----- CLI Integrations
   programs.zoxide.enable = true;
   programs.fzf.enable = true;
   programs.bat.enable = true;
@@ -21,21 +21,23 @@ in
     XDG_CACHE_HOME = "$HOME/.cache";
   };
 
-  # ----- Add to PATH
+  # ----- +PATH
   home.sessionPath = [
     "$HOME/.local/bin"
   ];
-
 
   programs.bash = {
     enable = true;
     enableCompletion = true;
 
-    # ----- History Settings
-    historyControl = [ "ignoreboth" "erasedups" ];
+    # ----- History
+    historyControl = [
+      "ignoreboth"
+      "erasedups"
+    ];
     historySize = 10000;
     historyFileSize = 20000;
-    
+
     shellOptions = [
       "histappend"
       "checkwinsize"
@@ -45,8 +47,8 @@ in
     shellAliases = {
       # ----- Standard
       grep = "grep --color=auto";
-      
-      # ----- Nix/NH
+
+      # ----- Nix
       nhs = "nh os switch";
       nht = "nh os test";
       nhc = "nh clean all --keep 8";
@@ -70,10 +72,10 @@ in
       nv = "nvim";
       vim = "nvim";
 
-      # ----- Modern CLI replacements
+      # ----- Modern CLI
       ls = "eza --icons --git";
       cat = "bat";
-      cd = "z"; # zoxide integration
+      cd = "z";
 
       # ----- Utilities
       rm = "rm -i";
@@ -83,7 +85,7 @@ in
     # ----- Custom Initialisation
     initExtra = ''
       # ----- Exports
-      export NH_FLAKE="$HOME/.nixos"
+      export NH_FLAKE="$HOME/${repoName}"
 
       # ----- Functions
 
@@ -92,7 +94,7 @@ in
     '';
   };
 
-  # ----- Custom Packages - Managed alongside their configurations
+  # ----- Custom Packages
   home.packages = [
     cheat-cmd
     pkgs.krabby

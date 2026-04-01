@@ -1,18 +1,28 @@
-{ pkgs, inputs, fonts, user, ... }:
+{
+  pkgs,
+  inputs,
+  fonts,
+  user,
+  repoName,
+  ...
+}:
 
 let
   spicePkgs = inputs.spicetify-nix.legacyPackages.${pkgs.stdenv.system};
 in
 {
   imports = [ ./affinity.nix ];
-  # ----- Home-Manager configuration (system-level)
+
   home-manager.useGlobalPkgs = true;
   home-manager.useUserPackages = true;
 
-  # ----- Required for dconf/GTK integration
   programs.dconf.enable = true;
 
   home-manager.users.${user} = {
+    _module.args = {
+      inherit fonts user repoName;
+    };
+
     imports = [
       ./dots.nix
       ./firefox.nix
@@ -35,10 +45,7 @@ in
     home.homeDirectory = "/home/${user}";
     home.stateVersion = "25.11";
 
-    # ----- Enable dconf for GNOME app settings
     dconf.enable = true;
-
-    # ----- Nautilus preferences are managed in ./nautilus.nix
     dconf.settings = {
       "org/gnome/desktop/interface" = {
         color-scheme = "prefer-dark";
@@ -51,14 +58,14 @@ in
       };
     };
 
-    # ----- Install GTK theme packages (managed by quickshell script, not Nix symlinks)
+    # ----- GTK 
     home.packages = with pkgs; [
       adw-gtk3
       papirus-icon-theme
       bibata-cursors
     ];
 
-    # ----- Spicetify Configuration (Spotify theming)
+    # ----- Spicetify
     programs.spicetify = {
       enable = true;
       theme = spicePkgs.themes.comfy;

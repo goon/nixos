@@ -1,28 +1,26 @@
-{ pkgs, ... }:
+{ pkgs, fonts, ... }:
 
 {
   xdgDefaults.mediaPlayerPackage = null;
 
   programs.mpv = {
     enable = true;
-    
-    # ----- Main Config (mpv.conf)
+
     config = {
       osc = "no";
-      osd-font = "Outfit";
+      osd-font = fonts.sansSerif;
     };
 
-    # ----- Managed Scripts (Official pkgs)
+    # ----- Scripts
     scripts = [
       pkgs.mpvScripts.thumbfast
       pkgs.mpvScripts.modernz
     ];
 
-    # ----- Script Options (script-opts/*.conf)
     scriptOpts = {
       modernz = {
         icon_theme = "material";
-        font = "Outfit";
+        font = fonts.sansSerif;
       };
     };
   };

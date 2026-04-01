@@ -37,19 +37,20 @@
       cfg = config.xdgDefaults;
     in
     {
-      home.packages = (lib.optional (cfg.imageViewerPackage != null) cfg.imageViewerPackage)
+      home.packages =
+        (lib.optional (cfg.imageViewerPackage != null) cfg.imageViewerPackage)
         ++ (lib.optional (cfg.mediaPlayerPackage != null) cfg.mediaPlayerPackage);
 
       xdg.mimeApps = {
         enable = true;
         defaultApplications = {
-          # ----- Browser (Firefox - managed by firefox.nix)
+          # ----- Browser
           "x-scheme-handler/http" = cfg.browser;
           "x-scheme-handler/https" = cfg.browser;
           "text/html" = cfg.browser;
           "image/svg+xml" = cfg.browser;
 
-          # ----- Images → feh
+          # ----- Images
           "image/jpeg" = cfg.imageViewer;
           "image/png" = cfg.imageViewer;
           "image/gif" = cfg.imageViewer;
@@ -57,7 +58,7 @@
           "image/bmp" = cfg.imageViewer;
           "image/tiff" = cfg.imageViewer;
 
-          # ----- Video → mpv
+          # ----- Video
           "video/mp4" = cfg.mediaPlayer;
           "video/webm" = cfg.mediaPlayer;
           "video/x-matroska" = cfg.mediaPlayer;
@@ -65,7 +66,7 @@
           "video/quicktime" = cfg.mediaPlayer;
           "video/x-mpeg" = cfg.mediaPlayer;
 
-          # ----- Audio → mpv
+          # ----- Audio
           "audio/mpeg" = cfg.mediaPlayer;
           "audio/flac" = cfg.mediaPlayer;
           "audio/ogg" = cfg.mediaPlayer;
@@ -74,7 +75,7 @@
         };
       };
 
-      # ----- Override "Neovim wrapper" → "Neovim"
+      # ----- Override → Neovim Wrapper 
       xdg.desktopEntries.nvim = {
         name = "Neovim";
         genericName = "Text Editor";
