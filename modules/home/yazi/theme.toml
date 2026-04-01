@@ -1,6 +1,0 @@
-[flavor]
-dark = "base16"
-light = "base16"
-
-[indicator]
-preview = { hidden = true }

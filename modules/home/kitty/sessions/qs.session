@@ -1,3 +1,0 @@
-cd ~/.nixos/modules/home/quickshell
-layout splits
-launch nvim
