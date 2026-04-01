@@ -1,10 +1,10 @@
-{ user, ... }:
+{ username, ... }:
 
 {
   # User account configuration
-  users.users.${user} = {
+  users.users.${username} = {
     isNormalUser = true;
-    description = user;
+    description = username;
     extraGroups = [
       "networkmanager"
       "wheel"
