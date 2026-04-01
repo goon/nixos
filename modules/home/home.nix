@@ -5,11 +5,11 @@ let
 in
 {
   imports = [ ./affinity.nix ];
-  # Home-Manager configuration (system-level)
+  # ----- Home-Manager configuration (system-level)
   home-manager.useGlobalPkgs = true;
   home-manager.useUserPackages = true;
 
-  # Required for dconf/GTK integration
+  # ----- Required for dconf/GTK integration
   programs.dconf.enable = true;
 
   home-manager.users.${user} = {
@@ -35,10 +35,10 @@ in
     home.homeDirectory = "/home/${user}";
     home.stateVersion = "25.11";
 
-    # Enable dconf for GNOME app settings
+    # ----- Enable dconf for GNOME app settings
     dconf.enable = true;
 
-    # Nautilus preferences are managed in ./nautilus.nix
+    # ----- Nautilus preferences are managed in ./nautilus.nix
     dconf.settings = {
       "org/gnome/desktop/interface" = {
         color-scheme = "prefer-dark";
@@ -51,14 +51,14 @@ in
       };
     };
 
-    # Install GTK theme packages (managed by quickshell script, not Nix symlinks)
+    # ----- Install GTK theme packages (managed by quickshell script, not Nix symlinks)
     home.packages = with pkgs; [
       adw-gtk3
       papirus-icon-theme
       bibata-cursors
     ];
 
-    # Spicetify Configuration (Spotify theming)
+    # ----- Spicetify Configuration (Spotify theming)
     programs.spicetify = {
       enable = true;
       theme = spicePkgs.themes.comfy;

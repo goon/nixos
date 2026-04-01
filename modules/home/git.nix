@@ -4,7 +4,7 @@
   programs.git = {
     enable = true;
     
-    # Global ignore patterns
+    # ----- Global ignore patterns
     ignores = [ 
       "AGENTS.md"
     ];
@@ -22,6 +22,6 @@
     };
   };
 
-  programs.delta.enable = true; # advanced 'diff' tool and syntax highlighting 
-  programs.lazygit.enable = true; # lazy git tui 
+  programs.delta.enable = true; # ----- advanced 'diff' tool and syntax highlighting 
+  programs.lazygit.enable = true; # ----- lazy git tui 
 }

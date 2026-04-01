@@ -3,8 +3,8 @@
 {
   home.packages = with pkgs; [
     nautilus
-    sushi # File Preview for Nautilus
-    ffmpegthumbnailer # Video thumbnails for Nautilus
+    sushi # ----- File Preview for Nautilus
+    ffmpegthumbnailer # ----- Video thumbnails for Nautilus
   ];
 
   dconf.settings = {
@@ -15,7 +15,7 @@
     };
   };
 
-  # GTK Bookmarks
+  # ----- GTK Bookmarks
   xdg.configFile."gtk-3.0/bookmarks" = {
     force = true;
     text = ''

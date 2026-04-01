@@ -1,7 +1,7 @@
 { lib, ... }:
 
 {
-  # [[ Starship Configuration (100% Declarative) ]]
+  # ----- Starship Configuration (100% Declarative)
   programs.starship = {
     enable = true;
     settings = {

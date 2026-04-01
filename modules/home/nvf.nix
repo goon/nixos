@@ -5,15 +5,15 @@
     enable = true;
     settings = {
       vim = {
-        # [[ Leader Keys ]]
+        # ----- Leader Keys
         globals.mapleader = " ";
 
-        # [[ General Options ]]
+        # ----- General Options
         viAlias = true;
         vimAlias = true;
 
         options = {
-          # UI Settings
+          # ----- UI Settings
           number = true;
           relativenumber = true;
           signcolumn = "yes";
@@ -24,19 +24,19 @@
           laststatus = 3;
           fillchars = "eob: ";
 
-          # Indentation
+          # ----- Indentation
           expandtab = true;
           shiftwidth = 2;
           tabstop = 2;
           smartindent = true;
           softtabstop = 2;
 
-          # Search
+          # ----- Search
           ignorecase = true;
           smartcase = true;
           hlsearch = false;
 
-          # Performance & UX
+          # ----- Performance & UX
           mouse = "a";
           clipboard = "unnamedplus";
           updatetime = 250;
@@ -49,18 +49,18 @@
           autoread = true;
         };
 
-        # [[ Keymaps ]]
+        # ----- Keymaps
         keymaps = [
-          # Paste from system clipboard in insert mode
+          # ----- Paste from system clipboard in insert mode
           { mode = "i"; key = "<C-v>"; action = "<C-r>+"; silent = true; desc = "Paste from system clipboard"; }
 
-          # Window Navigation
+          # ----- Window Navigation
           { mode = ["n" "t"]; key = "<C-h>"; action = "<C-\\><C-n><C-w>h"; silent = true; desc = "Go to Left Window"; }
           { mode = ["n" "t"]; key = "<C-j>"; action = "<C-\\><C-n><C-w>j"; silent = true; desc = "Go to Lower Window"; }
           { mode = ["n" "t"]; key = "<C-k>"; action = "<C-\\><C-n><C-w>k"; silent = true; desc = "Go to Upper Window"; }
           { mode = ["n" "t"]; key = "<C-l>"; action = "<C-\\><C-n><C-w>l"; silent = true; desc = "Go to Right Window"; }
 
-          # Window Management
+          # ----- Window Management
           { mode = "n"; key = "<leader>v"; action = "<C-w>v"; silent = true; desc = "Vertical Split"; }
           { mode = "n"; key = "<leader>h"; action = "<C-w>s"; silent = true; desc = "Horizontal Split"; }
           { mode = "n"; key = "<leader>cw"; action = "<C-w>c"; silent = true; desc = "Close Window"; }
@@ -71,7 +71,7 @@
           { mode = "n"; key = "<C-Left>"; action = "<cmd>vertical resize -2<cr>"; silent = true; desc = "Decrease Window Width"; }
           { mode = "n"; key = "<C-Right>"; action = "<cmd>vertical resize +2<cr>"; silent = true; desc = "Increase Window Width"; }
 
-          # Buffer Management
+          # ----- Buffer Management
           { mode = ["n" "t"]; key = "<A-[>"; action = "<cmd>bprevious<cr>"; silent = true; desc = "Previous Buffer"; }
           { mode = ["n" "t"]; key = "<A-]>"; action = "<cmd>bnext<cr>"; silent = true; desc = "Next Buffer"; }
           { mode = "n"; key = "[b"; action = ":bprevious<cr>"; silent = true; desc = "Previous Buffer"; }
@@ -82,7 +82,7 @@
           { mode = "n"; key = "<leader>bd"; action = ":bdelete<cr>"; silent = true; desc = "Delete Buffer"; }
           { mode = "n"; key = "<leader>bo"; action = "<cmd>%bd|e#|bd#<cr>"; silent = true; desc = "Delete Other Buffers"; }
 
-          # General/Misc
+          # ----- General/Misc
           { mode = ["i" "x" "n" "s"]; key = "<C-s>"; action = "<cmd>w<cr><esc>"; silent = true; desc = "Save File"; }
           { mode = "n"; key = "<leader>q"; action = "<cmd>qa<cr>"; silent = true; desc = "Quit All"; }
           { mode = "n"; key = "<leader>wq"; action = "<cmd>wqa<cr>"; silent = true; desc = "Save and Quit All"; }
@@ -91,10 +91,10 @@
           { mode = "n"; key = "<leader>s"; action = "<cmd>wa<cr>"; silent = true; desc = "Save All Files"; }
         ];
 
-        # [[ Binds ]]
+        # ----- Binds
         binds.whichKey.enable = true;
         
-        # [[ Languages ]]
+        # ----- Languages
         languages = {
           nix = {
             enable = true;
@@ -110,7 +110,7 @@
           };
         };
 
-        # [[ LSP ]]
+        # ----- LSP
         lsp = {
           enable = true;
           mappings = {
@@ -126,19 +126,19 @@
           };
         };
 
-        # [[ Completion ]]
+        # ----- Completion
         autocomplete.nvim-cmp.enable = true;
 
-        # [[ Formatting ]]
+        # ----- Formatting
         formatter.conform-nvim.enable = true;
 
-        # [[ Telescope (Fuzzy Finder) ]]
+        # ----- Telescope (Fuzzy Finder)
         telescope.enable = false;
 
-        # [[ Git ]]
+        # ----- Git
         git.gitsigns.enable = true;
 
-        # [[ UI & Visuals ]]
+        # ----- UI & Visuals
         statusline.lualine.enable = true;
 
         visuals = {
@@ -148,7 +148,7 @@
 
         comments.comment-nvim.enable = true;
 
-        # [[ Mini.nvim ]]
+        # ----- Mini.nvim
         mini = {
           surround = {
             enable = true;
@@ -169,7 +169,7 @@
           pairs.enable = true;
         };
 
-        # [[ Extra Plugins ]]
+        # ----- Extra Plugins
         extraPlugins = with pkgs.vimPlugins; {
           snacks = {
             package = snacks-nvim;
@@ -223,7 +223,7 @@
           };
           opencode = {
             package = opencode-nvim;
-            # setup = ""; # No setup function
+            # setup = ""; # ----- No setup function
           };
           flash = {
             package = flash-nvim;
@@ -251,7 +251,7 @@
           };
         };
 
-        # [[ Theme Bridge Integration ]]
+        # ----- Theme Bridge Integration
         luaConfigPost = ''
           -- Add Quickshell cache to the Lua search path
           package.path = vim.fn.expand("$HOME/.cache/quickshell/themes/?.lua;") .. package.path

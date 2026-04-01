@@ -43,13 +43,13 @@
       xdg.mimeApps = {
         enable = true;
         defaultApplications = {
-          # Browser (Firefox - managed by firefox.nix)
+          # ----- Browser (Firefox - managed by firefox.nix)
           "x-scheme-handler/http" = cfg.browser;
           "x-scheme-handler/https" = cfg.browser;
           "text/html" = cfg.browser;
           "image/svg+xml" = cfg.browser;
 
-          # Images → feh
+          # ----- Images → feh
           "image/jpeg" = cfg.imageViewer;
           "image/png" = cfg.imageViewer;
           "image/gif" = cfg.imageViewer;
@@ -57,7 +57,7 @@
           "image/bmp" = cfg.imageViewer;
           "image/tiff" = cfg.imageViewer;
 
-          # Video → mpv
+          # ----- Video → mpv
           "video/mp4" = cfg.mediaPlayer;
           "video/webm" = cfg.mediaPlayer;
           "video/x-matroska" = cfg.mediaPlayer;
@@ -65,7 +65,7 @@
           "video/quicktime" = cfg.mediaPlayer;
           "video/x-mpeg" = cfg.mediaPlayer;
 
-          # Audio → mpv
+          # ----- Audio → mpv
           "audio/mpeg" = cfg.mediaPlayer;
           "audio/flac" = cfg.mediaPlayer;
           "audio/ogg" = cfg.mediaPlayer;
@@ -74,7 +74,7 @@
         };
       };
 
-      # Override "Neovim wrapper" → "Neovim"
+      # ----- Override "Neovim wrapper" → "Neovim"
       xdg.desktopEntries.nvim = {
         name = "Neovim";
         genericName = "Text Editor";

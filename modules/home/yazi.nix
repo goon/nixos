@@ -7,7 +7,7 @@
     enable = true;
     shellWrapperName = "y";
 
-    # [[ Main Settings (yazi.toml) ]]
+    # ----- Main Settings (yazi.toml)
     settings = {
       mgr = {
         ratio = [ 2 4 3 ];
@@ -19,14 +19,14 @@
       ];
     };
 
-    # [[ Theme / UI (theme.toml) ]]
+    # ----- Theme / UI (theme.toml)
     theme = {
       flavor.dark = "base16";
       flavor.light = "base16";
       indicator.preview = { hidden = true; };
     };
 
-    # [[ Keybindings (keymap.toml) ]]
+    # ----- Keybindings (keymap.toml)
     keymap.mgr.prepend_keymap = [
       {
         on = "!";
@@ -45,7 +45,7 @@
       }
     ];
 
-    # [[ Initialization (init.lua) ]]
+    # ----- Initialization (init.lua)
     initLua = ''
       require ("git"):setup {
         order = 1500,
@@ -54,7 +54,7 @@
       Status:children_remove(4, Status.RIGHT)
     '';
 
-    # [[ Plugins ]]
+    # ----- Plugins
     plugins = {
       git = pkgs.yaziPlugins.git;
       mount = pkgs.yaziPlugins.mount;
@@ -66,7 +66,7 @@
       };
     };
 
-    # [[ Flavors ]]
+    # ----- Flavors
     flavors = {
       base16 = pkgs.fetchFromGitHub {
         owner = "matt-dong-123";
