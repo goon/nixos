@@ -1,6 +1,11 @@
 { pkgs, fonts, ... }:
 
 {
+  _module.args.fonts = {
+    sansSerif = "Outfit";
+    monospace = "Kode Mono";
+  };
+
   fonts.packages = with pkgs; [
     google-fonts
     material-symbols
