@@ -46,7 +46,35 @@
       ...
     }:
     {
-      nixosConfigurations = import ./hosts { inherit inputs; };
+      nixosConfigurations =
+        let
+          inherit (nixpkgs.lib) nixosSystem;
+
+          # Base modules shared by all hosts
+          baseModules = [
+            {
+              _module.args = {
+                user = "michael";
+                repoName = ".nixos";
+              };
+            }
+            { nixpkgs.config.allowUnfree = true; }
+            { nixpkgs.overlays = [ ]; }
+            { home-manager.extraSpecialArgs = { inherit inputs; }; }
+            inputs.home-manager.nixosModules.default
+            inputs.flatpaks.nixosModules.default
+            inputs.nix-gaming.nixosModules.pipewireLowLatency
+            inputs.nvf.nixosModules.default
+            ./modules/core
+          ];
+        in
+        {
+          desktop = nixosSystem {
+            specialArgs = { inherit inputs; };
+            system = "x86_64-linux";
+            modules = baseModules ++ [ ./host ];
+          };
+        };
 
       # Treefmt formatter for nix fmt (multi-system support)
       formatter = nixpkgs.lib.genAttrs [ "x86_64-linux" ] (
