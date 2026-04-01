@@ -1,0 +1,86 @@
+{ ... }:
+
+{
+  programs.fastfetch = {
+    enable = true;
+    settings = {
+      logo = {
+        type = "auto";
+        source = "nixos";
+      };
+      display = {
+        separator = " ";
+        key = {
+          width = 6;
+        };
+      };
+      modules = [
+        "break"
+        "break"
+        {
+          type = "custom";
+          format = "{#yellow}SYSTEM{#}";
+        }
+        "break"
+        {
+          type = "users";
+          key = "USR";
+          format = "{name}";
+        }
+        {
+          type = "os";
+          key = "OPS";
+          format = "{pretty-name}";
+        }
+        {
+          type = "kernel";
+          key = "KRN";
+        }
+        {
+          type = "packages";
+          key = "PKG";
+          format = "{all}";
+        }
+        {
+          type = "wm";
+          key = "WDM";
+          format = "{pretty-name}";
+        }
+        {
+          type = "terminal";
+          key = "TER";
+          format = "{pretty-name}";
+        }
+        {
+          type = "shell";
+          key = "SHL";
+          format = "{pretty-name}";
+        }
+        "break"
+        {
+          type = "custom";
+          format = "{#yellow}HARDWARE{#}";
+        }
+        "break"
+        {
+          type = "cpu";
+          key = "CPU";
+        }
+        {
+          type = "gpu";
+          key = "GPU";
+          hideType = "integrated";
+          format = "{name}";
+        }
+        {
+          type = "memory";
+          key = "MEM";
+        }
+        {
+          type = "uptime";
+          key = "UPT";
+        }
+      ];
+    };
+  };
+}
