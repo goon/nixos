@@ -5,33 +5,21 @@
 
     # ------- Command Line Utilities
 
-    kitty                     # Terminal Emulator 
     fd                        # File Finder 
     ripgrep                   # Improved Grep 
-    fzf                       # Fuzzy Finder
-    zoxide                    # cd+
-    bat                       # cat+
-    eza                       # ls+
     zellij                    # Multiplexer
-    fastfetch                 # System Info 
     btop                      # Resource Monitor 
     cava                      # Audio Visualizer
-    yazi                      # File Explorer
-    starship                  # Shell Prompt 
-    krabby                    # Pokemon Sprites
     wget                      # Web Downloads 
     curl                      # Curl 
-    trash-cli                 # CLI Trash Manager
     rmpc                      # Music Player
 
     # ------- Development Tools
 
-    neovim                    # Terminal Editor 
     nodejs                    # Javascript Runtime 
     python3                   # Python 
     go                        # Go 
     unzip                     
-    opencode                  # Opencode TUI
 
     # ------- Applications
 
