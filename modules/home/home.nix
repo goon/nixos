@@ -16,7 +16,6 @@ in
   home-manager.useGlobalPkgs = true;
   home-manager.useUserPackages = true;
 
-  programs.dconf.enable = true;
 
   home-manager.users.${user} = {
     _module.args = {
@@ -28,13 +27,11 @@ in
       ./firefox.nix
       ./xdg.nix
       ./git.nix
-      ./nautilus.nix
       ./nvf.nix
       ./kitty.nix
       ./fastfetch.nix
       ./bash.nix
       ./starship.nix
-      ./mpv.nix
       ./yazi.nix
       ./opencode.nix
       inputs.spicetify-nix.homeManagerModules.default
