@@ -14,7 +14,7 @@
     };
 
     imageViewerPackage = mkOption {
-      type = types.package;
+      type = types.nullOr types.package;
       default = pkgs.imv;
     };
     imageViewer = mkOption {
@@ -23,7 +23,7 @@
     };
 
     mediaPlayerPackage = mkOption {
-      type = types.package;
+      type = types.nullOr types.package;
       default = pkgs.mpv;
     };
     mediaPlayer = mkOption {
@@ -37,10 +37,8 @@
       cfg = config.xdgDefaults;
     in
     {
-      home.packages = [
-        cfg.imageViewerPackage # feh
-        cfg.mediaPlayerPackage # mpv
-      ];
+      home.packages = (lib.optional (cfg.imageViewerPackage != null) cfg.imageViewerPackage)
+        ++ (lib.optional (cfg.mediaPlayerPackage != null) cfg.mediaPlayerPackage);
 
       xdg.mimeApps = {
         enable = true;
