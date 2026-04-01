@@ -34,7 +34,7 @@
   networking.hostName = "desktop";
 
   # ========== Window Manager Selection ==========
-  desktop.windowmanager.name = "hyprland";
+  desktop.windowmanager.name = "niri";
 
   # ========== System Version ==========
   system.stateVersion = "25.11";
