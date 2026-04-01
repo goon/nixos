@@ -10,8 +10,9 @@
   # ========== Host Identity ==========
   networking.hostName = "desktop";
 
-  # ========== Window Manager Selection ==========
+  # ========== Window Manager & Desktop Selection ==========
   desktop.windowmanager.name = "niri";
+  desktop.gnome.enable = true;
 
   # ========== System Version ==========
   system.stateVersion = "25.11";
