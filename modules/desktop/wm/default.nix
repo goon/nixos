@@ -1,12 +1,12 @@
-{ lib, config, ... }:
+{ lib, ... }:
 
-let
-  cfg = config.desktop.windowmanager;
-in
 {
   options.desktop.windowmanager = {
     name = lib.mkOption {
-      type = lib.types.enum [ "niri" "hyprland" ];
+      type = lib.types.enum [
+        "niri"
+        "hyprland"
+      ];
       default = "niri";
       description = "The window manager to use.";
     };
