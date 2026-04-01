@@ -33,64 +33,37 @@
     treefmt-nix.url = "github:numtide/treefmt-nix";
     treefmt-nix.inputs.nixpkgs.follows = "nixpkgs";
 
-    # Void SDDM Theme (no flake, just a plain git repo)
-    voidsddm = {
-      type = "github";
-      owner = "talyamm";
-      repo = "VoidSDDM";
-      flake = false;
-    };
+    # nvf for Neovim configuration
+    nvf.url = "github:NotAShelf/nvf";
+    nvf.inputs.nixpkgs.follows = "nixpkgs";
   };
 
-  # ========== Outputs ==========
   # System configurations and modules
   outputs =
     inputs@{
       self,
       nixpkgs,
-      treefmt-nix,
       ...
     }:
-    let
-      supportedSystems = [ "x86_64-linux" ];
-      forAllSystems = nixpkgs.lib.genAttrs supportedSystems;
-      fonts = {
-        sansSerif = "Outfit";
-        monospace = "Kode Mono";
-      };
-      user = "michael";
-      repoName = ".nixos";
-    in
     {
-      nixosConfigurations.desktop = nixpkgs.lib.nixosSystem {
-        system = "x86_64-linux";
-        specialArgs = { inherit inputs fonts user repoName; };
-        modules = [
-          # Reproducibility: Isolate from local ~/.config/nixpkgs/
-          { nixpkgs.config.allowUnfree = true; }
-          { nixpkgs.overlays = [ ]; }
-          { home-manager.extraSpecialArgs = { inherit fonts user repoName; }; }
-          inputs.home-manager.nixosModules.default
-          inputs.flatpaks.nixosModules.default
-          inputs.nix-gaming.nixosModules.pipewireLowLatency
-          ./hosts/desktop
-        ];
-      };
+      nixosConfigurations = import ./hosts { inherit inputs; };
 
       # Treefmt formatter for nix fmt (multi-system support)
-      formatter = forAllSystems (
+      formatter = nixpkgs.lib.genAttrs [ "x86_64-linux" ] (
         system:
         let
           pkgs = nixpkgs.legacyPackages.${system};
+          inherit (inputs) treefmt-nix;
         in
         (treefmt-nix.lib.evalModule pkgs ./treefmt.nix).config.build.wrapper
       );
 
       # Check for nix flake check (multi-system support)
-      checks = forAllSystems (
+      checks = nixpkgs.lib.genAttrs [ "x86_64-linux" ] (
         system:
         let
           pkgs = nixpkgs.legacyPackages.${system};
+          inherit (inputs) treefmt-nix;
         in
         {
           formatting = (treefmt-nix.lib.evalModule pkgs ./treefmt.nix).config.build.check self;
