@@ -1,4 +1,4 @@
-{ fonts, repoName, ... }:
+{ config, repoName, ... }:
 
 {
   programs.kitty = {
@@ -9,8 +9,8 @@
       allow_remote_control = "yes";
       listen_on = "unix:/tmp/kitty";
 
-      # ----- Font 
-      font_family = fonts.monospace;
+      # ----- Font
+      font_family = config.globals.userFonts.monospace;
       font_size = "10.0";
 
       # ----- Cursor
@@ -46,7 +46,7 @@
       "f4" = "goto_session ~/.config/kitty/sessions/ --sort-by=alphabetical";
     };
 
-    # ----- Extra 
+    # ----- Extra
     extraConfig = ''
       # ----- Dynamic Theme Hook
       include ~/.cache/quickshell/themes/kitty.conf

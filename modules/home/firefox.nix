@@ -1,4 +1,4 @@
-{ fonts, ... }:
+{ config, ... }:
 {
   programs.firefox = {
     enable = true;
@@ -13,9 +13,9 @@
         "browser.tabs.allow_transparent_browser" = true;
         "browser.display.use_document_fonts" = 0;
         "font.default.x-western" = "sans-serif";
-        "font.name.sans-serif.x-western" = fonts.sansSerif;
-        "font.name.serif.x-western" = fonts.sansSerif;
-        "font.name.monospace.x-western" = fonts.monospace;
+        "font.name.sans-serif.x-western" = config.globals.userFonts.sansSerif;
+        "font.name.serif.x-western" = config.globals.userFonts.sansSerif;
+        "font.name.monospace.x-western" = config.globals.userFonts.monospace;
         "browser.ml.chat.enabled" = false;
         "browser.ml.enable" = false;
         "sidebar.position_start" = false;

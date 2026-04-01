@@ -1,7 +1,7 @@
 { pkgs, repoName, ... }:
 
 let
-  # ----- Cheat 
+  # ----- Cheat
   cheat-cmd = pkgs.writeShellScriptBin "cheat" ''
     curl "https://cheat.sh/$1"
   '';
