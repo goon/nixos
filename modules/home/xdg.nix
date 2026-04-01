@@ -15,20 +15,35 @@
 
     imageViewerPackage = mkOption {
       type = types.nullOr types.package;
-      default = pkgs.imv;
+      default = null;
     };
     imageViewer = mkOption {
       type = types.str;
-      default = "imv.desktop";
+      default = "org.gnome.Loupe.desktop";
     };
 
     mediaPlayerPackage = mkOption {
       type = types.nullOr types.package;
-      default = pkgs.mpv;
+      default = null;
     };
     mediaPlayer = mkOption {
       type = types.str;
-      default = "mpv.desktop";
+      default = "org.gnome.Totem.desktop";
+    };
+
+    fileManager = mkOption {
+      type = types.str;
+      default = "org.gnome.Nautilus.desktop";
+    };
+
+    documentViewer = mkOption {
+      type = types.str;
+      default = "org.gnome.Evince.desktop";
+    };
+
+    musicPlayer = mkOption {
+      type = types.str;
+      default = "org.gnome.Totem.desktop";
     };
   };
 
@@ -67,11 +82,24 @@
           "video/x-mpeg" = cfg.mediaPlayer;
 
           # ----- Audio
-          "audio/mpeg" = cfg.mediaPlayer;
-          "audio/flac" = cfg.mediaPlayer;
-          "audio/ogg" = cfg.mediaPlayer;
-          "audio/wav" = cfg.mediaPlayer;
-          "audio/aac" = cfg.mediaPlayer;
+          "audio/mpeg" = cfg.musicPlayer;
+          "audio/flac" = cfg.musicPlayer;
+          "audio/ogg" = cfg.musicPlayer;
+          "audio/wav" = cfg.musicPlayer;
+          "audio/aac" = cfg.musicPlayer;
+          "audio/x-vorbis+ogg" = cfg.musicPlayer;
+          "audio/x-flac" = cfg.musicPlayer;
+          "audio/x-wav" = cfg.musicPlayer;
+
+          # ----- File Manager
+          "inode/directory" = cfg.fileManager;
+
+          # ----- Documents
+          "application/pdf" = cfg.documentViewer;
+          "application/epub+zip" = cfg.documentViewer;
+          "application/x-mobipocket-ebook" = cfg.documentViewer;
+          "application/vnd.comicbook-rar" = cfg.documentViewer;
+          "application/vnd.comicbook+zip" = cfg.documentViewer;
         };
       };
 
