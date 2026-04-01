@@ -16,7 +16,6 @@
     # All packages moved to systemPackages in pkgs.nix
   };
 
-
   # XDG Base Directory variables
   environment.sessionVariables = {
     XDG_CONFIG_HOME = "$HOME/.config";
