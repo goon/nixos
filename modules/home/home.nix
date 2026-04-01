@@ -19,7 +19,16 @@ in
       ./xdg.nix
       ./git.nix
       ./nautilus.nix
+      ./nvf.nix
+      ./kitty.nix
+      ./fastfetch.nix
+      ./bash.nix
+      ./starship.nix
+      ./mpv.nix
+      ./yazi.nix
+      ./opencode.nix
       inputs.spicetify-nix.homeManagerModules.default
+      inputs.nvf.homeManagerModules.default
     ];
 
     home.username = user;
