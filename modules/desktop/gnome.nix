@@ -2,7 +2,7 @@
   pkgs,
   lib,
   config,
-  user,
+  username,
   repoName,
   ...
 }:
@@ -14,8 +14,7 @@
 
   config = lib.mkIf config.desktop.gnome.enable {
     # This module provides standalone GNOME application support.
-    # We rely on core modules (core/filesystems.nix, core/power.nix, etc.) 
-    # for shared services like gvfs, udisks2, upower, and localsearch (tracker).
+    # Shared services like gvfs, udisks2, upower, and localsearch (tracker).
 
     # Unique services needed for GNOME app integration
     services.devmon.enable = true; # Device monitoring
@@ -23,7 +22,7 @@
 
     # ========== Home Manager Configuration ==========
     # Consolidates user-level settings and applications for GNOME apps
-    home-manager.users.${user} = {
+    home-manager.users.${username} = {
       home.packages = with pkgs; [
         # Applications
         gnome-music
@@ -35,7 +34,7 @@
         # GNOME Circle
         resources # System Monitor
         eyedropper # Color Picker
-        
+
         # Nautilus & Utilities
         nautilus
         sushi # File Preview
@@ -54,12 +53,13 @@
       xdg.configFile."gtk-3.0/bookmarks" = {
         force = true;
         text = ''
-          file:///home/${user}/${repoName} Nix
-          file:///home/${user}/Downloads Downloads
-          file:///home/${user}/Documents Documents
-          file:///home/${user}/Pictures Pictures
-          file:///home/${user}/Music Music
-          file:///home/${user}/Videos Videos
+          file:///home/${username}/${repoName} Nix
+          file:///home/${username}/Downloads Downloads
+          file:///home/${username}/Documents Documents
+          file:///home/${username}/Pictures Pictures
+          file:///home/${username}/Music Music
+          file:///home/${username}/Videos Videos
+          file:///home/${username}/.config Config
         '';
       };
     };

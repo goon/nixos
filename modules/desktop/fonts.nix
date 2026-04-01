@@ -1,11 +1,6 @@
-{ pkgs, fonts, ... }:
+{ pkgs, config, ... }:
 
 {
-  _module.args.fonts = {
-    sansSerif = "Outfit";
-    monospace = "Kode Mono";
-  };
-
   fonts.packages = with pkgs; [
     google-fonts
     material-symbols
@@ -24,8 +19,8 @@
       rgba = "rgb";
     };
     defaultFonts = {
-      monospace = [ fonts.monospace ];
-      sansSerif = [ fonts.sansSerif ];
+      monospace = [ config.globals.userFonts.monospace ];
+      sansSerif = [ config.globals.userFonts.sansSerif ];
     };
   };
 }
