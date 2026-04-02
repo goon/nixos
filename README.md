@@ -37,9 +37,11 @@
 
 1. **Clone:** 
    ```bash
+   nix-shell -p git
    git clone https://github.com/goon/nixos ~/.nixos
    cd ~/.nixos
    ```
+   The configuration expects the repository to be located `$HOME/.nixos`
 
 2. **Generate Hardware Configuration:**
    ```bash
