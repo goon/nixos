@@ -56,7 +56,7 @@
     };
 
     # ----- Custom Initialisation
-    initExtra = ''
+    initContent = ''
       # ----- Exports
       export NH_FLAKE="$HOME/${repoName}"
 
