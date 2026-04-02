@@ -55,6 +55,9 @@ BasePopoutWindow {
                             spacing: 0
 
                             RowLayout {
+                                property real dispCpu: Stats.currentCpu
+                                Behavior on dispCpu { NumberAnimation { duration: 800; easing.type: Easing.OutQuint } }
+
                                 Layout.fillWidth: true
                                 Layout.topMargin: Theme.geometry.spacing.dynamicPadding
                                 Layout.leftMargin: Theme.geometry.spacing.dynamicPadding
@@ -63,7 +66,7 @@ BasePopoutWindow {
 
                                 BaseText { text: "CPU"; weight: Theme.typography.weights.bold }
                                 Item { Layout.fillWidth: true }
-                                BaseText { text: Math.round(Stats.currentCpu * 100) + "%"; color: Theme.colors.accent; weight: Theme.typography.weights.bold }
+                                BaseText { text: Math.round(parent.dispCpu * 100) + "%"; color: Theme.colors.accent; weight: Theme.typography.weights.bold }
                                 BaseText { text: Stats.currentTemp + "°C"; color: Theme.colors.text }
                             }
 
@@ -102,6 +105,9 @@ BasePopoutWindow {
                             spacing: 0
 
                             RowLayout {
+                                property real dispGpu: Stats.currentGpu
+                                Behavior on dispGpu { NumberAnimation { duration: 800; easing.type: Easing.OutQuint } }
+
                                 Layout.fillWidth: true
                                 Layout.topMargin: Theme.geometry.spacing.dynamicPadding
                                 Layout.leftMargin: Theme.geometry.spacing.dynamicPadding
@@ -110,7 +116,7 @@ BasePopoutWindow {
 
                                 BaseText { text: "GPU"; weight: Theme.typography.weights.bold }
                                 Item { Layout.fillWidth: true }
-                                BaseText { text: Math.round(Stats.currentGpu * 100) + "%"; color: Theme.colors.error; weight: Theme.typography.weights.bold }
+                                BaseText { text: Math.round(parent.dispGpu * 100) + "%"; color: Theme.colors.error; weight: Theme.typography.weights.bold }
                                 BaseText { text: Stats.currentGpuTemp + "°C"; color: Theme.colors.text }
                             }
 
@@ -150,6 +156,9 @@ BasePopoutWindow {
                             spacing: 0
 
                             RowLayout {
+                                property real dispRam: Stats.currentRam
+                                Behavior on dispRam { NumberAnimation { duration: 800; easing.type: Easing.OutQuint } }
+
                                 Layout.fillWidth: true
                                 Layout.topMargin: Theme.geometry.spacing.dynamicPadding
                                 Layout.leftMargin: Theme.geometry.spacing.dynamicPadding
@@ -158,7 +167,7 @@ BasePopoutWindow {
 
                                 BaseText { text: "RAM"; weight: Theme.typography.weights.bold }
                                 Item { Layout.fillWidth: true }
-                                BaseText { text: Math.round(Stats.currentRam * 100) + "%"; color: Theme.colors.success; weight: Theme.typography.weights.bold }
+                                BaseText { text: Math.round(parent.dispRam * 100) + "%"; color: Theme.colors.success; weight: Theme.typography.weights.bold }
                                 BaseText { text: Stats.ramText; color: Theme.colors.text }
                             }
 
@@ -207,15 +216,20 @@ BasePopoutWindow {
                                 Item { Layout.fillWidth: true }
                                 
                                 RowLayout {
+                                    property real dispRx: Stats.currentNetworkRx
+                                    property real dispTx: Stats.currentNetworkTx
+                                    Behavior on dispRx { NumberAnimation { duration: 800; easing.type: Easing.OutQuint } }
+                                    Behavior on dispTx { NumberAnimation { duration: 800; easing.type: Easing.OutQuint } }
+
                                     spacing: Theme.geometry.spacing.medium
                                     Layout.alignment: Qt.AlignVCenter | Qt.AlignRight
                                     
                                     BaseText { 
-                                        text: "↓ " + Stats.formatBytes(Stats.currentNetworkRx) + "/s"
+                                        text: "↓ " + Stats.formatBytes(parent.dispRx) + "/s"
                                         color: Theme.colors.primary 
                                     }
                                     BaseText { 
-                                        text: "↑ " + Stats.formatBytes(Stats.currentNetworkTx) + "/s"
+                                        text: "↑ " + Stats.formatBytes(parent.dispTx) + "/s"
                                         color: Theme.colors.accent 
                                     }
                                 }
@@ -277,15 +291,20 @@ BasePopoutWindow {
                                 Item { Layout.fillWidth: true }
                                 
                                 RowLayout {
+                                    property real dispRead: Stats.currentDiskRead
+                                    property real dispWrite: Stats.currentDiskWrite
+                                    Behavior on dispRead { NumberAnimation { duration: 800; easing.type: Easing.OutQuint } }
+                                    Behavior on dispWrite { NumberAnimation { duration: 800; easing.type: Easing.OutQuint } }
+
                                     spacing: Theme.geometry.spacing.medium
                                     Layout.alignment: Qt.AlignVCenter | Qt.AlignRight
                                     
                                     BaseText { 
-                                        text: "R: " + Stats.formatBytes(Stats.currentDiskRead) + "/s"
+                                        text: "R: " + Stats.formatBytes(parent.dispRead) + "/s"
                                         color: Theme.colors.warning 
                                     }
                                     BaseText { 
-                                        text: "W: " + Stats.formatBytes(Stats.currentDiskWrite) + "/s"
+                                        text: "W: " + Stats.formatBytes(parent.dispWrite) + "/s"
                                         color: Theme.colors.error 
                                     }
                                 }
