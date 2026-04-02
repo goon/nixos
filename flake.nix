@@ -52,12 +52,7 @@
 
           # Base modules shared by all hosts
           baseModules = [
-            {
-              _module.args = {
-                user = "michael";
-                repoName = ".nixos";
-              };
-            }
+            ./modules/options.nix
             { nixpkgs.config.allowUnfree = true; }
             { nixpkgs.overlays = [ ]; }
             { home-manager.extraSpecialArgs = { inherit inputs; }; }
