@@ -3,15 +3,15 @@
     enable = true;
     settings = {
       animate = true;
-      animation = "doom";
+      animation = "colormix";
       bg = 0;
       fg = 7;
     };
   };
 
-  # Catppuccin
+  # Catppuccin (Darker Variant - using Crust for darkest bg)
   console.colors = [
-    "1e1e2e" # 0: Base
+    "11111b" # 0: Base (Crust - Darkest)
     "f38ba8" # 1: Red
     "a6e3a1" # 2: Green
     "f9e2af" # 3: Yellow
@@ -19,7 +19,7 @@
     "f5c2e7" # 5: Pink
     "94e2d5" # 6: Teal
     "bac2de" # 7: Subtext1
-    "585b70" # 8: Surface2
+    "313244" # 8: Surface0 (Darker than Surface2)
     "f38ba8" # 9: Red
     "a6e3a1" # 10: Green
     "f9e2af" # 11: Yellow
