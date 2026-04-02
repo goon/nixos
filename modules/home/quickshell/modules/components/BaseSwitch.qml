@@ -39,21 +39,27 @@ Switch {
         Rectangle {
             id: thumb
 
-            x: control.checked ? parent.width - width - 4 : 4
+            property real targetX: control.checked ? parent.width - 16 - 4 : 4
+            x: targetX
             y: 4
-            width: 16
+            
+            property real stretch: {
+                var maxTravel = parent.width - 24
+                if (maxTravel <= 0) return 0
+                // Normalize the distance from target and apply a sine wave to bulge in the middle
+                var norm = Math.abs(x - targetX) / maxTravel
+                return Math.max(0, Math.sin(norm * Math.PI) * 12)
+            }
+            
+            width: 16 + stretch
             height: 16
             radius: Math.max(0, Math.max(2, Theme.geometry.radius * 0.5) - 2)
             // Thumb Color
             color: control.checked ? Theme.colors.base : Theme.colors.text
 
             Behavior on x {
-                BaseAnimation {
-                    speed: "fast"
-                }
-
+                BaseAnimation { speed: "fast"; easing.type: Easing.OutBack }
             }
-
         }
 
         Behavior on color {
