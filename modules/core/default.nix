@@ -1,5 +1,4 @@
 {
-  # ========== Core System Imports ==========
   imports = [
     ./boot.nix
     ./filesystems.nix

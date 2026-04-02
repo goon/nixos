@@ -1,17 +1,15 @@
 {
-  # Enable Ly display manager
   services.displayManager.ly = {
     enable = true;
     settings = {
-      # Customization options
       animate = true;
       animation = "doom";
-      bg = 0; # Use Mocha Base (#1e1e2e)
-      fg = 7; # Use Mocha Subtext1 (#bac2de)
+      bg = 0;
+      fg = 7;
     };
   };
 
-  # Set Catppuccin Mocha colors for the TTY
+  # Catppuccin
   console.colors = [
     "1e1e2e" # 0: Base
     "f38ba8" # 1: Red

@@ -7,7 +7,7 @@
   ];
   nix.settings.auto-optimise-store = true;
   nix.settings.warn-dirty = false;
-  # Binary caches (niri + garnix for affinity)
+  # Binary Caches ( Niri & Affinity )
   nix.settings.substituters = [
     "https://niri.cachix.org"
     "https://cache.garnix.io"
@@ -17,7 +17,7 @@
     "cache.garnix.io:CTFPyKSLcx5RMJKfLo5EEPUObbA78b0YQ2DTCJPXNJQ="
   ];
 
-  # Limit CPU usage for builds
+  # CPU Limits for Builds
   nix.settings.max-jobs = 10;
   nix.settings.cores = 10;
 

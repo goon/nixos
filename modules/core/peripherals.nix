@@ -1,11 +1,11 @@
 { pkgs, ... }:
 
 {
-  # Logitech wireless devices
+  # Logitech Wireless Devices
   hardware.logitech.wireless.enable = true;
-  boot.kernelModules = [ "hid-logitech-hidpp" ]; # For non-G Logitech devices
+  boot.kernelModules = [ "hid-logitech-hidpp" ];
 
-  # Wooting keyboard support
+  # Wooting
   services.udev.packages = [ pkgs.wooting-udev-rules ];
 
   environment.systemPackages = with pkgs; [

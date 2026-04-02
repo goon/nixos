@@ -1,5 +1,4 @@
 {
-  # ========== Desktop Specific Imports ==========
   imports = [
     ./desktop.nix
     ./gnome.nix

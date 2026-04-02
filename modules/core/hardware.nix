@@ -1,7 +1,7 @@
 { pkgs, ... }:
 
 {
-  # AMD GPU configuration
+  # AMD GPUs
   boot.initrd.kernelModules = [ "amdgpu" ];
   boot.kernelModules = [ "i2c_dev" ];
   hardware.i2c.enable = true;
@@ -11,8 +11,7 @@
     enable = true;
     enable32Bit = true;
 
-    # AMD Vulkan and OpenGL support
-    # RADV (Mesa's Vulkan driver) is enabled by default for AMD GPUs
+    # Vulkan and OpenGL
     extraPackages = with pkgs; [
       vulkan-loader
       vulkan-headers
@@ -22,12 +21,11 @@
     ];
   };
 
-  # Graphics/GPU tools
   environment.systemPackages = with pkgs; [
     vulkan-tools
     mesa-demos
   ];
 
-  # SSD TRIM for NVMe drives
+  # SSD Trim
   services.fstrim.enable = true;
 }
