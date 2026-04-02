@@ -1,5 +1,3 @@
-_:
-
 {
   # Enable Ly display manager
   services.displayManager.ly = {

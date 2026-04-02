@@ -1,5 +1,3 @@
-_:
-
 {
   # Timezone
   time.timeZone = "Europe/London";

@@ -1,5 +1,3 @@
-{ ... }:
-
 {
   # ========== Core System Imports ==========
   imports = [

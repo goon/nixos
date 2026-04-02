@@ -1,5 +1,3 @@
-_:
-
 {
   # Declarative Flatpak configuration
   services.flatpak = {

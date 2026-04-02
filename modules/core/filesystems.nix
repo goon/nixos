@@ -1,5 +1,3 @@
-_:
-
 {
   # Mount games drive
   fileSystems."/mnt/games" = {

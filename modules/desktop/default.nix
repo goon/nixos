@@ -1,5 +1,3 @@
-{ ... }:
-
 {
   # ========== Desktop Specific Imports ==========
   imports = [
