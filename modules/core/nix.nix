@@ -27,6 +27,6 @@
     enable = true;
     clean.enable = true;
     clean.dates = "weekly";
-    clean.extraArgs = "--keep 3";
+    clean.extraArgs = "--keep 5";
   };
 }
