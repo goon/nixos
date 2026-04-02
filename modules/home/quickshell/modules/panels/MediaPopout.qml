@@ -19,6 +19,13 @@ BasePopoutWindow {
         implicitWidth: 380
         implicitHeight: 380 // Fixed height for media
 
+        // Catch clicks so they don't fall through to the close-window background
+        MouseArea {
+            anchors.fill: parent
+            onClicked: (mouse) => mouse.accepted = true
+            onPressed: (mouse) => mouse.accepted = true
+        }
+
         HoverHandler {
             id: hoverTracker
             onPointChanged: {
@@ -124,17 +131,30 @@ BasePopoutWindow {
                 property real waveFrequency: 0.15
 
                 Layout.fillWidth: true
+                Layout.preferredHeight: 32
                 Layout.leftMargin: 60
                 Layout.rightMargin: 60
-                value: Media.progressRatio
                 
-                Behavior on value {
-                    enabled: !progressSlider.pressed
-                    BaseAnimation.Spring { profile: "snappy" }
+                Connections {
+                    target: Media
+                    function onProgressRatioChanged() {
+                        if (!progressSlider.pressed) {
+                            progressSlider.value = Media.progressRatio;
+                        }
+                    }
                 }
                 
-                enabled: Media.canSeek && Media.trackLength > 0
+                enabled: Media.activePlayer !== null
+                
                 onMoved: Media.seek(value * Media.trackLength)
+
+                onPressedChanged: {
+                    if (!pressed) {
+                        if (Media.trackLength > 0) {
+                            Media.seek(value * Media.trackLength);
+                        }
+                    }
+                }
 
                 BaseAnimation {
                     from: 0
@@ -157,6 +177,8 @@ BasePopoutWindow {
                         id: waveCanvas
 
                         property real progress: progressSlider.visualPosition
+                        Behavior on progress { BaseAnimation.Spring { profile: "snappy" } }
+
                         property color activeColor: Theme.colors.text
                         property color inactiveColor: Theme.colors.surface
                         property real phase: progressSlider.wavePhase
@@ -214,6 +236,8 @@ BasePopoutWindow {
                 handle: Rectangle {
                     z: 1
                     x: progressSlider.leftPadding + progressSlider.visualPosition * (progressSlider.availableWidth - width)
+                    Behavior on x { BaseAnimation.Spring { profile: "snappy" } }
+                    
                     y: progressSlider.topPadding + progressSlider.availableHeight / 2 - height / 2
                     width: 4
                     height: Theme.dimensions.iconMedium
@@ -228,12 +252,26 @@ BasePopoutWindow {
                 spacing: 24
 
                 BaseButton {
+                    id: prevBtn
                     size: Theme.dimensions.iconBase
                     normalColor: Theme.colors.transparent
                     hoverGradient: true
                     icon: "skip_previous"
                     enabled: Media.canGoPrevious
-                    onClicked: Media.previous()
+                    onClicked: {
+                        prevAnim.restart()
+                        Media.previous()
+                    }
+
+                    NumberAnimation {
+                        id: prevAnim
+                        target: prevBtn
+                        property: "iconRotation"
+                        from: 0
+                        to: -360
+                        duration: 500
+                        easing.type: Easing.OutBack
+                    }
                 }
 
                 BaseButton {
@@ -243,15 +281,32 @@ BasePopoutWindow {
                     icon: Media.playbackState === MprisPlaybackState.Playing ? "pause" : "play_arrow"
                     enabled: Media.activePlayer !== null
                     onClicked: Media.togglePlayPause()
+                    
+                    iconRotation: Media.playbackState === MprisPlaybackState.Playing ? 180 : 0
+                    Behavior on iconRotation { BaseAnimation { speed: "fast"; easing.type: Easing.InOutBack } }
                 }
 
                 BaseButton {
+                    id: nextBtn
                     size: Theme.dimensions.iconBase
                     normalColor: Theme.colors.transparent
                     hoverGradient: true
                     icon: "skip_next"
                     enabled: Media.canGoNext
-                    onClicked: Media.next()
+                    onClicked: {
+                        nextAnim.restart()
+                        Media.next()
+                    }
+
+                    NumberAnimation {
+                        id: nextAnim
+                        target: nextBtn
+                        property: "iconRotation"
+                        from: 0
+                        to: 360
+                        duration: 500
+                        easing.type: Easing.OutBack
+                    }
                 }
             }
         }
