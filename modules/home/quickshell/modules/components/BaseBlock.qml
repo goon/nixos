@@ -1,6 +1,7 @@
 import ".."
 import QtQuick
 import QtQuick.Layouts
+import QtQuick.Effects
 import Quickshell
 import qs
 
@@ -59,7 +60,6 @@ Rectangle {
     Rectangle {
         id: stateLayer
 
-        visible: root.clickable
         anchors.fill: parent
         radius: parent.radius
         color: {
@@ -74,7 +74,6 @@ Rectangle {
 
             return Theme.colors.transparent;
         }
-
 
     }
 
