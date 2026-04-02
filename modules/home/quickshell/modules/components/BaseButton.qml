@@ -1,6 +1,7 @@
 import ".."
 import QtQuick
 import QtQuick.Layouts
+import QtQuick.Effects
 import Quickshell
 import qs
 
@@ -135,6 +136,7 @@ Rectangle {
             }
             visible: !root.selected && !root.gradient && !root.hoverGradient
         }
+
     }
 
     BaseIcon {
