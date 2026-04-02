@@ -142,9 +142,9 @@ Item {
                     size: Theme.dimensions.iconSmall
                     color: mediaWidget.contentColor
 
-                    Behavior on icon {
-                        BaseAnimation { speed: "fast" }
-                    }
+                    rotation: Media.playbackState === MprisPlaybackState.Playing ? 180 : 0
+                    Behavior on rotation { BaseAnimation { speed: "fast"; easing.type: Easing.InOutBack } }
+                    Behavior on icon { BaseAnimation { speed: "fast" } }
                 }
             }
 
