@@ -69,8 +69,8 @@
 ## Links
 
 [Niri]: https://github.com/niri-wm/niri
-[Kitty]: https://github.com/kovidv/kitty
-[Ly]: https://github.com/nullishzero/ly
+[Kitty]: https://github.com/kovidgoyal/kitty
+[Ly]: https://github.com/fairyglade/ly
 [Resources]: https://github.com/nokyan/resources
 [Yazi]: https://github.com/sxyazi/yazi
 [Nautilus]: https://github.com/GNOME/nautilus
