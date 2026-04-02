@@ -95,6 +95,16 @@ ComboBox {
             border.color: Theme.alpha(Theme.colors.primary, 0.5)
             border.width: 1
         }
+
+        // Unified staggered opacity-only reveal
+        opacity: comboPopup.opened ? 1.0 : 0.0
+        Behavior on opacity {
+            enabled: !listView.moving
+            SequentialAnimation {
+                PauseAnimation { duration: Math.min(delegateRoot.index * 12, 100) }
+                NumberAnimation { duration: 150 }
+            }
+        }
     }
 
     // Main Content Item (Selected text)
@@ -138,6 +148,17 @@ ComboBox {
         width: root.width
         implicitHeight: contentLayout.implicitHeight + padding * 2
         padding: Theme.geometry.spacing.medium
+
+        // Seamless on-site transitions
+        enter: Transition {
+            NumberAnimation { property: "scale"; from: 0.95; to: 1.0; duration: 200; easing.type: Easing.OutQuint }
+            NumberAnimation { property: "opacity"; from: 0; to: 1; duration: 200 }
+        }
+
+        exit: Transition {
+            NumberAnimation { property: "scale"; to: 0.95; duration: 150; easing.type: Easing.InQuint }
+            NumberAnimation { property: "opacity"; to: 0; duration: 150 }
+        }
 
         onOpened: {
             if (root.searchable) {
