@@ -111,7 +111,7 @@ BasePopoutWindow {
                     ColumnLayout {
                         id: outputsContent
                         width: parent.width
-                        spacing: 0
+                        spacing: Theme.geometry.spacing.small
 
                         Repeater {
                             model: Volume.sinks
@@ -189,7 +189,7 @@ BasePopoutWindow {
                     ColumnLayout {
                         id: inputsContent
                         width: parent.width
-                        spacing: 0
+                        spacing: Theme.geometry.spacing.small
 
                         Repeater {
                             model: Volume.sources
