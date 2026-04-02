@@ -73,6 +73,7 @@ BasePopoutWindow {
                 }
 
                 Image {
+                    id: albumArtImg
                     anchors.centerIn: parent
                     width: parent.width * 1.25 // More bleed for factor 40
                     height: parent.height * 1.25
@@ -87,6 +88,19 @@ BasePopoutWindow {
 
                         Behavior on x { BaseAnimation { duration: Theme.animations.slow } }
                         Behavior on y { BaseAnimation { duration: Theme.animations.slow } }
+                    }
+
+                    property real breathScale: 1.0
+                    scale: breathScale
+
+                    SequentialAnimation {
+                        id: breathAnim
+                        loops: Animation.Infinite
+                        running: parent.visible
+                        paused: Media.playbackState !== MprisPlaybackState.Playing
+                        
+                        NumberAnimation { target: albumArtImg; property: "breathScale"; to: 1.05; duration: 8000; easing.type: Easing.InOutSine }
+                        NumberAnimation { target: albumArtImg; property: "breathScale"; to: 1.0; duration: 8000; easing.type: Easing.InOutSine }
                     }
                 }
             }
