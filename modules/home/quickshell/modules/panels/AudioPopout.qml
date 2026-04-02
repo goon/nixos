@@ -36,7 +36,7 @@ BasePopoutWindow {
                     Layout.alignment: Qt.AlignVCenter
                     trackHeight: 38
                     icon: Volume.volumeIcon
-                    suffix: Math.round(Volume.volume * 100) + "%"
+                    suffix: Math.round(Volume.volume * 100)
                     iconColor: Theme.colors.text
                     suffixColor: Theme.colors.text
                     iconSize: Theme.dimensions.iconMedium
@@ -61,7 +61,7 @@ BasePopoutWindow {
                     Layout.alignment: Qt.AlignVCenter
                     trackHeight: 38
                     icon: Volume.inputMuted ? "mic_off" : "mic"
-                    suffix: Math.round(Volume.inputVolume * 100) + "%"
+                    suffix: Math.round(Volume.inputVolume * 100)
                     iconColor: Theme.colors.text
                     suffixColor: Theme.colors.text
                     iconSize: Theme.dimensions.iconMedium

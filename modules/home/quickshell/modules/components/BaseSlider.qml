@@ -17,12 +17,14 @@ Item {
     property int orientation: Qt.Horizontal
     property bool interactive: true
     property alias pressed: mouseArea.pressed
+    readonly property bool hovered: mouseArea.containsMouse
 
     // Visual customization
+
     property color trackColor: Theme.colors.background
     property color fillColor: Theme.colors.primary
-    property color handleColor: Theme.colors.text
-    property color handleBorderColor: Theme.colors.text
+    property color handleColor: bigMode ? Theme.colors.surface : Theme.colors.text
+    property color handleBorderColor: bigMode ? Theme.colors.border : Theme.colors.text
     property int trackHeight: 12
     property int handleSize: 24
     property int handleWidth: 6
@@ -37,7 +39,22 @@ Item {
 
     // Internal computed values
     readonly property real normalizedValue: (value - from) / (to - from)
-    readonly property real fillSize: (orientation === Qt.Horizontal ? track.width : track.height) * normalizedValue
+    readonly property real fillSize: root.orientation === Qt.Horizontal ? parent.width * normalizedValue : parent.height * normalizedValue
+    readonly property bool bigMode: trackHeight >= 20
+
+    // Coolness Controls
+    property real interactionScale: (root.hovered || root.pressed) ? 1.05 : 1.0
+    property real breathOpacity: 1.0
+    property bool isActive: root.hovered || root.pressed
+
+    SequentialAnimation on breathOpacity {
+        id: breathAnim
+        running: root.pressed && root.bigMode
+        loops: Animation.Infinite
+        NumberAnimation { from: 1.0; to: 0.75; duration: 800; easing.type: Easing.InOutQuad }
+        NumberAnimation { from: 0.75; to: 1.0; duration: 800; easing.type: Easing.InOutQuad }
+        onStopped: root.breathOpacity = 1.0
+    }
 
     // Signals
     signal moved()
@@ -54,7 +71,7 @@ Item {
         anchors.centerIn: parent
         width: root.orientation === Qt.Horizontal ? parent.width : root.trackHeight
         height: root.orientation === Qt.Horizontal ? root.trackHeight : parent.height
-        radius: Math.max(2, Theme.geometry.radius * 0.5)
+        radius: root.bigMode ? (height / 2) : Math.max(2, Theme.geometry.radius * 0.5)
         color: trackColor
         border.width: 0
         clip: true
@@ -63,11 +80,14 @@ Item {
         Rectangle {
             id: fill
 
-            width: root.orientation === Qt.Horizontal ? root.fillSize : parent.width
+            width: root.bigMode ? (root.value > root.from ? (handle.x + handle.width + 4) : 0) : root.fillSize
             height: root.orientation === Qt.Horizontal ? parent.height : root.fillSize
             radius: parent.radius
             anchors.bottom: root.orientation === Qt.Vertical ? parent.bottom : undefined
+            anchors.top: root.orientation === Qt.Vertical ? (root.bigMode ? (handle.y - 4) : undefined) : undefined
             anchors.left: root.orientation === Qt.Horizontal ? parent.left : undefined
+            
+            opacity: root.pressed && root.bigMode ? root.breathOpacity : 1.0
             
             gradient: Gradient {
                 orientation: root.orientation === Qt.Horizontal ? Gradient.Horizontal : Gradient.Vertical
@@ -76,12 +96,12 @@ Item {
             }
 
             Behavior on width {
-                enabled: root.orientation === Qt.Horizontal && !mouseArea.pressed
+                enabled: !root.bigMode && root.orientation === Qt.Horizontal && !mouseArea.pressed
                 BaseAnimation { duration: Theme.animations.fast }
             }
 
             Behavior on height {
-                enabled: root.orientation === Qt.Vertical && !mouseArea.pressed
+                enabled: !root.bigMode && root.orientation === Qt.Vertical && !mouseArea.pressed
                 BaseAnimation { duration: Theme.animations.fast }
             }
         }
@@ -91,7 +111,7 @@ Item {
             anchors.fill: parent
             anchors.leftMargin: Theme.geometry.spacing.medium
             anchors.rightMargin: Theme.geometry.spacing.medium
-            visible: root.orientation === Qt.Horizontal
+            visible: root.orientation === Qt.Horizontal && !root.bigMode
             spacing: Theme.geometry.spacing.small
 
             Item {
@@ -130,14 +150,87 @@ Item {
     Rectangle {
         id: handle
 
-        visible: root.interactive && root.handleWidth > 0 && root.handleSize > 0 && root.trackHeight < 20
-        width: root.orientation === Qt.Horizontal ? root.handleWidth : root.handleSize
-        height: root.orientation === Qt.Horizontal ? root.handleSize : root.handleWidth
-        radius: Math.max(2, Theme.geometry.radius * 0.5)
-        x: root.orientation === Qt.Horizontal ? Math.max(0, Math.min(root.width - width, root.fillSize - width / 2)) : (root.width - width) / 2
-        y: root.orientation === Qt.Vertical ? Math.max(0, Math.min(root.height - height, root.height - root.fillSize - height / 2)) : (root.height - height) / 2
-        color: handleColor
-        border.width: 0
+        visible: root.interactive && root.handleWidth > 0 && root.handleSize > 0
+        width: root.bigMode ? (root.trackHeight - 8) : (root.orientation === Qt.Horizontal ? root.handleWidth : root.handleSize)
+        height: root.bigMode ? (root.trackHeight - 8) : (root.orientation === Qt.Horizontal ? root.handleSize : root.handleWidth)
+        radius: root.bigMode ? (height / 2) : Math.max(2, Theme.geometry.radius * 0.5)
+        
+        // Synchronize movement: knob and fill edge move together for big sliders, center for normal ones
+        x: root.bigMode ? (root.orientation === Qt.Horizontal ? (4 + (root.width - width - 8) * root.normalizedValue) : (root.width - width) / 2)
+                        : (root.orientation === Qt.Horizontal ? Math.max(0, Math.min(root.width - width, root.fillSize - width / 2)) : (root.width - width) / 2)
+        y: root.bigMode ? (root.orientation === Qt.Vertical ? (4 + (root.height - height - 8) * (1.0 - root.normalizedValue)) : (root.height - height) / 2)
+                        : (root.orientation === Qt.Vertical ? Math.max(0, Math.min(root.height - height, root.fillSize - height / 2)) : (root.height - height) / 2)
+        
+        color: root.bigMode ? Theme.alpha(handleColor, 0.95) : handleColor
+        border.color: Theme.alpha(handleBorderColor, (root.isActive && root.bigMode ? 0.3 : 0.15))
+        border.width: root.bigMode ? 1 : 0
+        z: 10
+
+        scale: root.bigMode ? root.interactionScale : 1.0
+        Behavior on scale { BaseAnimation { duration: 250; easing.type: Easing.OutBack } }
+
+        // Subtle glow effect when active
+        Rectangle {
+            anchors.fill: parent
+            anchors.margins: -4
+            radius: parent.radius + 4
+            color: "transparent"
+            border.width: 2
+            border.color: Theme.alpha(root.fillColor, 0.3)
+            visible: root.bigMode && root.isActive
+            opacity: root.pressed ? 1.0 : 0.5
+            z: -2
+            
+            SequentialAnimation on opacity {
+                running: root.isActive && root.bigMode
+                loops: Animation.Infinite
+                NumberAnimation { from: 0.2; to: 0.6; duration: 1000; easing.type: Easing.InOutQuad }
+                NumberAnimation { from: 0.6; to: 0.2; duration: 1000; easing.type: Easing.InOutQuad }
+            }
+        }
+
+        // Sublte depth effect for big sliders
+        Rectangle {
+            anchors.fill: parent
+            anchors.margins: -1
+            radius: parent.radius
+            color: "transparent"
+            border.width: 1
+            border.color: Theme.alpha(Theme.colors.background, 0.2)
+            visible: root.bigMode
+            z: -1
+        }
+
+        // Handle Content (Icon/Suffix Switch with Fading)
+        Item {
+            anchors.fill: parent
+            anchors.margins: 4
+            visible: root.bigMode && root.orientation === Qt.Horizontal
+
+            BaseIcon {
+                anchors.centerIn: parent
+                icon: root.icon
+                size: Math.min(parent.width, root.iconSize)
+                color: root.iconColor
+                opacity: (!root.hovered && !root.pressed) ? 1 : 0
+                Behavior on opacity { BaseAnimation { duration: 400; easing.type: Easing.InOutQuad } }
+            }
+
+            BaseText {
+                anchors.fill: parent
+                text: root.suffix
+                color: root.suffixColor
+                pixelSize: Math.min(parent.height - 4, root.fontSize + 1)
+                fontSizeMode: Text.Fit
+                minimumPixelSize: 8
+                horizontalAlignment: Text.AlignHCenter
+                verticalAlignment: Text.AlignVCenter
+                wrapMode: Text.NoWrap
+                font.weight: Theme.typography.weights.bold
+                opacity: (root.hovered || root.pressed) ? 1 : 0
+                Behavior on opacity { BaseAnimation { duration: 400; easing.type: Easing.InOutQuad } }
+            }
+        }
 
         Behavior on x {
             enabled: root.orientation === Qt.Horizontal && !mouseArea.pressed

@@ -84,7 +84,7 @@ BasePopoutWindow {
                             Layout.alignment: Qt.AlignVCenter
                             trackHeight: 38
                             icon: "brightness_medium"
-                            suffix: Math.round(Display.brightness * 100) + "%"
+                            suffix: Math.round(Display.brightness * 100)
                             iconColor: Theme.colors.text
                             suffixColor: Theme.colors.text
                             iconSize: Theme.dimensions.iconMedium
