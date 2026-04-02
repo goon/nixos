@@ -39,7 +39,7 @@ Item {
 
     // Internal computed values
     readonly property real normalizedValue: (value - from) / (to - from)
-    readonly property real fillSize: root.orientation === Qt.Horizontal ? parent.width * normalizedValue : parent.height * normalizedValue
+    readonly property real fillSize: root.orientation === Qt.Horizontal ? root.width * root.normalizedValue : root.height * root.normalizedValue
     readonly property bool bigMode: trackHeight >= 20
 
     // Coolness Controls
@@ -71,7 +71,7 @@ Item {
         anchors.centerIn: parent
         width: root.orientation === Qt.Horizontal ? parent.width : root.trackHeight
         height: root.orientation === Qt.Horizontal ? root.trackHeight : parent.height
-        radius: root.bigMode ? (height / 2) : Math.max(2, Theme.geometry.radius * 0.5)
+        radius: root.bigMode ? Theme.geometry.radius : Math.max(2, Theme.geometry.radius * 0.5)
         color: trackColor
         border.width: 0
         clip: true
@@ -153,7 +153,7 @@ Item {
         visible: root.interactive && root.handleWidth > 0 && root.handleSize > 0
         width: root.bigMode ? (root.trackHeight - 8) : (root.orientation === Qt.Horizontal ? root.handleWidth : root.handleSize)
         height: root.bigMode ? (root.trackHeight - 8) : (root.orientation === Qt.Horizontal ? root.handleSize : root.handleWidth)
-        radius: root.bigMode ? (height / 2) : Math.max(2, Theme.geometry.radius * 0.5)
+        radius: root.bigMode ? Theme.geometry.radius : Math.max(2, Theme.geometry.radius * 0.5)
         
         // Synchronize movement: knob and fill edge move together for big sliders, center for normal ones
         x: root.bigMode ? (root.orientation === Qt.Horizontal ? (4 + (root.width - width - 8) * root.normalizedValue) : (root.width - width) / 2)
