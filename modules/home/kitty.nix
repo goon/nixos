@@ -5,6 +5,8 @@
     enable = true;
 
     settings = {
+      confirm_os_window_close = 0;
+
       # ----- Remote Control
       allow_remote_control = "yes";
       listen_on = "unix:/tmp/kitty";
