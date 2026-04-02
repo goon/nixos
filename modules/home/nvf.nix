@@ -603,6 +603,7 @@
 
           map("n", "<leader>th", function() Snacks.terminal.toggle(nil, { win = { position = "bottom" } }) end, { desc = "Toggle Horizontal Terminal" })
           map("n", "<leader>tv", function() Snacks.terminal.toggle(nil, { win = { position = "right" } }) end, { desc = "Toggle Vertical Terminal" })
+          map("n", "<C-a>", function() Snacks.terminal.toggle("opencode", { win = { position = "right" } }) end, { desc = "Toggle Opencode AI" })
 
           map("n", "<leader>gg", function() Snacks.lazygit.open() end, { desc = "Open LazyGit" })
           map("n", "<leader>gb", function() Snacks.picker.git_branches() end, { desc = "Git Branches" })
