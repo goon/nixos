@@ -18,13 +18,21 @@
 > 2. Understand what each module does. 
 > 3. Adapt it to your specific use case.
 
-## Features 
+## Components 
 
-- **OS** - Nix OS 
-- **WM** - Niri 
-- **Shell** - Bash 
-- **Term** - Kitty 
-- **Editor** - Neovim 
+|                                                                | NixOS(Wayland)                                                                                                      |
+| -------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------- |
+| **Window Manager**                                             | [Niri][Niri]                                                                                                        |
+| **Terminal Emulator**                                          | [Kitty][Kitty]                                                                                                      |
+| **Display Manager**                                            | [Ly][Ly]                                                                                                            |
+| **System Resource Monitor**                                    | [Resources][Resources]                                                                                              |
+| **File Manager**                                               | [Yazi][Yazi] & [Nautilus][Nautilus]                                                                                 |
+| **Shell**                                                      | Bash & [Starship][Starship]                                                                                         |
+| **Media Player**                                               | [Totem][Totem]                                                                                                      |
+| **Text Editor**                                                | [Neovim][Neovim]                                                                                                    |
+| **Image Viewer**                                               | [Loupe][Loupe]                                                                                                      |
+| **Screen Recording**                                           | [OBS][OBS]                                                                                                          |
+| **Status Bar / Notifications / Launcher / Wallpaper            | Made with [Quickshell][Quickshell]
 
 ## Structure 
 
@@ -57,3 +65,19 @@
    ```bash
    sudo nix flake update
    ```
+
+## Links
+
+[Niri]: https://github.com/niri-wm/niri
+[Kitty]: https://github.com/kovidv/kitty
+[Ly]: https://github.com/nullishzero/ly
+[Resources]: https://github.com/nokyan/resources
+[Yazi]: https://github.com/sxyazi/yazi
+[Nautilus]: https://github.com/GNOME/nautilus
+[Starship]: https://github.com/starship/starship
+[Totem]: https://github.com/GNOME/totem
+[Neovim]: https://github.com/neovim/neovim
+[Loupe]: https://github.com/GNOME/loupe
+[OBS]: https://github.com/obsproject/obs-studio
+[Quickshell]: https://github.com/quickshell-mirror/quickshell
+
