@@ -48,6 +48,7 @@
 
           # ----- File Manager
           "inode/directory" = apps.fileManager;
+          "inode/mount-point" = apps.fileManager;
 
           # ----- Documents
           "application/pdf" = apps.pdfViewer;
