@@ -10,4 +10,6 @@
     ./security.nix
     ./user.nix
   ];
+
+  programs.zsh.enable = true;
 }

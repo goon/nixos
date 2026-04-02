@@ -1,4 +1,4 @@
-{ username, ... }:
+{ username, pkgs, ... }:
 
 {
   users.users.${username} = {
@@ -12,6 +12,7 @@
       "render"
       "i2c"
     ];
+    shell = pkgs.zsh;
   };
 
   # XDG Variables

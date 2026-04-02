@@ -27,6 +27,7 @@ in
       ./kitty.nix
       ./fastfetch.nix
       ./bash.nix
+      ./zsh.nix
       ./starship.nix
       ./yazi.nix
       ./opencode.nix
