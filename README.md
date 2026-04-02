@@ -20,7 +20,7 @@
 
 ## Components 
 
-|                                                                | NixOS(Wayland)                                                                                                      |
+| Component                                                      | Link                                                                                                                |
 | -------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------- |
 | **Window Manager**                                             | [Niri][Niri]                                                                                                        |
 | **Terminal Emulator**                                          | [Kitty][Kitty]                                                                                                      |
@@ -32,7 +32,7 @@
 | **Text Editor**                                                | [Neovim][Neovim]                                                                                                    |
 | **Image Viewer**                                               | [Loupe][Loupe]                                                                                                      |
 | **Screen Recording**                                           | [OBS][OBS]                                                                                                          |
-| **Status Bar / Notifications / Launcher / Wallpaper            | Made with [Quickshell][Quickshell]
+| **Status Bar / Notifications / Launcher / Wallpaper**          | Made with [Quickshell][Quickshell]
 
 ## Structure 
 
