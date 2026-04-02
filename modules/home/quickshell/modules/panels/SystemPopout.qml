@@ -341,6 +341,13 @@ BasePopoutWindow {
                 readonly property real totalUsed: driveData.totalUsedBytes || 0
                 readonly property bool isExternal: !!driveData.removable
 
+                clickable: true
+                onClicked: {
+                    if (driveCard.partitionsData.length > 0 && driveCard.partitionsData[0].mount) {
+                        ProcessService.runDetached(["xdg-open", driveCard.partitionsData[0].mount]);
+                    }
+                }
+
                 ColumnLayout {
                     Layout.fillWidth: true
                     spacing: Theme.geometry.spacing.medium
