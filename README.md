@@ -5,7 +5,18 @@
 
 **NixOS** configuration designed for a single host featuring flakes and home manager.
 
-This repository reflects my current **NixOS** configuration and is prone to **drastic change** as it constantly evolves.
+> [!IMPORTANT]
+> This is my **personal** NixOS configuration, shared for reference and inspiration **NOT** adoption. 
+>
+> - This configuration is constantly evolving. It is prone to drastic and likely **breaking** changes.
+> - Features may be partially implemented or entirely broken.
+> - The README and documentation will often times be outdated.
+> - I provide **no guarantees** of stability or support.
+>
+> **If you intend to use any aspect of my configuration, make sure you:**
+> 1. Review the code thoroughly.
+> 2. Understand what each module does. 
+> 3. Adapt it to your specific use case.
 
 ## Features 
 
