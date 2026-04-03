@@ -31,6 +31,7 @@ in
       ./starship.nix
       ./yazi.nix
       ./opencode.nix
+      ./obs.nix
       inputs.spicetify-nix.homeManagerModules.default
       inputs.nvf.homeManagerModules.default
     ];
