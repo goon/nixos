@@ -21,7 +21,6 @@
 
     vesktop # Discord Client
     obsidian # Notes
-    obs-studio # Screen Recording & Streaming
     gowall # Wallpaper Themer
     antigravity # Google IDE
     google-chrome # Google Web Browser
