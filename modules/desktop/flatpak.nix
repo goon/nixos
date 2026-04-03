@@ -11,7 +11,6 @@
     # Install Bottles for managing Windows applications
     packages = [
       "flathub:app/com.usebottles.bottles/x86_64/stable"
-      "flathub:app/gg.minion.Minion/x86_64/stable"
     ];
 
     # Configure Bottles permissions to access secondary drives
