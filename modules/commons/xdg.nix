@@ -13,10 +13,12 @@
   config = lib.mkIf config.module.xdg.enable {
     # System Layer
     environment.systemPackages = [ pkgs.xdg-user-dirs ];
+    environment.pathsToLink = [ "/share/applications" ];
     xdg.portal.enable = true;
 
     # User Layer (Home Manager)
     home-manager.users.${config._module.args.username} = {
+      xdg.enable = true;
       xdg.mimeApps = {
         enable = true;
         defaultApplications =
