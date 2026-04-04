@@ -18,7 +18,6 @@
       # Development
 
       # Desktop Apps
-      vesktop # Discord
       obsidian # Notes
       antigravity # IDE
       google-chrome # Browser
