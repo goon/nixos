@@ -36,6 +36,10 @@
     # nvf for Neovim configuration
     nvf.url = "github:NotAShelf/nvf";
     nvf.inputs.nixpkgs.follows = "nixpkgs";
+
+    # Nixcord for Discord customization
+    nixcord.url = "github:FlameFlag/nixcord";
+    nixcord.inputs.nixpkgs.follows = "nixpkgs";
   };
 
   # System configurations and modules
