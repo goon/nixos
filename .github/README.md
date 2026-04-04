@@ -7,7 +7,7 @@
 ![Stars](https://img.shields.io/github/stars/goon/nixos?style=for-the-badge&labelColor=%231e1e2e&color=%23a6e3a1) 
 ![License](https://img.shields.io/github/license/goon/nixos?style=for-the-badge&labelColor=%231e1e2e&color=%23f5c2e7) 
 
-![preview](.github/assets/goonix.png)
+![preview](assets/goonix.png)
 
 </div>
 
