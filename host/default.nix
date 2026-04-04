@@ -1,14 +1,46 @@
 {
   imports = [
     ./hardware-configuration.nix
-    ../modules/desktop
-    ../modules/home/home.nix
   ];
 
   networking.hostName = "desktop";
 
-  desktop.windowmanager.name = "niri";
-  desktop.gnome.enable = true;
+  # ========== Modules (Dendritic Dashboard) ==========
+
+  # [1] Hardware Support
+  module.hardware.radeon.enable = true;
+
+  # [2] Session (The Switch)
+  module.desktop.windowmanager = "niri";
+
+  # [3] Commons (Shared Plumbing - Enabled by default)
+  # module.xdg.enable = false;
+  # module.gtk.enable = false;
+  # module.shell.enable = false;
+  # module.utils.enable = false;
+
+  # [4] Extra (Optional Features - Enabled by default)
+  # module.packages.enable = false;
+  # module.quickshell.enable = false;
+  # module.gaming.enable = false;
+  # module.affinity.enable = false;
+  # module.flatpak.enable = false;
+  # module.gnome.enable = false;
+  # module.obs.enable = false;
+  # module.spicetify.enable = false;
+  # module.firefox.enable = false;
+  # module.kitty.enable = false;
+  # module.yazi.enable = false;
+  # module.fastfetch.enable = false;
+  # module.dev.enable = false;
+  # module.opencode.enable = false;
+  # module.git.enable = false;
+  # module.nvf.enable = false;
+
+  fileSystems."/mnt/games" = {
+    device = "/dev/disk/by-uuid/c6a3965a-5bf3-451c-934e-b391969c180a";
+    fsType = "ext4";
+  };
 
   system.stateVersion = "25.11";
 }

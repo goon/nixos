@@ -1,4 +1,4 @@
-{ lib, ... }:
+{ config, lib, ... }:
 
 let
   inherit (lib) mkOption types;
@@ -21,6 +21,12 @@ in
       type = types.str;
       default = "kitty";
       description = "default terminal emulator";
+    };
+
+    repoPath = mkOption {
+      type = types.str;
+      default = "/home/${config._module.args.username}/${config._module.args.repoName}";
+      description = "Absolute path to the flake repository root";
     };
 
     userFonts = {

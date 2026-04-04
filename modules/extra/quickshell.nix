@@ -1,0 +1,28 @@
+{
+  config,
+  lib,
+  pkgs,
+  inputs,
+  ...
+}:
+
+{
+  options.module.quickshell.enable = lib.mkEnableOption "Quickshell Desktop Interface" // {
+    default = true;
+  };
+
+  config = lib.mkIf config.module.quickshell.enable {
+    home-manager.users.${config._module.args.username} =
+      { config, osConfig, ... }:
+      {
+        xdg.configFile."quickshell".source =
+          config.lib.file.mkOutOfStoreSymlink "${osConfig.globals.repoPath}/modules/session/quickshell";
+
+        home.packages = with pkgs; [
+          inputs.quickshell.packages.${pkgs.stdenv.system}.quickshell
+          qt6Packages.qt6ct
+          gowall # Wallpaper Themer
+        ];
+      };
+  };
+}

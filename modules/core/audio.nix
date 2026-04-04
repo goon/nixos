@@ -1,4 +1,9 @@
-{ pkgs, username, ... }:
+{
+  config,
+  pkgs,
+  username,
+  ...
+}:
 
 {
   # Pipewire
@@ -39,7 +44,9 @@
     };
   };
   systemd.services.mpd.environment = {
-    XDG_RUNTIME_DIR = "/run/user/1000";
-    PULSE_SERVER = "unix:/run/user/1000/pulse/native";
+    XDG_RUNTIME_DIR = "/run/user/${builtins.toString config.users.users.${username}.uid}";
+    PULSE_SERVER = "unix:/run/user/${
+      builtins.toString config.users.users.${username}.uid
+    }/pulse/native";
   };
 }

@@ -1,3 +1,5 @@
+{ username, ... }:
+
 {
   nixpkgs.config.allowUnfree = true;
 
@@ -28,5 +30,14 @@
     clean.enable = true;
     clean.dates = "weekly";
     clean.extraArgs = "--keep 5";
+  };
+
+  home-manager.users.${username} = {
+    home.shellAliases = {
+      nhs = "nh os switch";
+      nht = "nh os test";
+      nhc = "nh clean all --keep 8";
+      nhu = "nh os switch -u";
+    };
   };
 }

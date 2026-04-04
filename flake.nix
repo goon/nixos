@@ -52,16 +52,17 @@
 
           # Base modules shared by all hosts
           baseModules = [
-            ./modules/options.nix
             { nixpkgs.config.allowUnfree = true; }
             { nixpkgs.overlays = [ ]; }
-            { home-manager.extraSpecialArgs = { inherit inputs; }; }
+            {
+              _module.args = { inherit inputs; };
+              home-manager.extraSpecialArgs = { inherit inputs; };
+            }
             inputs.home-manager.nixosModules.default
             inputs.flatpaks.nixosModules.default
-            inputs.nix-gaming.nixosModules.pipewireLowLatency
             inputs.nvf.nixosModules.default
-            ./modules/core
-          ];
+          ]
+          ++ (import ./modules/lib/recursive.nix ./modules);
         in
         {
           desktop = nixosSystem {
