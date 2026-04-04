@@ -59,10 +59,6 @@ in
 
       # Session variables
       home.sessionVariables = {
-        XDG_CONFIG_HOME = "$HOME/.config";
-        XDG_DATA_HOME = "$HOME/.local/share";
-        XDG_STATE_HOME = "$HOME/.local/state";
-        XDG_CACHE_HOME = "$HOME/.cache";
         NH_FLAKE = "/home/${username}/${repoName}";
         EDITOR = "nvim";
         VISUAL = "nvim";
@@ -148,6 +144,7 @@ in
       # ----- Zsh
       programs.zsh = {
         enable = true;
+        dotDir = "/home/${username}/.config/zsh";
         enableCompletion = true;
         autosuggestion.enable = true;
         syntaxHighlighting.enable = true;
