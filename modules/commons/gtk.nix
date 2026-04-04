@@ -43,9 +43,9 @@ in
       dconf.settings = {
         "org/gnome/desktop/interface" = {
           color-scheme = "prefer-dark";
-          font-name = "${config.globals.userFonts.sansSerif} 11";
-          document-font-name = "${config.globals.userFonts.sansSerif} 11";
-          monospace-font-name = "${config.globals.userFonts.monospace} 11";
+          font-name = "${config.globals.userFonts.sansSerif} 10";
+          document-font-name = "${config.globals.userFonts.sansSerif} 10";
+          monospace-font-name = "${config.globals.userFonts.monospace} 10";
           gtk-theme = "adw-gtk3";
           icon-theme = "Papirus";
           cursor-theme = "Bibata-Modern-Classic";
