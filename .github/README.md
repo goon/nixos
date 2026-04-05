@@ -54,12 +54,14 @@
 1. **Clone:** 
    ```bash
    nix-shell -p git
-   git clone https://github.com/goon/nixos ~/.nixos
+   git clone --recursive https://github.com/goon/nixos ~/.nixos
    cd ~/.nixos
 
     # The configuration expects the repository to be located under $HOME/.nixos. 
     # This can be overidden in the modules/options.nix file under "repoName".
     # You should update the "username" in modules/options.nix to match your user.
+
+    # The --recusive flag pulls the quickshell git submodule. 
    ```
 
 2. **Generate Hardware Configuration:**
