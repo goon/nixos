@@ -77,8 +77,6 @@
    sudo nix flake update
    ```
 
-Modules can be enabled or disabled in the `host/default.nix` file.
-
 ## Credits
 
 Thank you to the countless Nix OS configurations that I ~~copied~~ learnt from. 
