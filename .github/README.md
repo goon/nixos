@@ -56,6 +56,10 @@
    nix-shell -p git
    git clone https://github.com/goon/nixos ~/.nixos
    cd ~/.nixos
+
+    # The configuration expects the repository to be located under $HOME/.nixos. 
+    # This can be overidden in the modules/options.nix file under "repoName".
+    # You should update the "username" in modules/options.nix to match your user.
    ```
    The configuration expects the repository to be located `$HOME/.nixos` This can be **overidden** in `options.nix` under the `repoName` option.
 
@@ -64,10 +68,7 @@
    nixos-generate-config --show-hardware-config > host/hardware-configuration.nix
    ```
 
-3. **Modify Options**
-    - Modify the `username` and `repoName` in the `options.nix` file to match your user and nix directory.
-
-4. **Rebuild:**
+3. **Rebuild:**
    ```bash
    sudo nixos-rebuild switch --flake .#desktop 
    ```
