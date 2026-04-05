@@ -61,7 +61,6 @@
     # This can be overidden in the modules/options.nix file under "repoName".
     # You should update the "username" in modules/options.nix to match your user.
    ```
-   The configuration expects the repository to be located `$HOME/.nixos` This can be **overidden** in `options.nix` under the `repoName` option.
 
 2. **Generate Hardware Configuration:**
    ```bash
