@@ -13,22 +13,10 @@
   config = lib.mkIf config.module.packages.enable {
 
     environment.systemPackages = with pkgs; [
-      # CLI Utilities
-
-      # Development
-
-      # Desktop Apps
       obsidian # Notes
       antigravity # IDE
       google-chrome # Browser
       nicotine-plus # Soulseek
-
-      # Theming
-
-      # Desktop Environment & WM Tools
-      cliphist
-      wl-clipboard
-      libnotify
     ];
   };
 }
