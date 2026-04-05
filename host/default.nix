@@ -14,28 +14,30 @@
   module.desktop.windowmanager = "niri";
 
   # [3] Commons (Shared Plumbing - Enabled by default)
-  # module.xdg.enable = false;
   # module.gtk.enable = false;
   # module.shell.enable = false;
   # module.utils.enable = false;
+  # module.xdg.enable = false;
 
   # [4] Extra (Optional Features - Enabled by default)
-  # module.packages.enable = false;
-  # module.quickshell.enable = false;
-  # module.gaming.enable = false;
   # module.affinity.enable = false;
-  # module.flatpak.enable = false;
-  # module.gnome.enable = false;
-  # module.obs.enable = false;
-  # module.spicetify.enable = false;
-  # module.firefox.enable = false;
-  # module.kitty.enable = false;
-  # module.yazi.enable = false;
-  # module.fastfetch.enable = false;
   # module.dev.enable = false;
-  # module.opencode.enable = false;
+  # module.fastfetch.enable = false;
+  # module.firefox.enable = false;
+  # module.flatpak.enable = false;
+  # module.gaming.enable = false;
   # module.git.enable = false;
+  # module.gnome.enable = false;
+  # module.kitty.enable = false;
+  # module.nixcord.enable = false;
   # module.nvf.enable = false;
+  # module.obs.enable = false;
+  # module.obsidian.enable = false;
+  # module.opencode.enable = false;
+  # module.quickshell.enable = false;
+  # module.spicetify.enable = false;
+  # module.whogle.enable = false;
+  # module.yazi.enable = false;
 
   fileSystems."/mnt/games" = {
     device = "/dev/disk/by-uuid/c6a3965a-5bf3-451c-934e-b391969c180a";
