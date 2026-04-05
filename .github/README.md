@@ -5,7 +5,6 @@
 ![Commits](https://img.shields.io/github/commit-activity/m/goon/nixos?style=for-the-badge&labelColor=%231e1e2e&color=%23cba6f7) 
 ![Size](https://img.shields.io/github/repo-size/goon/nixos?style=for-the-badge&labelColor=%231e1e2e&color=%2389b4fa) 
 ![Stars](https://img.shields.io/github/stars/goon/nixos?style=for-the-badge&labelColor=%231e1e2e&color=%23a6e3a1) 
-![License](https://img.shields.io/github/license/goon/nixos?style=for-the-badge&labelColor=%231e1e2e&color=%23f5c2e7) 
 
 ![preview](assets/goonix.png)
 
@@ -45,9 +44,10 @@
 ## Structure 
 
 - `flake.nix` & `flake.lock` define the entry point and lock dependencies. 
-- `hosts/` contains host specific configuration e.g. `hardware-configuration`. 
-- `modules/` houses nix and home manager modules. 
 - `treefmt.nix` defines formatting standards for the codebase. 
+- `host/` contains host specific configuration e.g. `hardware-configuration`. 
+- `modules/` contains nix and home manager modules separated by subfolder. 
+- `wallpapers/` collection of wallpapers for your viewing pleasure.
 
 ## Setup
 
@@ -74,7 +74,15 @@
    sudo nix flake update
    ```
 
-## Links
+## Credits
+
+Thank you to the countless Nix OS configurations that I ~~copied~~ learnt from. 
+
+namishh - seniormatt - fufexan - frost-pheonix - anotherhadi - vic - vimjoyer - bad3r - mitchellh - misterio77 - max-baz - gvolpe - librephoenix - sioodmy
+
+Due to my dementia I have may have missed many. Regardless, I am thankful.
+
+<!-- Links -->
 
 [Niri]: https://github.com/niri-wm/niri
 [Kitty]: https://github.com/kovidgoyal/kitty
@@ -88,4 +96,3 @@
 [Loupe]: https://github.com/GNOME/loupe
 [OBS]: https://github.com/obsproject/obs-studio
 [Quickshell]: https://github.com/quickshell-mirror/quickshell
-
