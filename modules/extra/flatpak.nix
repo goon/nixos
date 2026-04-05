@@ -1,7 +1,7 @@
 { config, lib, ... }:
 
 {
-  options.module.flatpak.enable = lib.mkEnableOption "Declarative Flatpak Support" // {
+  options.module.flatpak.enable = lib.mkEnableOption "Flatpak" // {
     default = true;
   };
 

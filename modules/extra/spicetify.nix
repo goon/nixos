@@ -10,7 +10,7 @@ let
   spicePkgs = inputs.spicetify-nix.legacyPackages.${pkgs.stdenv.system};
 in
 {
-  options.module.spicetify.enable = lib.mkEnableOption "Spicetify (Themed Spotify)" // {
+  options.module.spicetify.enable = lib.mkEnableOption "Spicetify" // {
     default = true;
   };
 

@@ -7,7 +7,7 @@
 }:
 
 {
-  options.module.nixcord.enable = lib.mkEnableOption "Nixcord (Declarative Discord/Vesktop)" // {
+  options.module.nixcord.enable = lib.mkEnableOption "Nixcord (Declarative Discord)" // {
     default = true;
   };
 

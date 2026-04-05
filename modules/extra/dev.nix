@@ -6,7 +6,7 @@
 }:
 
 {
-  options.module.dev.enable = lib.mkEnableOption "Development Runtimes (Node.js, Python, Go)" // {
+  options.module.dev.enable = lib.mkEnableOption "Development Runtimes" // {
     default = true;
   };
 

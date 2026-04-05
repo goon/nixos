@@ -6,7 +6,7 @@
 }:
 
 {
-  options.module.gnome.enable = lib.mkEnableOption "GNOME Desktop Application Suite" // {
+  options.module.gnome.enable = lib.mkEnableOption "GNOME" // {
     default = true;
   };
 

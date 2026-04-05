@@ -6,7 +6,7 @@
 }:
 
 {
-  options.module.nvf.enable = lib.mkEnableOption "Neovim (NVF)" // {
+  options.module.nvf.enable = lib.mkEnableOption "nvf" // {
     default = true;
   };
 

@@ -5,7 +5,7 @@ let
   inherit (config._module.args) repoName;
 in
 {
-  options.module.kitty.enable = lib.mkEnableOption "Kitty Terminal" // {
+  options.module.kitty.enable = lib.mkEnableOption "Kitty" // {
     default = true;
   };
 

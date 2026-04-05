@@ -6,7 +6,7 @@
 }:
 
 {
-  options.module.opencode.enable = lib.mkEnableOption "OpenCode AI Hub" // {
+  options.module.opencode.enable = lib.mkEnableOption "Opencode" // {
     default = true;
   };
 

@@ -15,7 +15,7 @@ in
   ];
 
   options.module.gaming.enable =
-    mkEnableOption "Gaming optimizations and tools (Steam, Gamescope, Gamemode)"
+    mkEnableOption "Gaming Launchers, Tools and Optimisations"
     // {
       default = true;
     };

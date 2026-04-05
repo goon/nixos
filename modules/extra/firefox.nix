@@ -6,7 +6,7 @@
 }:
 
 {
-  options.module.firefox.enable = lib.mkEnableOption "Firefox Browser" // {
+  options.module.firefox.enable = lib.mkEnableOption "Firefox" // {
     default = true;
   };
 

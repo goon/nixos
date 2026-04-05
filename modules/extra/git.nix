@@ -1,7 +1,7 @@
 { config, lib, ... }:
 
 {
-  options.module.git.enable = lib.mkEnableOption "Git Version Control" // {
+  options.module.git.enable = lib.mkEnableOption "Git" // {
     default = true;
   };
 

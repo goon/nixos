@@ -1,7 +1,7 @@
 { config, lib, ... }:
 
 {
-  options.module.fastfetch.enable = lib.mkEnableOption "Fastfetch System Info" // {
+  options.module.fastfetch.enable = lib.mkEnableOption "Fastfetch" // {
     default = true;
   };
 

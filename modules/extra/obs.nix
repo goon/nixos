@@ -6,7 +6,7 @@
 }:
 
 {
-  options.module.obs.enable = lib.mkEnableOption "OBS Studio" // {
+  options.module.obs.enable = lib.mkEnableOption "OBS" // {
     default = true;
   };
 

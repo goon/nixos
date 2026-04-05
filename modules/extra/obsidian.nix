@@ -6,7 +6,7 @@
 }:
 
 {
-  options.module.obsidian.enable = lib.mkEnableOption "Obsidian Note-taking App" // {
+  options.module.obsidian.enable = lib.mkEnableOption "Obsidian" // {
     default = true;
   };
 

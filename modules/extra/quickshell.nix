@@ -7,7 +7,7 @@
 }:
 
 {
-  options.module.quickshell.enable = lib.mkEnableOption "Quickshell Desktop Interface" // {
+  options.module.quickshell.enable = lib.mkEnableOption "Quickshell" // {
     default = true;
   };
 
