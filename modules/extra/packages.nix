@@ -16,7 +16,6 @@
       obsidian # Notes
       antigravity # IDE
       google-chrome # Browser
-      nicotine-plus # Soulseek
     ];
   };
 }
