@@ -1,4 +1,4 @@
-{ username, ... }:
+{ username, pkgs, ... }:
 
 {
   nixpkgs.config.allowUnfree = true;
@@ -40,4 +40,17 @@
       nhu = "nh os switch -u";
     };
   };
+
+  # Enable nix-ld for unpatched binaries (e.g., Playwright/Chrome drivers)
+  programs.nix-ld.enable = true;
+  programs.nix-ld.libraries = with pkgs; [
+    stdenv.cc.cc
+    zlib
+    fuse3
+    icu
+    nss
+    openssl
+    curl
+    expat
+  ];
 }
