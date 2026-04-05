@@ -80,7 +80,7 @@ Thank you to the countless Nix OS configurations that I ~~copied~~ learnt from.
 
 namishh - seniormatt - fufexan - frost-pheonix - anotherhadi - vic - vimjoyer - bad3r - mitchellh - misterio77 - max-baz - gvolpe - librephoenix - sioodmy
 
-Due to my dementia I have may have missed many. Regardless, I am thankful.
+Due to my dementia I may have missed many. Regardless, I am thankful.
 
 <!-- Links -->
 
