@@ -51,12 +51,14 @@ in
         cd ~/${repoName}/
         layout splits
         launch nvim
+        launch --location=vsplit --bias=40 opencode
       '';
 
       xdg.configFile."kitty/sessions/qs.session".text = ''
         cd ~/${repoName}/modules/home/quickshell
         layout splits
         launch nvim
+        launch --location=vsplit --bias=40 opencode
       '';
     };
   };
