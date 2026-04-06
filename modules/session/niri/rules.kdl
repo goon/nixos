@@ -1,4 +1,3 @@
-//  FIREFOX PICTURE-IN-PICTURE FLOATING 
 window-rule {
     open-floating true
     match app-id=r#"firefox$"# title="^Picture-in-Picture$"
@@ -7,7 +6,6 @@ window-rule {
     default-window-height { fixed 800; }
 }
 
-//  VISUAL INDICATOR FOR SCREENCASTED WINDOWS 
 window-rule {
     match is-window-cast-target=true
     border {
@@ -18,25 +16,17 @@ window-rule {
 }
 
 window-rule {
-    match app-id="vesktop"
-    open-on-workspace "static"
-}
-
-//  WINDOW ROUNDING 
-window-rule {
     clip-to-geometry true 
     geometry-corner-radius 12
 }
 
-//  BLUR 
 window-rule {
     draw-border-with-background false 
     background-effect {
       blur true
       xray false
     }
-
-  }
+}
 
   layer-rule {
       match namespace="(?i)^quickshell.*"
@@ -45,13 +35,12 @@ window-rule {
           xray false
         }
 }
-// PLACES WALLPAPER WITHIN OVERVIEW 
+
 layer-rule {
-    match namespace="^wallpaper$"
+    match namespace="^quickshell:wallpaper$"
     place-within-backdrop true
 }
 
-//  AUTOSTART
 spawn-at-startup "vesktop"
 spawn-at-startup "spotify"
 spawn-at-startup "quickshell"
