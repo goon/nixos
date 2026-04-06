@@ -11,6 +11,7 @@ binds {
     Mod+G           hotkey-overlay-title="Wallpaper" { spawn "qs" "ipc" "call" "wallpaper" "toggle"; }
     Mod+S           hotkey-overlay-title="Settings" { spawn "qs" "ipc" "call" "settings" "toggle"; }
     Mod+P           hotkey-overlay-title="Power" { spawn "qs" "ipc" "call" "power" "toggle"; }
+    Mod+Alt+C       hotkey-overlay-title="Clipboard" { spawn "qs" "ipc" "call" "clipboard" "toggle"; }
 
     // SCREENSHOT 
     Print { screenshot; }
