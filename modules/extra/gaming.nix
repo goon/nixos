@@ -14,11 +14,9 @@ in
     inputs.nix-gaming.nixosModules.pipewireLowLatency
   ];
 
-  options.module.gaming.enable =
-    mkEnableOption "Gaming Launchers, Tools and Optimisations"
-    // {
-      default = true;
-    };
+  options.module.gaming.enable = mkEnableOption "Gaming Launchers, Tools and Optimisations" // {
+    default = true;
+  };
 
   config = mkIf config.module.gaming.enable {
     # ========== System Packages ==========
