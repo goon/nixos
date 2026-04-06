@@ -15,10 +15,12 @@
   config = lib.mkIf config.module.wayland.enable {
     home-manager.users.${config._module.args.username} = {
       home.packages = with pkgs; [
-        cliphist
         wl-clipboard
+        wlsunset
+        playerctl
         libnotify
       ];
+    services.cliphist.enable = true;
     };
   };
 }
