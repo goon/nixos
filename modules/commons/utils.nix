@@ -18,6 +18,7 @@
         wget
         curl
         unzip
+        btop
       ];
     };
   };
