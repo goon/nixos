@@ -41,9 +41,9 @@ layout {
 
     shadow {
         on
-        color "#1F1F28"
+        color "#0A0A12"
         spread 1
-        softness 4
+        softness 6
         draw-behind-window false
         offset x=0 y=0
     }
