@@ -72,7 +72,6 @@ in
       # Packages
       home.packages = [
         cheat-cmd
-        pkgs.krabby
       ];
 
       # ----- Starship
@@ -136,8 +135,6 @@ in
           # ----- Exports
           export NH_FLAKE="${config.home-manager.users.${username}.home.homeDirectory}/${repoName}"
 
-          # ----- Auto Run
-          ${pkgs.krabby}/bin/krabby random 1-3 --no-title
         '';
       };
 
@@ -159,8 +156,6 @@ in
           # ----- Exports
           export NH_FLAKE="/home/${username}/${repoName}"
 
-          # ----- Auto Run
-          ${pkgs.krabby}/bin/krabby random 1-3 --no-title
         '';
       };
     };
