@@ -56,11 +56,17 @@
   };
 
   home-manager.users.${username} = {
-    home.shellAliases = {
-      nhs = "nh os switch";
-      nht = "nh os test";
-      nhc = "nh clean all --keep 8";
-      nhu = "nh os switch -u";
+    home = {
+      packages = with pkgs; [
+        statix
+        deadnix
+      ];
+      shellAliases = {
+        nhs = "nh os switch";
+        nht = "nh os test";
+        nhc = "nh clean all --keep 8";
+        nhu = "nh os switch -u";
+      };
     };
   };
 }
