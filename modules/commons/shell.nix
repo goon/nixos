@@ -62,8 +62,6 @@ in
         # Session variables
         home.sessionVariables = {
           NH_FLAKE = config.globals.repoPath;
-          EDITOR = "nvim";
-          VISUAL = "nvim";
           BROWSER = "firefox";
         };
 
