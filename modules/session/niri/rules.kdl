@@ -28,12 +28,19 @@ window-rule {
     }
 }
 
-  layer-rule {
-      match namespace="(?i)^quickshell.*"
-      background-effect {
-          blur true 
-          xray false
-        }
+window-rule {
+  match is-floating=true
+  background-effect {
+    xray true
+  }
+}
+
+layer-rule {
+  match namespace="(?i)^quickshell.*"
+  background-effect {
+    blur true 
+    xray false
+  }
 }
 
 layer-rule {
