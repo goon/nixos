@@ -41,9 +41,8 @@ in
         fzf.enable = true;
       };
 
-      home = {
         # Universal shell aliases
-        shellAliases = {
+        home.shellAliases = {
           # --- Navigation
           ".." = "cd ..";
           "..." = "cd ../..";
@@ -59,32 +58,29 @@ in
           # --- Search & Filtering
           f = "fzf";
         };
-      };
 
-      # zoxide (Smart cd)
-      programs.zoxide = {
-        enable = true;
-        enableZshIntegration = true;
-        enableBashIntegration = true;
-      };
-
-      home = {
         # Session variables
-        sessionVariables = {
+        home.sessionVariables = {
           NH_FLAKE = config.globals.repoPath;
           EDITOR = "nvim";
           VISUAL = "nvim";
           BROWSER = "firefox";
         };
 
-        sessionPath = [
+        home.sessionPath = [
           "$HOME/.local/bin"
         ];
 
         # Packages
-        packages = [
+        home.packages = [
           cheat-cmd
         ];
+
+      # zoxide (Smart cd)
+      programs.zoxide = {
+        enable = true;
+        enableZshIntegration = true;
+        enableBashIntegration = true;
       };
 
       # ----- Starship
