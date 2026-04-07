@@ -26,12 +26,10 @@
 
     xdg.portal = {
       enable = true;
-      config.common.default = [ "gtk" ];
-      extraPortals = [
-        pkgs.xdg-desktop-portal-gtk
-        pkgs.xdg-desktop-portal-gnome
-      ];
       configPackages = [
+        inputs.niri.packages.${pkgs.stdenv.system}.default
+      ];
+      extraPortals = [
         pkgs.xdg-desktop-portal-gtk
         pkgs.xdg-desktop-portal-gnome
       ];
