@@ -1,12 +1,14 @@
 {
-  # Automatic USB Mounting
-  services.udisks2.enable = true;
+  services = {
+    # Automatic USB Mounting
+    udisks2.enable = true;
 
-  # File Manager Services
-  services.gvfs.enable = true;
-  services.tumbler.enable = true;
-  services.gnome.localsearch.enable = true;
+    # File Manager Services
+    gvfs.enable = true;
+    tumbler.enable = true;
+    gnome.localsearch.enable = true;
 
-  # SSD Trim
-  services.fstrim.enable = true;
+    # SSD Trim
+    fstrim.enable = true;
+  };
 }

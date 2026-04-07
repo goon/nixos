@@ -6,20 +6,39 @@
 }:
 
 {
-  # Pipewire
-  services.pipewire = {
-    enable = true;
-    alsa.enable = true;
-    alsa.support32Bit = true;
-
-    # Low Latency
-    lowLatency = {
+  services = {
+    # Pipewire
+    pipewire = {
       enable = true;
-      quantum = 64;
-      rate = 48000;
+      alsa = {
+        enable = true;
+        support32Bit = true;
+      };
+      pulse.enable = true;
+
+      # Low Latency
+      lowLatency = {
+        enable = true;
+        quantum = 64;
+        rate = 48000;
+      };
+    };
+
+    # MPD
+    mpd = {
+      enable = true;
+      user = username;
+      settings = {
+        music_directory = "/home/${username}/Music";
+        audio_output = [
+          {
+            type = "pulse";
+            name = "PipeWire Output";
+          }
+        ];
+      };
     };
   };
-  services.pipewire.pulse.enable = true;
 
   # RT Kit
   security.rtkit.enable = true;
@@ -29,20 +48,6 @@
     pulseaudio
   ];
 
-  # MPD
-  services.mpd = {
-    enable = true;
-    user = username;
-    settings = {
-      music_directory = "/home/${username}/Music";
-      audio_output = [
-        {
-          type = "pulse";
-          name = "PipeWire Output";
-        }
-      ];
-    };
-  };
   systemd.services.mpd.environment = {
     XDG_RUNTIME_DIR = "/run/user/${builtins.toString config.users.users.${username}.uid}";
     PULSE_SERVER = "unix:/run/user/${

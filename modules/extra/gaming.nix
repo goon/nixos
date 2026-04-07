@@ -26,17 +26,19 @@ in
     ];
 
     # ========== Programs & Services ==========
-    programs.steam = {
-      enable = true;
-      remotePlay.openFirewall = true;
-      dedicatedServer.openFirewall = true;
-      localNetworkGameTransfers.openFirewall = true;
-      protontricks.enable = true;
-      extraCompatPackages = [ pkgs.proton-ge-bin ];
-    };
+    programs = {
+      steam = {
+        enable = true;
+        remotePlay.openFirewall = true;
+        dedicatedServer.openFirewall = true;
+        localNetworkGameTransfers.openFirewall = true;
+        protontricks.enable = true;
+        extraCompatPackages = [ pkgs.proton-ge-bin ];
+      };
 
-    programs.gamescope.enable = true;
-    programs.gamemode.enable = true;
+      gamescope.enable = true;
+      gamemode.enable = true;
+    };
 
     # ========== Environment & Hardware tweaks ==========
     environment.variables = {
@@ -44,14 +46,16 @@ in
     };
 
     # Steam Networking
-    networking.firewall.allowedTCPPorts = [
-      27036
-      27037
-    ];
-    networking.firewall.allowedUDPPorts = [
-      27031
-      27036
-    ];
+    networking.firewall = {
+      allowedTCPPorts = [
+        27036
+        27037
+      ];
+      allowedUDPPorts = [
+        27031
+        27036
+      ];
+    };
 
     # Kernel performance (vm.max_map_count)
     boot.kernel.sysctl = {

@@ -35,24 +35,28 @@ in
 
     # ========== Home Manager Layer ==========
     home-manager.users.${username} = {
-      # CLI tools integration
-      programs.eza.enable = true;
-      programs.bat.enable = true;
-      programs.fzf.enable = true;
+      programs = {
+        # CLI tools integration
+        eza.enable = true;
+        bat.enable = true;
+        fzf.enable = true;
+      };
 
-      # Universal shell aliases
-      home.shellAliases = {
-        grep = "grep --color=auto";
-        f = "fzf";
-        partitions = "lsblk -f";
-        v = "nvim";
-        nv = "nvim";
-        vim = "nvim";
-        ls = "eza --icons --git";
-        cat = "bat";
-        cd = "z";
-        rm = "rm -i";
-        rqs = "pkill quickshell; quickshell & disown";
+      home = {
+        # Universal shell aliases
+        shellAliases = {
+          grep = "grep --color=auto";
+          f = "fzf";
+          partitions = "lsblk -f";
+          v = "nvim";
+          nv = "nvim";
+          vim = "nvim";
+          ls = "eza --icons --git";
+          cat = "bat";
+          cd = "z";
+          rm = "rm -i";
+          rqs = "pkill quickshell; quickshell & disown";
+        };
       };
 
       # zoxide (Smart cd)
@@ -62,22 +66,24 @@ in
         enableBashIntegration = true;
       };
 
-      # Session variables
-      home.sessionVariables = {
-        NH_FLAKE = "/home/${username}/${repoName}";
-        EDITOR = "nvim";
-        VISUAL = "nvim";
-        BROWSER = "firefox";
+      home = {
+        # Session variables
+        sessionVariables = {
+          NH_FLAKE = "/home/${username}/${repoName}";
+          EDITOR = "nvim";
+          VISUAL = "nvim";
+          BROWSER = "firefox";
+        };
+
+        sessionPath = [
+          "$HOME/.local/bin"
+        ];
+
+        # Packages
+        packages = [
+          cheat-cmd
+        ];
       };
-
-      home.sessionPath = [
-        "$HOME/.local/bin"
-      ];
-
-      # Packages
-      home.packages = [
-        cheat-cmd
-      ];
 
       # ----- Starship
       programs.starship = {

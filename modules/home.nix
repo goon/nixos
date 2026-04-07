@@ -1,13 +1,17 @@
 { username, ... }:
 
 {
-  home-manager.useGlobalPkgs = true;
-  home-manager.useUserPackages = true;
-  home-manager.backupFileExtension = "backup";
+  home-manager = {
+    useGlobalPkgs = true;
+    useUserPackages = true;
+    backupFileExtension = "backup";
 
-  home-manager.users.${username} = {
-    home.username = username;
-    home.homeDirectory = "/home/${username}";
-    home.stateVersion = "25.11";
+    users.${username} = {
+      home = {
+        inherit username;
+        homeDirectory = "/home/${username}";
+        stateVersion = "25.11";
+      };
+    };
   };
 }

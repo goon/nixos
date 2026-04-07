@@ -1,15 +1,21 @@
 { pkgs, ... }:
 {
-  boot.loader.systemd-boot.enable = true;
-  boot.loader.efi.canTouchEfiVariables = true;
-  boot.loader.systemd-boot.configurationLimit = 10;
+  boot = {
+    loader = {
+      systemd-boot = {
+        enable = true;
+        configurationLimit = 10;
+      };
+      efi.canTouchEfiVariables = true;
+    };
 
-  boot.kernelPackages = pkgs.linuxPackages_zen;
+    kernelPackages = pkgs.linuxPackages_zen;
 
-  boot.consoleLogLevel = 0;
-  boot.initrd.verbose = false;
-  boot.kernelParams = [
-    "quiet"
-    "loglevel=3"
-  ];
+    consoleLogLevel = 0;
+    initrd.verbose = false;
+    kernelParams = [
+      "quiet"
+      "loglevel=3"
+    ];
+  };
 }
