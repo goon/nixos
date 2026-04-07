@@ -22,6 +22,7 @@ in
     hardware.i2c.enable = true;
 
     services.xserver.videoDrivers = [ "amdgpu" ];
+    environment.sessionVariables.LIBVA_DRIVER_NAME = "radeonsi";
 
     hardware.graphics = {
       enable = true;
