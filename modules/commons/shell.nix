@@ -44,17 +44,20 @@ in
       home = {
         # Universal shell aliases
         shellAliases = {
-          grep = "grep --color=auto";
-          f = "fzf";
-          partitions = "lsblk -f";
-          v = "nvim";
-          nv = "nvim";
-          vim = "nvim";
-          ls = "eza --icons --git";
-          cat = "bat";
+          # --- Navigation
+          ".." = "cd ..";
+          "..." = "cd ../..";
           cd = "z";
+          ls = "eza --icons --git";
+
+          # --- System Utilities
+          cat = "bat";
+          grep = "grep --color=auto";
+          partitions = "lsblk -f";
           rm = "rm -i";
-          rqs = "pkill quickshell; quickshell & disown";
+
+          # --- Search & Filtering
+          f = "fzf";
         };
       };
 

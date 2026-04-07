@@ -25,6 +25,10 @@
           qt6Packages.qt6ct
           gowall # Wallpaper Themer
         ];
+
+        home.shellAliases = {
+          rqs = "pkill quickshell; quickshell & disown";
+        };
       };
   };
 }

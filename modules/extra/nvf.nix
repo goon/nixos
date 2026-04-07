@@ -669,6 +669,12 @@ in
         };
       };
 
+      home.shellAliases = {
+        v = "nvim";
+        nv = "nvim";
+        vim = "nvim";
+      };
+
       xdg.desktopEntries.nvim = {
         name = "Neovim";
         genericName = "Text Editor";
