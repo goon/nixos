@@ -28,6 +28,11 @@ in
 
     users.users.${username}.shell = pkgs.zsh;
 
+    environment.sessionVariables = {
+      TERM = config.globals.userTerminal;
+      TERMINAL = config.globals.userTerminal;
+    };
+
     # ========== Home Manager Layer ==========
     home-manager.users.${username} = {
       # CLI tools integration
