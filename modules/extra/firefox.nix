@@ -14,7 +14,7 @@
     home-manager.users.${config._module.args.username} = {
       programs.firefox = {
         enable = true;
-        configPath = ".config/mozilla/firefox";
+        configPath = "${config.globals.paths.config}/mozilla/firefox";
 
         profiles.default = {
           id = 0;

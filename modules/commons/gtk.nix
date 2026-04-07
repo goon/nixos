@@ -3,7 +3,6 @@
   lib,
   pkgs,
   username,
-  repoName,
   ...
 }:
 
@@ -61,13 +60,13 @@ in
       xdg.configFile."gtk-3.0/bookmarks" = {
         force = true;
         text = ''
-          file:///home/${username}/${repoName} Nix
-          file:///home/${username}/Downloads Downloads
-          file:///home/${username}/Documents Documents
-          file:///home/${username}/Pictures Pictures
-          file:///home/${username}/Music Music
-          file:///home/${username}/Videos Videos
-          file:///home/${username}/.config Config
+          file://${config.globals.repoPath} Nix
+          file://${config.globals.paths.home}/Downloads Downloads
+          file://${config.globals.paths.home}/Documents Documents
+          file://${config.globals.paths.home}/Pictures Pictures
+          file://${config.globals.paths.home}/Music Music
+          file://${config.globals.paths.home}/Videos Videos
+          file://${config.globals.paths.config} Config
         '';
       };
 

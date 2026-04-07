@@ -10,6 +10,12 @@
     default = true;
   };
 
+  options.globals.paths.config = lib.mkOption {
+    type = lib.types.str;
+    default = "${config.globals.paths.home}/.config";
+    description = "Absolute path to the XDG config home";
+  };
+
   config = lib.mkIf config.module.xdg.enable {
     # System Layer
     environment.systemPackages = [ pkgs.xdg-user-dirs ];

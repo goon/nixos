@@ -38,7 +38,7 @@ in
           "ctrl+shift+w" = "close_window";
           "ctrl+shift+]" = "next_window";
           "ctrl+shift+[" = "previous_window";
-          "f4" = "goto_session ~/.config/kitty/sessions/ --sort-by=alphabetical";
+          "f4" = "goto_session ${config.globals.paths.config}/kitty/sessions/ --sort-by=alphabetical";
         };
 
         extraConfig = ''

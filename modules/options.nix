@@ -4,9 +4,10 @@ let
   inherit (lib) mkOption types;
 in
 {
-  # ========== structural essentials ==========
+  # ========== Structural Essentials ==========
   # We use _module.args for these to avoid infinite recursion
   # when they are used in attribute names (like users.users.${username})
+
   config = {
     _module.args = {
       username = "michael";
@@ -14,8 +15,8 @@ in
     };
   };
 
-  # ========== system settings ==========
-  # We use the "Pro" mkOption pattern for these for better discovery
+  # ========== System Settings ==========
+
   options.globals = {
     userTerminal = mkOption {
       type = types.str;
@@ -23,9 +24,17 @@ in
       description = "default terminal emulator";
     };
 
+    paths = {
+      home = mkOption {
+        type = types.str;
+        default = "/home/${config._module.args.username}";
+        description = "Absolute path to the user's home directory";
+      };
+    };
+
     repoPath = mkOption {
       type = types.str;
-      default = "/home/${config._module.args.username}/${config._module.args.repoName}";
+      default = "${config.globals.paths.home}/${config._module.args.repoName}";
       description = "Absolute path to the flake repository root";
     };
 
@@ -43,6 +52,7 @@ in
     };
 
     # ========== Default Applications ==========
+
     apps = {
       browser = mkOption {
         type = types.str;

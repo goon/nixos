@@ -29,7 +29,7 @@
       enable = true;
       user = username;
       settings = {
-        music_directory = "/home/${username}/Music";
+        music_directory = "${config.globals.paths.home}/Music";
         audio_output = [
           {
             type = "pulse";

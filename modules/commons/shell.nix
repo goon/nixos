@@ -3,7 +3,6 @@
   lib,
   pkgs,
   username,
-  repoName,
   ...
 }:
 
@@ -69,7 +68,7 @@ in
       home = {
         # Session variables
         sessionVariables = {
-          NH_FLAKE = "/home/${username}/${repoName}";
+          NH_FLAKE = config.globals.repoPath;
           EDITOR = "nvim";
           VISUAL = "nvim";
           BROWSER = "firefox";
@@ -144,7 +143,7 @@ in
         ];
         initExtra = ''
           # ----- Exports
-          export NH_FLAKE="${config.home-manager.users.${username}.home.homeDirectory}/${repoName}"
+          export NH_FLAKE="${config.globals.repoPath}"
 
         '';
       };
@@ -152,7 +151,7 @@ in
       # ----- Zsh
       programs.zsh = {
         enable = true;
-        dotDir = "/home/${username}/.config/zsh";
+        dotDir = "${config.globals.paths.config}/zsh";
         enableCompletion = true;
         autosuggestion.enable = true;
         syntaxHighlighting.enable = true;
@@ -165,7 +164,7 @@ in
         };
         initContent = ''
           # ----- Exports
-          export NH_FLAKE="/home/${username}/${repoName}"
+          export NH_FLAKE="${config.globals.repoPath}"
 
         '';
       };

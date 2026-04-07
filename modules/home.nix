@@ -1,4 +1,4 @@
-{ username, ... }:
+{ username, config, ... }:
 
 {
   home-manager = {
@@ -9,7 +9,7 @@
     users.${username} = {
       home = {
         inherit username;
-        homeDirectory = "/home/${username}";
+        homeDirectory = config.globals.paths.home;
         stateVersion = "25.11";
       };
     };
