@@ -21,6 +21,7 @@ in
       imports = [ config._module.args.inputs.nvf.homeManagerModules.default ];
       programs.nvf = {
         enable = true;
+        defaultEditor = true;
         settings = {
           vim = {
             globals.mapleader = " ";
@@ -667,12 +668,6 @@ in
             '';
           };
         };
-      };
-
-      home.shellAliases = {
-        v = "nvim";
-        nv = "nvim";
-        vim = "nvim";
       };
 
       xdg.desktopEntries.nvim = {
