@@ -12,6 +12,8 @@
   };
 
   config = lib.mkIf config.module.quickshell.enable {
+    environment.sessionVariables.QS_ICON_THEME = "Papirus";
+
     home-manager.users.${config._module.args.username} =
       { config, osConfig, ... }:
       {
