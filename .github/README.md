@@ -3,8 +3,6 @@
 <div align="center">
 
 ![Commits](https://img.shields.io/github/commit-activity/m/goon/nixos?style=for-the-badge&labelColor=%231e1e2e&color=%23cba6f7) 
-![Size](https://img.shields.io/github/repo-size/goon/nixos?style=for-the-badge&labelColor=%231e1e2e&color=%2389b4fa) 
-![Stars](https://img.shields.io/github/stars/goon/nixos?style=for-the-badge&labelColor=%231e1e2e&color=%23a6e3a1) 
 
 ![preview](assets/goonix.png)
 
