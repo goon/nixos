@@ -34,7 +34,7 @@
 | **Display Manager**                                            | [Ly][Ly]                                                                                                            |
 | **System Resource Monitor**                                    | [Resources][Resources]                                                                                              |
 | **File Manager**                                               | [Yazi][Yazi] & [Nautilus][Nautilus]                                                                                 |
-| **Shell**                                                      | Bash & [Starship][Starship]                                                                                         |
+| **Shell**                                                      | Zsh & [Starship][Starship]                                                                                         |
 | **Media Player**                                               | [Totem][Totem]                                                                                                      |
 | **Text Editor**                                                | [Neovim][Neovim]                                                                                                    |
 | **Image Viewer**                                               | [Loupe][Loupe]                                                                                                      |
