@@ -33,7 +33,6 @@
     home-manager.users.${config._module.args.username} = {
       home.packages = with pkgs; [
         wl-clipboard
-        wlsunset
         playerctl
         libnotify
       ];
