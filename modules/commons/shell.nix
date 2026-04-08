@@ -15,11 +15,9 @@ let
   '';
 in
 {
-  options.module.shell.enable =
-    lib.mkEnableOption "Unified Shell Environment (Zsh/Bash/Starship)"
-    // {
-      default = true;
-    };
+  options.module.shell.enable = lib.mkEnableOption "Unified Shell Environment (Zsh/Bash)" // {
+    default = true;
+  };
 
   config = mkIf config.module.shell.enable {
     # ========== NixOS Layer ==========
@@ -41,88 +39,44 @@ in
         fzf.enable = true;
       };
 
-        # Universal shell aliases
-        home.shellAliases = {
-          # --- Navigation
-          ".." = "cd ..";
-          "..." = "cd ../..";
-          cd = "z";
-          ls = "eza --icons --git";
+      # Universal shell aliases
+      home.shellAliases = {
+        # --- Navigation
+        ".." = "cd ..";
+        "..." = "cd ../..";
+        cd = "z";
+        ls = "eza --icons --git";
 
-          # --- System Utilities
-          cat = "bat";
-          grep = "grep --color=auto";
-          partitions = "lsblk -f";
-          rm = "rm -i";
+        # --- System Utilities
+        cat = "bat";
+        grep = "grep --color=auto";
+        partitions = "lsblk -f";
+        rm = "rm -i";
 
-          # --- Search & Filtering
-          f = "fzf";
-        };
+        # --- Search & Filtering
+        f = "fzf";
+      };
 
-        # Session variables
-        home.sessionVariables = {
-          NH_FLAKE = config.globals.repoPath;
-          BROWSER = "firefox";
-        };
+      # Session variables
+      home.sessionVariables = {
+        NH_FLAKE = config.globals.repoPath;
+        BROWSER = "firefox";
+      };
 
-        home.sessionPath = [
-          "$HOME/.local/bin"
-        ];
+      home.sessionPath = [
+        "$HOME/.local/bin"
+      ];
 
-        # Packages
-        home.packages = [
-          cheat-cmd
-        ];
+      # Packages
+      home.packages = [
+        cheat-cmd
+      ];
 
       # zoxide (Smart cd)
       programs.zoxide = {
         enable = true;
         enableZshIntegration = true;
         enableBashIntegration = true;
-      };
-
-      # ----- Starship
-      programs.starship = {
-        enable = true;
-        settings = {
-          "$schema" = "https://starship.rs/config-schema.json";
-          format = "$username$hostname$directory$git_branch$git_state$git_status$cmd_duration$line_break$python$character";
-          directory.style = "blue";
-          character = {
-            success_symbol = "[❯](purple)";
-            error_symbol = "[❯](red)";
-            vimcmd_symbol = "[❮](green)";
-          };
-          git_branch = {
-            format = "[$branch]($style)";
-            style = "bright-black";
-          };
-          git_status = {
-            format = "[[(*$conflicted$untracked$modified$staged$renamed$deleted)](218) ($ahead_behind$stashed)]($style)";
-            style = "cyan";
-            conflicted = "​";
-            untracked = "​";
-            modified = "​";
-            staged = "​";
-            renamed = "​";
-            deleted = "​";
-            stashed = "≡";
-          };
-          git_state = {
-            format = "\\([$state( $progress_current/$progress_total)]($style)\\) ";
-            style = "bright-black";
-          };
-          cmd_duration = {
-            format = "[$duration]($style) ";
-            style = "yellow";
-          };
-          python = {
-            format = "[$virtualenv]($style) ";
-            style = "bright-black";
-            detect_extensions = [ ];
-            detect_files = [ ];
-          };
-        };
       };
 
       # ----- Bash
@@ -152,13 +106,6 @@ in
         enableCompletion = true;
         autosuggestion.enable = true;
         syntaxHighlighting.enable = true;
-        oh-my-zsh = {
-          enable = true;
-          plugins = [
-            "git"
-            "sudo"
-          ];
-        };
         initContent = ''
           # ----- Exports
           export NH_FLAKE="${config.globals.repoPath}"
