@@ -10,10 +10,27 @@
     default = true;
   };
 
-  options.globals.paths.config = lib.mkOption {
-    type = lib.types.str;
-    default = "${config.globals.paths.home}/.config";
-    description = "Absolute path to the XDG config home";
+  options.globals.paths = {
+    config = lib.mkOption {
+      type = lib.types.str;
+      default = "${config.globals.paths.home}/.config";
+      description = "Absolute path to the XDG config home";
+    };
+    data = lib.mkOption {
+      type = lib.types.str;
+      default = "${config.globals.paths.home}/.local/share";
+      description = "Absolute path to the XDG data home";
+    };
+    cache = lib.mkOption {
+      type = lib.types.str;
+      default = "${config.globals.paths.home}/.cache";
+      description = "Absolute path to the XDG cache home";
+    };
+    state = lib.mkOption {
+      type = lib.types.str;
+      default = "${config.globals.paths.home}/.local/state";
+      description = "Absolute path to the XDG state home";
+    };
   };
 
   config = lib.mkIf config.module.xdg.enable {
