@@ -45,6 +45,7 @@
 - `treefmt.nix` defines formatting standards for the codebase. 
 - `host/` contains host specific configuration e.g. `hardware-configuration`. 
 - `modules/` contains nix and home manager modules separated by subfolder. 
+- `scripts/` basic helper scripts.
 - `wallpapers/` collection of wallpapers for your viewing pleasure.
 
 ## Setup
