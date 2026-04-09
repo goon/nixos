@@ -33,17 +33,17 @@ layout {
     }
 
     border {
-        off
-        width 2
-        active-gradient from="#7c6f64" to="#d4be98" angle=0
-        inactive-color "#252535"
+        on
+        width 1
+        active-color "#FFFFFF50"
+        inactive-color "#FFFFFF15"
     }
 
     shadow {
         on
-        color "#0A0A12"
+        color "#11111177"
         spread 1
-        softness 6
+        softness 1
         draw-behind-window false
         offset x=0 y=0
     }
