@@ -32,7 +32,8 @@
             "browser.ml.chat.enabled" = false;
             "browser.ml.enable" = false;
             "sidebar.position_start" = false;
-            "browser.startup.page" = 3;
+            "browser.startup.page" = 1;
+            "browser.startup.homepage" = "https://www.cosmos.so/";
           };
         };
 
