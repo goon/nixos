@@ -10,7 +10,7 @@ let
   inherit (lib) mkIf mkEnableOption;
 
   # Reference to the scripts directory relative to this file
-  scriptDir = ../scripts;
+  scriptDir = ../../scripts;
 
   # Create a package containing all scripts in modules/scripts/
   # We use runCommand to copy them and ensure they are executable.
@@ -33,7 +33,7 @@ let
   '';
 in
 {
-  options.module.scripts.enable = mkEnableOption "scripts/ manager" // {
+  options.module.scripts.enable = mkEnableOption "Scripts" // {
     default = true;
   };
 
