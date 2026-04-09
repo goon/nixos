@@ -1,4 +1,4 @@
-{ username, ... }:
+{ username, config, ... }:
 
 {
   users.users.${username} = {
@@ -17,9 +17,9 @@
 
   # XDG Variables (Baseline)
   environment.sessionVariables = {
-    XDG_CONFIG_HOME = "$HOME/.config";
-    XDG_DATA_HOME = "$HOME/.local/share";
-    XDG_CACHE_HOME = "$HOME/.cache";
-    XDG_STATE_HOME = "$HOME/.local/state";
+    XDG_CONFIG_HOME = config.globals.paths.config;
+    XDG_DATA_HOME = config.globals.paths.data;
+    XDG_CACHE_HOME = config.globals.paths.cache;
+    XDG_STATE_HOME = config.globals.paths.state;
   };
 }
