@@ -1,0 +1,38 @@
+#!/usr/bin/env bash
+
+# Quickshell Debug script
+# Kills existing instances and runs Quickshell in the foreground
+
+APP="quickshell"
+
+# Function to send notifications
+notify() {
+    if command -v notify-send >/dev/null; then
+        notify-send "Quickshell Debug" "$1" \
+            --app-name="Quickshell" \
+            --icon="utilities-terminal" \
+            --urgency=low
+    fi
+}
+
+echo "Stopping Quickshell..."
+pkill "$APP"
+
+# Wait for exit
+COUNT=0
+while pgrep "$APP" >/dev/null && [ $COUNT -lt 20 ]; do
+    sleep 0.1
+    ((COUNT++))
+done
+
+# Force if needed
+if pgrep "$APP" >/dev/null; then
+    pkill -9 "$APP"
+fi
+
+notify "Starting debug mode..."
+echo "Starting Quickshell in foreground..."
+echo "-----------------------------------"
+
+# Run in foreground
+"$APP"
