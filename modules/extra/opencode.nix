@@ -25,7 +25,7 @@
           };
           build = {
             mode = "primary";
-            model = "opencode-go/kimi-k2.5";
+            model = "opencode-go/minimax-k2.5";
           };
         };
       };
