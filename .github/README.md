@@ -83,7 +83,13 @@ Thank you to the countless Nix OS configurations that I ~~copied~~ learnt from.
 
 namishh - seniormatt - fufexan - frost-pheonix - anotherhadi - vic - vimjoyer - bad3r - mitchellh - misterio77 - max-baz - gvolpe - librephoenix - sioodmy
 
-Due to my dementia I may have missed many. Regardless, I am thankful.
+Due to my dementia I may have missed many. Regardless, I am thankful. 
+
+## License 
+
+This repository is licensed under the **[MIT LICENSE](LICENSE)**. 
+
+<p align="center"><img src="https://raw.githubusercontent.com/catppuccin/catppuccin/main/assets/footers/gray0_ctp_on_line.svg?sanitize=true" /></p>
 
 <!-- Links -->
 
