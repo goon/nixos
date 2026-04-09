@@ -1,4 +1,9 @@
-{ username, pkgs, ... }:
+{
+  username,
+  pkgs,
+  config,
+  ...
+}:
 
 {
   nixpkgs.config.allowUnfree = true;
@@ -32,6 +37,7 @@
   programs = {
     nh = {
       enable = true;
+      flake = config.globals.repoPath;
       clean = {
         enable = true;
         dates = "weekly";
