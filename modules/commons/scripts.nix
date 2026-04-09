@@ -33,7 +33,7 @@ let
   '';
 in
 {
-  options.module.scripts.enable = mkEnableOption "Automatic script management for modules/scripts" // {
+  options.module.scripts.enable = mkEnableOption "scripts/ manager" // {
     default = true;
   };
 
