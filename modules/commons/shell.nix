@@ -59,7 +59,6 @@ in
 
       # Session variables
       home.sessionVariables = {
-        NH_FLAKE = config.globals.repoPath;
         BROWSER = "firefox";
       };
 
@@ -94,7 +93,6 @@ in
         ];
         initExtra = ''
           # ----- Exports
-          export NH_FLAKE="${config.globals.repoPath}"
 
         '';
       };
@@ -108,7 +106,6 @@ in
         syntaxHighlighting.enable = true;
         initContent = ''
           # ----- Exports
-          export NH_FLAKE="${config.globals.repoPath}"
 
         '';
       };
