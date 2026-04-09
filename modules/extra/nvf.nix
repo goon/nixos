@@ -12,7 +12,7 @@ let
   };
 in
 {
-  options.module.nvf.enable = lib.mkEnableOption "nvf" // {
+  options.module.nvf.enable = lib.mkEnableOption "NVF" // {
     default = true;
   };
 
