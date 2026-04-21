@@ -27,6 +27,7 @@ in
         colorScheme = "Mono";
         enabledExtensions = with spicePkgs.extensions; [
           hidePodcasts
+          adblockify
         ];
       };
     };
