@@ -73,8 +73,8 @@
           omni-trash = pkgs.fetchFromGitHub {
             owner = "goon";
             repo = "omni-trash.yazi";
-            rev = "main";
-            hash = "sha256-18oUV39zqbZUdXuyWIUYpiCc84T4KFnelQcGwOXItf8=";
+            rev = "06d7584d1a2d8f1174758db370cc16897ff39696";
+            hash = "sha256-jdSi8uNFKQS2Skn2OJNDPKYw9VmAd2V+Cor60MDLNt4=";
           };
         };
         flavors = {
