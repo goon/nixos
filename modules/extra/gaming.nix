@@ -23,6 +23,7 @@ in
     environment.systemPackages = with pkgs; [
       mangohud
       bolt-launcher
+      runelite
     ];
 
     # ========== Programs & Services ==========
