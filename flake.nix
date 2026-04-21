@@ -7,7 +7,7 @@
     nixpkgs.url = "nixpkgs/nixos-unstable";
     quickshell.url = "git+https://git.outfoxxed.me/outfoxxed/quickshell";
     quickshell.inputs.nixpkgs.follows = "nixpkgs";
-    niri.url = "github:niri-wm/niri?ref=wip/branch";
+    niri.url = "github:niri-wm/niri";
     niri.inputs.nixpkgs.follows = "nixpkgs";
 
     # Nix-gaming for additional gaming optimizations
