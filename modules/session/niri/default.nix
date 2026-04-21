@@ -8,6 +8,12 @@
 
 {
   config = lib.mkIf (config.module.desktop.windowmanager == "niri") {
+    # System-level Niri integration
+    programs.niri = {
+      enable = true;
+      package = inputs.niri.packages.${pkgs.stdenv.system}.default;
+    };
+
     home-manager.users.${config._module.args.username} =
       { config, osConfig, ... }:
       {
@@ -20,6 +26,7 @@
         ];
       };
 
+    # Explicit session and portal configuration (redundant with programs.niri but kept for clarity)
     services.displayManager.sessionPackages = [
       inputs.niri.packages.${pkgs.stdenv.system}.default
     ];
@@ -36,3 +43,5 @@
     };
   };
 }
+
+
