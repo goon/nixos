@@ -56,7 +56,7 @@ in
     apps = {
       browser = mkOption {
         type = types.str;
-        default = "firefox.desktop";
+        default = "brave-browser.desktop";
         description = "default web browser";
       };
       editor = mkOption {

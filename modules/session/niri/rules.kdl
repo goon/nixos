@@ -1,6 +1,6 @@
 window-rule {
     open-floating true
-    match app-id=r#"firefox$"# title="^Picture-in-Picture$"
+    match app-id=r#"brave-browser$"# title="^Picture-in-Picture$"
     match title="floating-terminal"
     default-column-width { fixed 1250; }
     default-window-height { fixed 800; }

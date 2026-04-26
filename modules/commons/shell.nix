@@ -59,7 +59,7 @@ in
 
       # Session variables
       home.sessionVariables = {
-        BROWSER = "firefox";
+        BROWSER = "brave";
       };
 
       home.sessionPath = [

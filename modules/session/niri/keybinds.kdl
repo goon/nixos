@@ -4,7 +4,7 @@ binds {
     Mod+RETURN      { spawn "kitty"; }
     Mod+E           { spawn "kitty" "-e" "yazi"; }
     Mod+N           { spawn "kitty" "-e" "nvim"; }
-    Mod+B           { spawn "firefox"; }
+    Mod+B           { spawn "brave"; }
     Mod+M           { spawn "obsidian"; }
     Mod+T           { spawn "kitty" "--title" "floating-terminal"; }
     Mod+SPACE       hotkey-overlay-title="Launcher" { spawn "qs" "ipc" "call" "launcher"  "toggle"; }
