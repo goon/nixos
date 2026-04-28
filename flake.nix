@@ -40,6 +40,10 @@
     # Nixcord for Discord customization
     nixcord.url = "github:FlameFlag/nixcord";
     nixcord.inputs.nixpkgs.follows = "nixpkgs";
+
+    # MangoWM Wayland compositor
+    mangowm.url = "github:mangowm/mango";
+    mangowm.inputs.nixpkgs.follows = "nixpkgs";
   };
 
   # System configurations and modules
