@@ -21,7 +21,7 @@
           inputs.mangowm.hmModules.mango
         ];
 
-        home.packages = [ pkgs.lswt ];
+        home.packages = [ pkgs.lswt pkgs.wlrctl ];
 
         # Enable the HM module
         wayland.windowManager.mango.enable = true;
