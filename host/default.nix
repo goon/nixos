@@ -11,7 +11,7 @@
   module.hardware.radeon.enable = true;
 
   # [2] Session (The Switch)
-  module.desktop.windowmanager = "niri";
+  module.desktop.windowmanager = "mangowm";
 
   # [3] Commons (Shared Plumbing - Enabled by default)
   # module.gtk.enable = false;
