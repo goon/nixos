@@ -43,6 +43,14 @@ in
         gtk3
       ];
 
+      home.pointerCursor = {
+        name = "Bibata-Modern-Ice";
+        package = pkgs.bibata-cursors;
+        size = 28;
+        gtk.enable = true;
+        x11.enable = true;
+      };
+
       # Interface Theming
       dconf.settings = {
         "org/gnome/desktop/interface" = {
@@ -52,7 +60,6 @@ in
           monospace-font-name = "${config.globals.userFonts.monospace} 10";
           gtk-theme = "adw-gtk3";
           icon-theme = "Papirus";
-          cursor-theme = "Bibata-Modern-Classic";
         };
       };
 
