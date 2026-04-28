@@ -15,7 +15,7 @@
         enable = true;
         extensions = [
           { id = "cjpalhdlnbpafiamejdnhcphjbkeiagm"; } # uBlock Origin
-          { id = "jplgfhpmjnbigmhklmmbgecoobifkmpa"; } # Proton VPN 
+          { id = "jplgfhpmjnbigmhklmmbgecoobifkmpa"; } # Proton VPN
           { id = "ghmbeldphafepmbegfdlkpapadhbakde"; } # Proton Pass
         ];
         commandLineArgs = [
@@ -39,4 +39,3 @@
     };
   };
 }
-
