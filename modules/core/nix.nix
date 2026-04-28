@@ -71,6 +71,7 @@
       nht = "nh os test";
       nhc = "nh clean all --keep 8";
       nhu = "nh os switch -u";
+      nhb = "nh os boot";
     };
   };
 }
