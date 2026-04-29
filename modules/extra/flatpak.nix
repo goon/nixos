@@ -8,12 +8,19 @@
   config = lib.mkIf config.module.flatpak.enable {
     services.flatpak = {
       enable = true;
-      remotes = {
-        "flathub" = "https://dl.flathub.org/repo/flathub.flatpakrepo";
-      };
+      uninstallUnmanaged = true;
+      update.onActivation = true;
+
+      remotes = [{
+        name = "flathub";
+        location = "https://dl.flathub.org/repo/flathub.flatpakrepo";
+      }];
+
       packages = [
-        "flathub:app/com.usebottles.bottles/x86_64/stable"
+        "com.usebottles.bottles"
+        "com.parsecgaming.parsec"
       ];
+
       overrides = {
         "com.usebottles.bottles" = {
           Context.filesystems = [ "/mnt/games" ];
