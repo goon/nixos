@@ -7,7 +7,7 @@
 
 {
   options.module.firefox.enable = lib.mkEnableOption "Firefox" // {
-    default = true;
+    default = false;
   };
 
   config = lib.mkIf config.module.firefox.enable {
