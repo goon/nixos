@@ -17,6 +17,7 @@
           { id = "cjpalhdlnbpafiamejdnhcphjbkeiagm"; } # uBlock Origin
           { id = "jplgfhpmjnbigmhklmmbgecoobifkmpa"; } # Proton VPN
           { id = "ghmbeldphafepmbegfdlkpapadhbakde"; } # Proton Pass
+          { id = "cnjifjpddelmedmihgijeibhnjfabmlf"; } # Obsidian Web Clipper
         ];
         commandLineArgs = [
           "--enable-features=UseOzonePlatform"
