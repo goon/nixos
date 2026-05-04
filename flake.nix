@@ -19,7 +19,7 @@
     affinity-nix.inputs.nixpkgs.follows = "nixpkgs";
 
     # Declarative flatpaks for managing Flatpak applications
-    flatpaks.url = "github:in-a-dil-emma/declarative-flatpak/latest";
+    nix-flatpak.url = "github:gmodena/nix-flatpak";
 
     # Home-Manager for user-level configuration
     home-manager.url = "github:nix-community/home-manager/master";
@@ -67,7 +67,7 @@
               home-manager.extraSpecialArgs = { inherit inputs; };
             }
             inputs.home-manager.nixosModules.default
-            inputs.flatpaks.nixosModules.default
+            inputs.nix-flatpak.nixosModules.nix-flatpak
             inputs.nvf.nixosModules.default
           ]
           ++ (import ./modules/lib/recursive.nix ./modules);
