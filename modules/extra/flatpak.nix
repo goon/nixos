@@ -11,10 +11,12 @@
       uninstallUnmanaged = true;
       update.onActivation = true;
 
-      remotes = [{
-        name = "flathub";
-        location = "https://dl.flathub.org/repo/flathub.flatpakrepo";
-      }];
+      remotes = [
+        {
+          name = "flathub";
+          location = "https://dl.flathub.org/repo/flathub.flatpakrepo";
+        }
+      ];
 
       packages = [
         "com.usebottles.bottles"
@@ -23,7 +25,14 @@
 
       overrides = {
         "com.usebottles.bottles" = {
-          Context.filesystems = [ "/mnt/games" ];
+          Context.filesystems = [
+            "/mnt/games"
+            "xdg-data/Steam:ro"
+          ];
+          Environment = {
+            WINE_SIMULATE_WRITECOPY = "1";
+            WINE_DISABLE_GPU_SANDBOX = "1";
+          };
         };
       };
     };
