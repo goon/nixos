@@ -14,6 +14,8 @@
     # ========== System Layer (NixOS) ==========
     services.devmon.enable = true;
     services.accounts-daemon.enable = true;
+    services.gnome.localsearch.enable = true;
+    services.gnome.tinysparql.enable = true;
 
     # ========== User Layer (Home Manager) ==========
     home-manager.users.${config._module.args.username} = {
@@ -23,9 +25,8 @@
         totem # Videos
         loupe # Image Viewer
         evince # Document Viewer
-        resources # System Monitor
         eyedropper # Color Picker
-        nautilus
+        nautilus # File Explorer
         sushi # File Preview
         ffmpegthumbnailer
       ];
