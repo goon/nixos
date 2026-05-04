@@ -4,6 +4,7 @@
   # System-wide Fonts
   fonts.packages = with pkgs; [
     google-fonts
+    corefonts
     material-symbols
     nerd-fonts.symbols-only
   ];
