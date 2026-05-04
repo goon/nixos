@@ -41,7 +41,7 @@ in
     userFonts = {
       sansSerif = mkOption {
         type = types.str;
-        default = "Parkinsans";
+        default = "Outfit";
         description = "global sans-serif font";
       };
       monospace = mkOption {
