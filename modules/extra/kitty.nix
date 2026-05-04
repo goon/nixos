@@ -18,7 +18,7 @@ in
           allow_remote_control = "yes";
           listen_on = "unix:/tmp/kitty";
           font_family = config.globals.userFonts.monospace;
-          font_size = "10.0";
+          font_size = "11.0";
           cursor_shape = "block";
           cursor_trail = 10;
           cursor_trail_start_threshold = 0;
