@@ -18,7 +18,7 @@ in
       home.packages = [
         pkgs.protonmail-desktop
         pkgs.proton-pass
-        pkgs.protonvpn-gui
+        pkgs.proton-vpn
       ];
     };
   };
