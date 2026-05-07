@@ -42,6 +42,10 @@
   fileSystems."/mnt/games" = {
     device = "/dev/disk/by-uuid/c6a3965a-5bf3-451c-934e-b391969c180a";
     fsType = "ext4";
+    options = [
+      "defaults"
+      "nofail"
+    ];
   };
 
   system.stateVersion = "25.11";
