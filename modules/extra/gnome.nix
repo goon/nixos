@@ -14,8 +14,8 @@
     # ========== System Layer (NixOS) ==========
     services.devmon.enable = true;
     services.accounts-daemon.enable = true;
-    services.gnome.localsearch.enable = true;
     services.gnome.tinysparql.enable = true;
+    services.gnome.localsearch.enable = true;
 
     # ========== User Layer (Home Manager) ==========
     home-manager.users.${config._module.args.username} = {
@@ -26,9 +26,11 @@
         loupe # Image Viewer
         evince # Document Viewer
         eyedropper # Color Picker
+        decibels # Audio Player
         nautilus # File Explorer
         sushi # File Preview
         ffmpegthumbnailer
+        gnome-disk-utility
       ];
 
       dconf.settings = {
