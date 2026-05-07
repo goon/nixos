@@ -49,6 +49,7 @@ in
 
         # --- System Utilities
         cat = "bat";
+        df = "duf";
         grep = "grep --color=auto";
         partitions = "lsblk -f";
         rm = "rm -i";
@@ -67,8 +68,9 @@ in
       ];
 
       # Packages
-      home.packages = [
+      home.packages = with pkgs; [
         cheat-cmd
+        duf
       ];
 
       # zoxide (Smart cd)
