@@ -20,7 +20,7 @@
   # module.xdg.enable = false;
 
   # [4] Extra (Optional Features - Enabled by default)
-  # module.affinity.enable = false;
+  # module.creative.enable = false;
   # module.dev.enable = false;
   # module.fastfetch.enable = false;
   # module.firefox.enable = false;
