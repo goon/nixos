@@ -56,7 +56,6 @@
         let
           inherit (nixpkgs.lib) nixosSystem;
 
-          # Base modules shared by all hosts
           baseModules = [
             { nixpkgs.config.allowUnfree = true; }
 

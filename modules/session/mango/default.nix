@@ -11,7 +11,6 @@
   ];
 
   config = lib.mkIf (config.module.desktop.windowmanager == "mango") {
-    # Use the official NixOS module for system-level setup
     programs.mango.enable = true;
 
     home-manager.users.${config._module.args.username} =
@@ -34,10 +33,8 @@
           swappy
         ];
 
-        # Enable the HM module
         wayland.windowManager.mango.enable = true;
 
-        # Maintain the repo's pattern of out-of-store symlinks for session configs
         xdg.configFile."mango".source =
           config.lib.file.mkOutOfStoreSymlink "${osConfig.globals.repoPath}/modules/session/mango";
 
