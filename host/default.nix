@@ -11,7 +11,7 @@
   module.hardware.radeon.enable = true;
 
   # [2] Session (The Switch)
-  module.desktop.windowmanager = "mangowm";
+  module.desktop.windowmanager = "hyprland";
 
   # [3] Commons (Shared Plumbing - Enabled by default)
   # module.gtk.enable = false;
