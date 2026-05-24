@@ -19,6 +19,8 @@
         curl
         unzip
         btop
+        jq
+        nixd
       ];
     };
   };
