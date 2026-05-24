@@ -52,7 +52,7 @@ hl.config({
             size = 4,
             passes = 4,
             new_optimizations = true,
-            xray = true,
+            xray = false,
         },
         shadow = {
             enabled = true,
@@ -159,7 +159,6 @@ hl.bind(mainMod .. " + " .. "Up", hl.dsp.focus({ direction = "u" }))
 hl.bind(mainMod .. " + " .. "Down", hl.dsp.focus({ direction = "d" }))
 hl.bind(mainMod .. " + " .. "Tab", hl.dsp.focus({ workspace = "previous" }))
 hl.bind(mainMod .. " + " .. "W", hl.dsp.group.toggle())
-hl.bind(mainMod .. " + " .. "G", hl.dsp.group.toggle())
 
 hl.bind(mainMod .. " + " .. "CTRL" .. " + " .. "H", hl.dsp.window.swap({ direction = "l" }))
 hl.bind(mainMod .. " + " .. "CTRL" .. " + " .. "L", hl.dsp.window.swap({ direction = "r" }))

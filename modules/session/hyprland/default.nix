@@ -21,7 +21,7 @@
         home.packages = with pkgs; [
           hyprpolkitagent
           grim
-          slurp
+          slurp 
         ];
       };
 
@@ -35,6 +35,7 @@
         pkgs.xdg-desktop-portal-gtk
         pkgs.xdg-desktop-portal-hyprland
       ];
+      config.hyprland.default = [ "hyprland" "gtk" ];
     };
   };
 }
