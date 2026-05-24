@@ -6,6 +6,15 @@
 }:
 
 {
+  options.module.desktop.windowmanager = lib.mkOption {
+    type = lib.types.enum [
+      "hyprland"
+      "mango"
+    ];
+    default = "hyprland";
+    description = "The window manager to use.";
+  };
+
   options.module.wayland.enable =
     lib.mkEnableOption "Wayland Utilities (cliphist, wl-clipboard, etc.)"
     // {
