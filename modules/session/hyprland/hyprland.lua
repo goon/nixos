@@ -65,6 +65,12 @@ hl.config({
 
 -- Animations
 
+hl.curve("spring_menu", { type = "spring", mass = 1, stiffness = 80, dampening = 14 })
+hl.curve("spring_window", { type = "spring", mass = 1, stiffness = 30, dampening = 8 })
+hl.curve("spring_open", { type = "spring", mass = 1, stiffness = 30, dampening = 8 })
+hl.curve("spring_workspace", { type = "spring", mass = 1.2, stiffness = 30, dampening = 10 })
+hl.curve("spring_special", { type = "spring", mass = 1, stiffness = 30, dampening = 8 })
+
 hl.config({
     animations = {
         enabled = true,
@@ -102,8 +108,9 @@ hl.bind(mainMod .. " + " .. "P", hl.dsp.exec_cmd("qs ipc call power toggle"))
 
 -- Screenshot
 
-hl.bind("Print", hl.dsp.exec_cmd("grim -g \"$(slurp)\" - | wl-copy"))
-hl.bind("CTRL" .. " + " .. "Print", hl.dsp.exec_cmd("grim - | wl-copy"))
+hl.bind("Print", hl.dsp.exec_cmd("mkdir -p ~/Pictures/Screenshots && grim -g \"$(slurp)\" - | tee ~/Pictures/Screenshots/$(date +%Y%m%d_%H%M%S).png | wl-copy"))
+hl.bind("SHIFT" .. " + " .. "Print", hl.dsp.exec_cmd("mkdir -p ~/Pictures/Screenshots && grim -g \"$(hyprctl clients -j | jq -r '.[] | select(.workspace.id == '$(hyprctl activeworkspace -j | jq '.id')') | \"\\(.at[0]),\\(.at[1]) \\(.size[0])x\\(.size[1])\"' | slurp)\" - | tee ~/Pictures/Screenshots/$(date +%Y%m%d_%H%M%S).png | wl-copy"))
+hl.bind("CTRL" .. " + " .. "Print", hl.dsp.exec_cmd("grim -g \"$(slurp)\" - | swappy -f -"))
 
 -- Power
 

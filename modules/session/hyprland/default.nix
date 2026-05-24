@@ -22,7 +22,22 @@
           hyprpolkitagent
           grim
           slurp
+          swappy
+          jq
         ];
+
+        xdg.configFile."swappy/config".text = ''
+          [Default]
+          save_dir=${osConfig.globals.paths.home}/Pictures/Screenshots
+          save_filename_format=%Y%m%d_%H%M%S.png
+          show_panel=false
+          line_size=5
+          text_size=20
+          text_font=sans-serif
+          paint_mode=brush
+          early_exit=true
+          fill_shape=false
+        '';
       };
 
     xdg.portal = {
