@@ -16,13 +16,11 @@
       ];
       auto-optimise-store = true;
       warn-dirty = false;
-      # Binary Caches ( Niri & Affinity )
+      # Binary Caches ( Affinity )
       substituters = [
-        "https://niri.cachix.org"
         "https://cache.garnix.io"
       ];
       trusted-public-keys = [
-        "niri.cachix.org-1:Wv0OmO7PsuocRKzfDoJ3mulSl7Z6oezYhGhR+3W2964="
         "cache.garnix.io:CTFPyKSLcx5RMJKfLo5EEPUObbA78b0YQ2DTCJXqr9g="
       ];
 
