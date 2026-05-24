@@ -88,6 +88,8 @@ hl.bind(mainMod .. " + SPACE", hl.dsp.exec_cmd("qs ipc call launcher toggle"))
 hl.bind(mainMod .. " + G", hl.dsp.exec_cmd("qs ipc call wallpaper toggle"))
 hl.bind(mainMod .. " + S", hl.dsp.exec_cmd("qs ipc call settings toggle"))
 hl.bind(mainMod .. " + P", hl.dsp.exec_cmd("qs ipc call power toggle"))
+hl.bind(mainMod .. " + ALT + C", hl.dsp.exec_cmd("qs ipc call clipboard toggle"))
+hl.bind(mainMod .. " + Y", hl.dsp.exec_cmd("brave --enable-features=UseOzonePlatform --ozone-platform=wayland --enable-wayland-ime --app=https://www.youtube.com"))
 
 -- Screenshot
 
