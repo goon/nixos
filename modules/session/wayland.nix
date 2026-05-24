@@ -47,21 +47,17 @@
           libnotify
           grim
           slurp
-          swappy
+          satty
         ];
         services.cliphist.enable = true;
 
-        xdg.configFile."swappy/config".text = ''
-          [Default]
-          save_dir=${config.globals.paths.home}/Pictures/Screenshots
-          save_filename_format=swappy-%Y%m%d-%H%M%S.png
-          show_panel=false
-          line_size=5
-          text_size=20
-          text_font=sans-serif
-          paint_mode=brush
-          early_exit=true
-          fill_shape=false
+        xdg.configFile."satty/config.toml".text = ''
+          [general]
+          output-filename = "${config.globals.paths.home}/Pictures/Screenshots/%Y%m%d_%H%M%S.png"
+          early-exit = true
+          initial-tool = "brush"
+          copy-command = "wl-copy"
+          default-hide-toolbars = false
         '';
       }
     ];
