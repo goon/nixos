@@ -6,22 +6,23 @@
 }:
 
 {
-  options.module.utils.enable = lib.mkEnableOption "Core CLI Utilities (fd, ripgrep, wget, etc.)" // {
+  options.module.utils.enable = lib.mkEnableOption "CLI Utilities" // {
     default = true;
   };
 
   config = lib.mkIf config.module.utils.enable {
-    home-manager.users.${config._module.args.username} = {
-      home.packages = with pkgs; [
-        fd
-        ripgrep
-        wget
-        curl
-        unzip
-        btop
-        jq
-        nixd
-      ];
-    };
+    home-manager.sharedModules = [
+      {
+        home.packages = with pkgs; [
+          fd
+          ripgrep
+          wget
+          curl
+          unzip
+          btop
+          jq
+        ];
+      }
+    ];
   };
 }

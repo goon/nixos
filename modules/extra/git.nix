@@ -1,4 +1,8 @@
-{ config, lib, ... }:
+{
+  config,
+  lib,
+  ...
+}:
 
 {
   options.module.git.enable = lib.mkEnableOption "Git" // {
@@ -6,33 +10,35 @@
   };
 
   config = lib.mkIf config.module.git.enable {
-    home-manager.users.${config._module.args.username} = {
-      programs = {
-        git = {
-          enable = true;
-          ignores = [ "AGENTS.md" ];
-          settings = {
-            user = {
-              name = "goon";
-              email = "hayhurst@protonmail.com";
+    home-manager.sharedModules = [
+      {
+        programs = {
+          git = {
+            enable = true;
+            ignores = [ "AGENTS.md" ];
+            settings = {
+              user = {
+                name = "goon";
+                email = "hayhurst@protonmail.com";
+              };
+              init.defaultBranch = "main";
+              push.autoSetupRemote = true;
+              pull.rebase = true;
+              fetch.prune = true;
             };
-            init.defaultBranch = "main";
-            push.autoSetupRemote = true;
-            pull.rebase = true;
-            fetch.prune = true;
           };
+          delta.enable = true;
+          lazygit.enable = true;
         };
-        delta.enable = true;
-        lazygit.enable = true;
-      };
 
-      home.shellAliases = {
-        gs = "git status";
-        ga = "git add";
-        gc = "git commit -m";
-        gp = "git push";
-        lg = "lazygit";
-      };
-    };
+        home.shellAliases = {
+          gs = "git status";
+          ga = "git add";
+          gc = "git commit -m";
+          gp = "git push";
+          lg = "lazygit";
+        };
+      }
+    ];
   };
 }

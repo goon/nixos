@@ -57,15 +57,12 @@
           inherit (nixpkgs.lib) nixosSystem;
 
           baseModules = [
-            { nixpkgs.config.allowUnfree = true; }
-
             {
               _module.args = { inherit inputs; };
               home-manager.extraSpecialArgs = { inherit inputs; };
             }
             inputs.home-manager.nixosModules.default
             inputs.nix-flatpak.nixosModules.nix-flatpak
-            inputs.nvf.nixosModules.default
           ]
           ++ (import ./modules/lib/recursive.nix ./modules);
         in

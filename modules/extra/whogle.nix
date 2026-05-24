@@ -11,11 +11,13 @@
   };
 
   config = lib.mkIf config.module.whogle.enable {
-    home-manager.users.${config._module.args.username} = {
-      home.packages = with pkgs; [
-        antigravity
-        google-chrome
-      ];
-    };
+    home-manager.sharedModules = [
+      {
+        home.packages = with pkgs; [
+          antigravity
+          google-chrome
+        ];
+      }
+    ];
   };
 }

@@ -14,18 +14,20 @@
   config = lib.mkIf config.module.quickshell.enable {
     environment.sessionVariables.QS_ICON_THEME = "Papirus";
 
-    home-manager.users.${config._module.args.username} =
-      { config, osConfig, ... }:
-      {
-        xdg.configFile."quickshell".source =
-          config.lib.file.mkOutOfStoreSymlink "${osConfig.globals.repoPath}/modules/session/quickshell";
+    home-manager.sharedModules = [
+      (
+        { config, osConfig, ... }:
+        {
+          xdg.configFile."quickshell".source =
+            config.lib.file.mkOutOfStoreSymlink "${osConfig.globals.repoPath}/modules/session/quickshell";
 
-        home.packages = with pkgs; [
-          inputs.quickshell.packages.${pkgs.stdenv.system}.quickshell
-          qt6Packages.qt6ct
-          gowall # Wallpaper Themer
-        ];
-
-      };
+          home.packages = with pkgs; [
+            inputs.quickshell.packages.${pkgs.stdenv.hostPlatform.system}.quickshell
+            qt6Packages.qt6ct
+            gowall # Wallpaper Themer
+          ];
+        }
+      )
+    ];
   };
 }

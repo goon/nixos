@@ -1,5 +1,4 @@
 {
-  username,
   pkgs,
   config,
   ...
@@ -59,17 +58,19 @@
     };
   };
 
-  home-manager.users.${username} = {
-    home.packages = with pkgs; [
-      statix
-      deadnix
-    ];
-    home.shellAliases = {
-      nhs = "nh os switch";
-      nht = "nh os test";
-      nhc = "nh clean all --keep 8";
-      nhu = "nh os switch -u";
-      nhb = "nh os boot";
-    };
-  };
+  home-manager.sharedModules = [
+    {
+      home.packages = with pkgs; [
+        statix
+        deadnix
+      ];
+      home.shellAliases = {
+        nhs = "nh os switch";
+        nht = "nh os test";
+        nhc = "nh clean all --keep 8";
+        nhu = "nh os switch -u";
+        nhb = "nh os boot";
+      };
+    }
+  ];
 }

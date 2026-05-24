@@ -2,7 +2,6 @@
   config,
   lib,
   pkgs,
-  username,
   ...
 }:
 
@@ -29,54 +28,53 @@ in
     # User-facing features
 
     # ========== User Layer (Home Manager) ==========
-    home-manager.users.${username} = {
-      imports = [ ];
+    home-manager.sharedModules = [
+      {
+        dconf.enable = true;
 
-      dconf.enable = true;
+        home.packages = with pkgs; [
+          # Theming
+          adw-gtk3
+          papirus-icon-theme
+          bibata-cursors
+          glib
+          gtk3
+        ];
 
-      home.packages = with pkgs; [
-        # Theming
-        adw-gtk3
-        papirus-icon-theme
-        bibata-cursors
-        glib
-        gtk3
-      ];
-
-      home.pointerCursor = {
-        name = "Bibata-Modern-Ice";
-        package = pkgs.bibata-cursors;
-        size = 28;
-        gtk.enable = true;
-        x11.enable = true;
-      };
-
-      # Interface Theming
-      dconf.settings = {
-        "org/gnome/desktop/interface" = {
-          color-scheme = "prefer-dark";
-          font-name = "${config.globals.userFonts.sansSerif} 11";
-          document-font-name = "${config.globals.userFonts.sansSerif} 11";
-          monospace-font-name = "${config.globals.userFonts.monospace} 11";
-          gtk-theme = "adw-gtk3";
-          icon-theme = "Papirus";
+        home.pointerCursor = {
+          name = "Bibata-Modern-Ice";
+          package = pkgs.bibata-cursors;
+          size = 28;
+          gtk.enable = true;
+          x11.enable = true;
         };
-      };
 
-      # GTK Bookmarks
-      xdg.configFile."gtk-3.0/bookmarks" = {
-        force = true;
-        text = ''
-          file://${config.globals.repoPath} Nix
-          file://${config.globals.paths.home}/Downloads Downloads
-          file://${config.globals.paths.home}/Documents Documents
-          file://${config.globals.paths.home}/Pictures Pictures
-          file://${config.globals.paths.home}/Music Music
-          file://${config.globals.paths.home}/Videos Videos
-          file://${config.globals.paths.config} Config
-        '';
-      };
+        # Interface Theming
+        dconf.settings = {
+          "org/gnome/desktop/interface" = {
+            color-scheme = "prefer-dark";
+            font-name = "${config.globals.userFonts.sansSerif} 11";
+            document-font-name = "${config.globals.userFonts.sansSerif} 11";
+            monospace-font-name = "${config.globals.userFonts.monospace} 11";
+            gtk-theme = "adw-gtk3";
+            icon-theme = "Papirus";
+          };
+        };
 
-    };
+        # GTK Bookmarks
+        xdg.configFile."gtk-3.0/bookmarks" = {
+          force = true;
+          text = ''
+            file://${config.globals.repoPath} Nix
+            file://${config.globals.paths.home}/Downloads Downloads
+            file://${config.globals.paths.home}/Documents Documents
+            file://${config.globals.paths.home}/Pictures Pictures
+            file://${config.globals.paths.home}/Music Music
+            file://${config.globals.paths.home}/Videos Videos
+            file://${config.globals.paths.config} Config
+          '';
+        };
+      }
+    ];
   };
 }

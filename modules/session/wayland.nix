@@ -39,29 +39,31 @@
       QT_FONT_DPI = "96";
     };
 
-    home-manager.users.${config._module.args.username} = {
-      home.packages = with pkgs; [
-        wl-clipboard
-        playerctl
-        libnotify
-        grim
-        slurp
-        swappy
-      ];
-      services.cliphist.enable = true;
+    home-manager.sharedModules = [
+      {
+        home.packages = with pkgs; [
+          wl-clipboard
+          playerctl
+          libnotify
+          grim
+          slurp
+          swappy
+        ];
+        services.cliphist.enable = true;
 
-      xdg.configFile."swappy/config".text = ''
-        [Default]
-        save_dir=${config.globals.paths.home}/Pictures/Screenshots
-        save_filename_format=swappy-%Y%m%d-%H%M%S.png
-        show_panel=false
-        line_size=5
-        text_size=20
-        text_font=sans-serif
-        paint_mode=brush
-        early_exit=true
-        fill_shape=false
-      '';
-    };
+        xdg.configFile."swappy/config".text = ''
+          [Default]
+          save_dir=${config.globals.paths.home}/Pictures/Screenshots
+          save_filename_format=swappy-%Y%m%d-%H%M%S.png
+          show_panel=false
+          line_size=5
+          text_size=20
+          text_font=sans-serif
+          paint_mode=brush
+          early_exit=true
+          fill_shape=false
+        '';
+      }
+    ];
   };
 }

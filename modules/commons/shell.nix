@@ -31,86 +31,90 @@ in
     };
 
     # ========== Home Manager Layer ==========
-    home-manager.users.${username} = {
-      programs = {
-        # CLI tools integration
-        eza.enable = true;
-        bat.enable = true;
-        fzf.enable = true;
-      };
+    home-manager.sharedModules = [
+      {
+        programs = {
+          # CLI tools integration
+          eza.enable = true;
+          bat.enable = true;
+          fzf.enable = true;
+        };
 
-      # Universal shell aliases
-      home.shellAliases = {
-        # --- Navigation
-        ".." = "cd ..";
-        "..." = "cd ../..";
-        cd = "z";
-        ls = "eza --icons --git";
+        # Universal shell aliases
+        home.shellAliases = {
+          # --- Navigation
+          ".." = "cd ..";
+          "..." = "cd ../..";
+          ls = "eza --icons --git";
 
-        # --- System Utilities
-        cat = "bat";
-        df = "duf";
-        grep = "grep --color=auto";
-        partitions = "lsblk -f";
-        rm = "rm -i";
+          # --- System Utilities
+          cat = "bat";
+          df = "duf";
+          grep = "grep --color=auto";
+          partitions = "lsblk -f";
+          rm = "rm -i";
 
-        # --- Search & Filtering
-        f = "fzf";
-      };
+          # --- Search & Filtering
+          f = "fzf";
+        };
 
-      # Session variables
-      home.sessionVariables = {
-        BROWSER = "brave";
-      };
+        # Session variables
+        home.sessionVariables = {
+          BROWSER = "brave";
+        };
 
-      home.sessionPath = [
-        "$HOME/.local/bin"
-      ];
-
-      # Packages
-      home.packages = with pkgs; [
-        cheat-cmd
-        duf
-      ];
-
-      # zoxide (Smart cd)
-      programs.zoxide = {
-        enable = true;
-        enableZshIntegration = true;
-        enableBashIntegration = true;
-      };
-
-      # ----- Bash
-      programs.bash = {
-        enable = true;
-        enableCompletion = true;
-        historyControl = [
-          "ignoreboth"
-          "erasedups"
+        home.sessionPath = [
+          "$HOME/.local/bin"
         ];
-        historyFileSize = 20000;
-        shellOptions = [
-          "histappend"
-          "checkwinsize"
+
+        # Packages
+        home.packages = with pkgs; [
+          cheat-cmd
+          duf
         ];
-        initExtra = ''
-          # ----- Exports
 
-        '';
-      };
+        # zoxide (Smart cd)
+        programs.zoxide = {
+          enable = true;
+          enableZshIntegration = true;
+          enableBashIntegration = true;
+          options = [
+            "--cmd cd"
+          ];
+        };
 
-      # ----- Zsh
-      programs.zsh = {
-        enable = true;
-        dotDir = "${config.globals.paths.config}/zsh";
-        enableCompletion = true;
-        autosuggestion.enable = true;
-        syntaxHighlighting.enable = true;
-        initContent = ''
-          # ----- Exports
+        # ----- Bash
+        programs.bash = {
+          enable = true;
+          enableCompletion = true;
+          historyControl = [
+            "ignoreboth"
+            "erasedups"
+          ];
+          historyFileSize = 20000;
+          shellOptions = [
+            "histappend"
+            "checkwinsize"
+          ];
+          initExtra = ''
+            # ----- Exports
 
-        '';
-      };
-    };
+          '';
+        };
+
+        # ----- Zsh
+        programs.zsh = {
+          enable = true;
+          dotDir = "${config.globals.paths.config}/zsh";
+          enableCompletion = true;
+          autosuggestion.enable = true;
+          syntaxHighlighting.enable = true;
+          initContent = ''
+            # ----- Exports
+
+          '';
+        };
+      }
+    ];
   };
 }

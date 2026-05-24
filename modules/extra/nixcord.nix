@@ -11,25 +11,26 @@
   };
 
   config = lib.mkIf config.module.nixcord.enable {
-    home-manager.users.${config._module.args.username} = {
-      imports = [ inputs.nixcord.homeModules.nixcord ];
+    home-manager.sharedModules = [
+      {
+        imports = [ inputs.nixcord.homeModules.nixcord ];
 
-      programs.nixcord = {
-        enable = true;
-        discord.enable = false;
-        vesktop.enable = true;
-        config = {
-          useQuickCss = true;
-          transparent = true;
-          themeLinks = [ ];
-          enabledThemes = [ "qsTheme.css" ];
-          plugins = {
-            alwaysAnimate.enable = true;
-            imageZoom.enable = true;
+        programs.nixcord = {
+          enable = true;
+          discord.enable = false;
+          vesktop.enable = true;
+          config = {
+            useQuickCss = true;
+            transparent = true;
+            themeLinks = [ ];
+            enabledThemes = [ "qsTheme.css" ];
+            plugins = {
+              alwaysAnimate.enable = true;
+              imageZoom.enable = true;
+            };
           };
         };
-      };
-
-    };
+      }
+    ];
   };
 }

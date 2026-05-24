@@ -14,12 +14,14 @@ in
   };
 
   config = lib.mkIf cfg.enable {
-    home-manager.users.${config._module.args.username} = {
-      home.packages = [
-        pkgs.protonmail-desktop
-        pkgs.proton-pass
-        pkgs.proton-vpn
-      ];
-    };
+    home-manager.sharedModules = [
+      {
+        home.packages = [
+          pkgs.protonmail-desktop
+          pkgs.proton-pass
+          pkgs.proton-vpn
+        ];
+      }
+    ];
   };
 }

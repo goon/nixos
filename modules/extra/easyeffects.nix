@@ -10,8 +10,10 @@
   };
 
   config = lib.mkIf config.module.easyeffects.enable {
-    home-manager.users.${config._module.args.username} = {
-      services.easyeffects.enable = true;
-    };
+    home-manager.sharedModules = [
+      {
+        services.easyeffects.enable = true;
+      }
+    ];
   };
 }

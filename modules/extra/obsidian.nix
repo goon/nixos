@@ -11,8 +11,10 @@
   };
 
   config = lib.mkIf config.module.obsidian.enable {
-    home-manager.users.${config._module.args.username} = {
-      home.packages = [ pkgs.obsidian ];
-    };
+    home-manager.sharedModules = [
+      {
+        home.packages = [ pkgs.obsidian ];
+      }
+    ];
   };
 }

@@ -12,16 +12,19 @@
       xwayland.enable = true;
     };
 
-    home-manager.users.${config._module.args.username} =
-      { config, osConfig, ... }:
-      {
-        xdg.configFile."hypr".source =
-          config.lib.file.mkOutOfStoreSymlink "${osConfig.globals.repoPath}/modules/session/hyprland";
+    home-manager.sharedModules = [
+      (
+        { config, osConfig, ... }:
+        {
+          xdg.configFile."hypr".source =
+            config.lib.file.mkOutOfStoreSymlink "${osConfig.globals.repoPath}/modules/session/hyprland";
 
-        home.packages = with pkgs; [
-          hyprpolkitagent
-        ];
-      };
+          home.packages = with pkgs; [
+            hyprpolkitagent
+          ];
+        }
+      )
+    ];
 
     xdg.portal = {
       enable = true;

@@ -6,7 +6,6 @@
     # File Manager Services
     gvfs.enable = true;
     tumbler.enable = true;
-    gnome.localsearch.enable = true;
 
     # SSD Trim
     fstrim.enable = true;

@@ -11,12 +11,14 @@
   };
 
   config = lib.mkIf config.module.dev.enable {
-    home-manager.users.${config._module.args.username} = {
-      home.packages = with pkgs; [
-        nodejs
-        python3
-        go
-      ];
-    };
+    home-manager.sharedModules = [
+      {
+        home.packages = with pkgs; [
+          nodejs
+          python3
+          go
+        ];
+      }
+    ];
   };
 }

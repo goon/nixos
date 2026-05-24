@@ -2,6 +2,7 @@
   config,
   lib,
   username,
+  repoPath,
   ...
 }:
 
@@ -16,7 +17,7 @@ in
   config = {
     _module.args = {
       username = "michael";
-      repoName = ".nixos";
+      repoPath = "/home/${username}/.nixos";
     };
 
     home-manager = {
@@ -46,14 +47,14 @@ in
     paths = {
       home = mkOption {
         type = types.str;
-        default = "/home/${config._module.args.username}";
+        default = "/home/${username}";
         description = "Absolute path to the user's home directory";
       };
     };
 
     repoPath = mkOption {
       type = types.str;
-      default = "${config.globals.paths.home}/${config._module.args.repoName}";
+      default = repoPath;
       description = "Absolute path to the flake repository root";
     };
 

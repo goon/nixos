@@ -2,7 +2,6 @@
   config,
   lib,
   pkgs,
-  username,
   ...
 }:
 
@@ -38,10 +37,12 @@ in
   };
 
   config = mkIf config.module.scripts.enable {
-    home-manager.users.${username} = {
-      home.packages = [
-        local-scripts
-      ];
-    };
+    home-manager.sharedModules = [
+      {
+        home.packages = [
+          local-scripts
+        ];
+      }
+    ];
   };
 }
