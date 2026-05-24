@@ -71,7 +71,7 @@ hl.config({
     },
 })
 
--- Dwindle Layout
+-- Layouts
 
 hl.config({
     dwindle = {
