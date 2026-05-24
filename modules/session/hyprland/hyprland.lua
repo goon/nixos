@@ -216,6 +216,12 @@ hl.window_rule({
     center = true,
 })
 
+hl.layer_rule({
+    match = { namespace = "quickshell:.*" },
+    blur = true,
+    ignore_alpha = 0,
+})
+
 -- Autostart
 hl.on("hyprland.start", function()
     hl.exec_cmd("quickshell")
