@@ -3,7 +3,7 @@
   options.module.desktop.windowmanager = lib.mkOption {
     type = lib.types.enum [
       "hyprland"
-      "mangowm"
+      "mango"
     ];
     default = "hyprland";
     description = "The window manager to use.";
