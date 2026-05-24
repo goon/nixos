@@ -345,11 +345,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1779507042,
-        "narHash": "sha256-7wOwi8B6D0BYsieZCnHZZj2sNUzgJhLoIVSfkwB7lxQ=",
+        "lastModified": 1779580960,
+        "narHash": "sha256-/EG2rRahtxdoKKzGPGqaymVB96kBBYhygatEAbsoqaM=",
         "owner": "nix-community",
         "repo": "home-manager",
-        "rev": "509ed3c603349a9d43de9e2ae6613baea6bd5b34",
+        "rev": "6e92bf094d45bc33d754e2b0f75d9ca1827cc363",
         "type": "github"
       },
       "original": {
@@ -368,11 +368,11 @@
         "scenefx": "scenefx"
       },
       "locked": {
-        "lastModified": 1779521441,
-        "narHash": "sha256-ACD9fvRtg+VIU2akjiPj2snD4trDZ9UrnHXJJHPZhrk=",
+        "lastModified": 1779580050,
+        "narHash": "sha256-qOJ7JMXCvfdxtppUbIVdixhoMxtbGJ0QcokLEoXVbwc=",
         "owner": "mangowm",
         "repo": "mango",
-        "rev": "2fefb42a6cd6ab00af2b1bcf70b24f01c67f1fbe",
+        "rev": "b868ff812b09ebfd8f5f41cd5e7ff21914bd3dc3",
         "type": "github"
       },
       "original": {
@@ -415,27 +415,6 @@
         "owner": "feel-co",
         "ref": "refs/tags/v2.8.0",
         "repo": "ndg",
-        "type": "github"
-      }
-    },
-    "niri": {
-      "inputs": {
-        "nixpkgs": [
-          "nixpkgs"
-        ],
-        "rust-overlay": "rust-overlay"
-      },
-      "locked": {
-        "lastModified": 1779374863,
-        "narHash": "sha256-qKWgJ2MUODpg+b8tOwWMdMKREvs8TdGBz63SHaQZCeA=",
-        "owner": "niri-wm",
-        "repo": "niri",
-        "rev": "4294948cf1c70c50e938383c2c865d7ca455ac7e",
-        "type": "github"
-      },
-      "original": {
-        "owner": "niri-wm",
-        "repo": "niri",
         "type": "github"
       }
     },
@@ -721,7 +700,6 @@
         "affinity-nix": "affinity-nix",
         "home-manager": "home-manager",
         "mangowm": "mangowm",
-        "niri": "niri",
         "nix-flatpak": "nix-flatpak",
         "nix-gaming": "nix-gaming",
         "nixcord": "nixcord",
@@ -746,27 +724,6 @@
         "owner": "rust-lang",
         "ref": "nightly",
         "repo": "rust-analyzer",
-        "type": "github"
-      }
-    },
-    "rust-overlay": {
-      "inputs": {
-        "nixpkgs": [
-          "niri",
-          "nixpkgs"
-        ]
-      },
-      "locked": {
-        "lastModified": 1757989933,
-        "narHash": "sha256-9cpKYWWPCFhgwQTww8S94rTXgg8Q8ydFv9fXM6I8xQM=",
-        "owner": "oxalica",
-        "repo": "rust-overlay",
-        "rev": "8249aa3442fb9b45e615a35f39eca2fe5510d7c3",
-        "type": "github"
-      },
-      "original": {
-        "owner": "oxalica",
-        "repo": "rust-overlay",
         "type": "github"
       }
     },

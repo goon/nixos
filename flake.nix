@@ -59,7 +59,7 @@
           # Base modules shared by all hosts
           baseModules = [
             { nixpkgs.config.allowUnfree = true; }
-            { nixpkgs.overlays = import ./overlays { inherit inputs; }; }
+
             {
               _module.args = { inherit inputs; };
               home-manager.extraSpecialArgs = { inherit inputs; };
