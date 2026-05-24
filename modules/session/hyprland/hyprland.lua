@@ -14,7 +14,7 @@ hl.monitor({
 hl.env("XDG_CURRENT_DESKTOP", "Hyprland")
 hl.env("XDG_SESSION_DESKTOP", "Hyprland")
 
--- Input
+-- Configuration
 
 hl.config({
     input = {
@@ -27,11 +27,6 @@ hl.config({
         force_no_accel = false,
         sensitivity = 0.0,
     },
-})
-
--- General Layout
-
-hl.config({
     general = {
         gaps_in = 5,
         gaps_out = 10,
@@ -40,13 +35,9 @@ hl.config({
         ["col.inactive_border"] = "rgba(252535ff)",
         layout = "scrolling",
     },
-})
-
--- Decoration
-
-hl.config({
     decoration = {
-        rounding = 10,
+        rounding = 12,
+        rounding_power = 8,
         blur = {
             enabled = true,
             size = 4,
@@ -58,28 +49,12 @@ hl.config({
             enabled = true,
             range = 4,
             render_power = 3,
-            color = "rgba(1F1F28ff)",
+            color = 0xEE121212,
         },
     },
-})
-
--- Animations
-
-hl.curve("spring_menu", { type = "spring", mass = 1, stiffness = 80, dampening = 14 })
-hl.curve("spring_window", { type = "spring", mass = 1, stiffness = 30, dampening = 8 })
-hl.curve("spring_open", { type = "spring", mass = 1, stiffness = 30, dampening = 8 })
-hl.curve("spring_workspace", { type = "spring", mass = 1.2, stiffness = 30, dampening = 10 })
-hl.curve("spring_special", { type = "spring", mass = 1, stiffness = 30, dampening = 8 })
-
-hl.config({
     animations = {
         enabled = true,
     },
-})
-
--- Layouts
-
-hl.config({
     dwindle = {
         preserve_split = true,
     },
@@ -89,34 +64,42 @@ hl.config({
     },
 })
 
+-- Animation Curves
+
+hl.curve("spring_menu", { type = "spring", mass = 1, stiffness = 80, dampening = 14 })
+hl.curve("spring_window", { type = "spring", mass = 1, stiffness = 30, dampening = 8 })
+hl.curve("spring_open", { type = "spring", mass = 1, stiffness = 30, dampening = 8 })
+hl.curve("spring_workspace", { type = "spring", mass = 1.2, stiffness = 30, dampening = 10 })
+hl.curve("spring_special", { type = "spring", mass = 1, stiffness = 30, dampening = 8 })
+
 -- Binds
 
 local mainMod = "SUPER"
 
 -- Applications
 
-hl.bind(mainMod .. " + " .. "RETURN", hl.dsp.exec_cmd("kitty"))
-hl.bind(mainMod .. " + " .. "E", hl.dsp.exec_cmd("kitty -e yazi"))
-hl.bind(mainMod .. " + " .. "N", hl.dsp.exec_cmd("kitty -e nvim"))
-hl.bind(mainMod .. " + " .. "B", hl.dsp.exec_cmd("brave"))
-hl.bind(mainMod .. " + " .. "M", hl.dsp.exec_cmd("obsidian"))
-hl.bind(mainMod .. " + " .. "T", hl.dsp.exec_cmd("kitty --class float"))
-hl.bind(mainMod .. " + " .. "SPACE", hl.dsp.exec_cmd("qs ipc call launcher toggle"))
-hl.bind(mainMod .. " + " .. "G", hl.dsp.exec_cmd("qs ipc call wallpaper toggle"))
-hl.bind(mainMod .. " + " .. "S", hl.dsp.exec_cmd("qs ipc call settings toggle"))
-hl.bind(mainMod .. " + " .. "P", hl.dsp.exec_cmd("qs ipc call power toggle"))
+hl.bind(mainMod .. " + RETURN", hl.dsp.exec_cmd("kitty"))
+hl.bind(mainMod .. " + E", hl.dsp.exec_cmd("kitty -e yazi"))
+hl.bind(mainMod .. " + N", hl.dsp.exec_cmd("kitty -e nvim"))
+hl.bind(mainMod .. " + B", hl.dsp.exec_cmd("brave"))
+hl.bind(mainMod .. " + M", hl.dsp.exec_cmd("obsidian"))
+hl.bind(mainMod .. " + T", hl.dsp.exec_cmd("kitty --class float"))
+hl.bind(mainMod .. " + SPACE", hl.dsp.exec_cmd("qs ipc call launcher toggle"))
+hl.bind(mainMod .. " + G", hl.dsp.exec_cmd("qs ipc call wallpaper toggle"))
+hl.bind(mainMod .. " + S", hl.dsp.exec_cmd("qs ipc call settings toggle"))
+hl.bind(mainMod .. " + P", hl.dsp.exec_cmd("qs ipc call power toggle"))
 
 -- Screenshot
 
 hl.bind("Print", hl.dsp.exec_cmd("mkdir -p ~/Pictures/Screenshots && grim -g \"$(slurp)\" - | tee ~/Pictures/Screenshots/$(date +%Y%m%d_%H%M%S).png | wl-copy"))
-hl.bind("SHIFT" .. " + " .. "Print", hl.dsp.exec_cmd("mkdir -p ~/Pictures/Screenshots && grim -g \"$(hyprctl clients -j | jq -r '.[] | select(.workspace.id == '$(hyprctl activeworkspace -j | jq '.id')') | \"\\(.at[0]),\\(.at[1]) \\(.size[0])x\\(.size[1])\"' | slurp)\" - | tee ~/Pictures/Screenshots/$(date +%Y%m%d_%H%M%S).png | wl-copy"))
-hl.bind("CTRL" .. " + " .. "Print", hl.dsp.exec_cmd("grim -g \"$(slurp)\" - | swappy -f -"))
+hl.bind("SHIFT + Print", hl.dsp.exec_cmd("mkdir -p ~/Pictures/Screenshots && grim -g \"$(hyprctl clients -j | jq -r '.[] | select(.workspace.id == '$(hyprctl activeworkspace -j | jq '.id')') | \"\\(.at[0]),\\(.at[1]) \\(.size[0])x\\(.size[1])\"' | slurp)\" - | tee ~/Pictures/Screenshots/$(date +%Y%m%d_%H%M%S).png | wl-copy"))
+hl.bind("CTRL + Print", hl.dsp.exec_cmd("grim -g \"$(slurp)\" - | swappy -f -"))
 
 -- Power
 
-hl.bind(mainMod .. " + " .. "SHIFT" .. " + " .. "Q", hl.dsp.exit())
-hl.bind("CTRL + ALT" .. " + " .. "Delete", hl.dsp.exit())
-hl.bind(mainMod .. " + " .. "SHIFT" .. " + " .. "P", hl.dsp.exec_cmd("hyprctl dispatch dpms off"))
+hl.bind(mainMod .. " + SHIFT + Q", hl.dsp.exit())
+hl.bind("CTRL + ALT + Delete", hl.dsp.exit())
+hl.bind(mainMod .. " + SHIFT + P", hl.dsp.exec_cmd("hyprctl dispatch dpms off"))
 
 -- Audio & Backlight
 
@@ -136,7 +119,7 @@ hl.bind("XF86MonBrightnessDown", hl.dsp.exec_cmd("brightnessctl set 10%-"))
 local layouts = { "scrolling", "dwindle", "master" }
 local workspace_layouts = {}
 
-hl.bind("CTRL" .. " + " .. "SHIFT" .. " + " .. "L", function()
+hl.bind("CTRL + SHIFT + L", function()
     local ws = hl.get_active_workspace()
     if not ws then return end
     local ws_id = tostring(ws.id)
@@ -153,49 +136,40 @@ hl.bind("CTRL" .. " + " .. "SHIFT" .. " + " .. "L", function()
     hl.dispatch(hl.dsp.exec_cmd("notify-send -i " .. icon_path .. " 'Workspace " .. ws_id .. "' 'The layout has been changed to <b>" .. display_name .. "</b>'"))
 end)
 
-hl.bind(mainMod .. " + " .. "X", hl.dsp.window.close())
-hl.bind(mainMod .. " + " .. "V", hl.dsp.window.float())
-hl.bind(mainMod .. " + " .. "F", hl.dsp.window.fullscreen())
+hl.bind(mainMod .. " + X", hl.dsp.window.close())
+hl.bind(mainMod .. " + V", hl.dsp.window.float())
+hl.bind(mainMod .. " + F", hl.dsp.window.fullscreen())
+hl.bind(mainMod .. " + SHIFT + F", hl.dsp.window.fullscreen())
 
-hl.bind(mainMod .. " + " .. "SHIFT" .. " + " .. "F", hl.dsp.window.fullscreen())
+local directions = {
+    { key = "H",     dir = "l" },
+    { key = "L",     dir = "r" },
+    { key = "K",     dir = "u" },
+    { key = "J",     dir = "d" },
+    { key = "Left",  dir = "l" },
+    { key = "Right", dir = "r" },
+    { key = "Up",    dir = "u" },
+    { key = "Down",  dir = "d" },
+}
+for _, item in ipairs(directions) do
+    hl.bind(mainMod .. " + " .. item.key, hl.dsp.focus({ direction = item.dir }))
+    hl.bind(mainMod .. " + " .. "CTRL" .. " + " .. item.key, hl.dsp.window.swap({ direction = item.dir }))
+end
 
-hl.bind(mainMod .. " + " .. "H", hl.dsp.focus({ direction = "l" }))
-hl.bind(mainMod .. " + " .. "L", hl.dsp.focus({ direction = "r" }))
-hl.bind(mainMod .. " + " .. "K", hl.dsp.focus({ direction = "u" }))
-hl.bind(mainMod .. " + " .. "J", hl.dsp.focus({ direction = "d" }))
-hl.bind(mainMod .. " + " .. "Left", hl.dsp.focus({ direction = "l" }))
-hl.bind(mainMod .. " + " .. "Right", hl.dsp.focus({ direction = "r" }))
-hl.bind(mainMod .. " + " .. "Up", hl.dsp.focus({ direction = "u" }))
-hl.bind(mainMod .. " + " .. "Down", hl.dsp.focus({ direction = "d" }))
-hl.bind(mainMod .. " + " .. "Tab", hl.dsp.focus({ workspace = "previous" }))
-hl.bind(mainMod .. " + " .. "W", hl.dsp.group.toggle())
-
-hl.bind(mainMod .. " + " .. "CTRL" .. " + " .. "H", hl.dsp.window.swap({ direction = "l" }))
-hl.bind(mainMod .. " + " .. "CTRL" .. " + " .. "L", hl.dsp.window.swap({ direction = "r" }))
-hl.bind(mainMod .. " + " .. "CTRL" .. " + " .. "K", hl.dsp.window.swap({ direction = "u" }))
-hl.bind(mainMod .. " + " .. "CTRL" .. " + " .. "J", hl.dsp.window.swap({ direction = "d" }))
-hl.bind(mainMod .. " + " .. "CTRL" .. " + " .. "Left", hl.dsp.window.swap({ direction = "l" }))
-hl.bind(mainMod .. " + " .. "CTRL" .. " + " .. "Right", hl.dsp.window.swap({ direction = "r" }))
-hl.bind(mainMod .. " + " .. "CTRL" .. " + " .. "Up", hl.dsp.window.swap({ direction = "u" }))
-hl.bind(mainMod .. " + " .. "CTRL" .. " + " .. "Down", hl.dsp.window.swap({ direction = "d" }))
+hl.bind(mainMod .. " + Tab", hl.dsp.focus({ workspace = "previous" }))
+hl.bind(mainMod .. " + W", hl.dsp.group.toggle())
 
 -- Workspaces
 
-hl.bind(mainMod .. " + " .. 1, hl.dsp.focus({ workspace = 1 }))
-hl.bind(mainMod .. " + " .. 2, hl.dsp.focus({ workspace = 2 }))
-hl.bind(mainMod .. " + " .. 3, hl.dsp.focus({ workspace = 3 }))
-hl.bind(mainMod .. " + " .. 4, hl.dsp.focus({ workspace = 4 }))
-hl.bind(mainMod .. " + " .. 5, hl.dsp.focus({ workspace = 5 }))
-hl.bind(mainMod .. " + " .. "CTRL" .. " + " .. 1, hl.dsp.window.move({ workspace = 1 }))
-hl.bind(mainMod .. " + " .. "CTRL" .. " + " .. 2, hl.dsp.window.move({ workspace = 2 }))
-hl.bind(mainMod .. " + " .. "CTRL" .. " + " .. 3, hl.dsp.window.move({ workspace = 3 }))
-hl.bind(mainMod .. " + " .. "CTRL" .. " + " .. 4, hl.dsp.window.move({ workspace = 4 }))
-hl.bind(mainMod .. " + " .. "CTRL" .. " + " .. 5, hl.dsp.window.move({ workspace = 5 }))
+for i = 1, 5 do
+    hl.bind(mainMod .. " + " .. i, hl.dsp.focus({ workspace = i }))
+    hl.bind(mainMod .. " + " .. "CTRL" .. " + " .. i, hl.dsp.window.move({ workspace = i }))
+end
 
 -- Mouse Binds
 
-hl.bind(mainMod .. " + " .. "mouse:272", hl.dsp.window.drag(), { mouse = true })
-hl.bind(mainMod .. " + " .. "mouse:273", hl.dsp.window.resize(), { mouse = true })
+hl.bind(mainMod .. " + mouse:272", hl.dsp.window.drag(), { mouse = true })
+hl.bind(mainMod .. " + mouse:273", hl.dsp.window.resize(), { mouse = true })
 
 -- Rules
 
