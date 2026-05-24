@@ -1,0 +1,40 @@
+#!/usr/bin/env bash
+
+# Screenshot Helper Script
+# Sends a notification when a screenshot is captured using grim & slurp.
+
+DIR="${XDG_PICTURES_DIR:-$HOME/Pictures}/Screenshots"
+mkdir -p "$DIR"
+
+FILE="$DIR/$(date +%Y%m%d_%H%M%S).png"
+
+MODE="${1:-area}"
+
+case "$MODE" in
+    window)
+        if command -v hyprctl >/dev/null; then
+            ACTIVE_WS=$(hyprctl activeworkspace -j | jq '.id')
+            GEOM=$(hyprctl clients -j | jq -r ".[] | select(.workspace.id == $ACTIVE_WS) | \"\(.at[0]),\(.at[1]) \(.size[0])x\(.size[1])\"" | slurp)
+        else
+            GEOM=$(slurp)
+        fi
+        
+        if [ -n "$GEOM" ]; then
+            grim -g "$GEOM" "$FILE"
+        fi
+        ;;
+    full)
+        grim "$FILE"
+        ;;
+    area|*)
+        GEOM=$(slurp)
+        if [ -n "$GEOM" ]; then
+            grim -g "$GEOM" "$FILE"
+        fi
+        ;;
+esac
+
+if [ -f "$FILE" ]; then
+    wl-copy < "$FILE"
+    notify-send "Screenshot Captured" "Saved to $(basename "$FILE") and copied to clipboard." -i "$FILE" --app-name="grim"
+fi
