@@ -133,15 +133,17 @@ hl.bind("CTRL" .. " + " .. "SHIFT" .. " + " .. "L", function()
     local ws = hl.get_active_workspace()
     if not ws then return end
     local ws_id = tostring(ws.id)
-    
+
     local current_idx = workspace_layouts[ws_id] or 1
     local next_idx = (current_idx % #layouts) + 1
     workspace_layouts[ws_id] = next_idx
-    
+
     local new_layout = layouts[next_idx]
-    
+    local display_name = new_layout:gsub("^%l", string.upper)
+
     hl.workspace_rule({ workspace = ws_id, layout = new_layout })
-    hl.dispatch(hl.dsp.exec_cmd("notify-send 'Workspace " .. ws_id .. " Layout' '" .. new_layout .. "'"))
+    local icon_path = os.getenv("HOME") .. "/.config/hypr/hyprland.svg"
+    hl.dispatch(hl.dsp.exec_cmd("notify-send -i " .. icon_path .. " 'Workspace " .. ws_id .. "' 'The layout has been changed to <b>" .. display_name .. "</b>'"))
 end)
 
 hl.bind(mainMod .. " + " .. "X", hl.dsp.window.close())
@@ -177,19 +179,11 @@ hl.bind(mainMod .. " + " .. 2, hl.dsp.focus({ workspace = 2 }))
 hl.bind(mainMod .. " + " .. 3, hl.dsp.focus({ workspace = 3 }))
 hl.bind(mainMod .. " + " .. 4, hl.dsp.focus({ workspace = 4 }))
 hl.bind(mainMod .. " + " .. 5, hl.dsp.focus({ workspace = 5 }))
-hl.bind(mainMod .. " + " .. 6, hl.dsp.focus({ workspace = 6 }))
-hl.bind(mainMod .. " + " .. 7, hl.dsp.focus({ workspace = 7 }))
-hl.bind(mainMod .. " + " .. 8, hl.dsp.focus({ workspace = 8 }))
-hl.bind(mainMod .. " + " .. 9, hl.dsp.focus({ workspace = 9 }))
 hl.bind(mainMod .. " + " .. "CTRL" .. " + " .. 1, hl.dsp.window.move({ workspace = 1 }))
 hl.bind(mainMod .. " + " .. "CTRL" .. " + " .. 2, hl.dsp.window.move({ workspace = 2 }))
 hl.bind(mainMod .. " + " .. "CTRL" .. " + " .. 3, hl.dsp.window.move({ workspace = 3 }))
 hl.bind(mainMod .. " + " .. "CTRL" .. " + " .. 4, hl.dsp.window.move({ workspace = 4 }))
 hl.bind(mainMod .. " + " .. "CTRL" .. " + " .. 5, hl.dsp.window.move({ workspace = 5 }))
-hl.bind(mainMod .. " + " .. "CTRL" .. " + " .. 6, hl.dsp.window.move({ workspace = 6 }))
-hl.bind(mainMod .. " + " .. "CTRL" .. " + " .. 7, hl.dsp.window.move({ workspace = 7 }))
-hl.bind(mainMod .. " + " .. "CTRL" .. " + " .. 8, hl.dsp.window.move({ workspace = 8 }))
-hl.bind(mainMod .. " + " .. "CTRL" .. " + " .. 9, hl.dsp.window.move({ workspace = 9 }))
 
 -- Mouse Binds
 
@@ -221,6 +215,11 @@ hl.layer_rule({
     match = { namespace = "quickshell.*" },
     blur = true,
     ignore_alpha = 0,
+})
+
+hl.window_rule({
+    match = { title = ".*" },
+    opacity = "0.95 0.95",
 })
 
 -- Autostart
