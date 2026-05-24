@@ -2,6 +2,7 @@
   config,
   lib,
   pkgs,
+  inputs,
   ...
 }:
 
@@ -11,6 +12,8 @@
   };
 
   config = lib.mkIf config.module.creative.enable {
+    nixpkgs.overlays = [ inputs.affinity-nix.overlays.default ];
+
     home-manager.users.${config._module.args.username} = {
       home.packages = [
         pkgs.affinity-v3
