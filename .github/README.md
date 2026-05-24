@@ -27,12 +27,12 @@
 
 | Component                                                      | Link                                                                                                                |
 | -------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------- |
-| **Window Manager**                                             | [Niri][Niri]                                                                                                        |
+| **Window Manager**                                             | [Hyprland][Hyprland] & [Mango][Mango]                                                                               |
 | **Terminal Emulator**                                          | [Kitty][Kitty]                                                                                                      |
 | **Display Manager**                                            | [Ly][Ly]                                                                                                            |
 | **System Resource Monitor**                                    | [Resources][Resources]                                                                                              |
 | **File Manager**                                               | [Yazi][Yazi] & [Nautilus][Nautilus]                                                                                 |
-| **Shell**                                                      | Zsh & [Starship][Starship]                                                                                         |
+| **Shell**                                                      | Zsh & [Starship][Starship]                                                                                          |
 | **Media Player**                                               | [Totem][Totem]                                                                                                      |
 | **Text Editor**                                                | [Neovim][Neovim]                                                                                                    |
 | **Image Viewer**                                               | [Loupe][Loupe]                                                                                                      |
@@ -94,7 +94,8 @@ This repository is licensed under the **[MIT LICENSE](LICENSE)**.
 
 <!-- Links -->
 
-[Niri]: https://github.com/niri-wm/niri
+[Hyprland]: https://hypr.land/
+[Mango]: https://mangowm.github.io/
 [Kitty]: https://github.com/kovidgoyal/kitty
 [Ly]: https://github.com/fairyglade/ly
 [Resources]: https://github.com/nokyan/resources
