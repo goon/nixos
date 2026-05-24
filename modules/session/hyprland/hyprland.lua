@@ -79,6 +79,7 @@ hl.config({
     },
     master = {
         orientation = "center",
+        slave_count_for_center_master = 0,
     },
 })
 
@@ -99,7 +100,7 @@ hl.bind(mainMod .. " + " .. "G", hl.dsp.exec_cmd("qs ipc call wallpaper toggle")
 hl.bind(mainMod .. " + " .. "S", hl.dsp.exec_cmd("qs ipc call settings toggle"))
 hl.bind(mainMod .. " + " .. "P", hl.dsp.exec_cmd("qs ipc call power toggle"))
 
--- Screenshot (mimicking Niri's screenshot tool might need grim/slurp)
+-- Screenshot
 
 hl.bind("Print", hl.dsp.exec_cmd("grim -g \"$(slurp)\" - | wl-copy"))
 hl.bind("CTRL" .. " + " .. "Print", hl.dsp.exec_cmd("grim - | wl-copy"))
@@ -217,7 +218,7 @@ hl.window_rule({
 })
 
 hl.layer_rule({
-    match = { namespace = "quickshell:.*" },
+    match = { namespace = "quickshell.*" },
     blur = true,
     ignore_alpha = 0,
 })
