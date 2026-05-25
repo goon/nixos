@@ -28,7 +28,7 @@ if pgrep "quickshell" >/dev/null; then
     pkill -9 "quickshell"
 fi
 
-nohup "$APP" >/dev/null 2>&1 &
+QT_USE_PORTAL=1 nohup "$APP" >/dev/null 2>&1 &
 
 if [ $? -eq 0 ]; then
     notify "Shell restarted successfully"
