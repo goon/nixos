@@ -12,7 +12,10 @@
   };
 
   config = lib.mkIf config.module.quickshell.enable {
-    environment.sessionVariables.QS_ICON_THEME = "Papirus";
+    environment.sessionVariables = {
+      QS_ICON_THEME = "Papirus";
+      QT_USE_PORTAL = "1";
+    };
 
     home-manager.sharedModules = [
       (
@@ -25,6 +28,7 @@
             inputs.quickshell.packages.${pkgs.stdenv.hostPlatform.system}.quickshell
             qt6Packages.qt6ct
             gowall # Wallpaper Themer
+            cava # Visualizer
           ];
         }
       )
