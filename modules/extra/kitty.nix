@@ -23,7 +23,6 @@
             cursor_trail = 10;
             cursor_trail_start_threshold = 0;
             cursor_trail_decay = "0.01 0.05";
-            cursor_blink = true;
             window_padding_width = 20;
             enabled_layouts = "tall";
             tab_bar_edge = "top";
