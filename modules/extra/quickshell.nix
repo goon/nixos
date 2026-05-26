@@ -14,7 +14,6 @@
   config = lib.mkIf config.module.quickshell.enable {
     environment.sessionVariables = {
       QS_ICON_THEME = "Papirus";
-      QT_USE_PORTAL = "1";
     };
 
     home-manager.sharedModules = [
