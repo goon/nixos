@@ -20,12 +20,6 @@ in
     services.dbus.enable = true;
     programs.dconf.enable = true;
 
-    environment.sessionVariables = {
-      GTK_USE_PORTAL = "1";
-    };
-
-    # User-facing features
-
     # ========== User Layer (Home Manager) ==========
     home-manager.sharedModules = [
       {

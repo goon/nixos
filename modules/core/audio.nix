@@ -1,13 +1,7 @@
-{
-  config,
-  pkgs,
-  username,
-  ...
-}:
+{ config, username, ... }:
 
 {
   services = {
-    # Pipewire
     pipewire = {
       enable = true;
       alsa = {
@@ -16,7 +10,6 @@
       };
       pulse.enable = true;
 
-      # Low Latency
       lowLatency = {
         enable = true;
         quantum = 64;
@@ -24,7 +17,6 @@
       };
     };
 
-    # MPD
     mpd = {
       enable = true;
       user = username;
@@ -40,13 +32,7 @@
     };
   };
 
-  # RT Kit
   security.rtkit.enable = true;
-
-  # Pulse Audio
-  environment.systemPackages = with pkgs; [
-    pulseaudio
-  ];
 
   systemd.services.mpd.environment = {
     XDG_RUNTIME_DIR = "/run/user/${builtins.toString config.users.users.${username}.uid}";

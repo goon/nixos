@@ -5,20 +5,16 @@
   inputs,
   ...
 }:
-
-let
-  inherit (lib) mkIf mkForce mkEnableOption;
-in
 {
   imports = [
     inputs.nix-gaming.nixosModules.pipewireLowLatency
   ];
 
-  options.module.gaming.enable = mkEnableOption "Gaming Launchers, Tools and Optimisations" // {
+  options.module.gaming.enable = lib.mkEnableOption "Gaming Launchers, Tools and Optimisations" // {
     default = true;
   };
 
-  config = mkIf config.module.gaming.enable {
+  config = lib.mkIf config.module.gaming.enable {
     # ========== System Packages ==========
     environment.systemPackages = with pkgs; [
       mangohud
@@ -43,7 +39,7 @@ in
 
     # ========== Environment & Hardware tweaks ==========
     environment.variables = {
-      SDL_VIDEODRIVER = mkForce "wayland,x11,windows";
+      SDL_VIDEODRIVER = lib.mkForce "wayland,x11,windows";
     };
 
     # Kernel performance (vm.max_map_count)

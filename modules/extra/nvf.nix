@@ -1,7 +1,6 @@
 {
   config,
   lib,
-  pkgs,
   ...
 }:
 
@@ -633,10 +632,6 @@ in
                     };
                   };
                 };
-              };
-
-              extraPlugins = with pkgs.vimPlugins; {
-                # mini-nvim and snacks-nvim are now fully managed by native nvf modules
               };
 
               luaConfigPost = ''
