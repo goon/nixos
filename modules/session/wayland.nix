@@ -48,6 +48,7 @@
           grim
           slurp
           satty
+          zenity
         ];
         services.cliphist.enable = true;
 

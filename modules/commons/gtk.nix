@@ -21,7 +21,6 @@ in
     programs.dconf.enable = true;
 
     environment.sessionVariables = {
-      QT_QPA_PLATFORMTHEME = "qt6ct";
       QT_QPA_PLATFORMTHEME_QT6 = "qt6ct";
     };
 
