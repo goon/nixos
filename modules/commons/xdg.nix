@@ -33,7 +33,7 @@
     };
   };
 
-config = lib.mkIf config.module.xdg.enable {
+  config = lib.mkIf config.module.xdg.enable {
     # System Layer
     environment.systemPackages = [ pkgs.xdg-user-dirs ];
     environment.pathsToLink = [ "/share/applications" ];

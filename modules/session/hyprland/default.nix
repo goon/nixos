@@ -14,7 +14,12 @@
 
     home-manager.sharedModules = [
       (
-        { config, osConfig, pkgs, ... }:
+        {
+          config,
+          osConfig,
+          pkgs,
+          ...
+        }:
         {
           xdg.configFile."hypr".source =
             config.lib.file.mkOutOfStoreSymlink "${osConfig.globals.repoPath}/modules/session/hyprland";
