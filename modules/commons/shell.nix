@@ -40,38 +40,40 @@ in
           fzf.enable = true;
         };
 
-        # Universal shell aliases
-        home.shellAliases = {
-          # --- Navigation
-          ".." = "cd ..";
-          "..." = "cd ../..";
-          ls = "eza --icons --git";
+        home = {
+          # Universal shell aliases
+          shellAliases = {
+            # --- Navigation
+            ".." = "cd ..";
+            "..." = "cd ../..";
+            ls = "eza --icons --git";
 
-          # --- System Utilities
-          cat = "bat";
-          df = "duf";
-          grep = "grep --color=auto";
-          partitions = "lsblk -f";
-          rm = "rm -i";
+            # --- System Utilities
+            cat = "bat";
+            df = "duf";
+            grep = "grep --color=auto";
+            partitions = "lsblk -f";
+            rm = "rm -i";
 
-          # --- Search & Filtering
-          f = "fzf";
+            # --- Search & Filtering
+            f = "fzf";
+          };
+
+          # Session variables
+          sessionVariables = {
+            BROWSER = "brave";
+          };
+
+          sessionPath = [
+            "$HOME/.local/bin"
+          ];
+
+          # Packages
+          packages = with pkgs; [
+            cheat-cmd
+            duf
+          ];
         };
-
-        # Session variables
-        home.sessionVariables = {
-          BROWSER = "brave";
-        };
-
-        home.sessionPath = [
-          "$HOME/.local/bin"
-        ];
-
-        # Packages
-        home.packages = with pkgs; [
-          cheat-cmd
-          duf
-        ];
 
         # zoxide (Smart cd)
         programs.zoxide = {
@@ -96,10 +98,6 @@ in
             "histappend"
             "checkwinsize"
           ];
-          initExtra = ''
-            # ----- Exports
-
-          '';
         };
 
         # ----- Zsh
@@ -109,10 +107,6 @@ in
           enableCompletion = true;
           autosuggestion.enable = true;
           syntaxHighlighting.enable = true;
-          initContent = ''
-            # ----- Exports
-
-          '';
         };
       }
     ];

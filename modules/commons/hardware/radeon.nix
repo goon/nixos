@@ -27,15 +27,6 @@ in
     hardware.graphics = {
       enable = true;
       enable32Bit = true;
-
-      # Vulkan and OpenGL
-      extraPackages = with pkgs; [
-        vulkan-loader
-        vulkan-headers
-      ];
-      extraPackages32 = with pkgs.pkgsi686Linux; [
-        vulkan-loader
-      ];
     };
 
     environment.systemPackages = with pkgs; [

@@ -1,7 +1,6 @@
 {
   config,
   lib,
-  pkgs,
   ...
 }:
 
@@ -35,31 +34,37 @@
 
   config = lib.mkIf config.module.xdg.enable {
     # System Layer
-    environment.systemPackages = [ pkgs.xdg-user-dirs ];
     environment.pathsToLink = [ "/share/applications" ];
     xdg.portal.enable = true;
 
     # User Layer (Home Manager)
     home-manager.sharedModules = [
       {
-        xdg.enable = true;
-        xdg.mimeApps = {
+        xdg = {
           enable = true;
-          defaultApplications =
-            let
-              inherit (config.globals) apps;
-            in
-            {
-              "x-scheme-handler/http" = apps.browser;
-              "x-scheme-handler/https" = apps.browser;
-              "text/html" = apps.browser;
-              "image/jpeg" = apps.imageViewer;
-              "image/png" = apps.imageViewer;
-              "video/mp4" = apps.videoPlayer;
-              "inode/directory" = apps.fileManager;
-              "application/pdf" = apps.pdfViewer;
-              "text/plain" = apps.editor;
-            };
+          userDirs = {
+            enable = true;
+            createDirectories = true;
+            setSessionVariables = true;
+          };
+          mimeApps = {
+            enable = true;
+            defaultApplications =
+              let
+                inherit (config.globals) apps;
+              in
+              {
+                "x-scheme-handler/http" = apps.browser;
+                "x-scheme-handler/https" = apps.browser;
+                "text/html" = apps.browser;
+                "image/jpeg" = apps.imageViewer;
+                "image/png" = apps.imageViewer;
+                "video/mp4" = apps.videoPlayer;
+                "inode/directory" = apps.fileManager;
+                "application/pdf" = apps.pdfViewer;
+                "text/plain" = apps.editor;
+              };
+          };
         };
       }
     ];

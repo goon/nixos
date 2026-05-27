@@ -46,18 +46,6 @@ in
       SDL_VIDEODRIVER = mkForce "wayland,x11,windows";
     };
 
-    # Steam Networking
-    networking.firewall = {
-      allowedTCPPorts = [
-        27036
-        27037
-      ];
-      allowedUDPPorts = [
-        27031
-        27036
-      ];
-    };
-
     # Kernel performance (vm.max_map_count)
     boot.kernel.sysctl = {
       "vm.max_map_count" = 2147483642;

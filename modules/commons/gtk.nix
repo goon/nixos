@@ -21,7 +21,7 @@ in
     programs.dconf.enable = true;
 
     environment.sessionVariables = {
-      QT_QPA_PLATFORMTHEME_QT6 = "qt6ct";
+      GTK_USE_PORTAL = "1";
     };
 
     # User-facing features

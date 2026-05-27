@@ -12,10 +12,14 @@
 
   config = lib.mkIf config.module.gnome.enable {
     # ========== System Layer (NixOS) ==========
-    services.devmon.enable = true;
-    services.accounts-daemon.enable = true;
-    services.gnome.tinysparql.enable = true;
-    services.gnome.localsearch.enable = true;
+    services = {
+      devmon.enable = true;
+      accounts-daemon.enable = true;
+      gnome = {
+        tinysparql.enable = true;
+        localsearch.enable = true;
+      };
+    };
 
     # ========== User Layer (Home Manager) ==========
     home-manager.sharedModules = [

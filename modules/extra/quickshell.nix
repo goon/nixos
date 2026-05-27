@@ -25,7 +25,6 @@
 
           home.packages = with pkgs; [
             inputs.quickshell.packages.${pkgs.stdenv.hostPlatform.system}.quickshell
-            qt6Packages.qt6ct
             gowall # Wallpaper Themer
             cava # Visualizer
           ];
