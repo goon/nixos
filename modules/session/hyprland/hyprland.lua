@@ -177,33 +177,34 @@ hl.bind(mainMod .. " + mouse:273", hl.dsp.window.resize(), { mouse = true })
 -- Rules
 
 hl.window_rule({
-    name  = "float_pip",
-    match = {
-        class = "^brave-browser$",
-        title = "^Picture-in-Picture$",
-    },
-    float = true,
+    match = { title = ".*" },
+    opacity = "0.95 0.95",
 })
 
-hl.window_rule({
-    name = "float",
-    match = {
-        class = "^float$",
-    },
-    float = true,
-    size = "1250 800",
-    center = true,
-})
+
+local float_apps = {
+    { class = "^float$" },
+    { class = "^com.gabm.satty$" },
+    { title = "^Picture-in-[Pp]icture$" },
+}
+for _, match_criteria in ipairs(float_apps) do
+    local pattern = match_criteria.class or match_criteria.title or ""
+    local name_suffix = pattern:gsub("[^%w]", "")
+    hl.window_rule({
+        name = "float_" .. name_suffix,
+        match = match_criteria,
+        float = true,
+        size = "1000 600",
+        center = true,
+    })
+end
+
+-- Layer Rules 
 
 hl.layer_rule({
     match = { namespace = "quickshell.*" },
     blur = true,
     ignore_alpha = 0.2
-})
-
-hl.window_rule({
-    match = { title = ".*" },
-    opacity = "0.95 0.95",
 })
 
 -- Autostart
