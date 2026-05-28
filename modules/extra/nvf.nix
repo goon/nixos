@@ -657,6 +657,7 @@ in
                   hl(0, "SnacksNotifierBorder", { fg = colors.border }); hl(0, "SnacksNotifierTitle", { fg = colors.text, bold = true })
                   hl(0, "SnacksIndent", { fg = colors.surfaceAlt }); hl(0, "SnacksIndentScope", { fg = colors.muted })
                   hl(0, "LualineCwd", { fg = colors.primary, bold = true }); hl(0, "LualineCwdInactive", { fg = colors.muted, bold = true }); hl(0, "LualineBuffers", { fg = colors.background, bg = colors.primary, bold = true })
+                  hl(0, "SnacksPickerDirectory", { fg = colors.primary, bold = true }); hl(0, "SnacksPickerDir", { fg = colors.textMuted }); hl(0, "SnacksPickerTree", { fg = colors.muted }); hl(0, "SnacksPickerPathHidden", { fg = colors.muted }); hl(0, "SnacksPickerPathIgnored", { fg = colors.muted }); hl(0, "SnacksPickerTreeToggle", { fg = colors.primary })
                   if package.loaded["lualine"] then require("lualine").setup({ options = { theme = get_lualine_theme(colors) } }) end
                 end
                 local signal = vim.uv.new_signal(); if signal then vim.uv.signal_start(signal, "sigusr1", function() vim.schedule(function() package.loaded["nvim"] = nil; apply_theme(); print("Theme reloaded") end) end) end
