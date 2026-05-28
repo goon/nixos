@@ -81,7 +81,7 @@
           pkgs = nixpkgs.legacyPackages.${system};
           inherit (inputs) treefmt-nix;
         in
-        (treefmt-nix.lib.evalModule pkgs ./treefmt.nix).config.build.wrapper
+        (treefmt-nix.lib.evalModule pkgs ./modules/lib/formatter.nix).config.build.wrapper
       );
 
       # Check for nix flake check (multi-system support)
@@ -92,7 +92,7 @@
           inherit (inputs) treefmt-nix;
         in
         {
-          formatting = (treefmt-nix.lib.evalModule pkgs ./treefmt.nix).config.build.check self;
+          formatting = (treefmt-nix.lib.evalModule pkgs ./modules/lib/formatter.nix).config.build.check self;
         }
       );
     };

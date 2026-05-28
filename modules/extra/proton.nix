@@ -5,15 +5,12 @@
   ...
 }:
 
-let
-  cfg = config.module.proton;
-in
 {
   options.module.proton.enable = lib.mkEnableOption "Proton Applications" // {
     default = true;
   };
 
-  config = lib.mkIf cfg.enable {
+  config = lib.mkIf config.module.proton.enable {
     home-manager.sharedModules = [
       {
         home.packages = [

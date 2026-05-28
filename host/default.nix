@@ -8,7 +8,7 @@
   # ========== Modules (Dendritic Dashboard) ==========
 
   # [1] Hardware Support
-  module.hardware.radeon.enable = true;
+  module.radeon.enable = true;
 
   # [2] Session (The Switch)
   module.desktop.windowmanager = "hyprland";
@@ -46,6 +46,11 @@
       "defaults"
       "nofail"
     ];
+  };
+
+  nix.settings = {
+    max-jobs = 10;
+    cores = 10;
   };
 
   system.stateVersion = "25.11";

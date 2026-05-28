@@ -31,6 +31,8 @@
       ELECTRON_OZONE_PLATFORM_HINT = "auto";
       XDG_SESSION_TYPE = "wayland";
       MOZ_DBUS_REMOTE = "1";
+      QT_QPA_PLATFORM = "wayland";
+      QT_WAYLAND_DISABLE_WINDOWDECORATION = "1";
     };
 
     home-manager.sharedModules = [

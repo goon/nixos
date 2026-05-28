@@ -7,9 +7,6 @@
 }:
 
 let
-  inherit (lib) mkIf;
-
-  # ----- Cheat (from bash.nix)
   cheat-cmd = pkgs.writeShellScriptBin "cheat" ''
     curl "https://cheat.sh/$1"
   '';
@@ -19,47 +16,38 @@ in
     default = true;
   };
 
-  config = mkIf config.module.shell.enable {
-    # ========== NixOS Layer ==========
+  config = lib.mkIf config.module.shell.enable {
     programs.zsh.enable = true;
 
     users.users.${username}.shell = pkgs.zsh;
 
     environment.sessionVariables = {
-      TERM = config.globals.userTerminal;
       TERMINAL = config.globals.userTerminal;
     };
 
-    # ========== Home Manager Layer ==========
     home-manager.sharedModules = [
       {
         programs = {
-          # CLI tools integration
           eza.enable = true;
           bat.enable = true;
           fzf.enable = true;
         };
 
         home = {
-          # Universal shell aliases
           shellAliases = {
-            # --- Navigation
             ".." = "cd ..";
             "..." = "cd ../..";
             ls = "eza --icons --git";
 
-            # --- System Utilities
             cat = "bat";
             df = "duf";
             grep = "grep --color=auto";
             partitions = "lsblk -f";
             rm = "rm -i";
 
-            # --- Search & Filtering
             f = "fzf";
           };
 
-          # Session variables
           sessionVariables = {
             BROWSER = "brave";
           };
@@ -68,14 +56,12 @@ in
             "$HOME/.local/bin"
           ];
 
-          # Packages
           packages = with pkgs; [
             cheat-cmd
             duf
           ];
         };
 
-        # zoxide (Smart cd)
         programs.zoxide = {
           enable = true;
           enableZshIntegration = true;
@@ -85,7 +71,6 @@ in
           ];
         };
 
-        # ----- Bash
         programs.bash = {
           enable = true;
           enableCompletion = true;
@@ -100,7 +85,6 @@ in
           ];
         };
 
-        # ----- Zsh
         programs.zsh = {
           enable = true;
           dotDir = "${config.globals.paths.config}/zsh";

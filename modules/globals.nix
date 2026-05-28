@@ -6,9 +6,6 @@
   ...
 }:
 
-let
-  inherit (lib) mkOption types;
-in
 {
   # ========== Structural Essentials ==========
   # We use _module.args for these to avoid infinite recursion
@@ -38,34 +35,34 @@ in
   # ========== System Settings ==========
 
   options.globals = {
-    userTerminal = mkOption {
-      type = types.str;
+    userTerminal = lib.mkOption {
+      type = lib.types.str;
       default = "kitty";
       description = "default terminal emulator";
     };
 
     paths = {
-      home = mkOption {
-        type = types.str;
+      home = lib.mkOption {
+        type = lib.types.str;
         default = "/home/${username}";
         description = "Absolute path to the user's home directory";
       };
     };
 
-    repoPath = mkOption {
-      type = types.str;
+    repoPath = lib.mkOption {
+      type = lib.types.str;
       default = repoPath;
       description = "Absolute path to the flake repository root";
     };
 
     userFonts = {
-      sansSerif = mkOption {
-        type = types.str;
+      sansSerif = lib.mkOption {
+        type = lib.types.str;
         default = "Outfit";
         description = "global sans-serif font";
       };
-      monospace = mkOption {
-        type = types.str;
+      monospace = lib.mkOption {
+        type = lib.types.str;
         default = "Kode Mono";
         description = "global monospace font";
       };
@@ -74,38 +71,38 @@ in
     # ========== Default Applications ==========
 
     apps = {
-      browser = mkOption {
-        type = types.str;
+      browser = lib.mkOption {
+        type = lib.types.str;
         default = "brave-browser.desktop";
         description = "default web browser";
       };
-      editor = mkOption {
-        type = types.str;
+      editor = lib.mkOption {
+        type = lib.types.str;
         default = "nvim.desktop";
         description = "default text editor";
       };
-      imageViewer = mkOption {
-        type = types.str;
+      imageViewer = lib.mkOption {
+        type = lib.types.str;
         default = "org.gnome.Loupe.desktop";
         description = "default image viewer";
       };
-      videoPlayer = mkOption {
-        type = types.str;
+      videoPlayer = lib.mkOption {
+        type = lib.types.str;
         default = "org.gnome.Totem.desktop";
         description = "default video player";
       };
-      musicPlayer = mkOption {
-        type = types.str;
+      musicPlayer = lib.mkOption {
+        type = lib.types.str;
         default = "org.gnome.Totem.desktop";
         description = "default music player";
       };
-      fileManager = mkOption {
-        type = types.str;
+      fileManager = lib.mkOption {
+        type = lib.types.str;
         default = "org.gnome.Nautilus.desktop";
         description = "default file manager";
       };
-      pdfViewer = mkOption {
-        type = types.str;
+      pdfViewer = lib.mkOption {
+        type = lib.types.str;
         default = "org.gnome.Evince.desktop";
         description = "default document viewer";
       };

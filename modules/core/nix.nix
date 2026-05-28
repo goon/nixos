@@ -15,17 +15,12 @@
       ];
       auto-optimise-store = true;
       warn-dirty = false;
-      # Binary Caches ( Affinity )
       substituters = [
         "https://cache.garnix.io"
       ];
       trusted-public-keys = [
         "cache.garnix.io:CTFPyKSLcx5RMJKfLo5EEPUObbA78b0YQ2DTCJXqr9g="
       ];
-
-      # CPU Limits for Builds
-      max-jobs = 10;
-      cores = 10;
     };
 
     gc.automatic = false;
@@ -42,7 +37,6 @@
       };
     };
 
-    # Enable nix-ld for unpatched binaries (e.g., Playwright/Chrome drivers)
     nix-ld = {
       enable = true;
       libraries = with pkgs; [
@@ -60,10 +54,6 @@
 
   home-manager.sharedModules = [
     {
-      home.packages = with pkgs; [
-        statix
-        deadnix
-      ];
       home.shellAliases = {
         nhs = "nh os switch";
         nht = "nh os test";

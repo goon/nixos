@@ -1,8 +1,4 @@
-{
-  config,
-  lib,
-  ...
-}:
+{ config, lib, ... }:
 
 {
   options.module.localsend.enable = lib.mkEnableOption "LocalSend" // {

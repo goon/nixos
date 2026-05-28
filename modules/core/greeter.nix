@@ -1,3 +1,5 @@
+_:
+
 {
   services.displayManager.ly = {
     enable = true;
@@ -9,7 +11,6 @@
     };
   };
 
-  # Catppuccin (Darker Variant - using Crust for darkest bg)
   console.colors = [
     "11111b" # 0: Base (Crust - Darkest)
     "f38ba8" # 1: Red

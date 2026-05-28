@@ -5,17 +5,14 @@
   ...
 }:
 
-let
-  inherit (lib) mkIf mkEnableOption;
-in
 {
   options.module.gtk.enable =
-    mkEnableOption "GTK Environment (Themes, Icons, Cursors, Bookmarks)"
+    lib.mkEnableOption "GTK Environment (Themes, Icons, Cursors, Bookmarks)"
     // {
       default = true;
     };
 
-  config = mkIf config.module.gtk.enable {
+  config = lib.mkIf config.module.gtk.enable {
     # ========== System Layer (NixOS) ==========
     services.dbus.enable = true;
     programs.dconf.enable = true;

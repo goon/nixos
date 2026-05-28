@@ -4,15 +4,12 @@
   ...
 }:
 
-let
-  inherit (lib) mkIf mkEnableOption;
-in
 {
-  options.module.starship.enable = mkEnableOption "Starship Prompt" // {
+  options.module.starship.enable = lib.mkEnableOption "Starship Prompt" // {
     default = true;
   };
 
-  config = mkIf config.module.starship.enable {
+  config = lib.mkIf config.module.starship.enable {
     home-manager.sharedModules = [
       {
         programs.starship = {

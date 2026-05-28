@@ -5,15 +5,12 @@
   ...
 }:
 
-let
-  inherit (lib) mkIf mkEnableOption;
-in
 {
-  options.module.hardware.radeon.enable = mkEnableOption "AMD Radeon GPU Support" // {
+  options.module.radeon.enable = lib.mkEnableOption "AMD Radeon GPU Support" // {
     default = false;
   };
 
-  config = mkIf config.module.hardware.radeon.enable {
+  config = lib.mkIf config.module.radeon.enable {
     # AMD GPUs
     boot.initrd.kernelModules = [ "amdgpu" ];
     boot.kernelModules = [ "i2c_dev" ];

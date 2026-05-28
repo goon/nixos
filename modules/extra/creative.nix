@@ -51,6 +51,6 @@
     ];
 
     # Hardware tweaks for DaVinci Resolve on Radeon
-    hardware.amdgpu.opencl.enable = lib.mkIf config.module.hardware.radeon.enable true;
+    hardware.amdgpu.opencl.enable = lib.mkIf config.module.radeon.enable true;
   };
 }
