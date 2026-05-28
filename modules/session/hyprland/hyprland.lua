@@ -209,8 +209,8 @@ hl.window_rule({
 -- Autostart
 hl.on("hyprland.start", function()
     hl.exec_cmd("dbus-update-activation-environment --systemd --all")
-    hl.exec_cmd("quickshell")  
-    hl.exec_cmd("vesktop")
-    hl.exec_cmd("spotify")
+    hl.exec_cmd("setpriv --ambient-caps -all quickshell")  
+    hl.exec_cmd("setpriv --ambient-caps -all vesktop")
+    hl.exec_cmd("setpriv --ambient-caps -all spotify")
     hl.exec_cmd("systemctl --user start hyprpolkitagent")
 end)
