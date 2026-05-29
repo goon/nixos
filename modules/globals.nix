@@ -73,7 +73,7 @@
     apps = {
       browser = lib.mkOption {
         type = lib.types.str;
-        default = "brave-browser.desktop";
+        default = "firefox.desktop";
         description = "default web browser";
       };
       editor = lib.mkOption {
