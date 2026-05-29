@@ -1,5 +1,4 @@
 #!/usr/bin/env bash
-
 # Restarts Quickshell
 
 APP="quickshell"
