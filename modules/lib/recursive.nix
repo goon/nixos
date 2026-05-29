@@ -1,6 +1,6 @@
 # modules/lib/recursive.nix
-# A helper function that recursively finds all .nix files in a directory
-# and returns them as a list of paths for the 'imports' attribute.
+# - helper function that recursively finds all .nix files in a directory
+# - and returns them as a list of paths for the 'imports' attribute.
 
 dir:
 let
@@ -16,7 +16,6 @@ let
           type = dirContents.${name};
           fullPath = path + ("/" + name);
 
-          # Check if the name suggests a private or hidden file/directory
           isPrivate =
             let
               firstChar = builtins.substring 0 1 name;
@@ -31,12 +30,11 @@ let
         in
         if type == "directory" then
           if name == "lib" || isPrivate then
-            [ ] # Skip forbidden directories
+            [ ]
           else if builtins.pathExists (fullPath + "/default.nix") then
             [ (fullPath + "/default.nix") ]
           else
             recurse fullPath
-        # Support regular files and symlinks that point to nix files
         else if (type == "regular" || type == "symlink") && isNixFile then
           [ fullPath ]
         else
