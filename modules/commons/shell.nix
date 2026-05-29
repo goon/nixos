@@ -49,7 +49,7 @@ in
           };
 
           sessionVariables = {
-            BROWSER = "brave";
+            BROWSER = "firefox";
           };
 
           sessionPath = [
