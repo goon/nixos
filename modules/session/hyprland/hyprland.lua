@@ -36,8 +36,8 @@ hl.config({
         layout = "scrolling",
     },
     decoration = {
-        rounding = 12,
-        rounding_power = 8,
+        rounding = 18,
+        rounding_power = 2,
         blur = {
             enabled = true,
             size = 4,
@@ -81,7 +81,7 @@ local mainMod = "SUPER"
 hl.bind(mainMod .. " + RETURN", hl.dsp.exec_cmd("kitty"))
 hl.bind(mainMod .. " + E", hl.dsp.exec_cmd("kitty -e yazi"))
 hl.bind(mainMod .. " + N", hl.dsp.exec_cmd("kitty -e nvim"))
-hl.bind(mainMod .. " + B", hl.dsp.exec_cmd("brave"))
+hl.bind(mainMod .. " + B", hl.dsp.exec_cmd("firefox"))
 hl.bind(mainMod .. " + M", hl.dsp.exec_cmd("obsidian"))
 hl.bind(mainMod .. " + T", hl.dsp.exec_cmd("kitty --class float"))
 hl.bind(mainMod .. " + SPACE", hl.dsp.exec_cmd("qs ipc call launcher toggle"))
@@ -90,7 +90,6 @@ hl.bind(mainMod .. " + S", hl.dsp.exec_cmd("qs ipc call settings toggle"))
 hl.bind(mainMod .. " + P", hl.dsp.exec_cmd("qs ipc call power toggle"))
 hl.bind(mainMod .. " + D", hl.dsp.exec_cmd("qs ipc call dashboard toggle"))
 hl.bind(mainMod .. " + ALT + C", hl.dsp.exec_cmd("qs ipc call clipboard toggle"))
-hl.bind(mainMod .. " + Y", hl.dsp.exec_cmd("brave --enable-features=UseOzonePlatform --ozone-platform=wayland --enable-wayland-ime --app=https://www.youtube.com"))
 
 -- Screenshot
 
