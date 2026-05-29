@@ -24,6 +24,9 @@
     hardware.graphics = {
       enable = true;
       enable32Bit = true;
+      extraPackages = with pkgs; [
+        libva-vdpau-driver
+      ];
     };
 
     environment.systemPackages = with pkgs; [
