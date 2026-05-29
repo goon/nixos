@@ -17,6 +17,7 @@
           nodejs
           python3
           go
+          zed-editor
         ];
 
         programs.vscodium = {
