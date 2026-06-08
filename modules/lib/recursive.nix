@@ -1,6 +1,6 @@
 # modules/lib/recursive.nix
-# - helper function that recursively finds all .nix files in a directory
-# - and returns them as a list of paths for the 'imports' attribute.
+# Helper function that recursively finds all .nix files in a directory
+# Returns them as a list of paths for the 'imports' attribute.
 
 dir:
 let

@@ -1,7 +1,6 @@
 { config, pkgs, ... }:
 
 {
-  # System-wide Fonts
   fonts.packages = with pkgs; [
     google-fonts
     corefonts

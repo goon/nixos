@@ -29,7 +29,7 @@
       }
     ];
 
-    # System-level policies to de-bloat Brave and simulate Brave Origin
+    # Debloat
     environment.etc."brave/policies/managed/policies.json".text = builtins.toJSON {
       "BraveRewardsDisabled" = true;
       "BraveWalletDisabled" = true;

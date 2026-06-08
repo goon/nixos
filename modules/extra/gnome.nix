@@ -11,7 +11,6 @@
   };
 
   config = lib.mkIf config.module.gnome.enable {
-    # ========== System Layer (NixOS) ==========
     services = {
       devmon.enable = true;
       accounts-daemon.enable = true;
@@ -21,21 +20,15 @@
       };
     };
 
-    # ========== User Layer (Home Manager) ==========
     home-manager.sharedModules = [
       {
         home.packages = with pkgs; [
-          gnome-music
-          gnome-font-viewer
-          totem # Videos
-          loupe # Image Viewer
-          evince # Document Viewer
-          eyedropper # Color Picker
-          decibels # Audio Player
-          nautilus # File Explorer
-          sushi # File Preview
+          nautilus
+          sushi
           ffmpegthumbnailer
-          gnome-disk-utility
+          totem
+          loupe
+          decibels
         ];
 
         dconf.settings = {

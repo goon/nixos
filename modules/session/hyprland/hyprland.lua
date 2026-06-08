@@ -203,8 +203,9 @@ end
 hl.layer_rule({
     match = { namespace = "quickshell.*" },
     blur = true,
-    ignore_alpha = 0.2
+    ignore_alpha = 0.2,
 })
+
 
 -- Autostart
 hl.on("hyprland.start", function()
