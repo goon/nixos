@@ -27,25 +27,23 @@
 
 | Component                                                      | Link                                                                                                                |
 | -------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------- |
-| **Window Manager**                                             | [Hyprland][Hyprland] & [Mango][Mango]                                                                               |
+| **Window Manager**                                             | [Hyprland][Hyprland]                                                                            |
 | **Terminal Emulator**                                          | [Kitty][Kitty]                                                                                                      |
 | **Display Manager**                                            | [Ly][Ly]                                                                                                            |
-| **System Resource Monitor**                                    | [Resources][Resources]                                                                                              |
 | **File Manager**                                               | [Yazi][Yazi] & [Nautilus][Nautilus]                                                                                 |
 | **Shell**                                                      | Zsh & [Starship][Starship]                                                                                          |
 | **Media Player**                                               | [Totem][Totem]                                                                                                      |
-| **Text Editor**                                                | [Neovim][Neovim]                                                                                                    |
+| **Editor**                                                | [Neovim][Neovim]                                                                                                    |
 | **Image Viewer**                                               | [Loupe][Loupe]                                                                                                      |
 | **Screen Recording**                                           | [OBS][OBS]                                                                                                          |
-| **Status Bar / Notifications / Launcher / Wallpaper**          | Made with [Quickshell][Quickshell]
+| **Bar / Notifications / Launcher / Wallpaper**          | Made with [Quickshell][Quickshell]
 
 ## Structure 
 
-- `flake.nix` & `flake.lock` define the entry point and lock dependencies. 
-- `treefmt.nix` defines formatting standards for the codebase. 
+- `flake.nix` & `flake.lock` define the entry point and lock dependencies.  
 - `host/` contains host specific configuration e.g. `hardware-configuration`. 
-- `modules/` contains nix and home manager modules separated by subfolder. 
-- `scripts/` basic helper scripts.
+- `modules/` contains nix and home manager modules.
+- `scripts/` contains helper scripts.
 - `wallpapers/` collection of wallpapers for your viewing pleasure.
 
 ## Setup
@@ -98,7 +96,6 @@ This repository is licensed under the **[MIT LICENSE](LICENSE)**.
 [Mango]: https://mangowm.github.io/
 [Kitty]: https://github.com/kovidgoyal/kitty
 [Ly]: https://github.com/fairyglade/ly
-[Resources]: https://github.com/nokyan/resources
 [Yazi]: https://github.com/sxyazi/yazi
 [Nautilus]: https://github.com/GNOME/nautilus
 [Starship]: https://github.com/starship/starship
