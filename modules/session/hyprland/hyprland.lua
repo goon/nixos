@@ -87,15 +87,16 @@ hl.bind(mainMod .. " + T", hl.dsp.exec_cmd("kitty --class float"))
 hl.bind(mainMod .. " + SPACE", hl.dsp.exec_cmd("qs ipc call launcher toggle"))
 hl.bind(mainMod .. " + G", hl.dsp.exec_cmd("qs ipc call wallpaper toggle"))
 hl.bind(mainMod .. " + S", hl.dsp.exec_cmd("qs ipc call settings toggle"))
-hl.bind(mainMod .. " + P", hl.dsp.exec_cmd("qs ipc call power toggle"))
+hl.bind(mainMod .. " + P", hl.dsp.exec_cmd("qs ipc call nexus toggle"))
 hl.bind(mainMod .. " + D", hl.dsp.exec_cmd("qs ipc call dashboard toggle"))
 hl.bind(mainMod .. " + ALT + C", hl.dsp.exec_cmd("qs ipc call clipboard toggle"))
 
--- Screenshot
+-- Screenshot & Recording
 
 hl.bind("Print", hl.dsp.exec_cmd("screenshot area"))
 hl.bind("SHIFT + Print", hl.dsp.exec_cmd("screenshot window"))
 hl.bind("CTRL + Print", hl.dsp.exec_cmd("grim -g \"$(slurp)\" - | satty --filename -"))
+hl.bind(mainMod .. " + R", hl.dsp.exec_cmd("qs ipc call recording toggle"))
 
 -- Power
 
