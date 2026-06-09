@@ -90,6 +90,7 @@ hl.bind(mainMod .. " + S", hl.dsp.exec_cmd("qs ipc call settings toggle"))
 hl.bind(mainMod .. " + P", hl.dsp.exec_cmd("qs ipc call nexus toggle"))
 hl.bind(mainMod .. " + D", hl.dsp.exec_cmd("qs ipc call dashboard toggle"))
 hl.bind(mainMod .. " + ALT + C", hl.dsp.exec_cmd("qs ipc call clipboard toggle"))
+hl.bind(mainMod .. " + TAB", hl.dsp.exec_cmd("qs ipc call overview toggle"))
 
 -- Screenshot & Recording
 
@@ -159,7 +160,7 @@ for _, item in ipairs(directions) do
     hl.bind(mainMod .. " + " .. "CTRL" .. " + " .. item.key, hl.dsp.window.swap({ direction = item.dir }))
 end
 
-hl.bind(mainMod .. " + Tab", hl.dsp.focus({ workspace = "previous" }))
+-- hl.bind(mainMod .. " + Tab", hl.dsp.focus({ workspace = "previous" }))
 hl.bind(mainMod .. " + W", hl.dsp.group.toggle())
 
 -- Workspaces

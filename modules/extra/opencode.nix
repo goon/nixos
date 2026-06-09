@@ -26,7 +26,7 @@
             };
             build = {
               mode = "primary";
-              model = "opencode-go/minimax-m2.5";
+              model = "opencode-go/deepseek-v4-flash";
             };
           };
         };
