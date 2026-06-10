@@ -2,7 +2,11 @@
 
 <div align="center">
 
-![Commits](https://img.shields.io/github/commit-activity/m/goon/nixos?style=for-the-badge&labelColor=%231e1e2e&color=%23cba6f7) 
+![NixOS](https://img.shields.io/badge/NixOS-Config-blue?style=for-the-badge&logo=nixos&logoColor=white&labelColor=%231e1e2e&color=%23cba6f7)
+![Stars](https://img.shields.io/github/stars/goon/nixos?style=for-the-badge&labelColor=%231e1e2e&color=%23cba6f7)
+![Last Commit](https://img.shields.io/github/last-commit/goon/nixos?style=for-the-badge&labelColor=%231e1e2e&color=%23cba6f7)
+![Repo Size](https://img.shields.io/github/repo-size/goon/nixos?style=for-the-badge&labelColor=%231e1e2e&color=%23cba6f7)
+![Commits](https://img.shields.io/github/commit-activity/m/goon/nixos?style=for-the-badge&labelColor=%231e1e2e&color=%23cba6c7)
 
 ![preview](assets/goonix.png)
 
