@@ -88,6 +88,6 @@ Due to my dementia I may have missed many. Regardless, I am thankful.
 
 ## License 
 
-This repository is licensed under the **[MIT LICENSE](LICENSE)**. 
+This repository is licensed under the **[MIT LICENSE](/LICENSE)**. 
 
 <p align="center"><img src="https://raw.githubusercontent.com/catppuccin/catppuccin/main/assets/footers/gray0_ctp_on_line.svg?sanitize=true" /></p>
