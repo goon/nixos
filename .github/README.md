@@ -96,7 +96,7 @@ The formatter module at `modules/lib/formatter.nix` is passed through `treefmt-n
 
 2. **Generate Hardware Configuration:**
    ```bash
-   nixos-generate-config --show-hardware-config > host/hardware-configuration.nix
+   nixos-generate-config --show-hardware-config > hosts/desktop/hardware-configuration.nix
    ```
 
 3. **Rebuild:**
