@@ -1,6 +1,8 @@
 # goon/nixos 
 
 <div align="center">
+<img src="./assets/nix.png" width="100px">
+<br></br>
 
 ![NixOS](https://img.shields.io/badge/NixOS-Config-blue?style=for-the-badge&logo=nixos&logoColor=white&labelColor=%231e1e2e&color=%23cba6f7)
 ![Stars](https://img.shields.io/github/stars/goon/nixos?style=for-the-badge&labelColor=%231e1e2e&color=%23cba6f7)
