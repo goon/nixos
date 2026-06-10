@@ -33,7 +33,7 @@ Oh look, another blazingly mid **NixOS** configuration with a dendritic first de
 
 ## Modules 
 
-Every `.nix` file under `modules/` is automatically discovered and imported by `modules/recursive.nix`, preventing the need for manual imports. Most modules follow a **on by default** format. To disable a feature or module on a given host, `module.<name>.enable = false;` can be set.
+Every `.nix` file under `modules/` is automatically discovered and imported by `modules/lib/recursive.nix`, preventing the need for manual imports. The importer skips private files prefixed with `_` or `.`, and the `/lib/` directory itself. Most modules follow a **on by default** format. To disable a feature or module on a given host, `module.<name>.enable = false;` can be set.
 
 Hosts are formed by combining the auto discovered modules with host specific overrides in `host/default.nix`. Where the host file serves as a **dendritic dashboard** for enabling hardware support, selecting a window manager and documenting which modules are explicitly enabled or disabled.
 
