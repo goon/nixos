@@ -8,7 +8,7 @@
 
 </div>
 
-**NixOS** configuration designed for a single host featuring flakes and home manager.
+Just another blazingly mid **NixOS** configuration with automatic module discovery featuring **flakes** and **home manager** targetting **Hyprland**. 
 
 > [!IMPORTANT]
 > This is my **personal** NixOS configuration, shared for reference and inspiration **NOT** adoption. 
@@ -23,21 +23,6 @@
 > 2. Understand what each module does. 
 > 3. Adapt it to your specific use case.
 
-## Components 
-
-| Component                                                      | Link                                                                                                                |
-| -------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------- |
-| **Window Manager**                                             | [Hyprland][Hyprland]                                                                            |
-| **Terminal Emulator**                                          | [Kitty][Kitty]                                                                                                      |
-| **Display Manager**                                            | [Ly][Ly]                                                                                                            |
-| **File Manager**                                               | [Yazi][Yazi] & [Nautilus][Nautilus]                                                                                 |
-| **Shell**                                                      | Zsh & [Starship][Starship]                                                                                          |
-| **Media Player**                                               | [Totem][Totem]                                                                                                      |
-| **Editor**                                                | [Neovim][Neovim]                                                                                                    |
-| **Image Viewer**                                               | [Loupe][Loupe]                                                                                                      |
-| **Screen Recording**                                           | [OBS][OBS]                                                                                                          |
-| **Bar / Notifications / Launcher / Wallpaper**          | Made with [Quickshell][Quickshell]
-
 ## Structure 
 
 - `flake.nix` & `flake.lock` define the entry point and lock dependencies.  
@@ -46,14 +31,20 @@
 - `scripts/` contains helper scripts.
 - `wallpapers/` collection of wallpapers for your viewing pleasure.
 
-## Setup
+## Modules 
+
+Every `.nix` file under `modules/` is automatically discovered and imported by `modules/recursive.nix`, preventing the need for manual imports. 
+
+Most modules follow a **default-on** strategy. To disable a feature or module on a given host, `module.<name>.enable = false;` can be set.
+
+Hosts are formed by combining the auto discovered modules with host specific overrides in `host/default.nix`. Where the host file serves as a **dendritic dashboard** for enabling hardware support, selecting a window manager and documenting which modules are explicitly enabled or disabled.
+
+## Deployment
 
 1. **Clone:** 
    ```bash
    nix-shell -p git
-
    git clone --recursive https://github.com/goon/nixos ~/.nixos
-   
    cd ~/.nixos
 
    ```
@@ -91,18 +82,3 @@ Due to my dementia I may have missed many. Regardless, I am thankful.
 This repository is licensed under the **[MIT LICENSE](LICENSE)**. 
 
 <p align="center"><img src="https://raw.githubusercontent.com/catppuccin/catppuccin/main/assets/footers/gray0_ctp_on_line.svg?sanitize=true" /></p>
-
-<!-- Links -->
-
-[Hyprland]: https://hypr.land/
-[Mango]: https://mangowm.github.io/
-[Kitty]: https://github.com/kovidgoyal/kitty
-[Ly]: https://github.com/fairyglade/ly
-[Yazi]: https://github.com/sxyazi/yazi
-[Nautilus]: https://github.com/GNOME/nautilus
-[Starship]: https://github.com/starship/starship
-[Totem]: https://github.com/GNOME/totem
-[Neovim]: https://github.com/neovim/neovim
-[Loupe]: https://github.com/GNOME/loupe
-[OBS]: https://github.com/obsproject/obs-studio
-[Quickshell]: https://github.com/quickshell-mirror/quickshell
