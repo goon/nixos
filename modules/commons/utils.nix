@@ -15,6 +15,7 @@
       {
         home.packages = with pkgs; [
           fd
+          gum
           ripgrep
           wget
           curl
