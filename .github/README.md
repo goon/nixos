@@ -25,13 +25,19 @@ Oh look, another blazingly mid **NixOS** configuration with a dendritic first de
 
 ## Structure 
 
-- `flake.nix` & `flake.lock` define the entry point and lock dependencies.  
-- `host/` contains host specific configuration e.g. `hardware-configuration`. 
-- `modules/` contains nix and home manager modules.
-- `scripts/` contains helper scripts.
-- `wallpapers/` collection of wallpapers for your viewing pleasure.
+- `flake.nix` & `flake.lock` — Define the entry points and locks dependencies. 
+- `host/` —  Contains host specific configuration e.g. `hardware-configuration`. 
+- `modules/` — Contains nix and home manager modules.
+- `scripts/` — Contains various `bash` scripts.
+- `wallpapers/` — Collection of wallpapers for your viewing pleasure.
 
 ## Modules 
+
+- `modules/commons` — Universal Configurations
+- `modules/core` — Device & Hardware Configurations
+- `modules/extra` — Software Configurations
+- `modules/lib` — Helper Scripts
+- `modules/session` — Window Managers & Shell
 
 Every `.nix` file under `modules/` is automatically discovered and imported by `modules/lib/recursive.nix`, preventing the need for manual imports. The importer skips private files prefixed with `_` or `.`, and the `/lib/` directory itself. Most modules follow a **on by default** format. To disable a feature or module on a given host, `module.<name>.enable = false;` can be set.
 
