@@ -91,7 +91,7 @@ The formatter module at `modules/lib/formatter.nix` is passed through `treefmt-n
 
 
 - The configuration expects the repository to live in `$HOME/.nixos`
-- If your `username` or `repoPath` differs from the defaults, they can be updated in `modules/globals.nix`.
+- Your `username` and/or `repoPath` need to be updated, they can be updated in `modules/globals.nix`.
 - The `--recursive` flag ensures the `yaks` quickshell submodule is pulled.
 
 2. **Generate Hardware Configuration:**
