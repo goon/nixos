@@ -8,7 +8,7 @@
   # ========== Modules (Dendritic Dashboard) ==========
 
   # [1] Hardware Support
-  # module.radeon.enable = false; # already default-off
+  # module.radeon.enable = false; 
 
   # [2] Session (The Switch)
   module.desktop.windowmanager = "mango";
@@ -40,6 +40,7 @@
   # module.yazi.enable = false;
 
   # ========== Virtualisation ==========
+
   virtualisation.vmware.guest.enable = true;
   services.qemuGuest.enable = true;
   services.spice-vdagentd.enable = true;
