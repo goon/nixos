@@ -88,6 +88,8 @@ The formatter module at `modules/lib/formatter.nix` is passed through `treefmt-n
    sudo nix flake update
    ```
 
+
+
 ## Credits
 
 Thank you to the countless Nix OS configurations that I ~~copied~~ learnt from. 
