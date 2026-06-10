@@ -10,8 +10,6 @@
 
 Oh look, another blazingly mid **NixOS** configuration with a dendritic first design featuring **flakes** and **home manager** with automatic module discovery.
 
-Just another blazingly mid **NixOS** configuration with automatic module discovery featuring **flakes** and **home manager** targetting **Hyprland**. 
-
 > [!IMPORTANT]
 > This is my **personal** NixOS configuration, shared for reference and inspiration **NOT** adoption. 
 >
