@@ -14,38 +14,44 @@ error() { echo -e "${RE}[ERROR]${NC} $1"; exit 1; }
 
 command -v gum &>/dev/null || error "gum is required but not installed."
 
+COG=$'\uF013'
+FLASK=$'\uF0C3'
+ARROWS=$'\uF021'
+TRASH=$'\uF1F8'
+LIST=$'\uF0CB'
+LINE='│'
+
 choice=$(gum choose \
-    --header="  Nix Operations" \
-    --cursor=" " \
-    "  Rebuild" \
-    "  Test" \
-    "  Update" \
-    "  Collect Garbage" \
-    "  List Generations")
+    --cursor " ❯" \
+    "${LINE} ${COG}  Rebuild" \
+    "${LINE} ${FLASK}  Test" \
+    "${LINE} ${ARROWS}  Update" \
+    "${LINE} ${TRASH}  Collect Garbage" \
+    "${LINE} ${LIST}  List Generations")
 
 case "$choice" in
-    "  Rebuild")
+    *Rebuild)
         info "Rebuilding system..."
-        sudo nh os switch
+        nh os switch
         success "Rebuild complete!"
         ;;
-    "  Test")
+    *Test)
         info "Testing configuration..."
-        sudo nh os test
+        nh os test
         success "Test complete!"
         ;;
-    "  Update")
+    *Update)
         info "Updating flake inputs and rebuilding..."
-        sudo nh os switch -u
+        nh os switch -u
         success "Update complete!"
         ;;
-    "  Collect Garbage")
+    *"Collect Garbage")
         info "Collecting garbage..."
-        sudo nh clean all --keep 8
+        nh clean all --keep 8
         success "Garbage collection complete!"
         ;;
-    "  List Generations")
-        nix-env --list-generations --profile /nix/var/nix/profiles/system | head -50
+    *"List Generations")
+        sudo nix-env --list-generations --profile /nix/var/nix/profiles/system | head -50
         ;;
     *)
         warn "No option selected."
