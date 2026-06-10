@@ -54,12 +54,12 @@
    git clone --recursive https://github.com/goon/nixos ~/.nixos
    cd ~/.nixos
 
-    # The configuration expects the repository to be located under $HOME/.nixos. 
-    # This can be overidden in the modules/options.nix file under "repoName".
-    # You should update the "username" in modules/options.nix to match your user.
-
-    # The --recursive flag pulls the quickshell git submodule. 
+    # The --recursive flag ensures the 'yaks' quickshell submodule is pulled.
    ```
+> [!IMPORTANT]
+> The configuration expects the repository to be located under `$HOME/.nixos`. 
+>
+> If your `username` or `repoPath` differs from the defaults, they can be updated in `modules/globals.nix`.
 
 2. **Generate Hardware Configuration:**
    ```bash
