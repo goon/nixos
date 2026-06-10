@@ -61,6 +61,7 @@ The formatter module at `modules/lib/formatter.nix` is passed through `treefmt-n
 ## Deployment
 
 1. **Clone:** 
+
    ```bash
    nix-shell -p git
    git clone --recursive https://github.com/goon/nixos ~/.nixos
