@@ -7,6 +7,8 @@
 ![Repo Size](https://img.shields.io/github/repo-size/goon/nixos?style=for-the-badge&labelColor=%231e1e2e&color=%23cba6f7)
 ![Commits](https://img.shields.io/github/commit-activity/m/goon/nixos?style=for-the-badge&labelColor=%231e1e2e&color=%23cba6c7)
 
+<p align="center"><img src="https://raw.githubusercontent.com/catppuccin/catppuccin/main/assets/footers/gray0_ctp_on_line.svg?sanitize=true" /></p>
+
 ![preview](assets/goonix.png)
 
 </div>
