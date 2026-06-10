@@ -4,17 +4,15 @@
 <img src="./assets/nix.png" width="100px">
 <br></br>
 
-![NixOS](https://img.shields.io/badge/NixOS-Config-blue?style=for-the-badge&logo=nixos&logoColor=white&labelColor=%231e1e2e&color=%23cba6f7)
+![NixOS](https://img.shields.io/badge/NixOS-unstable-blue?style=for-the-badge&logo=nixos&logoColor=white&labelColor=%231e1e2e&color=%23cba6f7)
+[![License](https://img.shields.io/badge/License-MIT-blue?style=for-the-badge&labelColor=%231e1e2e&color=%23cba6f7)](/LICENSE)
 ![Stars](https://img.shields.io/github/stars/goon/nixos?style=for-the-badge&labelColor=%231e1e2e&color=%23cba6f7)
 ![Commits](https://img.shields.io/github/commit-activity/m/goon/nixos?style=for-the-badge&labelColor=%231e1e2e&color=%23cba6c7)
 
 <p align="center"><img src="https://raw.githubusercontent.com/catppuccin/catppuccin/main/assets/footers/gray0_ctp_on_line.svg?sanitize=true" /></p>
-
-![preview](assets/goonix.png)
-
 </div>
 
-Oh look, another blazingly mid **NixOS** configuration with a dendritic first design featuring **flakes** and **home manager** with automatic module discovery.
+Another **blazingly mid** nix configuration with an overengineered dendritic architecture built on **flakes** and **home manager** with automatic module discovery, sane defaults, powered by **Hyprland** (or **Mango**), and held together by hopes, dreams and vibes.
 
 > [!IMPORTANT]
 > This is my **personal** NixOS configuration, shared for reference and inspiration **NOT** adoption. 
@@ -28,6 +26,24 @@ Oh look, another blazingly mid **NixOS** configuration with a dendritic first de
 > 1. Review the code thoroughly.
 > 2. Understand what each module does. 
 > 3. Adapt it to your specific use case.
+
+## Table of Contents
+
+- [Secreenshots](#screenshots)
+- [Structure](#structure)
+- [Modules](#modules)
+- [Formatting](#formatting)
+- [Deployment](#deployment)
+- [Credits](#credits)
+- [License](#license)
+
+## Screenshots 
+
+<div align="center">
+
+![preview](assets/goonix.png)
+
+</div>
 
 ## Structure 
 
@@ -44,6 +60,8 @@ Oh look, another blazingly mid **NixOS** configuration with a dendritic first de
 - `modules/extra` — Software Configurations
 - `modules/lib` — Helper Scripts
 - `modules/session` — Window Managers & Shell
+
+Modules follow a concern / context first structure. For example, the `git.nix` file contains the installation of `git`, home manager configurations for it, `git` shell aliases and related applications like `lazygit` and `delta`.
 
 Every `.nix` file under `modules/` is automatically discovered and imported by `modules/lib/recursive.nix`, preventing the need for manual imports. The importer skips private files prefixed with `_` or `.`, and the `/lib/` directory itself. Most modules follow a **on by default** format. To disable a feature or module on a given host, `module.<name>.enable = false;` can be set.
 
