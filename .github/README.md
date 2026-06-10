@@ -48,7 +48,7 @@ Another **blazingly mid** nix configuration with an overengineered dendritic arc
 ## Structure 
 
 - `flake.nix` & `flake.lock` — Define the entry points and locks dependencies. 
-- `host/` —  Contains host specific configuration e.g. `hardware-configuration`. 
+- `hosts/` —  Contains host specific configuration.
 - `modules/` — Contains nix and home manager modules.
 - `scripts/` — Contains various `bash` scripts.
 - `wallpapers/` — Collection of wallpapers for your viewing pleasure.
