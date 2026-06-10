@@ -15,7 +15,7 @@
 Another **blazingly mid** nix configuration with an overengineered dendritic architecture built on **flakes** and **home manager** with automatic module discovery, sane defaults, powered by **Hyprland** (or **Mango**), and held together by hopes, dreams and vibes.
 
 > [!IMPORTANT]
-> This is my **personal** NixOS configuration, shared for reference and inspiration **NOT** adoption. 
+> This is a **personal** configuration, shared for reference and inspiration **NOT** adoption. 
 >
 > - This configuration is constantly evolving. It is prone to drastic and likely **breaking** changes.
 > - Features may be partially implemented or entirely broken.
