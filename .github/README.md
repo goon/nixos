@@ -47,6 +47,17 @@ Every `.nix` file under `modules/` is automatically discovered and imported by `
 
 Hosts are formed by combining the auto discovered modules with host specific overrides in `host/default.nix`. Where the host file serves as a **dendritic dashboard** for enabling hardware support, selecting a window manager and documenting which modules are explicitly enabled or disabled.
 
+## Formatting 
+
+The code quality and formatting is enforced via [**treefmt-nix**](https://github.com/numtide/treefmt-nix), utilising three tools. 
+
+- [`nixfmt`](https://github.com/NixOS/nixfmt) — The standard Nix formatter, ensuring consistent whitespace, line breaks and attribute ordering. 
+- [`deadnix`](https://github.com/astro/deadnix) — Scans for unused `let` bindings, unreferenced function arguments and dead `with` statements.
+- [`statix`](https://github.com/nerdypepper/statix) — Analyses expressions for anti-patterns e.g. unused `args`, unnecessary `with` statements and deprecated idioms.
+
+The formatter module at `modules/lib/formatter.nix` is passed through `treefmt-nix`'s `evalModule`, which outputs a combined wrapper binary. The wrapper runs all three tools in sequence.
+
+
 ## Deployment
 
 1. **Clone:** 
@@ -81,7 +92,7 @@ Hosts are formed by combining the auto discovered modules with host specific ove
 
 Thank you to the countless Nix OS configurations that I ~~copied~~ learnt from. 
 
-namishh - seniormatt - fufexan - frost-pheonix - anotherhadi - vic - vimjoyer - bad3r - mitchellh - misterio77 - max-baz - gvolpe - librephoenix - sioodmy
+namishh — seniormatt — fufexan — frost-pheonix — anotherhadi — vic — vimjoyer — bad3r — mitchellh — misterio77 — max-baz — gvolpe — librephoenix — sioodmy
 
 Due to my dementia I may have missed many. Regardless, I am thankful. 
 
