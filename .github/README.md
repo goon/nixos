@@ -29,7 +29,7 @@ Another **blazingly mid** nix configuration with an overengineered dendritic arc
 
 ## Table of Contents
 
-- [Secreenshots](#screenshots)
+- [Screenshots](#screenshots)
 - [Structure](#structure)
 - [Modules](#modules)
 - [Formatting](#formatting)
