@@ -29,6 +29,8 @@
           totem
           loupe
           decibels
+          fragments 
+          switcheroo
         ];
 
         dconf.settings = {
