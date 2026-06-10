@@ -51,15 +51,17 @@
 1. **Clone:** 
    ```bash
    nix-shell -p git
+
    git clone --recursive https://github.com/goon/nixos ~/.nixos
+   
    cd ~/.nixos
 
-    # The --recursive flag ensures the 'yaks' quickshell submodule is pulled.
    ```
-> [!IMPORTANT]
-> The configuration expects the repository to be located under `$HOME/.nixos`. 
->
-> If your `username` or `repoPath` differs from the defaults, they can be updated in `modules/globals.nix`.
+
+
+- The configuration expects the repository to live in `$HOME/.nixos`
+- If your `username` or `repoPath` differs from the defaults, they can be updated in `modules/globals.nix`.
+- The `--recursive` flag ensures the `yaks` quickshell submodule is pulled.
 
 2. **Generate Hardware Configuration:**
    ```bash
