@@ -16,7 +16,7 @@
   };
 
   options.module.wayland.enable =
-    lib.mkEnableOption "Wayland Utilities (cliphist, wl-clipboard, etc.)"
+    lib.mkEnableOption "Wayland Utilities"
     // {
       default = true;
     };
