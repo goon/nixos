@@ -29,7 +29,6 @@
         remotePlay.openFirewall = true;
         dedicatedServer.openFirewall = true;
         localNetworkGameTransfers.openFirewall = true;
-        protontricks.enable = true;
         extraCompatPackages = [ pkgs.proton-ge-bin ];
       };
 
