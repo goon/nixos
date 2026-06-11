@@ -160,7 +160,7 @@ for _, item in ipairs(directions) do
     hl.bind(mainMod .. " + " .. "CTRL" .. " + " .. item.key, hl.dsp.window.swap({ direction = item.dir }))
 end
 
--- hl.bind(mainMod .. " + Tab", hl.dsp.focus({ workspace = "previous" }))
+hl.bind(mainMod .. " + Tab", hl.dsp.focus({ workspace = "previous" }))
 hl.bind(mainMod .. " + W", hl.dsp.group.toggle())
 
 -- Workspaces
