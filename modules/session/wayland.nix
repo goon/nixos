@@ -15,11 +15,9 @@
     description = "The window manager to use.";
   };
 
-  options.module.wayland.enable =
-    lib.mkEnableOption "Wayland Utilities"
-    // {
-      default = true;
-    };
+  options.module.wayland.enable = lib.mkEnableOption "Wayland Utilities" // {
+    default = true;
+  };
 
   config = lib.mkIf config.module.wayland.enable {
     environment.sessionVariables = {
