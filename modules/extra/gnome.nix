@@ -29,7 +29,7 @@
           totem
           loupe
           decibels
-          fragments 
+          fragments
           switcheroo
         ];
 
