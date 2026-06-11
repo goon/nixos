@@ -8,7 +8,7 @@
   # ========== Modules (Dendritic Dashboard) ==========
 
   # [1] Hardware Support
-  # module.radeon.enable = false; 
+  # module.radeon.enable = false;
 
   # [2] Session (The Switch)
   module.desktop.windowmanager = "mango";
