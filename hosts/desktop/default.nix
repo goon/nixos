@@ -39,8 +39,8 @@
   # module.whogle.enable = false;
   # module.yazi.enable = false;
 
-  fileSystems."/mnt/games" = {
-    device = "/dev/disk/by-uuid/c6a3965a-5bf3-451c-934e-b391969c180a";
+  fileSystems."/mnt/rocket" = {
+    device = "/dev/disk/by-uuid/f6e17653-e430-487b-ac24-0c509fba3968";
     fsType = "ext4";
     options = [
       "defaults"
