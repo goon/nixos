@@ -26,7 +26,7 @@
       overrides = {
         "com.usebottles.bottles" = {
           Context.filesystems = [
-            "/mnt/games"
+            "/mnt/rocket"
             "xdg-data/Steam:ro"
           ];
           Environment = {
