@@ -62,6 +62,7 @@
             file://${config.globals.paths.home}/Music Music
             file://${config.globals.paths.home}/Videos Videos
             file://${config.globals.paths.config} Config
+            file:///mnt/rocket Rocket
           '';
         };
       }
