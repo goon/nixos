@@ -15,6 +15,8 @@
   };
 
   config = lib.mkIf config.module.gaming.enable {
+    nixpkgs.overlays = [ inputs.millennium.overlays.default ];
+
     # ========== System Packages ==========
     environment.systemPackages = with pkgs; [
       mangohud
@@ -26,6 +28,7 @@
     programs = {
       steam = {
         enable = true;
+        package = pkgs.millennium-steam;
         remotePlay.openFirewall = true;
         dedicatedServer.openFirewall = true;
         localNetworkGameTransfers.openFirewall = true;
