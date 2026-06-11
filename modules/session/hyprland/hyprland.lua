@@ -31,7 +31,7 @@ hl.config({
         gaps_in = 5,
         gaps_out = 10,
         border_size = 2,
-        ["col.active_border"] = { colors = { "rgba(d4be98ff)", "rgba(7c6f64ff)" }, angle = 45 },
+        ["col.active_border"] = { colors = { "rgba(707389ff)", "rgba(555560ff)" }, angle = 45 },
         ["col.inactive_border"] = "rgba(252535ff)",
         layout = "scrolling",
     },
@@ -86,11 +86,11 @@ hl.bind(mainMod .. " + M", hl.dsp.exec_cmd("obsidian"))
 hl.bind(mainMod .. " + T", hl.dsp.exec_cmd("kitty --class float"))
 hl.bind(mainMod .. " + SPACE", hl.dsp.exec_cmd("qs ipc call launcher toggle"))
 hl.bind(mainMod .. " + G", hl.dsp.exec_cmd("qs ipc call wallpaper toggle"))
-hl.bind(mainMod .. " + S", hl.dsp.exec_cmd("qs ipc call settings toggle"))
+hl.bind(mainMod .. " + Z", hl.dsp.exec_cmd("qs ipc call settings toggle"))
+hl.bind(mainMod .. " + S", hl.dsp.workspace.toggle_special("scratchpad"))
 hl.bind(mainMod .. " + P", hl.dsp.exec_cmd("qs ipc call nexus toggle"))
 hl.bind(mainMod .. " + D", hl.dsp.exec_cmd("qs ipc call dashboard toggle"))
 hl.bind(mainMod .. " + ALT + C", hl.dsp.exec_cmd("qs ipc call clipboard toggle"))
-hl.bind(mainMod .. " + TAB", hl.dsp.exec_cmd("qs ipc call overview toggle"))
 
 -- Screenshot & Recording
 
@@ -200,6 +200,23 @@ for _, match_criteria in ipairs(float_apps) do
     })
 end
 
+-- Special Workspace Apps
+
+hl.workspace_rule({
+    workspace = "special:scratchpad",
+    layout = "dwindle",
+})
+
+hl.window_rule({
+    match = { class = "vesktop" },
+    workspace = "special:scratchpad",
+})
+
+hl.window_rule({
+    match = { class = "Spotify" },
+    workspace = "special:scratchpad",
+})
+
 -- Layer Rules 
 
 hl.layer_rule({
@@ -217,4 +234,12 @@ hl.on("hyprland.start", function()
     hl.exec_cmd("setpriv --ambient-caps -all vesktop")
     hl.exec_cmd("setpriv --ambient-caps -all spotify")
     hl.exec_cmd("systemctl --user start hyprpolkitagent")
+end)
+
+-- Event Listeners
+hl.on("workspace.active", function()
+    local active_special = hl.get_active_special_workspace()
+    if active_special and active_special ~= "" and active_special ~= false then
+        hl.dispatch(hl.dsp.workspace.toggle_special("scratchpad"))
+    end
 end)
