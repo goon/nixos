@@ -36,7 +36,6 @@
   # module.opencode.enable = false;
   # module.quickshell.enable = false;
   # module.spicetify.enable = false;
-  # module.whogle.enable = false;
   # module.yazi.enable = false;
 
   fileSystems."/mnt/rocket" = {
