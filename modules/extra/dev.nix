@@ -13,6 +13,10 @@
   config = lib.mkIf config.module.dev.enable {
     home-manager.sharedModules = [
       {
+        home.packages = with pkgs; [
+          antigravity
+        ];
+
         programs.direnv = {
           enable = true;
           nix-direnv.enable = true;
