@@ -7,6 +7,11 @@
 {
   nixpkgs.config.allowUnfree = true;
 
+  documentation = {
+    enable = false;
+    man.enable = false;
+  };
+
   nix = {
     settings = {
       experimental-features = [
