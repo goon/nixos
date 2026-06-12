@@ -1,25 +1,12 @@
 #!/usr/bin/env bash
 
-# NixOS Bootstrap Script
-#
-# Purpose:
-#   This script automates the initial deployment of this NixOS configuration on a new system.
-#   It handles hostname configuration, imports the system's hardware configuration, and 
-#   performs the first rebuild using optimized binary caches.
-#
+# NixOS Automated Bootstrap Script
+# This script automates the hardware configuration and build process for a fresh install.
 # Usage:
-#   1. Boot into a fresh NixOS installation (Graphical or Minimal).
-#   2. Clone this repository: git clone <repo_url> ~/.nixos
+#   1. Boot into a fresh NixOS installation.
+#   2. Clone this repository: nix-shell -p git --run "git clone --recursive https://github.com/goon/nixos ~/.nixos"
 #   3. Run this script: cd ~/.nixos && ./scripts/bootstrap
-#
-# Features:
-#   - Verifies environment (NixOS and correct directory).
-#   - Prompts for and updates the system hostname across the configuration.
-#   - Automatically extracts and applies binary caches from modules/core/nix.nix.
-#   - Imports /etc/nixos/hardware-configuration.nix.
-#
 
-# Exit on error
 set -e
 
 # --- Configuration & Colors ---
@@ -29,106 +16,47 @@ YE='\033[0;33m'
 BL='\033[0;34m'
 NC='\033[0m'
 
-# --- Functions ---
 info() { echo -e "${BL}[INFO]${NC} $1"; }
 success() { echo -e "${GR}[SUCCESS]${NC} $1"; }
 warn() { echo -e "${YE}[WARN]${NC} $1"; }
 error() { echo -e "${RE}[ERROR]${NC} $1"; exit 1; }
-
-# 1. Environment Verification
-info "Verifying environment..."
 
 if [ ! -f "/etc/NIXOS" ]; then
     error "This script must be run on NixOS."
 fi
 
 if [ ! -f "flake.nix" ] || [ ! -d "modules" ]; then
-    error "This script must be run from the root of the NixOS configuration directory."
+    error "This script must be run from the root of the NixOS configuration directory (cd ~/.nixos)."
 fi
 
-# 2. Hostname Configuration
-DEFAULT_HOSTNAME=$(hostname)
-printf "${YE}Enter desired hostname [default: %s]: ${NC}" "$DEFAULT_HOSTNAME"
-read -r NEW_HOSTNAME
-NEW_HOSTNAME=${NEW_HOSTNAME:-$DEFAULT_HOSTNAME}
+# Ask for the administrator password upfront
+info "Asking for sudo password upfront..."
+sudo -v
 
-info "Configuring system for host: ${GR}$NEW_HOSTNAME${NC}"
+# Keep-alive: update existing sudo time stamp until the script has finished
+while true; do sudo -n true; sleep 60; kill -0 "$$" || exit; done 2>/dev/null &
 
-# Find the old hostname (attribute in flake.nix nixosConfigurations)
-# Searches for the word followed by ' = nixosSystem'
-OLD_HOSTNAME=$(sed -n 's/^[[:space:]]*\([[:alnum:]_-]*\)[[:space:]]*=[[:space:]]*nixosSystem.*/\1/p' flake.nix | head -n 1)
-OLD_HOSTNAME=${OLD_HOSTNAME:-"desktop"}
+# Ensure submodules are up to date in case the user forgot --recursive during clone
+info "Checking submodules..."
+nix-shell -p git --run "git submodule update --init --recursive"
 
-if [ "$OLD_HOSTNAME" != "$NEW_HOSTNAME" ]; then
-    info "Renaming host from $OLD_HOSTNAME to $NEW_HOSTNAME..."
-    
-    # Update flake.nix
-    sed -i "s/$OLD_HOSTNAME = nixosSystem/$NEW_HOSTNAME = nixosSystem/g" flake.nix
-    
-    # Update host/default.nix
-    if [ -f "host/default.nix" ]; then
-        sed -i "s/networking.hostName = \".*\";/networking.hostName = \"$NEW_HOSTNAME\";/g" host/default.nix
-    fi
-    success "Hostname updated in configuration files."
-else
-    info "Hostname remains unchanged ($NEW_HOSTNAME)."
-fi
 
-# 3. Dynamic Cache Extraction
-info "Extracting binary caches from modules/core/nix.nix..."
+info "We are about to install the 'desktop' host."
+read -p "${YE}Press enter to continue or Ctrl+C to abort...${NC}"
 
-NIX_CONFIG="modules/core/nix.nix"
-if [ ! -f "$NIX_CONFIG" ]; then
-    error "Could not find $NIX_CONFIG to extract caches."
-fi
+# 4. Generate Hardware Configuration
+info "Generating hardware configuration for 'desktop'..."
+mkdir -p hosts/desktop
+nixos-generate-config --show-hardware-config > hosts/desktop/hardware-configuration.nix
+success "Hardware configuration saved to hosts/desktop/hardware-configuration.nix"
 
-# Use sed address ranges to extract between [ and ];
-SUBSTITUTERS=$(sed -n '/substituters = \[/,/];/p' "$NIX_CONFIG" | grep '"' | sed 's/.*"\(.*\)".*/\1/' | tr '\n' ' ')
-TRUSTED_KEYS=$(sed -n '/trusted-public-keys = \[/,/];/p' "$NIX_CONFIG" | grep '"' | sed 's/.*"\(.*\)".*/\1/' | tr '\n' ' ')
-
-if [ -z "$SUBSTITUTERS" ] || [ -z "$TRUSTED_KEYS" ]; then
-    warn "Failed to extract caches dynamically. Proceeding without extra caches."
-else
-    success "Extracted substituters: $SUBSTITUTERS"
-fi
-
-# 4. Hardware Configuration Import
-info "Importing hardware configuration from /etc/nixos/hardware-configuration.nix..."
-
-if [ -f "/etc/nixos/hardware-configuration.nix" ]; then
-    cp /etc/nixos/hardware-configuration.nix host/hardware-configuration.nix
-    success "Hardware configuration imported."
-else
-    warn "/etc/nixos/hardware-configuration.nix not found. Skipping import (ensure host/hardware-configuration.nix is correct)."
-fi
-
-# 5. Final Confirmation
-echo -e "\n${YE}Ready to perform initial rebuild.${NC}"
-echo -e "Host: ${GR}$NEW_HOSTNAME${NC}"
-echo -e "Flake: ${BL}.#$NEW_HOSTNAME${NC}"
-echo ""
-
-read -p "${YE}Proceed with 'nixos-rebuild switch'? [y/N]: ${NC}" CONFIRM
-if [[ ! "$CONFIRM" =~ ^[Yy]$ ]]; then
-    info "Rebuild cancelled. You can manually run:"
-    info "sudo nixos-rebuild switch --flake .#$NEW_HOSTNAME"
-    exit 0
-fi
-
-# 6. Rebuild
+# 5. Rebuild and Switch
 info "Starting NixOS rebuild... this may take a while."
+sudo nixos-rebuild switch --flake .#desktop
 
-REBUILD_CMD="sudo nixos-rebuild switch --flake .#$NEW_HOSTNAME"
-
-if [ -n "$SUBSTITUTERS" ]; then
-    REBUILD_CMD="$REBUILD_CMD --extra-substituters \"$SUBSTITUTERS\""
-fi
-
-if [ -n "$TRUSTED_KEYS" ]; then
-    REBUILD_CMD="$REBUILD_CMD --extra-trusted-public-keys \"$TRUSTED_KEYS\""
-fi
-
-# Execute rebuild
-eval "$REBUILD_CMD"
+# 6. Update Flake Inputs
+info "Updating flake inputs..."
+sudo nix flake update
+success "Flake inputs updated."
 
 success "Bootstrap complete! Your system is now running the new configuration."
