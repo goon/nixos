@@ -10,7 +10,6 @@
       };
       pulse.enable = true;
 
-
     };
 
     mpd = {
