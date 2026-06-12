@@ -39,6 +39,11 @@
     ];
   };
 
+  fileSystems."/mnt/rocket" = {
+    device = "/dev/disk/by-uuid/f6e17653-e430-487b-ac24-0c509fba3968";
+    fsType = "ext4";
+  };
+
   swapDevices = [ ];
 
   nixpkgs.hostPlatform = lib.mkDefault "x86_64-linux";
