@@ -82,6 +82,8 @@ The formatter module at `modules/lib/formatter.nix` is passed through `treefmt-n
 
 ### Script 
 
+1. **Clone**
+
    ```bash
    nix-shell -p git
    git clone --recursive https://github.com/goon/nixos ~/.nixos
@@ -89,11 +91,11 @@ The formatter module at `modules/lib/formatter.nix` is passed through `treefmt-n
 
    ```
 
-2. Run the Bootstrap Script 
+2. **Run the Bootstrap Script **
 
    ```bash
    sudo ./scripts/bootstrap
-   
+
    ```
 
 ### Manual 
