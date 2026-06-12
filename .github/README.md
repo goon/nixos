@@ -80,6 +80,11 @@ The formatter module at `modules/lib/formatter.nix` is passed through `treefmt-n
 
 ## Deployment
 
+> [!NOTE]
+> - The configuration expects the repository to live in `$HOME/.nixos`
+> - Your `username` and/or `repoPath` need to be updated, they can be updated in `modules/globals.nix`.
+> The `--recursive` flag ensures the `yaks` quickshell submodule is pulled.
+
 ### Script 
 
 1. **Clone**
@@ -108,10 +113,6 @@ The formatter module at `modules/lib/formatter.nix` is passed through `treefmt-n
    cd ~/.nixos
 
    ```
-
-- The configuration expects the repository to live in `$HOME/.nixos`
-- Your `username` and/or `repoPath` need to be updated, they can be updated in `modules/globals.nix`.
-- The `--recursive` flag ensures the `yaks` quickshell submodule is pulled.
 
 2. **Generate Hardware Configuration:**
    ```bash
