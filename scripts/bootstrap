@@ -42,7 +42,8 @@ nix-shell -p git --run "git submodule update --init --recursive"
 
 
 info "We are about to install the 'desktop' host."
-read -p "${YE}Press enter to continue or Ctrl+C to abort...${NC}"
+echo -e -n "${YE}Press enter to continue or Ctrl+C to abort...${NC} "
+read -r
 
 # 4. Generate Hardware Configuration
 info "Generating hardware configuration for 'desktop'..."
