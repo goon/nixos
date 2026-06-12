@@ -80,7 +80,7 @@ The formatter module at `modules/lib/formatter.nix` is passed through `treefmt-n
 
 ## Deployment
 
-1. **Clone:** 
+### Script 
 
    ```bash
    nix-shell -p git
@@ -89,6 +89,23 @@ The formatter module at `modules/lib/formatter.nix` is passed through `treefmt-n
 
    ```
 
+2. Run the Bootstrap Script 
+
+   ```bash
+   sudo ./scripts/bootstrap
+   
+   ```
+
+### Manual 
+
+1. **Clone:** 
+
+   ```bash
+   nix-shell -p git
+   git clone --recursive https://github.com/goon/nixos ~/.nixos
+   cd ~/.nixos
+
+   ```
 
 - The configuration expects the repository to live in `$HOME/.nixos`
 - Your `username` and/or `repoPath` need to be updated, they can be updated in `modules/globals.nix`.
