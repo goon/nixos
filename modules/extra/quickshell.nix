@@ -22,6 +22,6 @@ lib.module config "quickshell" true {
 
   home = { config, osConfig, ... }: {
     xdg.configFile."quickshell".source =
-      config.lib.file.mkOutOfStoreSymlink "${osConfig.globals.repoPath}/modules/session/quickshell";
+      config.lib.file.mkOutOfStoreSymlink "${osConfig.globals.repo}/modules/session/quickshell";
   };
 }

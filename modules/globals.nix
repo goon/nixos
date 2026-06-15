@@ -2,7 +2,7 @@
   config,
   lib,
   username,
-  repoPath,
+  repo,
   ...
 }:
 
@@ -12,10 +12,6 @@
   # when they are used in attribute names (like users.users.${username})
 
   config = {
-    _module.args = {
-      username = "michael";
-      repoPath = "/home/${username}/.nixos";
-    };
 
     home-manager = {
       useGlobalPkgs = true;
@@ -48,7 +44,7 @@
       home = lib.opt lib.types.str "/home/${username}" "Absolute path to the user's home directory";
     };
 
-    repoPath = lib.opt lib.types.str repoPath "Absolute path to the flake repository root";
+    repo = lib.opt lib.types.str repo "Absolute path to the flake repository root";
 
     userFonts = {
       sansSerif = lib.opt lib.types.str "Outfit" "global sans-serif font";

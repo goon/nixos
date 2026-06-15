@@ -38,7 +38,7 @@ lib.module config "nix" true {
     programs = {
       nh = {
         enable = true;
-        flake = config.globals.repoPath;
+        flake = config.globals.repo;
         clean = {
           enable = true;
           dates = "weekly";

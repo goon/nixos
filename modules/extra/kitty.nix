@@ -42,14 +42,14 @@ lib.module config "kitty" true {
     };
 
     xdg.configFile."kitty/sessions/nix.session".text = ''
-      cd ${config.globals.repoPath}
+      cd ${config.globals.repo}
       layout splits
       launch nvim
       launch --location=vsplit --bias=40 opencode
     '';
 
     xdg.configFile."kitty/sessions/qs.session".text = ''
-      cd ${config.globals.repoPath}/modules/session/quickshell
+      cd ${config.globals.repo}/modules/session/quickshell
       layout splits
       launch nvim
       launch --location=vsplit --bias=40 opencode

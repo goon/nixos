@@ -34,7 +34,7 @@
           wayland.windowManager.mango.enable = true;
 
           xdg.configFile."mango".source =
-            config.lib.file.mkOutOfStoreSymlink "${osConfig.globals.repoPath}/modules/session/mango";
+            config.lib.file.mkOutOfStoreSymlink "${osConfig.globals.repo}/modules/session/mango";
         }
       )
     ];

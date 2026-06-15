@@ -48,7 +48,7 @@ lib.module config "gtk" true {
     xdg.configFile."gtk-3.0/bookmarks" = {
       force = true;
       text = ''
-        file://${config.globals.repoPath} Nix
+        file://${config.globals.repo} Nix
         file://${config.globals.paths.home}/Downloads Downloads
         file://${config.globals.paths.home}/Documents Documents
         file://${config.globals.paths.home}/Pictures Pictures

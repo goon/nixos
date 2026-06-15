@@ -22,7 +22,7 @@
         }:
         {
           xdg.configFile."hypr".source =
-            config.lib.file.mkOutOfStoreSymlink "${osConfig.globals.repoPath}/modules/session/hyprland";
+            config.lib.file.mkOutOfStoreSymlink "${osConfig.globals.repo}/modules/session/hyprland";
 
           home.packages = with pkgs; [
             hyprpolkitagent
