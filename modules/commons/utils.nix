@@ -6,17 +6,14 @@
 }:
 
 lib.module config "utils" true {
-    home-manager.sharedModules = [
-      {
-        home.packages = with pkgs; [
-          fd
-          gum
-          ripgrep
-          wget
-          curl
-          unzip
-          btop
-          jq
-        ];
-      }
-    ];}
+  userPkgs = with pkgs; [
+    fd
+    gum
+    ripgrep
+    wget
+    curl
+    unzip
+    btop
+    jq
+  ];
+}

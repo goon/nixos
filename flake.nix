@@ -45,9 +45,10 @@
     {
       nixosConfigurations =
         let
-          inherit (nixpkgs.lib) nixosSystem;
-
-          extendedLib = import ./lib/module.nix { inherit (nixpkgs) lib; };
+          extendedLib = import ./lib {
+            inherit inputs;
+            inherit (nixpkgs) lib;
+          };
 
           baseModules = [
             {
@@ -58,18 +59,13 @@
           ]
           ++ (import ./lib/recursive.nix ./modules);
         in
-        {
-          desktop = nixosSystem {
-            specialArgs = { inherit inputs; lib = extendedLib; };
-            system = "x86_64-linux";
-            modules = baseModules ++ [ ./hosts/desktop ];
+        extendedLib.mkHosts ./hosts {
+          system = "x86_64-linux";
+          specialArgs = {
+            inherit inputs;
+            lib = extendedLib;
           };
-
-          sandbox = nixosSystem {
-            specialArgs = { inherit inputs; lib = extendedLib; };
-            system = "x86_64-linux";
-            modules = baseModules ++ [ ./hosts/sandbox ];
-          };
+          inherit baseModules;
         };
 
       formatter = nixpkgs.lib.genAttrs [ "x86_64-linux" ] (

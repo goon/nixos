@@ -7,12 +7,11 @@
 }:
 
 lib.module config "creative" true {
+  config = {
     nixpkgs.overlays = [ inputs.affinity-nix.overlays.default ];
+  };
 
-    home-manager.sharedModules = [
-      {
-        home.packages = [
-          pkgs.affinity-v3
-        ];
-      }
-    ];}
+  userPkgs = [
+    pkgs.affinity-v3
+  ];
+}

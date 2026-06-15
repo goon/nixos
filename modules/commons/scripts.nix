@@ -25,10 +25,7 @@ let
   '';
 in
 lib.module config "scripts" true {
-    home-manager.sharedModules = [
-      {
-        home.packages = [
-          local-scripts
-        ];
-      }
-    ];}
+  userPkgs = [
+    local-scripts
+  ];
+}

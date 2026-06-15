@@ -1,11 +1,17 @@
 {
-  config, lib, pkgs, inputs, ... }:
+  config,
+  lib,
+  pkgs,
+  inputs,
+  ...
+}:
 
 {
   imports = [
     inputs.nix-gaming.nixosModules.pipewireLowLatency
   ];
-} // lib.module config "gaming" true {
+}
+// lib.module config "gaming" true {
   nixpkgs.overlays = [ inputs.millennium.overlays.default ];
 
   # ========== System Packages ==========

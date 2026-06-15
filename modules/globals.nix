@@ -42,77 +42,29 @@
       description = "The state version for both NixOS and Home Manager";
     };
 
-    userTerminal = lib.mkOption {
-      type = lib.types.str;
-      default = "kitty";
-      description = "default terminal emulator";
-    };
+    userTerminal = lib.opt lib.types.str "kitty" "default terminal emulator";
 
     paths = {
-      home = lib.mkOption {
-        type = lib.types.str;
-        default = "/home/${username}";
-        description = "Absolute path to the user's home directory";
-      };
+      home = lib.opt lib.types.str "/home/${username}" "Absolute path to the user's home directory";
     };
 
-    repoPath = lib.mkOption {
-      type = lib.types.str;
-      default = repoPath;
-      description = "Absolute path to the flake repository root";
-    };
+    repoPath = lib.opt lib.types.str repoPath "Absolute path to the flake repository root";
 
     userFonts = {
-      sansSerif = lib.mkOption {
-        type = lib.types.str;
-        default = "Outfit";
-        description = "global sans-serif font";
-      };
-      monospace = lib.mkOption {
-        type = lib.types.str;
-        default = "Kode Mono";
-        description = "global monospace font";
-      };
+      sansSerif = lib.opt lib.types.str "Outfit" "global sans-serif font";
+      monospace = lib.opt lib.types.str "Kode Mono" "global monospace font";
     };
 
     # ========== Default Applications ==========
 
     apps = {
-      browser = lib.mkOption {
-        type = lib.types.str;
-        default = "firefox.desktop";
-        description = "default web browser";
-      };
-      editor = lib.mkOption {
-        type = lib.types.str;
-        default = "nvim.desktop";
-        description = "default text editor";
-      };
-      imageViewer = lib.mkOption {
-        type = lib.types.str;
-        default = "org.gnome.Loupe.desktop";
-        description = "default image viewer";
-      };
-      videoPlayer = lib.mkOption {
-        type = lib.types.str;
-        default = "org.gnome.Totem.desktop";
-        description = "default video player";
-      };
-      musicPlayer = lib.mkOption {
-        type = lib.types.str;
-        default = "org.gnome.Totem.desktop";
-        description = "default music player";
-      };
-      fileManager = lib.mkOption {
-        type = lib.types.str;
-        default = "org.gnome.Nautilus.desktop";
-        description = "default file manager";
-      };
-      pdfViewer = lib.mkOption {
-        type = lib.types.str;
-        default = "org.gnome.Evince.desktop";
-        description = "default document viewer";
-      };
+      browser = lib.opt lib.types.str "firefox.desktop" "default web browser";
+      editor = lib.opt lib.types.str "nvim.desktop" "default text editor";
+      imageViewer = lib.opt lib.types.str "org.gnome.Loupe.desktop" "default image viewer";
+      videoPlayer = lib.opt lib.types.str "org.gnome.Totem.desktop" "default video player";
+      musicPlayer = lib.opt lib.types.str "org.gnome.Totem.desktop" "default music player";
+      fileManager = lib.opt lib.types.str "org.gnome.Nautilus.desktop" "default file manager";
+      pdfViewer = lib.opt lib.types.str "org.gnome.Evince.desktop" "default document viewer";
     };
   };
 }

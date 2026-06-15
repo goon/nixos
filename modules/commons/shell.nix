@@ -12,6 +12,7 @@ let
   '';
 in
 lib.module config "shell" true {
+  config = {
     programs.zsh.enable = true;
 
     users.users.${username}.shell = pkgs.zsh;
@@ -19,73 +20,73 @@ lib.module config "shell" true {
     environment.sessionVariables = {
       TERMINAL = config.globals.userTerminal;
     };
+  };
 
-    home-manager.sharedModules = [
-      {
-        programs = {
-          eza.enable = true;
-          bat.enable = true;
-          fzf.enable = true;
-        };
+  userPkgs = with pkgs; [
+    cheat-cmd
+    duf
+  ];
 
-        home = {
-          shellAliases = {
-            ".." = "cd ..";
-            "..." = "cd ../..";
-            ls = "eza --icons --git";
+  home = {
+    programs = {
+      eza.enable = true;
+      bat.enable = true;
+      fzf.enable = true;
+    };
 
-            cat = "bat";
-            df = "duf";
-            grep = "grep --color=auto";
-            partitions = "lsblk -f";
-            rm = "rm -i";
+    home = {
+      shellAliases = {
+        ".." = "cd ..";
+        "..." = "cd ../..";
+        ls = "eza --icons --git";
 
-            f = "fzf";
-          };
+        cat = "bat";
+        df = "duf";
+        grep = "grep --color=auto";
+        partitions = "lsblk -f";
+        rm = "rm -i";
 
-          sessionVariables = {
-            BROWSER = "firefox";
-          };
+        f = "fzf";
+      };
 
-          sessionPath = [
-            "$HOME/.local/bin"
-          ];
+      sessionVariables = {
+        BROWSER = "firefox";
+      };
 
-          packages = with pkgs; [
-            cheat-cmd
-            duf
-          ];
-        };
+      sessionPath = [
+        "$HOME/.local/bin"
+      ];
+    };
 
-        programs.zoxide = {
-          enable = true;
-          enableZshIntegration = true;
-          enableBashIntegration = true;
-          options = [
-            "--cmd cd"
-          ];
-        };
+    programs.zoxide = {
+      enable = true;
+      enableZshIntegration = true;
+      enableBashIntegration = true;
+      options = [
+        "--cmd cd"
+      ];
+    };
 
-        programs.bash = {
-          enable = true;
-          enableCompletion = true;
-          historyControl = [
-            "ignoreboth"
-            "erasedups"
-          ];
-          historyFileSize = 20000;
-          shellOptions = [
-            "histappend"
-            "checkwinsize"
-          ];
-        };
+    programs.bash = {
+      enable = true;
+      enableCompletion = true;
+      historyControl = [
+        "ignoreboth"
+        "erasedups"
+      ];
+      historyFileSize = 20000;
+      shellOptions = [
+        "histappend"
+        "checkwinsize"
+      ];
+    };
 
-        programs.zsh = {
-          enable = true;
-          dotDir = "${config.globals.paths.config}/zsh";
-          enableCompletion = true;
-          autosuggestion.enable = true;
-          syntaxHighlighting.enable = true;
-        };
-      }
-    ];}
+    programs.zsh = {
+      enable = true;
+      dotDir = "${config.globals.paths.config}/zsh";
+      enableCompletion = true;
+      autosuggestion.enable = true;
+      syntaxHighlighting.enable = true;
+    };
+  };
+}

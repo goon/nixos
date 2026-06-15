@@ -12,7 +12,7 @@
 <p align="center"><img src="https://raw.githubusercontent.com/catppuccin/catppuccin/main/assets/footers/gray0_ctp_on_line.svg?sanitize=true" /></p>
 </div>
 
-Another **blazingly mid** nix configuration with an overengineered dendritic architecture built on **flakes** and **home manager** with automatic module discovery, sane defaults, powered by **Hyprland** (or **Mango**), and held together by hopes, dreams and vibes.
+Another **blazingly mid** nix configuration with an overengineered dendritic architecture built on **flakes** and **home manager** with automatic module discovery, powered by **Hyprland** (or **Mango**), and held together by hopes, dreams and vibes.
 
 > [!IMPORTANT]
 > This is a **personal** configuration, shared for reference and inspiration **NOT** adoption. 
@@ -61,11 +61,42 @@ Another **blazingly mid** nix configuration with an overengineered dendritic arc
 - `modules/extra` — Software Configurations
 - `modules/session` — Window Managers & Shell
 
-Modules follow a concern / context first structure. For example, the `git.nix` file contains the installation of `git`, home manager configurations for it, `git` shell aliases and related applications like `lazygit` and `delta`.
+### The Dendritic Module Engine
+
+
+To heavily reduce boilerplate traditionally associated with mixing NixOS and Home Manager configurations a custom abstraction engine is used (`lib.module`). 
+
+Instead of dealing with deeply nested `home-manager.sharedModules` arrays, every module is automatically exposed with three root level blocks:
+
+```nix
+{ config, lib, pkgs, ... }:
+
+lib.module config "moduleName" true {
+  # 1. System Layer (Standard NixOS Options)
+  config = {
+    services.example.enable = true;
+  };
+
+  # 2. Package Injection (Automatically Injected into home.packages)
+  userPkgs = with pkgs; [
+    example-package
+  ];
+
+  # 3. User Layer (Standard Home Manager Options)
+  home = {
+    programs.example = {
+      enable = true;
+      settings = { ... };
+    };
+  };
+}
+```
+
+The `config`, `home` and `userPkgs` blocks are automatically parsed and natively wired into NixOS and Home Manager under the hood, ensuring that modules remain flat, organised and stripped of boilerplate.
 
 Every `.nix` file under `modules/` is automatically discovered and imported by `lib/recursive.nix`, preventing the need for manual imports. The importer skips private files prefixed with `_` or `.`. Most modules follow a **on by default** format. To disable a feature or module on a given host, `module.<name>.enable = false;` can be set.
 
-Hosts are formed by combining the auto discovered modules with host specific overrides in `host/default.nix`. Where the host file serves as a **dendritic dashboard** for enabling hardware support, selecting a window manager and documenting which modules are explicitly enabled or disabled.
+Hosts are formed by combining the auto discovered modules with host specific overrides in `hosts/<hostname>/default.nix`. Where the host file serves as a **dendritic dashboard** for enabling hardware support, selecting a window manager and documenting which modules are explicitly enabled or disabled.
 
 ## Formatting 
 
@@ -75,7 +106,7 @@ The code quality and formatting is enforced via [**treefmt-nix**](https://github
 - [`deadnix`](https://github.com/astro/deadnix) — Scans for unused `let` bindings, unreferenced function arguments and dead `with` statements.
 - [`statix`](https://github.com/nerdypepper/statix) — Analyses expressions for anti-patterns e.g. unused `args`, unnecessary `with` statements and deprecated idioms.
 
-The formatter module at `modules/lib/formatter.nix` is passed through `treefmt-nix`'s `evalModule`, which outputs a combined wrapper binary. The wrapper runs all three tools in sequence.
+The formatter module at `lib/formatter.nix` is passed through `treefmt-nix`'s `evalModule`, which outputs a combined wrapper binary. The wrapper runs all three tools in sequence.
 
 
 ## Deployment
@@ -133,7 +164,7 @@ The formatter module at `modules/lib/formatter.nix` is passed through `treefmt-n
 
 Thank you to the countless Nix OS configurations that I ~~copied~~ learnt from. 
 
-namishh — seniormatt — fufexan — frost-pheonix — anotherhadi — vic — vimjoyer — bad3r — mitchellh — misterio77 — max-baz — gvolpe — librephoenix — sioodmy
+namishh — seniormatt — hlissner — fufexan — frost-pheonix — anotherhadi — vic — vimjoyer — bad3r — mitchellh — misterio77 — max-baz — gvolpe — librephoenix — sioodmy
 
 Due to my dementia I may have missed many. Regardless, I am thankful. 
 
