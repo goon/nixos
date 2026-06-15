@@ -72,17 +72,17 @@ Instead of dealing with deeply nested `home-manager.sharedModules` arrays, every
 { config, lib, pkgs, ... }:
 
 lib.module config "moduleName" true {
-  # 1. System Layer (Standard NixOS Options)
+  # 1. System Layer
   config = {
     services.example.enable = true;
   };
 
-  # 2. Package Injection (Automatically Injected into home.packages)
+  # 2. Package Injection
   userPkgs = with pkgs; [
     example-package
   ];
 
-  # 3. User Layer (Standard Home Manager Options)
+  # 3. User Layer
   home = {
     programs.example = {
       enable = true;
