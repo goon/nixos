@@ -4,12 +4,7 @@
   ...
 }:
 
-{
-  options.module.brave.enable = lib.mkEnableOption "Brave Browser" // {
-    default = true;
-  };
-
-  config = lib.mkIf config.module.brave.enable {
+lib.module config "brave" true {
     home-manager.sharedModules = [
       {
         programs.brave = {
@@ -39,6 +34,4 @@
       "AutofillAddressEnabled" = false;
       "AutofillCreditCardEnabled" = false;
       "PasswordManagerEnabled" = false;
-    };
-  };
-}
+    };}

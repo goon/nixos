@@ -5,12 +5,7 @@
   ...
 }:
 
-{
-  options.module.obs.enable = lib.mkEnableOption "OBS" // {
-    default = true;
-  };
-
-  config = lib.mkIf config.module.obs.enable {
+lib.module config "obs" true {
     home-manager.sharedModules = [
       {
         programs.obs-studio = {
@@ -22,6 +17,4 @@
           ];
         };
       }
-    ];
-  };
-}
+    ];}

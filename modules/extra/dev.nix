@@ -5,12 +5,7 @@
   ...
 }:
 
-{
-  options.module.dev.enable = lib.mkEnableOption "Development Runtimes" // {
-    default = true;
-  };
-
-  config = lib.mkIf config.module.dev.enable {
+lib.module config "dev" true {
     home-manager.sharedModules = [
       {
         home.packages = with pkgs; [
@@ -53,6 +48,4 @@
           };
         };
       }
-    ];
-  };
-}
+    ];}

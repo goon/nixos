@@ -6,12 +6,7 @@
   ...
 }:
 
-{
-  options.module.quickshell.enable = lib.mkEnableOption "Quickshell" // {
-    default = true;
-  };
-
-  config = lib.mkIf config.module.quickshell.enable {
+lib.module config "quickshell" true {
     environment.sessionVariables = {
       QS_ICON_THEME = "Papirus";
       QT_USE_PORTAL = "1";
@@ -31,6 +26,4 @@
           ];
         }
       )
-    ];
-  };
-}
+    ];}

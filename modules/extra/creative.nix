@@ -6,12 +6,7 @@
   ...
 }:
 
-{
-  options.module.creative.enable = lib.mkEnableOption "Creative Suite (Affinity)" // {
-    default = true;
-  };
-
-  config = lib.mkIf config.module.creative.enable {
+lib.module config "creative" true {
     nixpkgs.overlays = [ inputs.affinity-nix.overlays.default ];
 
     home-manager.sharedModules = [
@@ -20,6 +15,4 @@
           pkgs.affinity-v3
         ];
       }
-    ];
-  };
-}
+    ];}

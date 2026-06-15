@@ -5,12 +5,7 @@
   ...
 }:
 
-{
-  options.module.nixcord.enable = lib.mkEnableOption "Nixcord (Declarative Discord)" // {
-    default = true;
-  };
-
-  config = lib.mkIf config.module.nixcord.enable {
+lib.module config "nixcord" true {
     home-manager.sharedModules = [
       {
         imports = [ inputs.nixcord.homeModules.nixcord ];
@@ -31,6 +26,4 @@
           };
         };
       }
-    ];
-  };
-}
+    ];}

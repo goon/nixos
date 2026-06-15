@@ -1,11 +1,6 @@
 { config, lib, ... }:
 
-{
-  options.module.flatpak.enable = lib.mkEnableOption "Flatpak" // {
-    default = true;
-  };
-
-  config = lib.mkIf config.module.flatpak.enable {
+lib.module config "flatpak" true {
     services.flatpak = {
       enable = true;
       uninstallUnmanaged = true;
@@ -35,6 +30,4 @@
           };
         };
       };
-    };
-  };
-}
+    };}

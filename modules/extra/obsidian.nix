@@ -5,16 +5,9 @@
   ...
 }:
 
-{
-  options.module.obsidian.enable = lib.mkEnableOption "Obsidian" // {
-    default = true;
-  };
-
-  config = lib.mkIf config.module.obsidian.enable {
+lib.module config "obsidian" true {
     home-manager.sharedModules = [
       {
         home.packages = [ pkgs.obsidian ];
       }
-    ];
-  };
-}
+    ];}

@@ -5,12 +5,7 @@
   ...
 }:
 
-{
-  options.module.firefox.enable = lib.mkEnableOption "Firefox" // {
-    default = true;
-  };
-
-  config = lib.mkIf config.module.firefox.enable {
+lib.module config "firefox" true {
     home-manager.sharedModules = [
       {
         programs.firefox = {
@@ -116,6 +111,4 @@
           allowed_extensions = [ "pywalfox@frewacom.org" ];
         };
       }
-    ];
-  };
-}
+    ];}

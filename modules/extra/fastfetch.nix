@@ -4,12 +4,7 @@
   ...
 }:
 
-{
-  options.module.fastfetch.enable = lib.mkEnableOption "Fastfetch" // {
-    default = true;
-  };
-
-  config = lib.mkIf config.module.fastfetch.enable {
+lib.module config "fastfetch" true {
     home-manager.sharedModules = [
       {
         programs.fastfetch = {
@@ -110,6 +105,4 @@
           };
         };
       }
-    ];
-  };
-}
+    ];}

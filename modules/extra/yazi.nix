@@ -5,12 +5,7 @@
   ...
 }:
 
-{
-  options.module.yazi.enable = lib.mkEnableOption "Yazi File Manager" // {
-    default = true;
-  };
-
-  config = lib.mkIf config.module.yazi.enable {
+lib.module config "yazi" true {
     home-manager.sharedModules = [
       {
         home.packages = [ pkgs.trash-cli ];
@@ -89,6 +84,4 @@
           };
         };
       }
-    ];
-  };
-}
+    ];}

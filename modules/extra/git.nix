@@ -4,12 +4,7 @@
   ...
 }:
 
-{
-  options.module.git.enable = lib.mkEnableOption "Git" // {
-    default = true;
-  };
-
-  config = lib.mkIf config.module.git.enable {
+lib.module config "git" true {
     home-manager.sharedModules = [
       {
         programs = {
@@ -39,6 +34,4 @@
           lg = "lazygit";
         };
       }
-    ];
-  };
-}
+    ];}

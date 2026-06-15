@@ -4,12 +4,7 @@
   ...
 }:
 
-{
-  options.module.starship.enable = lib.mkEnableOption "Starship Prompt" // {
-    default = true;
-  };
-
-  config = lib.mkIf config.module.starship.enable {
+lib.module config "starship" true {
     home-manager.sharedModules = [
       {
         programs.starship = {
@@ -55,6 +50,4 @@
           };
         };
       }
-    ];
-  };
-}
+    ];}

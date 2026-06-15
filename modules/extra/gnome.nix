@@ -5,12 +5,7 @@
   ...
 }:
 
-{
-  options.module.gnome.enable = lib.mkEnableOption "GNOME" // {
-    default = true;
-  };
-
-  config = lib.mkIf config.module.gnome.enable {
+lib.module config "gnome" true {
     services = {
       devmon.enable = true;
       accounts-daemon.enable = true;
@@ -41,6 +36,4 @@
           };
         };
       }
-    ];
-  };
-}
+    ];}

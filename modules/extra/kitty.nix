@@ -3,12 +3,7 @@
   lib,
   ...
 }:
-{
-  options.module.kitty.enable = lib.mkEnableOption "Kitty" // {
-    default = true;
-  };
-
-  config = lib.mkIf config.module.kitty.enable {
+lib.module config "kitty" true {
     home-manager.sharedModules = [
       {
         programs.kitty = {
@@ -61,6 +56,4 @@
           launch --location=vsplit --bias=40 opencode
         '';
       }
-    ];
-  };
-}
+    ];}

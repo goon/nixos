@@ -9,12 +9,7 @@
 let
   spicePkgs = inputs.spicetify-nix.legacyPackages.${pkgs.stdenv.hostPlatform.system};
 in
-{
-  options.module.spicetify.enable = lib.mkEnableOption "Spicetify" // {
-    default = true;
-  };
-
-  config = lib.mkIf config.module.spicetify.enable {
+lib.module config "spicetify" true {
     home-manager.sharedModules = [
       {
         imports = [
@@ -32,6 +27,4 @@ in
           ];
         };
       }
-    ];
-  };
-}
+    ];}

@@ -1,8 +1,4 @@
-{
-  config,
-  lib,
-  ...
-}:
+{ config, lib, inputs, ... }:
 
 let
   mkLua = expr: {
@@ -10,15 +6,10 @@ let
     inherit expr;
   };
 in
-{
-  options.module.nvf.enable = lib.mkEnableOption "NVF" // {
-    default = true;
-  };
-
-  config = lib.mkIf config.module.nvf.enable {
+lib.module config "nvf" true {
     home-manager.sharedModules = [
       {
-        imports = [ config._module.args.inputs.nvf.homeManagerModules.default ];
+        imports = [ inputs.nvf.homeManagerModules.default ];
         programs.nvf = {
           enable = true;
           defaultEditor = true;
@@ -680,6 +671,4 @@ in
           icon = "nvim";
         };
       }
-    ];
-  };
-}
+    ];}

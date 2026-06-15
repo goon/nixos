@@ -1,14 +1,7 @@
 { config, lib, ... }:
 
-{
-  options.module.localsend.enable = lib.mkEnableOption "LocalSend" // {
-    default = true;
-  };
-
-  config = lib.mkIf config.module.localsend.enable {
+lib.module config "localsend" true {
     programs.localsend = {
       enable = true;
       openFirewall = true;
-    };
-  };
-}
+    };}

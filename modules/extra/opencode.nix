@@ -5,12 +5,7 @@
   ...
 }:
 
-{
-  options.module.opencode.enable = lib.mkEnableOption "Opencode" // {
-    default = true;
-  };
-
-  config = lib.mkIf config.module.opencode.enable {
+lib.module config "opencode" true {
     home-manager.sharedModules = [
       {
         home.packages = [ pkgs.opencode ];
@@ -31,6 +26,4 @@
           };
         };
       }
-    ];
-  };
-}
+    ];}
