@@ -12,6 +12,8 @@
     man.enable = false;
   };
 
+  nix.channel.enable = false;
+
   nix = {
     settings = {
       experimental-features = [
