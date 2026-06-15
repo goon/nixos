@@ -5,12 +5,7 @@
   ...
 }:
 
-{
-  options.module.utils.enable = lib.mkEnableOption "CLI Utilities" // {
-    default = true;
-  };
-
-  config = lib.mkIf config.module.utils.enable {
+lib.module config "utils" true {
     home-manager.sharedModules = [
       {
         home.packages = with pkgs; [
@@ -24,6 +19,4 @@
           jq
         ];
       }
-    ];
-  };
-}
+    ];}

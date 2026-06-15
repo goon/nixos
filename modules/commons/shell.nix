@@ -11,12 +11,7 @@ let
     curl "https://cheat.sh/$1"
   '';
 in
-{
-  options.module.shell.enable = lib.mkEnableOption "Unified Shell Environment (Zsh/Bash)" // {
-    default = true;
-  };
-
-  config = lib.mkIf config.module.shell.enable {
+lib.module config "shell" true {
     programs.zsh.enable = true;
 
     users.users.${username}.shell = pkgs.zsh;
@@ -93,6 +88,4 @@ in
           syntaxHighlighting.enable = true;
         };
       }
-    ];
-  };
-}
+    ];}

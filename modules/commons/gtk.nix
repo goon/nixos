@@ -5,14 +5,7 @@
   ...
 }:
 
-{
-  options.module.gtk.enable =
-    lib.mkEnableOption "GTK Environment (Themes, Icons, Cursors, Bookmarks)"
-    // {
-      default = true;
-    };
-
-  config = lib.mkIf config.module.gtk.enable {
+lib.module config "gtk" true {
     # ========== System Layer (NixOS) ==========
     services.dbus.enable = true;
     programs.dconf.enable = true;
@@ -66,6 +59,4 @@
           '';
         };
       }
-    ];
-  };
-}
+    ];}

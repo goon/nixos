@@ -24,18 +24,11 @@ let
     fi
   '';
 in
-{
-  options.module.scripts.enable = lib.mkEnableOption "Scripts" // {
-    default = true;
-  };
-
-  config = lib.mkIf config.module.scripts.enable {
+lib.module config "scripts" true {
     home-manager.sharedModules = [
       {
         home.packages = [
           local-scripts
         ];
       }
-    ];
-  };
-}
+    ];}

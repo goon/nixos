@@ -4,12 +4,7 @@
   ...
 }:
 
-{
-  options.module.qt.enable = lib.mkEnableOption "Qt Environment" // {
-    default = true;
-  };
-
-  config = lib.mkIf config.module.qt.enable {
+lib.module config "qt" true {
     environment.sessionVariables = {
       QT_AUTO_SCREEN_SCALE_FACTOR = "1";
       QT_SCALE_FACTOR = "1";
@@ -24,6 +19,4 @@
           style.name = "adwaita-dark";
         };
       }
-    ];
-  };
-}
+    ];}

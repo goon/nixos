@@ -5,12 +5,7 @@
   ...
 }:
 
-{
-  options.module.radeon.enable = lib.mkEnableOption "AMD Radeon GPU Support" // {
-    default = false;
-  };
-
-  config = lib.mkIf config.module.radeon.enable {
+lib.module config "radeon" false {
     # AMD GPUs
     boot.initrd.kernelModules = [ "amdgpu" ];
     boot.kernelModules = [ "i2c_dev" ];
@@ -32,6 +27,4 @@
     environment.systemPackages = with pkgs; [
       vulkan-tools
       mesa-demos
-    ];
-  };
-}
+    ];}
