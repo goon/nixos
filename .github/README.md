@@ -126,7 +126,7 @@ The formatter module at `lib/formatter.nix` is passed through `treefmt-nix`'s `e
 
    ```
 
-> [!INFO]
+> [!NOTE]
 > - The `--recursive` flag ensures the `yaks` quickshell submodule is pulled.
 
 2. **Run the Bootstrap Script**
@@ -147,7 +147,7 @@ The formatter module at `lib/formatter.nix` is passed through `treefmt-nix`'s `e
 
    ```
 
-> [!INFO]
+> [!NOTE]
 > - The `--recursive` flag ensures the `yaks` quickshell submodule is pulled.
 
 2. **Generate Hardware Configuration:**
