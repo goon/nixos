@@ -3,7 +3,7 @@
 
   inputs = {
     nixpkgs.url = "nixpkgs/nixos-unstable";
-    home-manager.url = "github:nix-community/home-manager/release-26.05";
+    home-manager.url = "github:nix-community/home-manager/master";
     home-manager.inputs.nixpkgs.follows = "nixpkgs";
 
     quickshell.url = "git+https://git.outfoxxed.me/outfoxxed/quickshell";
@@ -33,6 +33,7 @@
     mangowm.inputs.nixpkgs.follows = "nixpkgs";
 
     millennium.url = "github:SteamClientHomebrew/Millennium?dir=packages/nix";
+    millennium.inputs.nixpkgs.follows = "nixpkgs";
   };
 
   outputs =
@@ -46,9 +47,10 @@
         let
           inherit (nixpkgs.lib) nixosSystem;
 
+          extendedLib = import ./modules/lib/module.nix { inherit (nixpkgs) lib; };
+
           baseModules = [
             {
-              _module.args = { inherit inputs; };
               home-manager.extraSpecialArgs = { inherit inputs; };
             }
             inputs.home-manager.nixosModules.default
@@ -58,13 +60,13 @@
         in
         {
           desktop = nixosSystem {
-            specialArgs = { inherit inputs; };
+            specialArgs = { inherit inputs; lib = extendedLib; };
             system = "x86_64-linux";
             modules = baseModules ++ [ ./hosts/desktop ];
           };
 
           sandbox = nixosSystem {
-            specialArgs = { inherit inputs; };
+            specialArgs = { inherit inputs; lib = extendedLib; };
             system = "x86_64-linux";
             modules = baseModules ++ [ ./hosts/sandbox ];
           };
