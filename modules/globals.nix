@@ -26,15 +26,22 @@
         home = {
           inherit username;
           homeDirectory = config.globals.paths.home;
-          stateVersion = "25.11";
+          stateVersion = config.globals.stateVersion;
         };
       };
     };
+
+    system.stateVersion = config.globals.stateVersion;
   };
 
   # ========== System Settings ==========
 
   options.globals = {
+    stateVersion = lib.mkOption {
+      type = lib.types.str;
+      description = "The state version for both NixOS and Home Manager";
+    };
+
     userTerminal = lib.mkOption {
       type = lib.types.str;
       default = "kitty";
