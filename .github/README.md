@@ -49,6 +49,7 @@ Another **blazingly mid** nix configuration with an overengineered dendritic arc
 
 - `flake.nix` & `flake.lock` — Define the entry points and locks dependencies. 
 - `hosts/` —  Contains host specific configuration.
+- `lib/` — Helper Scripts
 - `modules/` — Contains nix and home manager modules.
 - `scripts/` — Contains various `bash` scripts.
 - `wallpapers/` — Collection of wallpapers for your viewing pleasure.
@@ -58,12 +59,11 @@ Another **blazingly mid** nix configuration with an overengineered dendritic arc
 - `modules/commons` — Universal Configurations
 - `modules/core` — Device & Hardware Configurations
 - `modules/extra` — Software Configurations
-- `modules/lib` — Helper Scripts
 - `modules/session` — Window Managers & Shell
 
 Modules follow a concern / context first structure. For example, the `git.nix` file contains the installation of `git`, home manager configurations for it, `git` shell aliases and related applications like `lazygit` and `delta`.
 
-Every `.nix` file under `modules/` is automatically discovered and imported by `modules/lib/recursive.nix`, preventing the need for manual imports. The importer skips private files prefixed with `_` or `.`, and the `/lib/` directory itself. Most modules follow a **on by default** format. To disable a feature or module on a given host, `module.<name>.enable = false;` can be set.
+Every `.nix` file under `modules/` is automatically discovered and imported by `lib/recursive.nix`, preventing the need for manual imports. The importer skips private files prefixed with `_` or `.`. Most modules follow a **on by default** format. To disable a feature or module on a given host, `module.<name>.enable = false;` can be set.
 
 Hosts are formed by combining the auto discovered modules with host specific overrides in `host/default.nix`. Where the host file serves as a **dendritic dashboard** for enabling hardware support, selecting a window manager and documenting which modules are explicitly enabled or disabled.
 
