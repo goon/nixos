@@ -1,4 +1,4 @@
-# modules/lib/recursive.nix
+# lib/recursive.nix
 # Helper function that recursively finds all .nix files in a directory
 # Returns them as a list of paths for the 'imports' attribute.
 
@@ -29,7 +29,7 @@ let
             len > 4 && builtins.substring (len - 4) 4 name == ".nix" && name != "default.nix" && !isPrivate;
         in
         if type == "directory" then
-          if name == "lib" || isPrivate then
+          if isPrivate then
             [ ]
           else if builtins.pathExists (fullPath + "/default.nix") then
             [ (fullPath + "/default.nix") ]
