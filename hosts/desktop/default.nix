@@ -1,4 +1,9 @@
 {
+  username,
+  ...
+}:
+
+{
   imports = [
     ./hardware-configuration.nix
   ];
@@ -52,5 +57,5 @@
     cores = 10;
   };
 
-  system.stateVersion = "25.11";
+  globals.stateVersion = "25.11";
 }
