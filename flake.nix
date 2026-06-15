@@ -47,7 +47,7 @@
         let
           inherit (nixpkgs.lib) nixosSystem;
 
-          extendedLib = import ./modules/lib/module.nix { inherit (nixpkgs) lib; };
+          extendedLib = import ./lib/module.nix { inherit (nixpkgs) lib; };
 
           baseModules = [
             {
@@ -56,7 +56,7 @@
             inputs.home-manager.nixosModules.default
             inputs.nix-flatpak.nixosModules.nix-flatpak
           ]
-          ++ (import ./modules/lib/recursive.nix ./modules);
+          ++ (import ./lib/recursive.nix ./modules);
         in
         {
           desktop = nixosSystem {
@@ -78,7 +78,7 @@
           pkgs = nixpkgs.legacyPackages.${system};
           inherit (inputs) treefmt-nix;
         in
-        (treefmt-nix.lib.evalModule pkgs ./modules/lib/formatter.nix).config.build.wrapper
+        (treefmt-nix.lib.evalModule pkgs ./lib/formatter.nix).config.build.wrapper
       );
 
       checks = nixpkgs.lib.genAttrs [ "x86_64-linux" ] (
@@ -88,7 +88,7 @@
           inherit (inputs) treefmt-nix;
         in
         {
-          formatting = (treefmt-nix.lib.evalModule pkgs ./modules/lib/formatter.nix).config.build.check self;
+          formatting = (treefmt-nix.lib.evalModule pkgs ./lib/formatter.nix).config.build.check self;
         }
       );
     };
