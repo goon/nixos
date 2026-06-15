@@ -113,8 +113,7 @@ The formatter module at `lib/formatter.nix` is passed through `treefmt-nix`'s `e
 
 > [!WARNING]
 > - By default the configuration expects the flake to live in `$HOME/.nixos`. 
-> - Your `username` and `repo` path can be updated in `hosts/vars.nix` if they differ from the defaults.
-> - The `--recursive` flag ensures the `yaks` quickshell submodule is pulled.
+> - `username` and `repo` path is declared in `hosts/vars.nix`. You **must** update them if they differ from the defaults.
 
 ### Deployment Script 
 
@@ -126,6 +125,9 @@ The formatter module at `lib/formatter.nix` is passed through `treefmt-nix`'s `e
    cd ~/.nixos
 
    ```
+
+> [!INFO]
+> The `--recursive` flag ensures the `yaks` quickshell submodule is pulled.
 
 2. **Run the Bootstrap Script**
 
@@ -144,6 +146,9 @@ The formatter module at `lib/formatter.nix` is passed through `treefmt-nix`'s `e
    cd ~/.nixos
 
    ```
+
+> [!INFO]
+> The `--recursive` flag ensures the `yaks` quickshell submodule is pulled.
 
 2. **Generate Hardware Configuration:**
    ```bash
