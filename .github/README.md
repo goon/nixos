@@ -112,8 +112,8 @@ The formatter module at `lib/formatter.nix` is passed through `treefmt-nix`'s `e
 ## Deployment
 
 > [!WARNING]
-> By default the configuration expects the flake to live in `$HOME/.nixos`. 
-> Your `username` and `repo` path can be updated in `hosts/vars.nix` if they differ from the defaults.
+> - By default the configuration expects the flake to live in `$HOME/.nixos`. 
+> - Your `username` and `repo` path can be updated in `hosts/vars.nix` if they differ from the defaults.
 > - The `--recursive` flag ensures the `yaks` quickshell submodule is pulled.
 
 ### Deployment Script 

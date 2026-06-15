@@ -8,8 +8,6 @@
 
 {
   # ========== Structural Essentials ==========
-  # We use _module.args for these to avoid infinite recursion
-  # when they are used in attribute names (like users.users.${username})
 
   config = {
 
