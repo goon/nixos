@@ -112,10 +112,9 @@ The formatter module at `lib/formatter.nix` is passed through `treefmt-nix`'s `e
 ## Deployment
 
 > [!WARNING]
-> The configuration expects the flake to live in `$HOME/.nixos`. 
+> The configuration expects the flake to live in `$HOME/.nixos`
 >
-> Update your `username` and the location of the flake *if it differs* from the default inside of [hosts/vars.nix](/hosts/vars.nix).
-
+> Your `username` and the location of the flake can be modified inside of `hosts/vars.nix`. 
 
 ### Deployment Script 
 
