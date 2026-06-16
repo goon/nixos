@@ -12,7 +12,7 @@
 <p align="center"><img src="https://raw.githubusercontent.com/catppuccin/catppuccin/main/assets/footers/gray0_ctp_on_line.svg?sanitize=true" /></p>
 </div>
 
-Another **blazingly mid** nix configuration with an overengineered dendritic architecture built on **flakes** and **home manager** with automatic module discovery, powered by **Hyprland** (or **Mango**), and held together by hopes, dreams and vibes.
+Another **blazingly mid** nix configuration with an overengineered dendritic architecture built on **flakes** and **home manager** with automatic module discovery, powered by **Hyprland**, and held together by hopes, dreams and vibes.
 
 > [!IMPORTANT]
 > This is a **personal** configuration, shared for reference and inspiration **NOT** adoption. 
