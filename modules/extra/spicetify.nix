@@ -9,7 +9,7 @@
 let
   spicePkgs = inputs.spicetify-nix.legacyPackages.${pkgs.stdenv.hostPlatform.system};
 in
-lib.module config "spicetify" true {
+lib.module config "spicetify" false {
   home = {
     imports = [
       inputs.spicetify-nix.homeManagerModules.default

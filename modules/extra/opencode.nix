@@ -5,7 +5,7 @@
   ...
 }:
 
-lib.module config "opencode" true {
+lib.module config "opencode" false {
   userPkgs = [ pkgs.opencode ];
 
   home = {

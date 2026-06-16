@@ -5,7 +5,7 @@
   ...
 }:
 
-lib.module config "obs" true {
+lib.module config "obs" false {
   home = {
     programs.obs-studio = {
       enable = true;

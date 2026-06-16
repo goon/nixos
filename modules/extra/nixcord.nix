@@ -5,7 +5,7 @@
   ...
 }:
 
-lib.module config "nixcord" true {
+lib.module config "nixcord" false {
   home = {
     imports = [ inputs.nixcord.homeModules.nixcord ];
 

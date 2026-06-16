@@ -5,7 +5,7 @@
   ...
 }:
 
-lib.module config "hyprland" true {
+lib.module config "hyprland" false {
   config = {
     programs.hyprland = {
       enable = true;

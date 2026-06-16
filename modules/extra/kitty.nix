@@ -3,7 +3,7 @@
   lib,
   ...
 }:
-lib.module config "kitty" true {
+lib.module config "kitty" false {
   home = { config, osConfig, ... }: {
     programs.kitty = {
       enable = true;

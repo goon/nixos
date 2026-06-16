@@ -4,7 +4,7 @@
   ...
 }:
 
-lib.module config "fastfetch" true {
+lib.module config "fastfetch" false {
   home = {
     programs.fastfetch = {
       enable = true;

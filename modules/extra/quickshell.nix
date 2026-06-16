@@ -19,7 +19,7 @@ let
     pywalfox-native
   ];
 in
-lib.module config "quickshell" true {
+lib.module config "quickshell" false {
   config = {
     environment.sessionVariables = {
       QS_ICON_THEME = "Papirus";

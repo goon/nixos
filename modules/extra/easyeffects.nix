@@ -4,7 +4,7 @@
   ...
 }:
 
-lib.module config "easyeffects" true {
+lib.module config "easyeffects" false {
   home = {
     services.easyeffects.enable = true;
   };

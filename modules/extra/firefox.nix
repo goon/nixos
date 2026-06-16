@@ -5,7 +5,7 @@
   ...
 }:
 
-lib.module config "firefox" true {
+lib.module config "firefox" false {
   userPkgs = with pkgs; [
     pywal16
     pywalfox-native

@@ -5,7 +5,7 @@
   ...
 }:
 
-lib.module config "dev" true {
+lib.module config "dev" false {
   userPkgs = with pkgs; [
     antigravity
   ];

@@ -5,7 +5,7 @@
   ...
 }:
 
-lib.module config "yazi" true {
+lib.module config "yazi" false {
   userPkgs = [ pkgs.trash-cli ];
 
   home = {

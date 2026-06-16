@@ -1,8 +1,4 @@
 {
-  ...
-}:
-
-{
   imports = [
     ./hardware-configuration.nix
   ];
@@ -11,33 +7,34 @@
 
   # ========== Modules (Dendritic Dashboard) ==========
 
-  # [1] Hardware Support
+  # [1] Hardware
   module.radeon.enable = true;
 
-  # [3] Commons (Shared Plumbing - Enabled by default)
-  # module.gtk.enable = false;
-  # module.shell.enable = false;
-  # module.utils.enable = false;
-  # module.xdg.enable = false;
+  # [2] Session
+  module.wayland.enable = true;
+  module.hyprland.enable = true;
 
-  # [4] Extra (Optional Features - Enabled by default)
-  # module.creative.enable = false;
-  # module.dev.enable = false;
-  # module.fastfetch.enable = false;
-  # module.firefox.enable = false;
-  # module.flatpak.enable = false;
-  # module.gaming.enable = false;
-  # module.git.enable = false;
-  # module.gnome.enable = false;
-  # module.kitty.enable = false;
-  # module.nixcord.enable = false;
-  # module.nvf.enable = false;
-  # module.obs.enable = false;
-  # module.obsidian.enable = false;
-  # module.opencode.enable = false;
-  # module.quickshell.enable = false;
-  # module.spicetify.enable = false;
-  # module.yazi.enable = false;
+  # [3] Extra (Optional Features)
+  module.creative.enable = true;
+  module.dev.enable = true;
+  module.easyeffects.enable = true;
+  module.fastfetch.enable = true;
+  module.firefox.enable = true;
+  module.flatpak.enable = true;
+  module.gaming.enable = true;
+  module.git.enable = true;
+  module.gnome.enable = true;
+  module.kitty.enable = true;
+  module.localsend.enable = true;
+  module.nixcord.enable = true;
+  module.nvf.enable = true;
+  module.obs.enable = true;
+  module.obsidian.enable = true;
+  module.opencode.enable = true;
+  module.quickshell.enable = true;
+  module.spicetify.enable = true;
+  module.starship.enable = true;
+  module.yazi.enable = true;
 
   fileSystems."/mnt/rocket" = {
     device = "/dev/disk/by-uuid/f6e17653-e430-487b-ac24-0c509fba3968";

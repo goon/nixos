@@ -5,6 +5,6 @@
   ...
 }:
 
-lib.module config "obsidian" true {
+lib.module config "obsidian" false {
   userPkgs = [ pkgs.obsidian ];
 }

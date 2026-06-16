@@ -4,7 +4,7 @@
   ...
 }:
 
-lib.module config "starship" true {
+lib.module config "starship" false {
   home = {
     programs.starship = {
       enable = true;

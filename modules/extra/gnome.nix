@@ -5,7 +5,7 @@
   ...
 }:
 
-lib.module config "gnome" true {
+lib.module config "gnome" false {
   config = {
     services = {
       devmon.enable = true;

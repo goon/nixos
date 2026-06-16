@@ -1,6 +1,6 @@
 { config, lib, ... }:
 
-lib.module config "flatpak" true {
+lib.module config "flatpak" false {
   services.flatpak = {
     enable = true;
     uninstallUnmanaged = true;

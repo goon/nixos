@@ -11,7 +11,7 @@
     inputs.nix-gaming.nixosModules.pipewireLowLatency
   ];
 }
-// lib.module config "gaming" true {
+// lib.module config "gaming" false {
   nixpkgs.overlays = [ inputs.millennium.overlays.default ];
 
   # ========== System Packages ==========

@@ -11,7 +11,7 @@ let
     inherit expr;
   };
 in
-lib.module config "nvf" true {
+lib.module config "nvf" false {
   home = {
     imports = [ inputs.nvf.homeManagerModules.default ];
     programs.nvf = {

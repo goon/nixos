@@ -4,7 +4,7 @@
   ...
 }:
 
-lib.module config "git" true {
+lib.module config "git" false {
   home = {
     programs = {
       git = {
