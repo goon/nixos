@@ -6,17 +6,6 @@
 }:
 
 lib.module config "wayland" true {
-  options = {
-    module.desktop.windowmanager = lib.mkOption {
-      type = lib.types.enum [
-        "hyprland"
-        "mango"
-      ];
-      default = "hyprland";
-      description = "The window manager to use.";
-    };
-  };
-
   config = {
     environment.sessionVariables = {
       NIXOS_OZONE_WL = "1";

@@ -14,9 +14,6 @@
   # [1] Hardware Support
   module.radeon.enable = true;
 
-  # [2] Session (The Switch)
-  module.desktop.windowmanager = "hyprland";
-
   # [3] Commons (Shared Plumbing - Enabled by default)
   # module.gtk.enable = false;
   # module.shell.enable = false;

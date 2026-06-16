@@ -5,31 +5,12 @@
   ...
 }:
 
-{
-  config = lib.mkIf (config.module.desktop.windowmanager == "hyprland") {
+lib.module config "hyprland" true {
+  config = {
     programs.hyprland = {
       enable = true;
       xwayland.enable = true;
     };
-
-    home-manager.sharedModules = [
-      (
-        {
-          config,
-          osConfig,
-          pkgs,
-          ...
-        }:
-        {
-          xdg.configFile."hypr".source =
-            config.lib.file.mkOutOfStoreSymlink "${osConfig.globals.repo}/modules/session/hyprland";
-
-          home.packages = with pkgs; [
-            hyprpolkitagent
-          ];
-        }
-      )
-    ];
 
     xdg.portal = {
       enable = true;
@@ -46,5 +27,14 @@
         "gtk"
       ];
     };
+  };
+
+  userPkgs = with pkgs; [
+    hyprpolkitagent
+  ];
+
+  home = { config, osConfig, ... }: {
+    xdg.configFile."hypr".source =
+      config.lib.file.mkOutOfStoreSymlink "${osConfig.globals.repo}/modules/session/hyprland";
   };
 }
