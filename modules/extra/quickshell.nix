@@ -5,7 +5,20 @@
   inputs,
   ...
 }:
+let
+  quickshell = inputs.quickshell.packages.${pkgs.stdenv.hostPlatform.system}.quickshell;
 
+  dependencies = with pkgs; [
+    gowall
+    cava
+    brightnessctl
+    ddcutil
+    wl-clipboard
+    cliphist
+    jq
+    pywalfox-native
+  ];
+in
 lib.module config "quickshell" true {
   config = {
     environment.sessionVariables = {
@@ -14,17 +27,7 @@ lib.module config "quickshell" true {
     };
   };
 
-  userPkgs = with pkgs; [
-    inputs.quickshell.packages.${pkgs.stdenv.hostPlatform.system}.quickshell
-    gowall
-    cava
-    brightnessctl 
-    ddcutil 
-    wl-clipboard
-    cliphist 
-    jq 
-    pywalfox-native
-  ];
+  userPkgs = [ quickshell ] ++ dependencies;
 
   home = { config, osConfig, ... }: {
     xdg.configFile."quickshell".source =
