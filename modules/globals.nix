@@ -56,7 +56,7 @@
       editor = lib.opt lib.types.str "nvim.desktop" "default text editor";
       imageViewer = lib.opt lib.types.str "org.gnome.Loupe.desktop" "default image viewer";
       videoPlayer = lib.opt lib.types.str "org.gnome.Totem.desktop" "default video player";
-      musicPlayer = lib.opt lib.types.str "org.gnome.Totem.desktop" "default music player";
+      musicPlayer = lib.opt lib.types.str "com.vixalien.decibels.desktop" "default music player";
       fileManager = lib.opt lib.types.str "org.gnome.Nautilus.desktop" "default file manager";
       pdfViewer = lib.opt lib.types.str "org.gnome.Evince.desktop" "default document viewer";
     };

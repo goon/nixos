@@ -11,10 +11,10 @@ lib.module config "firefox" true {
     pywalfox-native
   ];
 
-  home = {
+  home = { config, osConfig, ... }: {
     programs.firefox = {
       enable = true;
-      configPath = "${config.globals.paths.config}/mozilla/firefox";
+      configPath = "${config.xdg.configHome}/mozilla/firefox";
 
       profiles.default = {
         id = 0;
@@ -26,9 +26,9 @@ lib.module config "firefox" true {
           "browser.tabs.allow_transparent_browser" = true;
           "browser.display.use_document_fonts" = 0;
           "font.default.x-western" = "sans-serif";
-          "font.name.sans-serif.x-western" = config.globals.userFonts.sansSerif;
-          "font.name.serif.x-western" = config.globals.userFonts.sansSerif;
-          "font.name.monospace.x-western" = config.globals.userFonts.monospace;
+          "font.name.sans-serif.x-western" = osConfig.globals.userFonts.sansSerif;
+          "font.name.serif.x-western" = osConfig.globals.userFonts.sansSerif;
+          "font.name.monospace.x-western" = osConfig.globals.userFonts.monospace;
           "browser.ml.chat.enabled" = false;
           "browser.ml.enable" = false;
           "sidebar.position_start" = false;

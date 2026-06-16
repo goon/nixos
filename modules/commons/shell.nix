@@ -27,7 +27,7 @@ lib.module config "shell" true {
     duf
   ];
 
-  home = {
+  home = { config, ... }: {
     programs = {
       eza.enable = true;
       bat.enable = true;
@@ -83,7 +83,7 @@ lib.module config "shell" true {
 
     programs.zsh = {
       enable = true;
-      dotDir = "${config.globals.paths.config}/zsh";
+      dotDir = "${config.xdg.configHome}/zsh";
       enableCompletion = true;
       autosuggestion.enable = true;
       syntaxHighlighting.enable = true;

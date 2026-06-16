@@ -4,14 +4,14 @@
   ...
 }:
 lib.module config "kitty" true {
-  home = {
+  home = { config, osConfig, ... }: {
     programs.kitty = {
       enable = true;
       settings = {
         confirm_os_window_close = 0;
         allow_remote_control = "yes";
         listen_on = "unix:/tmp/kitty";
-        font_family = config.globals.userFonts.monospace;
+        font_family = osConfig.globals.userFonts.monospace;
         font_size = "11.0";
         cursor_shape = "block";
         cursor_trail = 10;
@@ -32,7 +32,7 @@ lib.module config "kitty" true {
         "ctrl+shift+w" = "close_window";
         "ctrl+shift+]" = "next_window";
         "ctrl+shift+[" = "previous_window";
-        "f4" = "goto_session ${config.globals.paths.config}/kitty/sessions/ --sort-by=alphabetical";
+        "f4" = "goto_session ${config.xdg.configHome}/kitty/sessions/ --sort-by=alphabetical";
       };
 
       extraConfig = ''
@@ -42,14 +42,14 @@ lib.module config "kitty" true {
     };
 
     xdg.configFile."kitty/sessions/nix.session".text = ''
-      cd ${config.globals.repo}
+      cd ${osConfig.globals.repo}
       layout splits
       launch nvim
       launch --location=vsplit --bias=40 opencode
     '';
 
     xdg.configFile."kitty/sessions/qs.session".text = ''
-      cd ${config.globals.repo}/modules/session/quickshell
+      cd ${osConfig.globals.repo}/modules/session/quickshell
       layout splits
       launch nvim
       launch --location=vsplit --bias=40 opencode

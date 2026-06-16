@@ -21,7 +21,7 @@ lib.module config "gtk" true {
     gtk3
   ];
 
-  home = {
+  home = { config, osConfig, ... }: {
     dconf.enable = true;
 
     home.pointerCursor = {
@@ -36,9 +36,9 @@ lib.module config "gtk" true {
     dconf.settings = {
       "org/gnome/desktop/interface" = {
         color-scheme = "prefer-dark";
-        font-name = "${config.globals.userFonts.sansSerif} 11";
-        document-font-name = "${config.globals.userFonts.sansSerif} 11";
-        monospace-font-name = "${config.globals.userFonts.monospace} 11";
+        font-name = "${osConfig.globals.userFonts.sansSerif} 11";
+        document-font-name = "${osConfig.globals.userFonts.sansSerif} 11";
+        monospace-font-name = "${osConfig.globals.userFonts.monospace} 11";
         gtk-theme = "adw-gtk3";
         icon-theme = "Papirus";
       };
@@ -48,13 +48,13 @@ lib.module config "gtk" true {
     xdg.configFile."gtk-3.0/bookmarks" = {
       force = true;
       text = ''
-        file://${config.globals.repo} Nix
-        file://${config.globals.paths.home}/Downloads Downloads
-        file://${config.globals.paths.home}/Documents Documents
-        file://${config.globals.paths.home}/Pictures Pictures
-        file://${config.globals.paths.home}/Music Music
-        file://${config.globals.paths.home}/Videos Videos
-        file://${config.globals.paths.config} Config
+        file://${osConfig.globals.repo} Nix
+        file://${osConfig.globals.paths.home}/Downloads Downloads
+        file://${osConfig.globals.paths.home}/Documents Documents
+        file://${osConfig.globals.paths.home}/Pictures Pictures
+        file://${osConfig.globals.paths.home}/Music Music
+        file://${osConfig.globals.paths.home}/Videos Videos
+        file://${config.xdg.configHome} Config
         file:///mnt/rocket Rocket
       '';
     };

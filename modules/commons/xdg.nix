@@ -6,31 +6,6 @@
 }:
 
 lib.module config "xdg" true {
-  options = {
-    globals.paths = {
-      config = lib.mkOption {
-        type = lib.types.str;
-        default = "${config.globals.paths.home}/.config";
-        description = "Absolute path to the XDG config home";
-      };
-      data = lib.mkOption {
-        type = lib.types.str;
-        default = "${config.globals.paths.home}/.local/share";
-        description = "Absolute path to the XDG data home";
-      };
-      cache = lib.mkOption {
-        type = lib.types.str;
-        default = "${config.globals.paths.home}/.cache";
-        description = "Absolute path to the XDG cache home";
-      };
-      state = lib.mkOption {
-        type = lib.types.str;
-        default = "${config.globals.paths.home}/.local/state";
-        description = "Absolute path to the XDG state home";
-      };
-    };
-  };
-
   config = {
     # System Layer
     environment.systemPackages = [ pkgs.xdg-user-dirs ];
@@ -54,19 +29,72 @@ lib.module config "xdg" true {
         defaultApplications =
           let
             inherit (config.globals) apps;
+            xdgAssociations =
+              type: program: list:
+              builtins.listToAttrs (
+                map (e: {
+                  name = "${type}/${e}";
+                  value = program;
+                }) list
+              );
+
+            image = xdgAssociations "image" apps.imageViewer [
+              "png"
+              "svg"
+              "jpeg"
+              "jpg"
+              "gif"
+              "webp"
+            ];
+            video = xdgAssociations "video" apps.videoPlayer [
+              "mp4"
+              "avi"
+              "mkv"
+              "webm"
+            ];
+            audio = xdgAssociations "audio" apps.musicPlayer [
+              "mp3"
+              "flac"
+              "wav"
+              "aac"
+              "ogg"
+            ];
+            browserTypes =
+              (xdgAssociations "application" apps.browser [
+                "json"
+                "x-extension-htm"
+                "x-extension-html"
+                "x-extension-shtml"
+                "x-extension-xht"
+                "x-extension-xhtml"
+                "xhtml+xml"
+              ])
+              // (xdgAssociations "x-scheme-handler" apps.browser [
+                "about"
+                "chrome"
+                "ftp"
+                "http"
+                "https"
+                "unknown"
+              ]);
           in
           {
-            "x-scheme-handler/http" = apps.browser;
-            "x-scheme-handler/https" = apps.browser;
-            "text/html" = apps.browser;
-            "image/jpeg" = apps.imageViewer;
-            "image/png" = apps.imageViewer;
-            "video/mp4" = apps.videoPlayer;
-            "inode/directory" = apps.fileManager;
             "application/pdf" = apps.pdfViewer;
             "text/plain" = apps.editor;
-          };
+            "inode/directory" = apps.fileManager;
+          }
+          // image
+          // video
+          // audio
+          // browserTypes;
       };
     };
+
+    home.packages = [
+      (pkgs.writeShellScriptBin "xdg-terminal-exec" ''
+        ${config.globals.userTerminal} "$@"
+      '')
+      pkgs.xdg-utils
+    ];
   };
 }
