@@ -94,7 +94,7 @@ lib.module config "moduleName" true {
 
 The `config`, `home` and `userPkgs` blocks are automatically parsed and natively wired into NixOS and Home Manager under the hood, ensuring that modules remain flat, organised and stripped of boilerplate.
 
-Every `.nix` file under `modules/` is automatically discovered and imported by `lib/recursive.nix`, preventing the need for manual imports. The importer skips private files prefixed with `_` or `.`. Most modules follow a **on by default** format. To disable a feature or module on a given host, `module.<name>.enable = false;` can be set.
+Every `.nix` file under `modules/` is automatically discovered and imported by `lib/recursive.nix`, preventing the need for manual imports. The importer skips private files prefixed with `_` or `.`. To disable / enable a feature or module on a given host, `module.<name>.enable = <true/false>;` can be set.
 
 Hosts are formed by combining the auto discovered modules with host specific overrides in `hosts/<hostname>/default.nix`. Where the host file serves as a **dendritic dashboard** for enabling hardware support, selecting a window manager and documenting which modules are explicitly enabled or disabled.
 
