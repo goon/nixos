@@ -56,13 +56,13 @@ Another **blazingly mid** nix configuration with an overengineered dendritic arc
 
 ## Modules 
 
-- `modules/commons` — Universal Configurations
-- `modules/core` — Device & Hardware Configurations
-- `modules/extra` — Software Configurations
-- `modules/session` — Window Managers & Shell
+- `modules/apps` — Software Configurations
+- `modules/core` — Bedrock
+- `modules/env` — Environment Configurations
+- `modules/hardware` — Hardware Configurations
+- `modules/shared` — Shared Configurations
 
 ### The Dendritic Module Engine
-
 
 To heavily reduce boilerplate traditionally associated with mixing NixOS and Home Manager configurations a custom abstraction engine is used (`lib.module`). 
 
