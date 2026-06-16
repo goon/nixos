@@ -35,7 +35,10 @@ lib.module config "xdg" true {
     # System Layer
     environment.systemPackages = [ pkgs.xdg-user-dirs ];
     environment.pathsToLink = [ "/share/applications" ];
-    xdg.portal.enable = true;
+    xdg.portal = {
+      enable = true;
+      xdgOpenUsePortal = true;
+    };
   };
 
   home = {
