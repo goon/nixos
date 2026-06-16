@@ -16,8 +16,14 @@ lib.module config "quickshell" true {
 
   userPkgs = with pkgs; [
     inputs.quickshell.packages.${pkgs.stdenv.hostPlatform.system}.quickshell
-    gowall # Wallpaper Themer
-    cava # Visualizer
+    gowall
+    cava
+    brightnessctl 
+    ddcutil 
+    wl-clipboard
+    cliphist 
+    jq 
+    pywalfox-native
   ];
 
   home = { config, osConfig, ... }: {
