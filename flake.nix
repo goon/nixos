@@ -29,9 +29,6 @@
     nixcord.url = "github:FlameFlag/nixcord";
     nixcord.inputs.nixpkgs.follows = "nixpkgs";
 
-    mangowm.url = "github:mangowm/mango";
-    mangowm.inputs.nixpkgs.follows = "nixpkgs";
-
     millennium.url = "github:SteamClientHomebrew/Millennium?dir=packages/nix";
     millennium.inputs.nixpkgs.follows = "nixpkgs";
   };
