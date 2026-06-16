@@ -49,7 +49,7 @@ lib.module config "kitty" false {
     '';
 
     xdg.configFile."kitty/sessions/qs.session".text = ''
-      cd ${osConfig.globals.repo}/modules/session/quickshell
+      cd ${osConfig.globals.repo}/modules/env/yaks
       layout splits
       launch nvim
       launch --location=vsplit --bias=40 opencode

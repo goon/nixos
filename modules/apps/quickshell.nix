@@ -31,7 +31,7 @@ lib.module config "quickshell" false {
 
   home = { config, osConfig, ... }: {
     xdg.configFile."quickshell".source =
-      config.lib.file.mkOutOfStoreSymlink "${osConfig.globals.repo}/modules/session/yaks";
+      config.lib.file.mkOutOfStoreSymlink "${osConfig.globals.repo}/modules/env/yaks";
 
     systemd.user.services.quickshell = {
       Unit = {

@@ -35,6 +35,6 @@ lib.module config "hyprland" false {
 
   home = { config, osConfig, ... }: {
     xdg.configFile."hypr".source =
-      config.lib.file.mkOutOfStoreSymlink "${osConfig.globals.repo}/modules/session/hyprland";
+      config.lib.file.mkOutOfStoreSymlink "${osConfig.globals.repo}/modules/env/hyprland";
   };
 }

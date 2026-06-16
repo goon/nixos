@@ -9,12 +9,15 @@
 
   # [1] Hardware
   module.radeon.enable = true;
+  module.monitors.enable = true;
+  module.logitech.enable = true;
+  module.wooting.enable = true;
 
   # [2] Session
   module.wayland.enable = true;
   module.hyprland.enable = true;
 
-  # [3] Extra (Optional Features)
+  # [3] Apps (Optional Features)
   module.creative.enable = true;
   module.dev.enable = true;
   module.easyeffects.enable = true;
