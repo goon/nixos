@@ -1,8 +1,6 @@
 #!/usr/bin/env bash
 # Restarts Quickshell
 
-APP="quickshell"
-
 notify() {
     if command -v notify-send >/dev/null; then
         notify-send "Quickshell" "$1" \
@@ -12,28 +10,14 @@ notify() {
     fi
 }
 
-echo "Stopping Quickshell..."
-
-pkill "quickshell"
-
-COUNT=0
-while pgrep "quickshell" >/dev/null && [ $COUNT -lt 20 ]; do
-    sleep 0.1
-    ((COUNT++))
-done
-
-if pgrep "quickshell" >/dev/null; then
-    echo "Forcing exit..."
-    pkill -9 "quickshell"
-fi
-
-QT_USE_PORTAL=1 nohup "$APP" >/dev/null 2>&1 &
+echo "Restarting Quickshell service..."
+systemctl --user restart quickshell.service
 
 if [ $? -eq 0 ]; then
     notify "Shell restarted successfully"
     echo "Done."
 else
     notify "Failed to restart Shell"
-    echo "Error: Failed to start $APP"
+    echo "Error: Failed to restart quickshell.service"
     exit 1
 fi

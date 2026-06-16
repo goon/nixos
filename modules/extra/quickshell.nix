@@ -31,6 +31,23 @@ lib.module config "quickshell" true {
 
   home = { config, osConfig, ... }: {
     xdg.configFile."quickshell".source =
-      config.lib.file.mkOutOfStoreSymlink "${osConfig.globals.repo}/modules/session/quickshell";
+      config.lib.file.mkOutOfStoreSymlink "${osConfig.globals.repo}/modules/session/yaks";
+
+    systemd.user.services.quickshell = {
+      Unit = {
+        Description = "Quickshell Desktop Shell";
+        PartOf = [ "graphical-session.target" ];
+        After = [ "graphical-session.target" ];
+      };
+      Service = {
+        ExecStart = "${lib.getExe quickshell}";
+        Environment = "QT_USE_PORTAL=1";
+        Restart = "on-failure";
+        RestartSec = "2";
+      };
+      Install = {
+        WantedBy = [ "graphical-session.target" ];
+      };
+    };
   };
 }

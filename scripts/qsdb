@@ -2,8 +2,6 @@
 # Quickshell Debugger
 # Restarts Quickshell with Advanced Debugging.
 
-APP="quickshell"
-
 notify() {
     if command -v notify-send >/dev/null; then
         notify-send "Quickshell Debug" "$1" \
@@ -13,21 +11,15 @@ notify() {
     fi
 }
 
-echo "Stopping Quickshell..."
-pkill "$APP"
-
-COUNT=0
-while pgrep "$APP" >/dev/null && [ $COUNT -lt 20 ]; do
-    sleep 0.1
-    ((COUNT++))
-done
-
-if pgrep "$APP" >/dev/null; then
-    pkill -9 "$APP"
-fi
+echo "Stopping Quickshell service..."
+systemctl --user stop quickshell.service
 
 notify "Starting debug mode..."
 echo "Starting Quickshell in foreground..."
 echo "-----------------------------------"
 
-"$APP"
+QT_USE_PORTAL=1 quickshell
+
+echo "-----------------------------------"
+echo "Restarting background service..."
+systemctl --user start quickshell.service
