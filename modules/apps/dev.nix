@@ -8,6 +8,7 @@
 lib.module config "dev" false {
   userPkgs = with pkgs; [
     antigravity
+    nixd
   ];
 
   home = {
