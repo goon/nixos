@@ -41,19 +41,40 @@ info "Checking submodules..."
 nix-shell -p git --run "git submodule update --init --recursive"
 
 
-info "We are about to install the 'desktop' host."
+# Find available hosts
+HOSTS=()
+for dir in hosts/*/; do
+    if [ -d "$dir" ]; then
+        HOSTS+=("$(basename "$dir")")
+    fi
+done
+
+if [ ${#HOSTS[@]} -eq 0 ]; then
+    error "No hosts found in hosts/ directory."
+fi
+
+info "Available hosts:"
+select SELECTED_HOST in "${HOSTS[@]}"; do
+    if [ -n "$SELECTED_HOST" ]; then
+        break
+    else
+        warn "Invalid selection. Please try again."
+    fi
+done
+
+info "We are about to install the '$SELECTED_HOST' host."
 echo -e -n "${YE}Press enter to continue or Ctrl+C to abort...${NC} "
 read -r
 
 # 4. Generate Hardware Configuration
-info "Generating hardware configuration for 'desktop'..."
-mkdir -p hosts/desktop
-nixos-generate-config --show-hardware-config > hosts/desktop/hardware-configuration.nix
-success "Hardware configuration saved to hosts/desktop/hardware-configuration.nix"
+info "Generating hardware configuration for '$SELECTED_HOST'..."
+mkdir -p "hosts/$SELECTED_HOST"
+nixos-generate-config --show-hardware-config > "hosts/$SELECTED_HOST/hardware-configuration.nix"
+success "Hardware configuration saved to hosts/$SELECTED_HOST/hardware-configuration.nix"
 
 # 5. Rebuild and Switch
 info "Starting NixOS rebuild... this may take a while."
-sudo nixos-rebuild switch --flake .#desktop
+sudo nixos-rebuild switch --flake ".#$SELECTED_HOST"
 
 # 6. Update Flake Inputs
 info "Updating flake inputs..."
