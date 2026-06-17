@@ -119,22 +119,20 @@ The formatter module at `lib/formatter.nix` is passed through `treefmt-nix`'s `e
 
 1. **Clone**
 
-   ```bash
+```bash
    nix-shell -p git
    git clone --recursive https://github.com/goon/nixos ~/.nixos
    cd ~/.nixos
-
-   ```
+```
 
 > [!NOTE]
 > The `--recursive` flag ensures the `yaks` quickshell submodule is pulled.
 
 2. **Run the Bootstrap Script**
 
-   ```bash
+```bash
    ./scripts/bootstrap
-
-   ```
+```
 
 ## Credits
 
