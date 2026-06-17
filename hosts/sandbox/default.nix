@@ -22,6 +22,8 @@
   module.kitty.enable = true;
   module.nvf.enable = true;
   module.starship.enable = true;
+  module.yazi.enable = true;
+  module.quickshell.enable = true;
 
   nix.settings = {
     max-jobs = 4;
