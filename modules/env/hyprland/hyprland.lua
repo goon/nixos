@@ -230,7 +230,7 @@ hl.layer_rule({
 -- Autostart
 hl.on("hyprland.start", function()
     hl.exec_cmd("dbus-update-activation-environment --systemd --all")
-    hl.exec_cmd("systemctl --user start graphical-session.target")
+    hl.exec_cmd("systemctl --user start hyprland-session.target")
 
     hl.exec_cmd("setpriv --ambient-caps -all vesktop")
     hl.exec_cmd("setpriv --ambient-caps -all spotify")

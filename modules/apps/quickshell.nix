@@ -37,7 +37,7 @@ lib.module config "quickshell" false {
       Unit = {
         Description = "Quickshell Desktop Shell";
         PartOf = [ "graphical-session.target" ];
-        After = [ "graphical-session.target" ];
+        After = [ "graphical-session-pre.target" ];
       };
       Service = {
         ExecStart = "${lib.getExe quickshell}";
