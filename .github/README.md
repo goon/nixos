@@ -14,18 +14,14 @@
 
 Another **blazingly mid** nix configuration with an overengineered dendritic architecture built on **flakes** and **home manager** with automatic module discovery, powered by **Hyprland**, and held together by hopes, dreams and vibes.
 
-> [!IMPORTANT]
-> This is a **personal** configuration, shared for reference and inspiration **NOT** adoption. 
+> [!CAUTION]
+> This configuration is shared for reference and inspiration, **NOT** adoption.
 >
-> - This configuration is constantly evolving. It is prone to drastic and likely **breaking** changes.
+> - This configuration is constantly evolving. It is prone to drastic, **breaking** changes.
 > - Features may be partially implemented or entirely broken.
-> - The README and documentation will often times be outdated.
+> - The README and documentation will often be outdated.
 > - I provide **no guarantees** of stability or support.
->
-> **If you intend to use any aspect of my configuration, make sure you:**
-> 1. Review the code thoroughly.
-> 2. Understand what each module does. 
-> 3. Adapt it to your specific use case.
+
 
 ## Table of Contents
 
@@ -111,7 +107,7 @@ The formatter module at `lib/formatter.nix` is passed through `treefmt-nix`'s `e
 
 ## Deployment
 
-> [!WARNING]
+> [!CAUTION]
 > The configuration expects the flake to live in `$HOME/.nixos`.
 >
 > Your username and the location of the flake can be modified inside of `hosts/vars.nix`.
@@ -138,35 +134,6 @@ The formatter module at `lib/formatter.nix` is passed through `treefmt-nix`'s `e
    ```bash
    ./scripts/bootstrap
 
-   ```
-
-### Manual Deployment 
-
-1. **Clone:** 
-
-   ```bash
-   nix-shell -p git
-   git clone --recursive https://github.com/goon/nixos ~/.nixos
-   cd ~/.nixos
-
-   ```
-
-> [!NOTE]
-> The `--recursive` flag ensures the `yaks` quickshell submodule is pulled.
-
-2. **Generate Hardware Configuration:**
-   ```bash
-   nixos-generate-config --show-hardware-config > hosts/desktop/hardware-configuration.nix
-   ```
-
-3. **Rebuild:**
-   ```bash
-   sudo nixos-rebuild switch --flake .#desktop 
-   ```
-
-4. **Update:**
-   ```bash
-   sudo nix flake update
    ```
 
 ## Credits
