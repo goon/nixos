@@ -26,8 +26,8 @@
   module.quickshell.enable = true;
 
   nix.settings = {
-    max-jobs = 4;
-    cores = 4;
+    max-jobs = 2;
+    cores = 2;
   };
 
   globals.stateVersion = "25.11";
