@@ -107,15 +107,15 @@ The formatter module at `lib/formatter.nix` is passed through `treefmt-nix`'s `e
 
 ## Deployment
 
+> [!NOTE]
+> These instructions document the bootstrapping process for deploying to a new machine. It is **not** intended as a guide for others to install this configuration. Once again, this configuration is shared for reference and inspiration, **NOT** adoption.
+
 > [!CAUTION]
 > The configuration expects the flake to live in `$HOME/.nixos`.
 >
 > Your username and the location of the flake per host can be modified inside of `hosts/vars.nix`.
 >
 >**Forgetting to update these values will result in a broken configuration.**
-
-
-### Deployment Script 
 
 1. **Clone**
 
