@@ -175,7 +175,7 @@ Huge thank you to the countless configurations made public that I ~~copied~~, re
 
 Both [hlissner](https://github.com/hlissner/dotfiles) and [fufexan](https://github.com/fufexan/dotfiles)'s configurations heavily informed and inspired my own, and many more:
 
-— namishh — seniormatt — anotherhadi — vic — vimjoyer — mitchellh — misterio77 — gvolpe — librephoenix 
+namishh — seniormatt — anotherhadi — vic — vimjoyer — mitchellh — gvolpe — librephoenix 
 
 Due to my dementia I may have missed many. Regardless, I am thankful. 
 
