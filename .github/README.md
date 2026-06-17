@@ -171,9 +171,11 @@ The formatter module at `lib/formatter.nix` is passed through `treefmt-nix`'s `e
 
 ## Credits
 
-Thank you to the countless Nix OS configurations that I ~~copied~~ learnt from. 
+Huge thank you to the countless configurations made public that I ~~copied~~, referenced, learnt from and that inspired me to take my config to the deepest pits of hell.
 
-namishh — seniormatt — hlissner — fufexan — frost-pheonix — anotherhadi — vic — vimjoyer — bad3r — mitchellh — misterio77 — max-baz — gvolpe — librephoenix — sioodmy
+Both [hlissner](https://github.com/hlissner/dotfiles) and [fufexan](https://github.com/fufexan/dotfiles)'s configurations heavily informed and inspired my own, and many more:
+
+— namishh — seniormatt — anotherhadi — vic — vimjoyer — mitchellh — misterio77 — gvolpe — librephoenix 
 
 Due to my dementia I may have missed many. Regardless, I am thankful. 
 
