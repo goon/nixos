@@ -16,8 +16,18 @@ lib.module config "qt" true {
   home = {
     qt = {
       enable = true;
-      platformTheme.name = "adwaita";
-      style.name = "adwaita-dark";
+      platformTheme.name = "gtk3";
+      style.name = "kvantum";
+    };
+
+    xdg.configFile."Kvantum/kvantum.kvconfig".text = ''
+      [General]
+      theme=quickshell
+    '';
+
+    xdg.desktopEntries.kvantummanager = {
+      name = "Kvantum Manager";
+      noDisplay = true;
     };
   };
 }
