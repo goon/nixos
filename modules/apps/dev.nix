@@ -44,6 +44,12 @@ lib.module config "dev" false {
               version = "0.0.13";
               sha256 = "1m301j2qbym3j2qnck76jyxakca3h1qiybc2r7wy7z11m98mg9z9";
             }
+            {
+              name = "symbols";
+              publisher = "miguelsolorio";
+              version = "0.0.26";
+              sha256 = "52b9059b0c2a314b02bb064ddbfb7cb9e0d0059d561334c5f48aa2ae64c06595";
+            }
           ];
       };
     };
