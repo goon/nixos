@@ -17,11 +17,11 @@
         "treefmt-nix": "treefmt-nix"
       },
       "locked": {
-        "lastModified": 1781480688,
-        "narHash": "sha256-TZGZYAeV2RDX/SNMRtnyLnv5+3KK/gxnbLBhDDl1iik=",
+        "lastModified": 1781688715,
+        "narHash": "sha256-brhFyhDel7E6rmwViRF0yehhiLb5ICYRnznTwdA0+cA=",
         "owner": "mrshmllow",
         "repo": "affinity-nix",
-        "rev": "6befe0119a1d33bd05c0766f2f3b610cfb4b9e7b",
+        "rev": "2c764c934bf7b772b43f8cfaed1fac474c7d2807",
         "type": "github"
       },
       "original": {
@@ -327,11 +327,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1781642113,
-        "narHash": "sha256-mAR7KTS9rjreTcXCNqfCbN96mnhJO8lDQq1vl7GviBQ=",
+        "lastModified": 1781729244,
+        "narHash": "sha256-vT1hM3l+vH1h9BHhuxkAsJmAPl6Rld7cjLVEGtHGzOA=",
         "owner": "nix-community",
         "repo": "home-manager",
-        "rev": "df4e0465717a2d34f05b8ccd967275aaf3ceaa01",
+        "rev": "c51ac59e59f2a7362d71d1d01ab68b2c09d09347",
         "type": "github"
       },
       "original": {
@@ -483,11 +483,11 @@
         "nixpkgs-nixcord": "nixpkgs-nixcord"
       },
       "locked": {
-        "lastModified": 1781632276,
-        "narHash": "sha256-zUoCToxdZfyiWrwEKCNoY9hHV0P6oPu7/FKMZtWhYys=",
+        "lastModified": 1781716424,
+        "narHash": "sha256-vzNMgPYXQ0Uz9tPEKqsgJE2+l3reQZ6Js9i7dIeMxTc=",
         "owner": "FlameFlag",
         "repo": "nixcord",
-        "rev": "1b28cbc0146244c82f72c2e9619690a108819a4e",
+        "rev": "1a7c514d94dffde42b59431c135d161c9cd837ea",
         "type": "github"
       },
       "original": {
