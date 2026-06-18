@@ -10,14 +10,22 @@ notify() {
     fi
 }
 
-echo "Restarting Quickshell service..."
-systemctl --user restart quickshell.service
+echo "Reloading Quickshell QML engine..."
+qs ipc call shell reload true
 
 if [ $? -eq 0 ]; then
-    notify "Shell restarted successfully"
+    notify "Shell reloaded successfully"
     echo "Done."
 else
-    notify "Failed to restart Shell"
-    echo "Error: Failed to restart quickshell.service"
-    exit 1
+    notify "IPC reload failed, restarting service..."
+    echo "Warning: IPC reload failed, falling back to service restart..."
+    systemctl --user restart quickshell.service
+    if [ $? -eq 0 ]; then
+        notify "Shell restarted successfully"
+        echo "Done."
+    else
+        notify "Failed to restart Shell"
+        echo "Error: Failed to restart quickshell.service"
+        exit 1
+    fi
 fi
