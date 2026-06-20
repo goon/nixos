@@ -6,11 +6,6 @@
   ...
 }:
 
-let
-  cheat-cmd = pkgs.writeShellScriptBin "cheat" ''
-    curl "https://cheat.sh/$1"
-  '';
-in
 lib.module config "shell" true {
   config = {
     programs.zsh.enable = true;
@@ -23,7 +18,7 @@ lib.module config "shell" true {
   };
 
   userPkgs = with pkgs; [
-    cheat-cmd
+    (writeShellScriptBin "cheat" ''curl "https://cheat.sh/$1"'')
     curl
     duf
     gum
