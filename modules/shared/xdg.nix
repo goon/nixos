@@ -7,7 +7,6 @@
 
 lib.module config "xdg" true {
   config = {
-    # System Layer
     environment.systemPackages = [ pkgs.xdg-user-dirs ];
     environment.pathsToLink = [ "/share/applications" ];
     xdg.portal = {
