@@ -2,6 +2,7 @@
   config,
   lib,
   pkgs,
+  repo,
   ...
 }:
 
@@ -22,6 +23,7 @@ let
         chmod +x $out/bin/*
       fi
     fi
+    echo ${repo} > $out/dcli.repo
   '';
 in
 lib.module config "scripts" true {

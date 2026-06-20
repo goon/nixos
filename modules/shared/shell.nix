@@ -25,6 +25,14 @@ lib.module config "shell" true {
   userPkgs = with pkgs; [
     cheat-cmd
     duf
+    fd
+    gum
+    ripgrep
+    wget
+    curl
+    unzip
+    btop
+    jq
   ];
 
   home = { config, ... }: {
@@ -42,10 +50,10 @@ lib.module config "shell" true {
 
         cat = "bat";
         df = "duf";
-        grep = "grep --color=auto";
-        partitions = "lsblk -f";
+        tree = "eza --tree";
+        find = "fd";
+        grep = "rg";
         rm = "rm -i";
-
         f = "fzf";
       };
 

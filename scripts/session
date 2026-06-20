@@ -1,0 +1,23 @@
+#!/usr/bin/env bash
+set -euo pipefail
+
+SESSION_DIR="$HOME/.config/kitty/sessions"
+
+session_file=$(find "$SESSION_DIR" -maxdepth 1 -name "*.session" -printf "%f\n" | fzf --prompt="Select session: ")
+
+if [ -z "$session_file" ]; then
+  exit 0
+fi
+
+session_path="$SESSION_DIR/$session_file"
+
+current_tab_info=$(kitty @ ls | jq -r '.[] | select(.is_focused) | .tabs[] | select(.is_focused)')
+current_tab_id=$(echo "$current_tab_info" | jq -r '.id')
+window_count=$(echo "$current_tab_info" | jq -r '.windows | length')
+first_window_cmd=$(echo "$current_tab_info" | jq -r '.windows[0].foreground_processes[0].cmdline[0]' 2>/dev/null || echo "")
+
+kitty @ action goto_session "$session_path"
+
+if [ "$window_count" -eq 1 ] && [[ "$first_window_cmd" =~ ^(bash|zsh|fish|sh|kitty)$ || -z "$first_window_cmd" ]]; then
+  kitty @ close-tab --match "id:$current_tab_id"
+fi

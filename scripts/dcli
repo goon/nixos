@@ -1,0 +1,56 @@
+#!/usr/bin/env bash
+set -euo pipefail
+
+DCLI_DIR="$(cd "$(dirname "$(realpath "${BASH_SOURCE[0]}")")" && pwd)"
+export DCLI_DIR
+
+source "$DCLI_DIR/dcli.lib/index.sh"
+
+cmd="${1:-menu}"; shift || true
+
+if [ "$cmd" = "menu" ]; then
+  command -v gum &>/dev/null || error "gum is required but not installed."
+
+  COG=$'\uF013'
+  FLASK=$'\uF0C3'
+  ARROWS=$'\uF021'
+  TRASH=$'\uF1F8'
+  LIST=$'\uF0CB'
+  FMT=$'\uF0AD'
+  SEARCH=$'\uF002'
+  MODULE=$'\uF1B3'
+  VERSION=$'\uF05A'
+  LINE='│'
+
+  choice=$(gum choose \
+    --cursor " ❯" \
+    "${LINE} ${COG}  Rebuild" \
+    "${LINE} ${FLASK}  Test" \
+    "${LINE} ${ARROWS}  Update" \
+    "${LINE} ${TRASH}  Collect Garbage" \
+    "${LINE} ${LIST}  List Generations" \
+    "${LINE} ${FMT}  Format" \
+    "${LINE} ${SEARCH}  Search" \
+    "${LINE} ${MODULE}  Modules" \
+    "${LINE} ${VERSION}  Version")
+
+  case "$choice" in
+    *Rebuild)           exec "$0" rebuild ;;
+    *Test)              exec "$0" test ;;
+    *Update)            exec "$0" update ;;
+    *"Collect Garbage") exec "$0" gc ;;
+    *"List Generations") exec "$0" generations ;;
+    *Format)            exec "$0" fmt ;;
+    *Search)            exec "$0" search ;;
+    *Modules)           exec "$0" module ;;
+    *Version)           exec "$0" version ;;
+    *)                  exit 0 ;;
+  esac
+fi
+
+cmd_path="$DCLI_DIR/dcli.cmds/${cmd}.sh"
+if [ -f "$cmd_path" ]; then
+  source "$cmd_path" "$@"
+else
+  error "Unknown subcommand: $cmd. Run 'dcli help'."
+fi
