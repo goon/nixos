@@ -1,10 +1,10 @@
 #!/usr/bin/env bash
 set -euo pipefail
 
-DCLI_DIR="$(cd "$(dirname "$(realpath "${BASH_SOURCE[0]}")")" && pwd)"
-export DCLI_DIR
+NCLI_DIR="$(cd "$(dirname "$(realpath "${BASH_SOURCE[0]}")")" && pwd)"
+export NCLI_DIR
 
-source "$DCLI_DIR/dcli.lib/index.sh"
+source "$NCLI_DIR/ncli.lib/index.sh"
 
 cmd="${1:-menu}"; shift || true
 
@@ -48,9 +48,9 @@ if [ "$cmd" = "menu" ]; then
   esac
 fi
 
-cmd_path="$DCLI_DIR/dcli.cmds/${cmd}.sh"
+cmd_path="$NCLI_DIR/ncli.cmds/${cmd}.sh"
 if [ -f "$cmd_path" ]; then
   source "$cmd_path" "$@"
 else
-  error "Unknown subcommand: $cmd. Run 'dcli help'."
+  error "Unknown subcommand: $cmd. Run 'ncli help'."
 fi

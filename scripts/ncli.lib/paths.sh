@@ -1,10 +1,10 @@
-if [ -f "$DCLI_DIR/../dcli.repo" ]; then
-  REPO="$(cat "$DCLI_DIR/../dcli.repo")"
+if [ -f "$NCLI_DIR/../ncli.repo" ]; then
+  REPO="$(cat "$NCLI_DIR/../ncli.repo")"
 else
-  _dir="$DCLI_DIR"
+  _dir="$NCLI_DIR"
   while [ ! -f "$_dir/flake.nix" ]; do
     _dir="$(dirname "$_dir")"
-    [ "$_dir" = "/" ] && error "Could not find flake.nix from $DCLI_DIR"
+    [ "$_dir" = "/" ] && error "Could not find flake.nix from $NCLI_DIR"
   done
   REPO="$_dir"
 fi

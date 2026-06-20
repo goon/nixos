@@ -1,7 +1,7 @@
 cmd_help() {
-  echo "dcli — declarative cli for NixOS flake management"
+  echo "ncli — declarative cli for NixOS flake management"
   echo ""
-  echo "Usage: dcli [subcommand]"
+  echo "Usage: ncli [subcommand]"
   echo ""
   echo "Available subcommands:"
   echo "  help         Show this help"
@@ -15,6 +15,6 @@ cmd_help() {
   echo "  module list [host]  List modules enabled/disabled on a host"
   echo "  version             Show repo HEAD and flake.lock mtime"
   echo ""
-  echo "Run 'dcli' without arguments for the interactive menu."
+  echo "Run 'ncli' without arguments for the interactive menu."
 }
 cmd_help "$@"

@@ -23,7 +23,7 @@ let
         chmod +x $out/bin/*
       fi
     fi
-    echo ${repo} > $out/dcli.repo
+    echo ${repo} > $out/ncli.repo
   '';
 in
 lib.module config "scripts" true {
