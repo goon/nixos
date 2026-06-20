@@ -7,15 +7,15 @@
 lib.extend (
   final: _prev: {
     opt =
-      type: default: description:
+      type: default:
       final.mkOption {
-        inherit type default description;
+        inherit type default;
       };
 
     boolOpt =
-      default: description:
+      default:
       final.mkOption {
-        inherit default description;
+        inherit default;
         type = final.types.bool;
       };
   }

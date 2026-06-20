@@ -5,7 +5,7 @@
   ...
 }:
 
-lib.module config "gtk" true {
+lib.module config "gtk" false {
   config = {
     # ========== System Layer (NixOS) ==========
     services.dbus.enable = true;

@@ -5,7 +5,7 @@
   ...
 }:
 
-lib.module config "xdg" true {
+lib.module config "xdg" false {
   config = {
     environment.systemPackages = [ pkgs.xdg-user-dirs ];
     environment.pathsToLink = [ "/share/applications" ];

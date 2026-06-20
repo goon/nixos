@@ -11,8 +11,7 @@
   module.virtualisation.enable = true;
 
   # [2] Session
-  module.wayland.enable = true;
-  module.hyprland.enable = true;
+  profile.session = true;
 
   # [3] Apps (Optional Features)
   module.dev.enable = true;
@@ -23,7 +22,6 @@
   module.nvf.enable = true;
   module.starship.enable = true;
   module.yazi.enable = true;
-  module.quickshell.enable = true;
 
   nix.settings = {
     max-jobs = 2;

@@ -45,6 +45,6 @@ lib.module config "hyprland" false {
     };
 
     xdg.configFile."hypr".source =
-      config.lib.file.mkOutOfStoreSymlink "${globals.repo}/modules/env/hyprland";
+      config.lib.file.mkOutOfStoreSymlink "${globals.repo}/modules/session/hyprland";
   };
 }

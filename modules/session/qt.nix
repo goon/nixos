@@ -4,7 +4,7 @@
   ...
 }:
 
-lib.module config "qt" true {
+lib.module config "qt" false {
   config = {
     environment.sessionVariables = {
       QT_AUTO_SCREEN_SCALE_FACTOR = "1";

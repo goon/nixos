@@ -52,7 +52,7 @@ lib.module config "kitty" false {
     '';
 
     xdg.configFile."kitty/sessions/yaks.session".text = ''
-      cd ${globals.repo}/modules/env/yaks
+      cd ${globals.repo}/modules/session/yaks
       layout splits
       launch --var window=editor nvim
       launch --location=vsplit --bias=40 opencode
