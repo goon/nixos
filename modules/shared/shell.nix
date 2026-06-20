@@ -68,6 +68,8 @@ lib.module config "shell" true {
 
     home = {
       shellAliases = {
+        c = "clear";
+        h = "history";
         ".." = "cd ..";
         "..." = "cd ../..";
         cat = "bat";
