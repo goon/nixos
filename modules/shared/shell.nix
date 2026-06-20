@@ -26,72 +26,67 @@ lib.module config "shell" true {
     wget
   ];
 
-  home =
-    { config, osConfig, ... }:
-    let
-      inherit (osConfig) globals;
-    in
-    {
-      programs = {
-        bat.enable = true;
-        btop.enable = true;
-        eza.enable = true;
-        fd.enable = true;
-        fzf.enable = true;
-        jq.enable = true;
-        ripgrep.enable = true;
+  home = { config, globals, ... }: {
+    programs = {
+      bat.enable = true;
+      btop.enable = true;
+      eza.enable = true;
+      fd.enable = true;
+      fzf.enable = true;
+      jq.enable = true;
+      ripgrep.enable = true;
 
-        zoxide = {
-          enable = true;
-          options = [
-            "--cmd cd"
-          ];
-        };
-
-        bash = {
-          enable = true;
-          enableCompletion = true;
-          historyControl = [
-            "ignoreboth"
-            "erasedups"
-          ];
-          historyFileSize = 20000;
-          shellOptions = [
-            "histappend"
-            "checkwinsize"
-          ];
-        };
-
-        zsh = {
-          enable = true;
-          dotDir = "${config.xdg.configHome}/zsh";
-          enableCompletion = true;
-          autosuggestion.enable = true;
-          syntaxHighlighting.enable = true;
-        };
-      };
-
-      home = {
-        shellAliases = {
-          ".." = "cd ..";
-          "..." = "cd ../..";
-          cat = "bat";
-          df = "duf";
-          f = "fzf";
-          find = "fd";
-          grep = "rg";
-          ls = "eza --icons --git";
-          rm = "rm -i";
-          tree = "eza --tree";
-        };
-
-        sessionVariables = {
-          BROWSER = lib.removeSuffix ".desktop" globals.apps.browser;
-        };
-
-        sessionPath = [
-          "$HOME/.local/bin"
+      zoxide = {
+        enable = true;
+        options = [
+          "--cmd cd"
         ];
       };
+
+      bash = {
+        enable = true;
+        enableCompletion = true;
+        historyControl = [
+          "ignoreboth"
+          "erasedups"
+        ];
+        historyFileSize = 20000;
+        shellOptions = [
+          "histappend"
+          "checkwinsize"
+        ];
+      };
+
+      zsh = {
+        enable = true;
+        dotDir = "${config.xdg.configHome}/zsh";
+        enableCompletion = true;
+        autosuggestion.enable = true;
+        syntaxHighlighting.enable = true;
+      };
     };
+
+    home = {
+      shellAliases = {
+        ".." = "cd ..";
+        "..." = "cd ../..";
+        cat = "bat";
+        df = "duf";
+        f = "fzf";
+        find = "fd";
+        grep = "rg";
+        ls = "eza --icons --git";
+        rm = "rm -i";
+        tree = "eza --tree";
+      };
+
+      sessionVariables = {
+        BROWSER = lib.removeSuffix ".desktop" globals.apps.browser;
+      };
+
+      sessionPath = [
+        "$HOME/.local/bin"
+      ];
+    };
+  };
 }

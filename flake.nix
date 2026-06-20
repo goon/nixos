@@ -48,9 +48,15 @@
           };
 
           baseModules = [
-            {
-              home-manager.extraSpecialArgs = { inherit inputs; };
-            }
+            (
+              { config, ... }:
+              {
+                home-manager.extraSpecialArgs = {
+                  inherit inputs;
+                  inherit (config) globals;
+                };
+              }
+            )
             inputs.home-manager.nixosModules.default
             inputs.nix-flatpak.nixosModules.nix-flatpak
           ]
