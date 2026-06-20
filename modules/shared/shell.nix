@@ -45,22 +45,11 @@ lib.module config "shell" true {
 
       bash = {
         enable = true;
-        enableCompletion = true;
-        historyControl = [
-          "ignoreboth"
-          "erasedups"
-        ];
-        historyFileSize = 20000;
-        shellOptions = [
-          "histappend"
-          "checkwinsize"
-        ];
       };
 
       zsh = {
         enable = true;
         dotDir = "${config.xdg.configHome}/zsh";
-        enableCompletion = true;
         autosuggestion.enable = true;
         syntaxHighlighting.enable = true;
       };
