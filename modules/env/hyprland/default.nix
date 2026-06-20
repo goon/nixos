@@ -33,7 +33,7 @@ lib.module config "hyprland" false {
     hyprpolkitagent
   ];
 
-  home = { config, osConfig, ... }: {
+  home = { config, globals, ... }: {
     systemd.user.targets.hyprland-session = {
       Unit = {
         Description = "Hyprland compositor session";
@@ -45,6 +45,6 @@ lib.module config "hyprland" false {
     };
 
     xdg.configFile."hypr".source =
-      config.lib.file.mkOutOfStoreSymlink "${osConfig.globals.repo}/modules/env/hyprland";
+      config.lib.file.mkOutOfStoreSymlink "${globals.repo}/modules/env/hyprland";
   };
 }

@@ -11,7 +11,7 @@ lib.module config "firefox" false {
     pywalfox-native
   ];
 
-  home = { config, osConfig, ... }: {
+  home = { config, globals, ... }: {
     programs.firefox = {
       enable = true;
       configPath = "${config.xdg.configHome}/mozilla/firefox";
@@ -26,9 +26,9 @@ lib.module config "firefox" false {
           "browser.tabs.allow_transparent_browser" = true;
           "browser.display.use_document_fonts" = 0;
           "font.default.x-western" = "sans-serif";
-          "font.name.sans-serif.x-western" = osConfig.globals.userFonts.sansSerif;
-          "font.name.serif.x-western" = osConfig.globals.userFonts.sansSerif;
-          "font.name.monospace.x-western" = osConfig.globals.userFonts.monospace;
+          "font.name.sans-serif.x-western" = globals.userFonts.sansSerif;
+          "font.name.serif.x-western" = globals.userFonts.sansSerif;
+          "font.name.monospace.x-western" = globals.userFonts.monospace;
           "browser.ml.chat.enabled" = false;
           "browser.ml.enable" = false;
           "sidebar.position_start" = false;
