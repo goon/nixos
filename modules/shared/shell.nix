@@ -43,8 +43,6 @@ lib.module config "shell" true {
 
       zoxide = {
         enable = true;
-        enableZshIntegration = true;
-        enableBashIntegration = true;
         options = [
           "--cmd cd"
         ];
