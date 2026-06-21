@@ -45,18 +45,17 @@ Another **blazingly mid** nix configuration with an overengineered dendritic arc
 
 - `flake.nix` & `flake.lock` — Define the entry points and locks dependencies. 
 - `hosts/` —  Contains host specific configuration.
-- `lib/` — Helper Scripts
+- `lib/` — Custom abstractions for modules, options and utilities.
 - `modules/` — Contains nix and home manager modules.
-- `scripts/` — Contains various `bash` scripts.
+- `scripts/` — Contains various helper scripts.
 - `wallpapers/` — Collection of wallpapers for your viewing pleasure.
 
 ## Modules 
 
 - `modules/apps` — Software Configurations
 - `modules/core` — Bedrock
-- `modules/env` — Environment Configurations
 - `modules/hardware` — Hardware Configurations
-- `modules/shared` — Shared Configurations
+- `modules/session` — Environment Configurations
 
 ### The Dendritic Module Engine
 
@@ -93,6 +92,16 @@ The `config`, `home` and `userPkgs` blocks are automatically parsed and natively
 Every `.nix` file under `modules/` is automatically discovered and imported by `lib/recursive.nix`, preventing the need for manual imports. The importer skips private files prefixed with `_` or `.`. To disable / enable a feature or module on a given host, `module.<name>.enable = <true/false>;` can be set.
 
 Hosts are formed by combining the auto discovered modules with host specific overrides in `hosts/<hostname>/default.nix`. Where the host file serves as a **dendritic dashboard** for enabling hardware support, selecting a window manager and documenting which modules are explicitly enabled or disabled.
+
+### Profiles 
+
+To avoid manually enabling douzens of individual modules on every host, the configuration uses a high-level profile system defined in `modules/profiles.nix`. 
+
+Profiles bundle related modules together. For example, setting `profile.session = true;` in a host configuration automatically enables the entire desktop session as a cohesive module.
+
+### Globals 
+
+Global options are defined centrally in `modules/globals.nix` under the `globals.` namespace. They allow hosts to share common system settings and user preferences across both NixOS and Home Manager modules.
 
 ## Formatting 
 
