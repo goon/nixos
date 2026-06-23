@@ -5,39 +5,39 @@ cmd="${1:-}"; shift 2>/dev/null || true
 
 notify() {
   if command -v notify-send >/dev/null; then
-    notify-send "Quickshell" "$1" \
-      --app-name="Quickshell" \
+    notify-send "Yaks" "$1" \
+      --app-name="Yaks" \
       --icon="system-software-update" \
       --urgency=low
   fi
 }
 
 cmd_reload() {
-  if systemctl --user is-active --quiet quickshell.service; then
-    echo "Reloading Quickshell QML engine..."
+  if systemctl --user is-active --quiet yaks.service; then
+    echo "Reloading Yaks QML engine..."
     if qs ipc call shell reload true; then
       notify "Shell reloaded successfully"
       echo "Done."
     else
       notify "IPC reload failed"
-      echo "Error: IPC reload failed. Run 'systemctl --user restart quickshell.service' to force a service restart."
+      echo "Error: IPC reload failed. Run 'systemctl --user restart yaks.service' to force a service restart."
       exit 1
     fi
   else
-    echo "Quickshell is not running. Starting it..."
-    if systemctl --user start quickshell.service; then
+    echo "Yaks is not running. Starting it..."
+    if systemctl --user start yaks.service; then
       notify "Shell started"
       echo "Done."
     else
-      notify "Failed to start quickshell"
-      echo "Error: Failed to start quickshell.service"
+      notify "Failed to start yaks"
+      echo "Error: Failed to start yaks.service"
       exit 1
     fi
   fi
 }
 
 cmd_log() {
-  stdbuf -oL journalctl --user -u quickshell -f | awk '{
+  stdbuf -oL journalctl --user -u yaks -f | awk '{
     gsub(/WARN|warn/, "\033[33m&\033[0m")
     gsub(/ERROR|error|FATAL|fatal/, "\033[31m&\033[0m")
     print
@@ -45,12 +45,12 @@ cmd_log() {
 }
 
 cmd_status() {
-  systemctl --user status quickshell -n 0 --no-pager
+  systemctl --user status yaks -n 0 --no-pager
 }
 
 usage() {
   cat <<EOF
-yaks — quickshell management
+yaks — yaks management
 
 Usage: yaks <command>
 
