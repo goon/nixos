@@ -10,6 +10,7 @@ let
 
   dependencies = with pkgs; [
     gowall
+    lutgen
     cava
     brightnessctl
     ddcutil
@@ -33,7 +34,7 @@ lib.module config "quickshell" false {
     xdg.configFile."quickshell".source =
       config.lib.file.mkOutOfStoreSymlink "${globals.repo}/modules/session/yaks";
 
-    systemd.user.services.quickshell = {
+    systemd.user.services.yaks = {
       Unit = {
         Description = "Quickshell Desktop Shell";
         PartOf = [ "graphical-session.target" ];
