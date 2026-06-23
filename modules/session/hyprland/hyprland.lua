@@ -221,9 +221,9 @@ hl.window_rule({
 -- Layer Rules 
 
 hl.layer_rule({
-    match = { namespace = "quickshell.*" },
+    match = { namespace = "yaks.*" },
     blur = true,
-    ignore_alpha = 0.2,
+    ignore_alpha = 0.5,
 })
 
 
