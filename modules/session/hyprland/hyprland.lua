@@ -89,7 +89,7 @@ hl.bind(mainMod .. " + G", hl.dsp.exec_cmd("qs ipc call wallpaper toggle"))
 hl.bind(mainMod .. " + Z", hl.dsp.exec_cmd("qs ipc call settings toggle"))
 hl.bind(mainMod .. " + S", hl.dsp.workspace.toggle_special("scratchpad"))
 hl.bind(mainMod .. " + CTRL + S", hl.dsp.window.move({ workspace = "special:scratchpad" }))
-hl.bind(mainMod .. " + P", hl.dsp.exec_cmd("qs ipc call nexus toggle"))
+hl.bind(mainMod .. " + P", hl.dsp.exec_cmd("qs ipc call power toggle"))
 hl.bind(mainMod .. " + D", hl.dsp.exec_cmd("qs ipc call dashboard toggle"))
 hl.bind(mainMod .. " + ALT + C", hl.dsp.exec_cmd("qs ipc call clipboard toggle"))
 
@@ -98,7 +98,8 @@ hl.bind(mainMod .. " + ALT + C", hl.dsp.exec_cmd("qs ipc call clipboard toggle")
 hl.bind("Print", hl.dsp.exec_cmd("screenshot area"))
 hl.bind("SHIFT + Print", hl.dsp.exec_cmd("screenshot window"))
 hl.bind("CTRL + Print", hl.dsp.exec_cmd("grim -g \"$(slurp)\" - | satty --filename -"))
-hl.bind(mainMod .. " + R", hl.dsp.exec_cmd("qs ipc call recording toggle"))
+hl.bind(mainMod .. " + R", hl.dsp.exec_cmd("recording screen"))
+hl.bind(mainMod .. " + SHIFT + R", hl.dsp.exec_cmd("recording region"))
 
 -- Power
 
@@ -225,7 +226,6 @@ hl.layer_rule({
     blur = true,
     ignore_alpha = 0.5,
 })
-
 
 -- Autostart
 hl.on("hyprland.start", function()
