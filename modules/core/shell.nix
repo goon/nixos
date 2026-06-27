@@ -45,6 +45,21 @@ lib.module config "shell" true {
 
       bash = {
         enable = true;
+        initExtra = ''
+          _starship_first_prompt=1
+          _starship_prompt_command() {
+            if [[ -n "$_starship_first_prompt" ]]; then
+              unset _starship_first_prompt
+            else
+              echo ""
+            fi
+          }
+          if [ -n "$PROMPT_COMMAND" ]; then
+            PROMPT_COMMAND="_starship_prompt_command; $PROMPT_COMMAND"
+          else
+            PROMPT_COMMAND="_starship_prompt_command"
+          fi
+        '';
       };
 
       zsh = {
@@ -52,6 +67,16 @@ lib.module config "shell" true {
         dotDir = "${config.xdg.configHome}/zsh";
         autosuggestion.enable = true;
         syntaxHighlighting.enable = true;
+        initContent = ''
+          _starship_first_prompt=1
+          precmd() {
+            if [[ -n "$_starship_first_prompt" ]]; then
+              unset _starship_first_prompt
+            else
+              print ""
+            fi
+          }
+        '';
       };
     };
 
