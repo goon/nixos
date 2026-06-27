@@ -25,7 +25,7 @@ lib.module config "nvf" false {
 
           options = {
             number = true;
-            relativenumber = true;
+            relativenumber = false;
             signcolumn = "yes";
             cursorline = true;
             termguicolors = true;
@@ -147,20 +147,6 @@ lib.module config "nvf" false {
               silent = true;
               desc = "Vertical Split";
             }
-            {
-              mode = "n";
-              key = "<leader>h";
-              action = "<C-w>s";
-              silent = true;
-              desc = "Horizontal Split";
-            }
-            {
-              mode = "n";
-              key = "<leader>cw";
-              action = "<C-w>c";
-              silent = true;
-              desc = "Close Window";
-            }
             # Window resize
             {
               mode = "n";
@@ -268,17 +254,24 @@ lib.module config "nvf" false {
             }
             {
               mode = "n";
-              key = "<leader>q";
+              key = "<leader>qq";
               action = "<cmd>qa<cr>";
               silent = true;
-              desc = "Quit All";
+              desc = "Quit";
             }
             {
               mode = "n";
-              key = "<leader>wq";
+              key = "<leader>qs";
               action = "<cmd>wqa<cr>";
               silent = true;
-              desc = "Save and Quit All";
+              desc = "Save and Quit";
+            }
+            {
+              mode = "n";
+              key = "<leader>qw";
+              action = "<C-w>c";
+              silent = true;
+              desc = "Close Window";
             }
             {
               mode = "n";
@@ -301,20 +294,19 @@ lib.module config "nvf" false {
               silent = true;
               desc = "Save All Files";
             }
-            # Snacks Bindings (Smart CWD via explicit function call)
             {
               mode = "n";
               key = "<leader>ff";
-              action = ":lua (function() local p=Snacks.picker.get({source='explorer'})[1]; Snacks.picker.files({cwd=p and p:cwd() or vim.fn.getcwd()}) end)()<cr>";
+              action = ":lua Snacks.picker.files()<cr>";
               silent = true;
-              desc = "Find Files (Explorer Aware)";
+              desc = "Find Files";
             }
             {
               mode = "n";
               key = "<leader>fg";
-              action = ":lua (function() local p=Snacks.picker.get({source='explorer'})[1]; Snacks.picker.grep({cwd=p and p:cwd() or vim.fn.getcwd()}) end)()<cr>";
+              action = ":lua Snacks.picker.grep()<cr>";
               silent = true;
-              desc = "Live Grep (Explorer Aware)";
+              desc = "Live Grep";
             }
             {
               mode = "n";
@@ -329,13 +321,6 @@ lib.module config "nvf" false {
               action = ":lua Snacks.picker.help()<cr>";
               silent = true;
               desc = "Find Help";
-            }
-            {
-              mode = "n";
-              key = "<leader>fs";
-              action = ":lua Snacks.picker.smart()<cr>";
-              silent = true;
-              desc = "Smart Find Files";
             }
             {
               mode = "n";
@@ -360,17 +345,10 @@ lib.module config "nvf" false {
             }
             {
               mode = "n";
-              key = "<leader>th";
-              action = ":lua Snacks.terminal.toggle(nil, { win = { position = 'bottom' } })<cr>";
+              key = "<leader>t";
+              action = ":lua Snacks.terminal.toggle(nil, { win = { position = 'float', border = 'rounded', height = 0.6, width = 0.75 } })<cr>";
               silent = true;
-              desc = "Toggle Horizontal Terminal";
-            }
-            {
-              mode = "n";
-              key = "<leader>tv";
-              action = ":lua Snacks.terminal.toggle(nil, { win = { position = 'right'  } })<cr>";
-              silent = true;
-              desc = "Toggle Vertical Terminal";
+              desc = "Floating Terminal";
             }
             {
               mode = "n";
@@ -403,7 +381,7 @@ lib.module config "nvf" false {
             {
               mode = "n";
               key = "<leader>e";
-              action = ":lua Snacks.explorer.open()<cr>";
+              action = ":lua Snacks.explorer({ layout = { preset = 'default' } })<cr>";
               silent = true;
               desc = "Open Explorer";
             }
@@ -413,21 +391,6 @@ lib.module config "nvf" false {
               action = ":lua Snacks.bufdelete()<cr>";
               silent = true;
               desc = "Delete Buffer";
-            }
-            {
-              mode = "n";
-              key = "<leader>xx";
-              action = ":lua Snacks.picker.diagnostics()<cr>";
-              silent = true;
-              desc = "Diagnostics";
-            }
-            # Mini Bindings
-            {
-              mode = "n";
-              key = "<leader>j";
-              action = ":lua MiniJump2d.start()<cr>";
-              silent = true;
-              desc = "Jump 2D";
             }
           ];
 
@@ -459,6 +422,13 @@ lib.module config "nvf" false {
               signatureHelp = "gK";
               renameSymbol = "<leader>cr";
               codeAction = "<leader>ca";
+              openDiagnosticFloat = "<leader>le";
+              documentHighlight = null;
+              listDocumentSymbols = null;
+              format = "<leader>lf";
+              addWorkspaceFolder = null;
+              removeWorkspaceFolder = null;
+              listWorkspaceFolders = null;
             };
           };
 
@@ -481,7 +451,6 @@ lib.module config "nvf" false {
             };
             comment.enable = true;
             diff.enable = true;
-            jump2d.enable = true;
             operators.enable = true;
             move.enable = true;
             bufremove.enable = true;
@@ -569,7 +538,7 @@ lib.module config "nvf" false {
                     {
                       key = "e";
                       desc = "Explorer";
-                      action = ":lua Snacks.explorer.open()";
+                      action = ":lua Snacks.explorer({ layout = { preset = 'default' } })";
                     }
                     {
                       key = "c";
@@ -605,23 +574,12 @@ lib.module config "nvf" false {
                 auto_cd = true;
                 sources = {
                   explorer = {
-                    actions = {
-                      focus_and_cd = mkLua ''
-                        function(picker)
-                          picker:action("explorer_focus")
-                          vim.schedule(function()
-                            vim.cmd("cd " .. picker:cwd())
-                            Snacks.notify.info("CWD synchronized: " .. picker:cwd())
-                          end)
-                        end
-                      '';
+                    layout = {
+                      preset = "default";
+                      preview = true;
                     };
-                    win = {
-                      list = {
-                        keys = {
-                          "." = "focus_and_cd";
-                        };
-                      };
+                    jump = {
+                      close = true;
                     };
                   };
                 };
