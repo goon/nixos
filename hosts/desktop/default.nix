@@ -30,7 +30,6 @@
   module.localsend.enable = true;
   module.nixcord.enable = true;
   module.nvf.enable = true;
-  module.obs.enable = true;
   module.obsidian.enable = true;
   module.opencode.enable = true;
   module.spicetify.enable = true;
