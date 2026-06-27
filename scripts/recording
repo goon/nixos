@@ -1,0 +1,87 @@
+#!/usr/bin/env bash
+# gpu-screen-recorder toggle.
+# Usage: recording <screen|region|window>
+
+set -euo pipefail
+
+MODE="${1:?usage: recording <screen|region|window>}"
+
+DIR="$HOME/Videos"
+mkdir -p "$DIR"
+FILE="$DIR/$(date +%Y%m%d_%H%M%S).mp4"
+
+stop() {
+  local mode="$1"
+  local pid saved_file=""
+  pid=$(pgrep -f "gpu-screen-recorder -w $mode" | head -1)
+  if [ -n "$pid" ] && [ -r "/proc/$pid/cmdline" ]; then
+    saved_file=$(tr '\0' ' ' < "/proc/$pid/cmdline" | sed -n 's/.*-o \([^ ]*\).*/\1/p')
+  fi
+  pkill -SIGINT -f "gpu-screen-recorder -w $mode"
+  while pgrep -f "gpu-screen-recorder -w $mode" >/dev/null 2>&1; do sleep 0.1; done
+  if [ -n "$saved_file" ] && [ -f "$saved_file" ]; then
+    setsid notify-send -a "Quickshell" -i "screen_record" \
+      "Recording" "Stopped recording and saved to $(basename "$saved_file")" < /dev/null > /dev/null 2>&1 &
+  else
+    setsid notify-send -a "Quickshell" -i "screen_record" \
+      "Recording" "Stopped recording." < /dev/null > /dev/null 2>&1 &
+  fi
+}
+
+start_screen() {
+  setsid gpu-screen-recorder -w screen -q ultra -f 144 -a default_output -o "$FILE" \
+    < /dev/null > /dev/null 2>&1 &
+  setsid notify-send -a "Quickshell" -i "screen_record" \
+    "Recording" "Started recording screen." < /dev/null > /dev/null 2>&1 &
+}
+
+start_region() {
+  GEOM=$(slurp -f "%wx%h+%x+%y") || exit 0
+  setsid gpu-screen-recorder -w region -region "$GEOM" -q ultra -f 144 -a default_output -o "$FILE" \
+    < /dev/null > /dev/null 2>&1 &
+  setsid notify-send -a "Quickshell" -i "screen_record" \
+    "Recording" "Started recording region." < /dev/null > /dev/null 2>&1 &
+}
+
+start_window() {
+  if ! command -v hyprctl >/dev/null; then
+    setsid notify-send -a "Quickshell" -i "screen_record" \
+      "Recording" "Window mode requires Hyprland" < /dev/null > /dev/null 2>&1 &
+    return 1
+  fi
+  ACTIVE_WS=$(hyprctl activeworkspace -j | jq '.id')
+  GEOM=$(hyprctl clients -j | jq -r ".[] | select(.workspace.id == $ACTIVE_WS) | \"\(.at[0]),\(.at[1]) \(.size[0])x\(.size[1])\"" | slurp -f "%wx%h+%x+%y") || exit 0
+  [ -z "$GEOM" ] && exit 0
+  setsid gpu-screen-recorder -w region -region "$GEOM" -q ultra -f 144 -a default_output -o "$FILE" \
+    < /dev/null > /dev/null 2>&1 &
+  setsid notify-send -a "Quickshell" -i "screen_record" \
+    "Recording" "Started recording window." < /dev/null > /dev/null 2>&1 &
+}
+
+case "$MODE" in
+  screen)
+    if pgrep -f "gpu-screen-recorder -w screen" >/dev/null; then
+      stop screen
+    else
+      start_screen
+    fi
+    ;;
+  region)
+    if pgrep -f "gpu-screen-recorder -w region" >/dev/null; then
+      stop region
+    else
+      start_region
+    fi
+    ;;
+  window)
+    if pgrep -f "gpu-screen-recorder -w region" >/dev/null; then
+      stop region
+    else
+      start_window
+    fi
+    ;;
+  *)
+    echo "usage: recording <screen|region|window>" >&2
+    exit 1
+    ;;
+esac
