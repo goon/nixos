@@ -12,15 +12,16 @@ lib.module config "kitty" false {
         allow_remote_control = "yes";
         listen_on = "unix:/tmp/kitty";
         font_family = globals.userFonts.monospace;
-        font_size = "10.0";
+        font_size = "12";
         cursor_shape = "block";
         cursor_trail = 10;
         cursor_trail_start_threshold = 0;
         cursor_trail_decay = "0.01 0.05";
-        window_padding_width = 20;
+        window_padding_width = "20";
+        resize_in_steps = "yes";
         enabled_layouts = "tall";
         tab_bar_edge = "top";
-        tab_bar_margin_height = "12 12";
+        tab_bar_margin_height = "20 20";
         tab_bar_style = "powerline";
         tab_powerline_style = "round";
       };
@@ -47,8 +48,6 @@ lib.module config "kitty" false {
       launch --var window=editor nvim
       launch --location=vsplit --bias=40 opencode
       focus_matching_window var:window=editor
-      launch --location=hsplit --bias=30
-      focus_matching_window var:window=editor
     '';
 
     xdg.configFile."kitty/sessions/yaks.session".text = ''
@@ -56,8 +55,6 @@ lib.module config "kitty" false {
       layout splits
       launch --var window=editor nvim
       launch --location=vsplit --bias=40 opencode
-      focus_matching_window var:window=editor
-      launch --location=hsplit --bias=30
       focus_matching_window var:window=editor
     '';
   };
