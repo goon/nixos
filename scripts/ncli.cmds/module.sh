@@ -3,33 +3,33 @@ cmd_module() {
   shift 2>/dev/null || true
   case "$verb" in
     list) cmd_module_list "$@" ;;
-    *) error "Unknown module subcommand: $verb. Valid: list" ;;
+    enable) cmd_module_enable "$@" ;;
+    disable) cmd_module_disable "$@" ;;
+    *) error "Unknown module subcommand: $verb. Valid: list, enable, disable" ;;
   esac
 }
 
-cmd_module_list() {
+get_host() {
   local requested_host="${1:-}"
   local host=""
-  local hosts_list=""
-
   if [ -z "$requested_host" ]; then
     host="$(hostname -s 2>/dev/null || true)"
     if [ -z "$host" ] || ! host_dashboard_exists "$host"; then
-      hosts_list="$(discover_hosts | awk '{printf "%s%s", sep, $0; sep=", "} END{print ""}')"
-      if [ -z "$host" ]; then
-        error "Could not determine hostname. Available hosts: $hosts_list"
-      else
-        error "Current host '$host' has no dashboard. Available hosts: $hosts_list"
-      fi
+      local hosts_list="$(discover_hosts | awk '{printf "%s%s", sep, $0; sep=", "} END{print ""}')"
+      error "Could not determine hostname or host has no dashboard. Available hosts: $hosts_list"
     fi
   else
     if ! host_dashboard_exists "$requested_host"; then
-      hosts_list="$(discover_hosts | awk '{printf "%s%s", sep, $0; sep=", "} END{print ""}')"
+      local hosts_list="$(discover_hosts | awk '{printf "%s%s", sep, $0; sep=", "} END{print ""}')"
       error "Host '$requested_host' not found. Available hosts: $hosts_list"
     fi
     host="$requested_host"
   fi
+  echo "$host"
+}
 
+cmd_module_list() {
+  local host="$(get_host "${1:-}")"
   echo ""
   info "Modules on $host"
   echo ""
@@ -69,6 +69,53 @@ cmd_module_list() {
 
   if [ -n "$current_category" ]; then
     print_category_group "$current_category" "$always_names" "$on_names" "$off_names"
+  fi
+}
+
+cmd_module_enable() {
+  local module_name="${1:-}"
+  if [ -z "$module_name" ]; then
+    error "Please specify a module to enable. Usage: ncli module enable <name> [host]"
+  fi
+  local host="$(get_host "${2:-}")"
+  local dashboard="$HOSTS_DIR/$host/default.nix"
+  
+  # Check if module exists
+  local module_exists=false
+  while IFS=' ' read -r category name; do
+    if [ "$name" = "$module_name" ]; then
+      module_exists=true
+      break
+    fi
+  done < <(discover_modules_raw)
+  
+  if ! $module_exists; then
+    error "Module '$module_name' does not exist."
+  fi
+  
+  if grep -qE "^[[:space:]]*module\.$module_name\.enable[[:space:]]*=" "$dashboard"; then
+    sed -i -E "s/^[[:space:]]*module\.$module_name\.enable[[:space:]]*=.*$/  module.$module_name.enable = true;/" "$dashboard"
+  else
+    # Insert before the last closing brace
+    sed -i -E "/^}/i \ \ module.$module_name.enable = true;" "$dashboard"
+  fi
+  
+  success "Enabled module '$module_name' on host '$host'."
+}
+
+cmd_module_disable() {
+  local module_name="${1:-}"
+  if [ -z "$module_name" ]; then
+    error "Please specify a module to disable. Usage: ncli module disable <name> [host]"
+  fi
+  local host="$(get_host "${2:-}")"
+  local dashboard="$HOSTS_DIR/$host/default.nix"
+  
+  if grep -qE "^[[:space:]]*module\.$module_name\.enable[[:space:]]*=" "$dashboard"; then
+    sed -i -E "s/^[[:space:]]*module\.$module_name\.enable[[:space:]]*=.*$/  module.$module_name.enable = false;/" "$dashboard"
+    success "Disabled module '$module_name' on host '$host'."
+  else
+    success "Module '$module_name' was not enabled on host '$host'."
   fi
 }
 
