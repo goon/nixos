@@ -246,7 +246,6 @@ cmd_help() {
   echo -e "Usage: ${GR}nyx${NC} ${YE}[subcommand]${NC}"
   echo ""
   echo "Available subcommands:"
-  echo -e "  ${GR}help${NC}                          Show this help"
   echo -e "  ${GR}build${NC}                         nh os build"
   echo -e "  ${GR}switch${NC}                        nh os switch"
   echo -e "  ${GR}boot${NC}                          nh os boot"
@@ -257,8 +256,9 @@ cmd_help() {
   echo -e "  ${GR}search${NC} ${YE}<pkg>${NC}                  nix search nixpkgs <pkg>"
   echo -e "  ${GR}run${NC} ${YE}<pkg>${NC}                     nix run nixpkgs#<pkg>"
   echo -e "  ${GR}shell${NC} ${YE}<pkg>${NC}                   nix shell nixpkgs#<pkg>"
-  echo -e "  ${GR}generations${NC}                   List system generations"
-  echo -e "  ${GR}module list${NC} ${YE}[host]${NC}            List modules enabled/disabled on a host"
+  echo -e "  ${GR}dir${NC}                           Switches current working directory to flake"
+  echo -e "  ${GR}generations${NC}                   Returns a list of system generations"
+  echo -e "  ${GR}module list${NC} ${YE}[host]${NC}            Returns a list of modules enabled/disabled on a host"
   echo -e "  ${GR}module enable${NC} ${YE}<name> [host]${NC}   Enable a module on a host"
   echo -e "  ${GR}module disable${NC} ${YE}<name> [host]${NC}  Disable a module on a host"
 }
@@ -272,6 +272,10 @@ case "$cmd" in
     info "Collecting garbage..."
     nh clean all --keep 5
     success "Garbage collection complete!"
+    ;;
+  dir)
+    info "Entering $REPO..."
+    exec "${SHELL:-bash}"
     ;;
   fmt)
     info "Formatting Nix files..."
@@ -308,5 +312,5 @@ case "$cmd" in
     ;;
   module) cmd_module "$@" ;;
   help) cmd_help ;;
-  *) error "Unknown subcommand: $cmd. Run 'nyx help'." ;;
+  *) error "Unknown subcommand: $cmd. Run 'nyx' for a list of commands." ;;
 esac
