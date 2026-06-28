@@ -1,6 +1,18 @@
 #!/usr/bin/env bash
 set -euo pipefail
 
+# --- Colors ---
+RE='\033[0;31m'
+GR='\033[0;32m'
+YE='\033[0;33m'
+BL='\033[0;34m'
+NC='\033[0m'
+
+info() { echo -e "${BL}[INFO]${NC} $1"; }
+success() { echo -e "${GR}[SUCCESS]${NC} $1"; }
+warn() { echo -e "${YE}[WARN]${NC} $1"; }
+error() { echo -e "${RE}[ERROR]${NC} $1"; exit 1; }
+
 cmd="${1:-}"; shift 2>/dev/null || true
 
 notify() {
@@ -14,24 +26,22 @@ notify() {
 
 cmd_reload() {
   if systemctl --user is-active --quiet yaks.service; then
-    echo "Reloading Yaks QML engine..."
+    info "Reloading Yaks QML engine..."
     if qs ipc call shell reload true; then
       notify "Shell reloaded successfully"
-      echo "Done."
+      success "Done."
     else
       notify "IPC reload failed"
-      echo "Error: IPC reload failed. Run 'systemctl --user restart yaks.service' to force a service restart."
-      exit 1
+      error "IPC reload failed. Run '${YE}systemctl --user restart yaks.service${NC}' to force a service restart."
     fi
   else
-    echo "Yaks is not running. Starting it..."
+    info "Yaks is not running. Starting it..."
     if systemctl --user start yaks.service; then
       notify "Shell started"
-      echo "Done."
+      success "Done."
     else
       notify "Failed to start yaks"
-      echo "Error: Failed to start yaks.service"
-      exit 1
+      error "Failed to start yaks.service"
     fi
   fi
 }
@@ -49,16 +59,14 @@ cmd_status() {
 }
 
 usage() {
-  cat <<EOF
-yaks — yaks management
-
-Usage: yaks <command>
-
-Commands:
-  reload   Reload or start Quickshell (IPC reload if running, start if not)
-  log      Tail the quickshell journal
-  status   Show service status
-EOF
+  echo -e "${BL}yaks${NC} — yaks management"
+  echo ""
+  echo -e "Usage: ${GR}yaks${NC} ${YE}<command>${NC}"
+  echo ""
+  echo "Commands:"
+  echo -e "  ${GR}reload${NC}   Reload or start Quickshell (IPC reload if running, start if not)"
+  echo -e "  ${GR}log${NC}      Tail the quickshell journal"
+  echo -e "  ${GR}status${NC}   Show service status"
 }
 
 case "$cmd" in
@@ -66,5 +74,5 @@ case "$cmd" in
   log)                 cmd_log ;;
   status)              cmd_status ;;
   -h|--help|"")        usage ;;
-  *)                   echo "Unknown command: $cmd"; usage; exit 1 ;;
+  *)                   usage; echo ""; error "Unknown command: ${YE}$cmd${NC}" ;;
 esac
