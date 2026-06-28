@@ -258,6 +258,7 @@ cmd_help() {
   echo -e "  ${GR}shell${NC} ${YE}<pkg>${NC}                   nix shell nixpkgs#<pkg>"
   echo -e "  ${GR}dir${NC}                           Switches current working directory to flake"
   echo -e "  ${GR}generations${NC}                   Returns a list of system generations"
+  echo -e "  ${GR}repl${NC}                          Drops into a configured REPL"
   echo -e "  ${GR}module list${NC} ${YE}[host]${NC}            Returns a list of modules enabled/disabled on a host"
   echo -e "  ${GR}module enable${NC} ${YE}<name> [host]${NC}   Enable a module on a host"
   echo -e "  ${GR}module disable${NC} ${YE}<name> [host]${NC}  Disable a module on a host"
@@ -309,6 +310,10 @@ case "$cmd" in
     done
     if [ ${#pkgs[@]} -eq 0 ]; then error "Please specify at least one package. Usage: nyx shell <pkg>..."; fi
     exec nix shell "${pkgs[@]}"
+    ;;
+  repl)
+    info "Starting Nix REPL..."
+    exec nix repl --file "$REPO/lib/repl.nix"
     ;;
   module) cmd_module "$@" ;;
   help) cmd_help ;;
