@@ -1,6 +1,4 @@
 #!/usr/bin/env bash
-# Screenshot Notifier
-# Sends a notification using notify-send when a screenshot is captured using grim & slurp.
 
 DIR="${XDG_PICTURES_DIR:-$HOME/Pictures}/Screenshots"
 mkdir -p "$DIR"

@@ -1,6 +1,4 @@
 #!/usr/bin/env bash
-# gpu-screen-recorder toggle.
-# Usage: recording <screen|region|window>
 
 set -euo pipefail
 
