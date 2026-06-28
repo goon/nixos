@@ -3,17 +3,19 @@
   hostnamePath ? "/etc/hostname",
 }:
 let
-  inherit (builtins) getFlake head match currentSystem readFile pathExists;
+  inherit (builtins)
+    getFlake
+    head
+    match
+    currentSystem
+    readFile
+    pathExists
+    ;
 
-  flakePath' = toString (
-    if flakePath != null then
-      flakePath
-    else
-      ../.
-  );
+  flakePath' = toString (if flakePath != null then flakePath else ../.);
 
   flake = if pathExists flakePath' then getFlake flakePath' else { };
-  
+
   hostname =
     if pathExists hostnamePath then head (match "([a-zA-Z0-9\\-]+)\n" (readFile hostnamePath)) else "";
 
