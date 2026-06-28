@@ -23,7 +23,7 @@ let
         chmod +x $out/bin/*
       fi
     fi
-    echo ${repo} > $out/ncli.repo
+    echo ${repo} > $out/nyx.repo
   '';
 in
 lib.module config "scripts" true {
