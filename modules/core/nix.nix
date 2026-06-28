@@ -63,14 +63,4 @@ lib.module config "nix" true {
     };
   };
 
-  home = {
-    home.shellAliases = {
-      nhs = "nh os switch";
-      nht = "nh os test";
-      nhc = "nh clean all --keep 8";
-      nhu = "nh os switch -u";
-      nhb = "nh os boot";
-      nps = "nix search nixpkgs";
-    };
-  };
 }

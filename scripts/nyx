@@ -252,7 +252,7 @@ cmd_help() {
   echo -e "  ${GR}boot${NC}                          nh os boot"
   echo -e "  ${GR}test${NC}                          nh os test"
   echo -e "  ${GR}update${NC}                        nh os switch -u"
-  echo -e "  ${GR}clean${NC}                         nh clean all --keep 8"
+  echo -e "  ${GR}clean${NC}                         nh clean all --keep 5"
   echo -e "  ${GR}fmt${NC}                           nix fmt"
   echo -e "  ${GR}search${NC} ${YE}<pkg>${NC}                  nix search nixpkgs <pkg>"
   echo -e "  ${GR}run${NC} ${YE}<pkg>${NC}                     nix run nixpkgs#<pkg>"
@@ -270,7 +270,7 @@ case "$cmd" in
   update) exec nh os switch -u "$@" ;;
   clean)
     info "Collecting garbage..."
-    nh clean all --keep 8
+    nh clean all --keep 5
     success "Garbage collection complete!"
     ;;
   fmt)
