@@ -59,14 +59,7 @@ Another **blazingly mid** nix configuration with an overengineered dendritic arc
 
 ### The Dendritic Module Engine
 
-To heavily reduce boilerplate traditionally associated with mixing NixOS and Home Manager configurations, I use a custom evaluation engine built entirely inside the `lib/` directory.
-
-- `lib/outputs.nix` — Bootstraps the module tree, applies base overlays, and generates the final flake outputs.
-- `lib/recursive.nix` — Recursively discovers and imports all `.nix` files under `modules/`, skipping files prefixed with `_` or `.`.
-- `lib/module.nix` — Wrapper that eliminates boilerplate by handling Home Manager wiring and conditional boolean evaluations. 
-- `lib/hosts.nix` — Dynamic host discovery engine that scans the `hosts/` directory and automatically maps them into `nixosConfigurations`. 
-
-Because of `lib.module`, instead of dealing with deeply nested `home-manager` arrays, every module is exposed with clean root level blocks stripped of boilerplate. 
+To heavily reduce boilerplate traditionally associated with mixing NixOS and Home Manager configurations a custom abstraction engine is used (`lib.module`). 
 
 ```nix
 { config, lib, pkgs, ... }:
