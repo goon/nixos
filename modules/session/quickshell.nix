@@ -10,7 +10,6 @@ let
 
   dependencies = with pkgs; [
     gowall
-    lutgen
     cava
     brightnessctl
     ddcutil
