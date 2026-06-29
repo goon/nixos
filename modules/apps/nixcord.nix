@@ -4,9 +4,8 @@
   inputs,
   ...
 }:
-
 lib.module config "nixcord" false {
-  home = {
+  homeManager = {
     imports = [ inputs.nixcord.homeModules.nixcord ];
 
     programs.nixcord = {

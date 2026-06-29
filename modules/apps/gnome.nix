@@ -4,7 +4,6 @@
   pkgs,
   ...
 }:
-
 lib.module config "gnome" false {
   config = {
     services = {
@@ -17,18 +16,17 @@ lib.module config "gnome" false {
     };
   };
 
-  userPkgs = with pkgs; [
-    nautilus
-    sushi
-    ffmpegthumbnailer
-    totem
-    loupe
-    decibels
-    fragments
-    switcheroo
-  ];
-
-  home = {
+  homeManager = {
+    home.packages = with pkgs; [
+      nautilus
+      sushi
+      ffmpegthumbnailer
+      totem
+      loupe
+      decibels
+      fragments
+      switcheroo
+    ];
     dconf.settings = {
       "org/gnome/nautilus/preferences" = {
         show-hidden-files = true;

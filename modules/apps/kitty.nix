@@ -4,7 +4,7 @@
   ...
 }:
 lib.module config "kitty" false {
-  home = { globals, ... }: {
+  homeManager = { globals, ... }: {
     programs.kitty = {
       enable = true;
       settings = {

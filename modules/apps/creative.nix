@@ -5,13 +5,14 @@
   inputs,
   ...
 }:
-
 lib.module config "creative" false {
   config = {
     nixpkgs.overlays = [ inputs.affinity-nix.overlays.default ];
   };
 
-  userPkgs = [
-    pkgs.affinity-v3
-  ];
+  homeManager = _: {
+    home.packages = [
+      pkgs.affinity-v3
+    ];
+  };
 }

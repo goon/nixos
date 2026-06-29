@@ -4,16 +4,14 @@
   pkgs,
   ...
 }:
-
 lib.module config "opencode" false {
-  userPkgs = [
-    pkgs.opencode
-    pkgs.rtk
-    pkgs.snip
-    pkgs.mcp-nixos
-  ];
-
-  home = { lib, ... }: {
+  homeManager = { lib, ... }: {
+    home.packages = [
+      pkgs.opencode
+      pkgs.rtk
+      pkgs.snip
+      pkgs.mcp-nixos
+    ];
     xdg.configFile."opencode/opencode.json".text = builtins.toJSON {
       "$schema" = "https://opencode.ai/config.json";
       snapshot = false;

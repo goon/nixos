@@ -1,5 +1,8 @@
-{ config, lib, ... }:
-
+{
+  config,
+  lib,
+  ...
+}:
 lib.module config "flatpak" false {
   services.flatpak = {
     enable = true;

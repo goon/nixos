@@ -1,49 +1,46 @@
-# lib/module.nix
+# ── MODULE.NIX ───────────────
 # Core architecture engine for the dendritic module system.
-# Wraps module definitions with automatic enable options, home-manager wiring, and package lists.
+# Wraps module definitions with automatic boolean enable options,
+# home-manager wiring, and handles conditional evaluation based on host dashboards.
 
 { lib }:
-
 lib.extend (
   final: _prev: {
     module =
       config: name: defaultState: body:
       let
-        isAdvanced = body ? options || body ? config || body ? home || body ? sysPkgs || body ? userPkgs;
+        isAdvanced = body ? options || body ? config || body ? homeManager;
 
         extraOptions = if isAdvanced then (body.options or { }) else { };
         baseConfig = if isAdvanced then (body.config or { }) else body;
 
-        hasHome = body ? home;
-        hasSysPkgs = body ? sysPkgs;
-        hasUserPkgs = body ? userPkgs;
+        # Extract imports so they are evaluated unconditionally
+        extraImports = baseConfig.imports or [ ];
+        cleanConfig = builtins.removeAttrs baseConfig [ "imports" ];
+
+        hasHomeManager = body ? homeManager;
 
         hmSharedModule =
-          if hasHome || hasUserPkgs then
+          if hasHomeManager then
             {
-              home-manager.sharedModules = [
-                (if hasHome then body.home else { })
-                (if hasUserPkgs then { home.packages = body.userPkgs; } else { })
-              ];
+              home-manager.sharedModules = [ body.homeManager ];
             }
           else
             { };
 
-        sysPkgsConfig = if hasSysPkgs then { environment.systemPackages = body.sysPkgs; } else { };
-
         rawConfig = final.mkMerge [
-          baseConfig
+          cleanConfig
           hmSharedModule
-          sysPkgsConfig
         ];
       in
       {
+        imports = extraImports;
         options = final.recursiveUpdate extraOptions {
-          module.${name}.enable = final.mkEnableOption name // {
+          module.${name} = final.mkEnableOption name // {
             default = defaultState;
           };
         };
-        config = final.mkIf config.module.${name}.enable rawConfig;
+        config = final.mkIf config.module.${name} rawConfig;
       };
   }
 )

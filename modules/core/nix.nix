@@ -4,7 +4,6 @@
   pkgs,
   ...
 }:
-
 lib.module config "nix" true {
   config = {
     nixpkgs.config.allowUnfree = true;
@@ -62,5 +61,4 @@ lib.module config "nix" true {
       };
     };
   };
-
 }

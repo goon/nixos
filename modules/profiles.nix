@@ -1,5 +1,8 @@
-{ config, lib, ... }:
-
+{
+  config,
+  lib,
+  ...
+}:
 {
   options.profile = {
     session = lib.mkOption {
@@ -9,11 +12,11 @@
   };
 
   config = lib.mkIf config.profile.session {
-    module.hyprland.enable = lib.mkDefault true;
-    module.gtk.enable = lib.mkDefault true;
-    module.qt.enable = lib.mkDefault true;
-    module.quickshell.enable = lib.mkDefault true;
-    module.wayland.enable = lib.mkDefault true;
-    module.xdg.enable = lib.mkDefault true;
+    module.hyprland = lib.mkDefault true;
+    module.gtk = lib.mkDefault true;
+    module.qt = lib.mkDefault true;
+    module.quickshell = lib.mkDefault true;
+    module.wayland = lib.mkDefault true;
+    module.xdg = lib.mkDefault true;
   };
 }

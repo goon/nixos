@@ -4,7 +4,6 @@
   pkgs,
   ...
 }:
-
 lib.module config "hyprland" false {
   config = {
     programs.hyprland = {
@@ -29,22 +28,27 @@ lib.module config "hyprland" false {
     };
   };
 
-  userPkgs = with pkgs; [
-    hyprpolkitagent
-  ];
-
-  home = { config, globals, ... }: {
-    systemd.user.targets.hyprland-session = {
-      Unit = {
-        Description = "Hyprland compositor session";
-        Documentation = "man:systemd.special(7)";
-        BindsTo = [ "graphical-session.target" ];
-        Wants = [ "graphical-session-pre.target" ];
-        After = [ "graphical-session-pre.target" ];
+  homeManager =
+    {
+      config,
+      globals,
+      ...
+    }:
+    {
+      home.packages = with pkgs; [
+        hyprpolkitagent
+      ];
+      systemd.user.targets.hyprland-session = {
+        Unit = {
+          Description = "Hyprland compositor session";
+          Documentation = "man:systemd.special(7)";
+          BindsTo = [ "graphical-session.target" ];
+          Wants = [ "graphical-session-pre.target" ];
+          After = [ "graphical-session-pre.target" ];
+        };
       };
-    };
 
-    xdg.configFile."hypr".source =
-      config.lib.file.mkOutOfStoreSymlink "${globals.repo}/modules/session/hyprland";
-  };
+      xdg.configFile."hypr".source =
+        config.lib.file.mkOutOfStoreSymlink "${globals.repo}/modules/session/hyprland";
+    };
 }

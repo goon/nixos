@@ -1,5 +1,8 @@
-{ config, username, ... }:
-
+{
+  config,
+  username,
+  ...
+}:
 {
   services = {
     pipewire = {
@@ -9,7 +12,6 @@
         support32Bit = true;
       };
       pulse.enable = true;
-
     };
 
     mpd = {

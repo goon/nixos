@@ -1,6 +1,4 @@
-_:
-
-{
+_: {
   services.displayManager.ly = {
     enable = true;
     settings = {

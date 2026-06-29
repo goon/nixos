@@ -5,7 +5,6 @@
   repo,
   ...
 }:
-
 let
   scriptDir = ../../scripts;
 
@@ -27,7 +26,9 @@ let
   '';
 in
 lib.module config "scripts" true {
-  userPkgs = [
-    local-scripts
-  ];
+  homeManager = _: {
+    home.packages = [
+      local-scripts
+    ];
+  };
 }

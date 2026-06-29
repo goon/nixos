@@ -1,5 +1,5 @@
 {
-  description = "NixOS configuration for desktop";
+  description = "blazingly mid nixos configuration";
 
   inputs = {
     nixpkgs.url = "nixpkgs/nixos-unstable";
@@ -39,56 +39,14 @@
       nixpkgs,
       ...
     }:
-    {
-      nixosConfigurations =
-        let
-          extendedLib = import ./lib {
-            inherit inputs;
-            inherit (nixpkgs) lib;
-          };
-
-          baseModules = [
-            (
-              { config, ... }:
-              {
-                home-manager.extraSpecialArgs = {
-                  inherit inputs;
-                  inherit (config) globals;
-                };
-              }
-            )
-            inputs.home-manager.nixosModules.default
-            inputs.nix-flatpak.nixosModules.nix-flatpak
-          ]
-          ++ (import ./lib/recursive.nix ./modules);
-        in
-        extendedLib.mkHosts ./hosts {
-          system = "x86_64-linux";
-          specialArgs = {
-            inherit inputs;
-            lib = extendedLib;
-          };
-          inherit baseModules;
-        };
-
-      formatter = nixpkgs.lib.genAttrs [ "x86_64-linux" ] (
-        system:
-        let
-          pkgs = nixpkgs.legacyPackages.${system};
-          inherit (inputs) treefmt-nix;
-        in
-        (treefmt-nix.lib.evalModule pkgs ./lib/formatter.nix).config.build.wrapper
-      );
-
-      checks = nixpkgs.lib.genAttrs [ "x86_64-linux" ] (
-        system:
-        let
-          pkgs = nixpkgs.legacyPackages.${system};
-          inherit (inputs) treefmt-nix;
-        in
-        {
-          formatting = (treefmt-nix.lib.evalModule pkgs ./lib/formatter.nix).config.build.check self;
-        }
-      );
+    let
+      extendedLib = import ./lib {
+        inherit inputs;
+        inherit (nixpkgs) lib;
+      };
+    in
+    extendedLib.mkOutputs {
+      inherit self nixpkgs;
+      systems = [ "x86_64-linux" ];
     };
 }

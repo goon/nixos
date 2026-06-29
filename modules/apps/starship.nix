@@ -3,9 +3,8 @@
   lib,
   ...
 }:
-
 lib.module config "starship" false {
-  home = {
+  homeManager = {
     programs.starship = {
       enable = true;
       settings = {

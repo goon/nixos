@@ -4,14 +4,13 @@
   pkgs,
   ...
 }:
-
 lib.module config "dev" false {
-  userPkgs = with pkgs; [
-    antigravity
-    nixd
-  ];
+  homeManager = {
+    home.packages = with pkgs; [
+      antigravity
+      nixd
+    ];
 
-  home = {
     programs.direnv = {
       enable = true;
       nix-direnv.enable = true;

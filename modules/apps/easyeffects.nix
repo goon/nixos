@@ -3,9 +3,8 @@
   lib,
   ...
 }:
-
 lib.module config "easyeffects" false {
-  home = {
+  homeManager = {
     services.easyeffects.enable = true;
   };
 }

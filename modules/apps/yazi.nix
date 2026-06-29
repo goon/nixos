@@ -4,11 +4,9 @@
   pkgs,
   ...
 }:
-
 lib.module config "yazi" false {
-  userPkgs = [ pkgs.trash-cli ];
-
-  home = {
+  homeManager = {
+    home.packages = [ pkgs.trash-cli ];
     programs.yazi = {
       enable = true;
       shellWrapperName = "y";

@@ -1,15 +1,22 @@
-# lib/default.nix
+# ── DEFAULT.NIX ──────────────
 # Central entrypoint that binds all custom library extensions into a single object.
-# Uses lib.extend to chain extensions so they can reference each other.
-
-{ lib, inputs }:
-
+# Uses lib.extend to chain extensions so they can reference each other natively.
+# This extended lib is what gets passed to modules and hosts.
+{
+  lib,
+  inputs,
+}:
 let
   l1 = import ./module.nix { inherit lib; };
-  l2 = import ./options.nix { lib = l1; };
-  l3 = import ./hosts.nix {
-    lib = l2;
+  l2 = import ./hosts.nix {
+    lib = l1;
     inherit inputs;
   };
+  l3 =
+    l2
+    // import ./outputs.nix {
+      lib = l2;
+      inherit inputs;
+    };
 in
 l3

@@ -1,9 +1,11 @@
-# lib/hosts.nix
+# ── HOSTS.NIX ────────────────
 # Dynamic host discovery engine.
-# Scans a directory for subdirectories and maps them into nixosConfigurations automatically.
-
-{ lib, inputs }:
-
+# Scans a directory for subdirectories (e.g. hosts/desktop) and maps them
+# into nixosConfigurations automatically, passing down global and per-host variables.
+{
+  lib,
+  inputs,
+}:
 lib.extend (
   final: _prev: {
     mkHosts =

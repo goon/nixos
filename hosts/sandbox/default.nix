@@ -3,25 +3,21 @@
     ./hardware-configuration.nix
   ];
 
-  networking.hostName = "sandbox";
+  module.monitors = true;
+  module.virtualisation = true;
 
-  # ========== Modules (Dendritic Dashboard) ==========
+  module.dev = true;
+  module.fastfetch = true;
+  module.firefox = true;
+  module.git = true;
+  module.kitty = true;
+  module.nvf = true;
+  module.starship = true;
+  module.yazi = true;
 
-  # [1] Hardware
-  module.virtualisation.enable = true;
-
-  # [2] Session
   profile.session = true;
 
-  # [3] Apps (Optional Features)
-  module.dev.enable = true;
-  module.fastfetch.enable = true;
-  module.firefox.enable = true;
-  module.git.enable = true;
-  module.kitty.enable = true;
-  module.nvf.enable = true;
-  module.starship.enable = true;
-  module.yazi.enable = true;
+  networking.hostName = "sandbox";
 
   nix.settings = {
     max-jobs = 2;

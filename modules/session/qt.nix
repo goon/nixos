@@ -3,7 +3,6 @@
   lib,
   ...
 }:
-
 lib.module config "qt" false {
   config = {
     environment.sessionVariables = {
@@ -13,7 +12,7 @@ lib.module config "qt" false {
     };
   };
 
-  home = {
+  homeManager = {
     qt = {
       enable = true;
       platformTheme.name = "gtk3";

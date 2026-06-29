@@ -1,7 +1,6 @@
-# lib/formatter.nix
+# ── FORMATTER.NIX ────────────
 # Configuration for treefmt-nix.
-# Defines the formatters used by 'nix fmt' and 'nix flake check'.
-
+# Defines the formatters and linters used by 'nix fmt' and 'nix flake check'.
 {
   projectRootFile = "flake.nix";
 

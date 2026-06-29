@@ -4,7 +4,6 @@
   pkgs,
   ...
 }:
-
 lib.module config "wayland" false {
   config = {
     environment.sessionVariables = {
@@ -23,17 +22,16 @@ lib.module config "wayland" false {
     programs.gpu-screen-recorder.enable = true;
   };
 
-  userPkgs = with pkgs; [
-    wl-clipboard
-    playerctl
-    libnotify
-    grim
-    slurp
-    satty
-    zenity
-  ];
-
-  home = {
+  homeManager = {
+    home.packages = with pkgs; [
+      wl-clipboard
+      playerctl
+      libnotify
+      grim
+      slurp
+      satty
+      zenity
+    ];
     services.cliphist.enable = true;
 
     xdg.configFile."satty/config.toml".text = ''

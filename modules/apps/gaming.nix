@@ -5,13 +5,11 @@
   inputs,
   ...
 }:
-
-{
+lib.module config "gaming" false {
   imports = [
     inputs.nix-gaming.nixosModules.pipewireLowLatency
   ];
-}
-// lib.module config "gaming" false {
+
   nixpkgs.overlays = [ inputs.millennium.overlays.default ];
 
   # ========== System Packages ==========

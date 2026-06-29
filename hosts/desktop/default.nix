@@ -3,38 +3,33 @@
     ./hardware-configuration.nix
   ];
 
-  networking.hostName = "desktop";
+  module.radeon = true;
+  module.monitors = true;
+  module.logitech = true;
+  module.wooting = true;
 
-  # ========== Modules (Dendritic Dashboard) ==========
+  module.creative = true;
+  module.dev = true;
+  module.easyeffects = true;
+  module.fastfetch = true;
+  module.firefox = true;
+  module.flatpak = true;
+  module.gaming = true;
+  module.git = true;
+  module.gnome = true;
+  module.kitty = true;
+  module.localsend = true;
+  module.nixcord = true;
+  module.nvf = true;
+  module.obsidian = true;
+  module.opencode = true;
+  module.spicetify = true;
+  module.starship = true;
+  module.yazi = true;
 
-  # [1] Hardware
-  module.radeon.enable = true;
-  module.monitors.enable = true;
-  module.logitech.enable = true;
-  module.wooting.enable = true;
-
-  # [2] Session
   profile.session = true;
 
-  # [3] Apps (Optional Features)
-  module.creative.enable = true;
-  module.dev.enable = true;
-  module.easyeffects.enable = true;
-  module.fastfetch.enable = true;
-  module.firefox.enable = true;
-  module.flatpak.enable = true;
-  module.gaming.enable = true;
-  module.git.enable = true;
-  module.gnome.enable = true;
-  module.kitty.enable = true;
-  module.localsend.enable = true;
-  module.nixcord.enable = true;
-  module.nvf.enable = true;
-  module.obsidian.enable = true;
-  module.opencode.enable = true;
-  module.spicetify.enable = true;
-  module.starship.enable = true;
-  module.yazi.enable = true;
+  networking.hostName = "desktop";
 
   fileSystems."/mnt/rocket" = {
     device = "/dev/disk/by-uuid/f6e17653-e430-487b-ac24-0c509fba3968";

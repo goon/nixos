@@ -5,12 +5,11 @@
   inputs,
   ...
 }:
-
 let
   spicePkgs = inputs.spicetify-nix.legacyPackages.${pkgs.stdenv.hostPlatform.system};
 in
 lib.module config "spicetify" false {
-  home = {
+  homeManager = {
     imports = [
       inputs.spicetify-nix.homeManagerModules.default
     ];

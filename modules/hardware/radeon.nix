@@ -4,7 +4,6 @@
   pkgs,
   ...
 }:
-
 lib.module config "radeon" false {
   # AMD GPUs
   boot.initrd.kernelModules = [ "amdgpu" ];

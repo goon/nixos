@@ -4,7 +4,6 @@
   pkgs,
   ...
 }:
-
 lib.module config "xdg" false {
   config = {
     environment.systemPackages = [ pkgs.xdg-user-dirs ];
@@ -15,7 +14,7 @@ lib.module config "xdg" false {
     };
   };
 
-  home = {
+  homeManager = {
     xdg = {
       enable = true;
       userDirs = {

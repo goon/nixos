@@ -4,7 +4,6 @@
   inputs,
   ...
 }:
-
 let
   mkLua = expr: {
     _type = "lua-inline";
@@ -12,7 +11,7 @@ let
   };
 in
 lib.module config "nvf" false {
-  home = {
+  homeManager = {
     imports = [ inputs.nvf.homeManagerModules.default ];
     programs.nvf = {
       enable = true;

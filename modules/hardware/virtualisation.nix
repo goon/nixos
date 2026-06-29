@@ -1,5 +1,8 @@
-{ config, lib, ... }:
-
+{
+  config,
+  lib,
+  ...
+}:
 lib.module config "virtualisation" false {
   config = {
     virtualisation.vmware.guest.enable = true;

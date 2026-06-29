@@ -3,9 +3,8 @@
   lib,
   ...
 }:
-
 lib.module config "git" false {
-  home = {
+  homeManager = {
     programs = {
       git = {
         enable = true;

@@ -28,27 +28,32 @@ lib.module config "quickshell" false {
     };
   };
 
-  userPkgs = [ quickshell ] ++ dependencies;
+  homeManager =
+    {
+      config,
+      globals,
+      ...
+    }:
+    {
+      home.packages = [ quickshell ] ++ dependencies;
+      xdg.configFile."quickshell".source =
+        config.lib.file.mkOutOfStoreSymlink "${globals.repo}/modules/session/yaks";
 
-  home = { config, globals, ... }: {
-    xdg.configFile."quickshell".source =
-      config.lib.file.mkOutOfStoreSymlink "${globals.repo}/modules/session/yaks";
-
-    systemd.user.services.yaks = {
-      Unit = {
-        Description = "Quickshell Desktop Shell";
-        PartOf = [ "graphical-session.target" ];
-        After = [ "graphical-session-pre.target" ];
-      };
-      Service = {
-        ExecStart = "${lib.getExe quickshell}";
-        Environment = "QT_USE_PORTAL=1";
-        Restart = "on-failure";
-        RestartSec = "2";
-      };
-      Install = {
-        WantedBy = [ "graphical-session.target" ];
+      systemd.user.services.yaks = {
+        Unit = {
+          Description = "Quickshell Desktop Shell";
+          PartOf = [ "graphical-session.target" ];
+          After = [ "graphical-session-pre.target" ];
+        };
+        Service = {
+          ExecStart = "${lib.getExe quickshell}";
+          Environment = "QT_USE_PORTAL=1";
+          Restart = "on-failure";
+          RestartSec = "2";
+        };
+        Install = {
+          WantedBy = [ "graphical-session.target" ];
+        };
       };
     };
-  };
 }

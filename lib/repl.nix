@@ -1,3 +1,8 @@
+# ── REPL.NIX ─────────────────
+# Interactive debugging environment configuration.
+# Bootstraps the flake, determines the current host context, and automatically
+# loads nixpkgs, builtins, and host configuration into the top-level REPL namespace.
+
 {
   flakePath ? null,
   hostnamePath ? "/etc/hostname",

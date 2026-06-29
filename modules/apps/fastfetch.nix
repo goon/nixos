@@ -3,9 +3,8 @@
   lib,
   ...
 }:
-
 lib.module config "fastfetch" false {
-  home = {
+  homeManager = {
     programs.fastfetch = {
       enable = true;
       settings = {

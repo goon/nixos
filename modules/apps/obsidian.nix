@@ -4,7 +4,8 @@
   pkgs,
   ...
 }:
-
 lib.module config "obsidian" false {
-  userPkgs = [ pkgs.obsidian ];
+  homeManager = _: {
+    home.packages = [ pkgs.obsidian ];
+  };
 }

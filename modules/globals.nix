@@ -5,12 +5,10 @@
   repo,
   ...
 }:
-
 {
   # ========== Structural Essentials ==========
 
   config = {
-
     home-manager = {
       useGlobalPkgs = true;
       useUserPackages = true;
@@ -35,29 +33,65 @@
       type = lib.types.str;
     };
 
-    userTerminal = lib.opt lib.types.str "kitty";
-
-    paths = {
-      home = lib.opt lib.types.str "/home/${username}";
+    userTerminal = lib.mkOption {
+      type = lib.types.str;
+      default = "kitty";
     };
 
-    repo = lib.opt lib.types.str repo;
+    paths = {
+      home = lib.mkOption {
+        type = lib.types.str;
+        default = "/home/${username}";
+      };
+    };
+
+    repo = lib.mkOption {
+      type = lib.types.str;
+      default = repo;
+    };
 
     userFonts = {
-      sansSerif = lib.opt lib.types.str "Outfit";
-      monospace = lib.opt lib.types.str "Kode Mono";
+      sansSerif = lib.mkOption {
+        type = lib.types.str;
+        default = "Outfit";
+      };
+      monospace = lib.mkOption {
+        type = lib.types.str;
+        default = "Kode Mono";
+      };
     };
 
     # ========== Default Applications ==========
 
     apps = {
-      browser = lib.opt lib.types.str "firefox.desktop";
-      editor = lib.opt lib.types.str "nvim.desktop";
-      imageViewer = lib.opt lib.types.str "org.gnome.Loupe.desktop";
-      videoPlayer = lib.opt lib.types.str "org.gnome.Totem.desktop";
-      musicPlayer = lib.opt lib.types.str "com.vixalien.decibels.desktop";
-      fileManager = lib.opt lib.types.str "org.gnome.Nautilus.desktop";
-      pdfViewer = lib.opt lib.types.str "org.gnome.Evince.desktop";
+      browser = lib.mkOption {
+        type = lib.types.str;
+        default = "firefox.desktop";
+      };
+      editor = lib.mkOption {
+        type = lib.types.str;
+        default = "nvim.desktop";
+      };
+      imageViewer = lib.mkOption {
+        type = lib.types.str;
+        default = "org.gnome.Loupe.desktop";
+      };
+      videoPlayer = lib.mkOption {
+        type = lib.types.str;
+        default = "org.gnome.Totem.desktop";
+      };
+      musicPlayer = lib.mkOption {
+        type = lib.types.str;
+        default = "com.vixalien.decibels.desktop";
+      };
+      fileManager = lib.mkOption {
+        type = lib.types.str;
+        default = "org.gnome.Nautilus.desktop";
+      };
+      pdfViewer = lib.mkOption {
+        type = lib.types.str;
+        default = "org.gnome.Evince.desktop";
+      };
     };
   };
 }
