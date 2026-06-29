@@ -59,7 +59,14 @@ Another **blazingly mid** nix configuration with an overengineered dendritic arc
 
 ### The Dendritic Module Engine
 
-To heavily reduce boilerplate traditionally associated with mixing NixOS and Home Manager configurations a custom abstraction engine is used (`lib.module`). 
+To heavily reduce boilerplate traditionally associated with mixing NixOS and Home Manager configurations, I use a custom evaluation engine built entirely inside the `lib/` directory.
+
+- `lib/outputs.nix` — Bootstraps the module tree, applies base overlays, and generates the final flake outputs.
+- `lib/recursive.nix` — Recursively discovers and imports all `.nix` files under `modules/`, skipping files prefixed with `_` or `.`.
+- `lib/module.nix` — Wrapper that eliminates boilerplate by handling Home Manager wiring and conditional boolean evaluations. 
+- `lib/hosts.nix` — Dynamic host discovery engine that scans the `hosts/` directory and automatically maps them into `nixosConfigurations`. 
+
+Because of `lib.module`, instead of dealing with deeply nested `home-manager` arrays, every module is exposed with clean root level blocks stripped of boilerplate. 
 
 ```nix
 { config, lib, pkgs, ... }:
@@ -84,7 +91,7 @@ The `config` and `homeManager` blocks are automatically parsed and natively wire
 
 Every `.nix` file under `modules/` is automatically discovered and imported by `lib/recursive.nix`, preventing the need for imports. The importer skips private files prefixed with `_` or `.`. To disable or enable a module on a given host, a boolean toggle e.g. `module.<name> = <true/false>;` can be set.
 
-Hosts are formed by combining the auto discovered modules with host specific overrides in `hosts/<hostname>/default.nix`. Where the host file serves as a **dendritic dashboard** for enabling hardware support documenting which modules are explicitly enabled or disabled.
+Hosts are formed by combining the auto discovered modules with host specific overrides in `hosts/<hostname>/default.nix`. Where the host file serves as a **dendritic dashboard** for enabling hardware support, and documenting which modules are explicitly enabled or disabled.
 
 ### Profiles 
 
