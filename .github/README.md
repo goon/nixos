@@ -61,24 +61,17 @@ Another **blazingly mid** nix configuration with an overengineered dendritic arc
 
 To heavily reduce boilerplate traditionally associated with mixing NixOS and Home Manager configurations a custom abstraction engine is used (`lib.module`). 
 
-Instead of dealing with deeply nested `home-manager.sharedModules` arrays, every module is automatically exposed with three root level blocks:
-
 ```nix
 { config, lib, pkgs, ... }:
-
 lib.module config "moduleName" true {
   # 1. System Layer
   config = {
     services.example.enable = true;
+    environment.systemPackages = [ pkgs.example-package ];
   };
 
-  # 2. Package Injection
-  userPkgs = with pkgs; [
-    example-package
-  ];
-
-  # 3. User Layer
-  home = {
+  # 2. Home Manager Layer
+  homeManager = { config, globals, ... }: {
     programs.example = {
       enable = true;
       settings = { ... };
@@ -87,11 +80,11 @@ lib.module config "moduleName" true {
 }
 ```
 
-The `config`, `home` and `userPkgs` blocks are automatically parsed and natively wired into NixOS and Home Manager under the hood, ensuring that modules remain flat, organised and stripped of boilerplate.
+The `config` and `homeManager` blocks are automatically parsed and natively wired into NixOS and Home Manager under the hood, ensuring that modules remain flat, organised and stripped of boilerplate.
 
-Every `.nix` file under `modules/` is automatically discovered and imported by `lib/recursive.nix`, preventing the need for manual imports. The importer skips private files prefixed with `_` or `.`. To disable / enable a feature or module on a given host, `module.<name>.enable = <true/false>;` can be set.
+Every `.nix` file under `modules/` is automatically discovered and imported by `lib/recursive.nix`, preventing the need for imports. The importer skips private files prefixed with `_` or `.`. To disable or enable a module on a given host, a boolean toggle e.g. `module.<name> = <true/false>;` can be set.
 
-Hosts are formed by combining the auto discovered modules with host specific overrides in `hosts/<hostname>/default.nix`. Where the host file serves as a **dendritic dashboard** for enabling hardware support, selecting a window manager and documenting which modules are explicitly enabled or disabled.
+Hosts are formed by combining the auto discovered modules with host specific overrides in `hosts/<hostname>/default.nix`. Where the host file serves as a **dendritic dashboard** for enabling hardware support documenting which modules are explicitly enabled or disabled.
 
 ### Profiles 
 
@@ -107,7 +100,7 @@ Global options are defined centrally in `modules/globals.nix` under the `globals
 
 The code quality and formatting is enforced via [**treefmt-nix**](https://github.com/numtide/treefmt-nix), utilising three tools. 
 
-- [`nixfmt`](https://github.com/NixOS/nixfmt) — The standard Nix formatter, ensuring consistent whitespace, line breaks and attribute ordering. 
+- [`nixfmt`](https://github.com/NixOS/nixfmt) — The formatter enforcing the RFC 166 standard, ensuring consistent whitespace, line breaks and attribute ordering. 
 - [`deadnix`](https://github.com/astro/deadnix) — Scans for unused `let` bindings, unreferenced function arguments and dead `with` statements.
 - [`statix`](https://github.com/nerdypepper/statix) — Analyses expressions for anti-patterns e.g. unused `args`, unnecessary `with` statements and deprecated idioms.
 
