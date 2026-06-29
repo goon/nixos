@@ -43,13 +43,15 @@ let
 
   # Function to build the nested tree structure for visualization
   buildTree =
-    targetList:
+    targetList: visited:
     builtins.listToAttrs (
       map (target: {
         name = target;
         value =
-          if builtins.hasAttr target registry && registry.${target} != [ ] then
-            buildTree registry.${target}
+          if builtins.elem target visited then
+            { }
+          else if builtins.hasAttr target registry && registry.${target} != [ ] then
+            buildTree registry.${target} (visited ++ [ target ])
           else
             { };
       }) targetList
@@ -83,6 +85,6 @@ in
     );
 
     # 2. Expose the raw tree to NixOS so the `nyx includes` script can read it
-    system.build.includes = buildTree hostIncludes;
+    system.build.includes = buildTree hostIncludes [ ];
   };
 }
