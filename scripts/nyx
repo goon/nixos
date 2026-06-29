@@ -262,6 +262,7 @@ cmd_help() {
   echo -e "  ${GR}module list${NC} ${YE}[host]${NC}            Returns a list of modules enabled/disabled on a host"
   echo -e "  ${GR}module enable${NC} ${YE}<name> [host]${NC}   Enable a module on a host"
   echo -e "  ${GR}module disable${NC} ${YE}<name> [host]${NC}  Disable a module on a host"
+  echo -e "  ${GR}includes${NC} ${YE}[host]${NC}               Visualise the includes tree for a host"
 }
 
 # --- Router ---
@@ -316,6 +317,36 @@ case "$cmd" in
     exec nix repl --file "$REPO/lib/repl.nix"
     ;;
   module) cmd_module "$@" ;;
+  includes)
+    host="$(get_host "${1:-}")"
+    info "Visualizing DAG tree for $host..."
+    nix eval .#nixosConfigurations."$host".config.system.build.includes --json | nix run nixpkgs#python3 -- -c '
+import sys, json
+
+BLUE = "\033[0;34m"
+GREEN = "\033[0;32m"
+RESET = "\033[0m"
+
+def print_tree(d, prefix=""):
+    items = list(d.items())
+    for i, (k, v) in enumerate(items):
+        is_last = (i == len(items) - 1)
+        connector = "└── " if is_last else "├── "
+        has_children = isinstance(v, dict) and v
+        color = BLUE if has_children else RESET
+        print(f"{prefix}{connector}{color}{k}{RESET}")
+        if has_children:
+            extension = "    " if is_last else "│   "
+            print_tree(v, prefix + extension)
+
+try:
+    data = json.load(sys.stdin)
+    print(f"{GREEN}[host: '"$host"']{RESET}")
+    print_tree(data)
+except Exception as e:
+    print(f"Error parsing tree: {e}")
+'
+    ;;
   help) cmd_help ;;
   *) error "Unknown subcommand: $cmd. Run 'nyx' for a list of commands." ;;
 esac
