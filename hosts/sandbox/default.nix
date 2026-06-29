@@ -3,6 +3,8 @@
     ./hardware-configuration.nix
   ];
 
+  includes = [ "profile.session" ];
+
   module.monitors = true;
   module.virtualisation = true;
 
@@ -14,8 +16,6 @@
   module.nvf = true;
   module.starship = true;
   module.yazi = true;
-
-  profile.session = true;
 
   networking.hostName = "sandbox";
 

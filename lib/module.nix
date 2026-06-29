@@ -9,14 +9,18 @@ lib.extend (
     module =
       config: name: defaultState: body:
       let
-        isAdvanced = body ? options || body ? config || body ? homeManager;
+        isAdvanced = body ? options || body ? config || body ? homeManager || body ? includes;
 
         extraOptions = if isAdvanced then (body.options or { }) else { };
         baseConfig = if isAdvanced then (body.config or { }) else body;
+        moduleIncludes = if isAdvanced then (body.includes or [ ]) else [ ];
 
         # Extract imports so they are evaluated unconditionally
         extraImports = baseConfig.imports or [ ];
-        cleanConfig = builtins.removeAttrs baseConfig [ "imports" ];
+        cleanConfig = removeAttrs baseConfig [
+          "imports"
+          "includes"
+        ];
 
         hasHomeManager = body ? homeManager;
 
@@ -40,7 +44,10 @@ lib.extend (
             default = defaultState;
           };
         };
-        config = final.mkIf config.module.${name} rawConfig;
+        config = final.mkMerge [
+          (final.mkIf config.module.${name} rawConfig)
+          { dendritic.registry.${name} = moduleIncludes; }
+        ];
       };
   }
 )

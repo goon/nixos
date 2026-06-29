@@ -3,6 +3,10 @@
     ./hardware-configuration.nix
   ];
 
+  includes = [
+    "profile.session"
+  ];
+
   module.radeon = true;
   module.monitors = true;
   module.logitech = true;
@@ -26,8 +30,6 @@
   module.spicetify = true;
   module.starship = true;
   module.yazi = true;
-
-  profile.session = true;
 
   networking.hostName = "desktop";
 
