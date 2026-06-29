@@ -5,6 +5,16 @@
   ...
 }:
 lib.module config "wayland" false {
+
+  includes = [
+    "clipboard"
+    "screenshot"
+    "xdg"
+    "gtk"
+    "qt"
+    "quickshell"
+  ];
+
   config = {
     environment.sessionVariables = {
       NIXOS_OZONE_WL = "1";
@@ -24,23 +34,9 @@ lib.module config "wayland" false {
 
   homeManager = {
     home.packages = with pkgs; [
-      wl-clipboard
       playerctl
       libnotify
-      grim
-      slurp
-      satty
       zenity
     ];
-    services.cliphist.enable = true;
-
-    xdg.configFile."satty/config.toml".text = ''
-      [general]
-      output-filename = "${config.globals.paths.home}/Pictures/Screenshots/%Y%m%d_%H%M%S.png"
-      early-exit = true
-      initial-tool = "brush"
-      copy-command = "wl-copy"
-      default-hide-toolbars = false
-    '';
   };
 }

@@ -6,7 +6,6 @@
 }:
 lib.module config "gtk" false {
   config = {
-    # ========== System Layer (NixOS) ==========
     services.dbus.enable = true;
     programs.dconf.enable = true;
   };
@@ -19,7 +18,6 @@ lib.module config "gtk" false {
     }:
     {
       home.packages = with pkgs; [
-        # Theming
         adw-gtk3
         papirus-icon-theme
         bibata-cursors
@@ -36,7 +34,6 @@ lib.module config "gtk" false {
         x11.enable = true;
       };
 
-      # Interface Theming
       dconf.settings = {
         "org/gnome/desktop/interface" = {
           color-scheme = "prefer-dark";

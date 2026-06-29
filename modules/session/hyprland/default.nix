@@ -5,6 +5,11 @@
   ...
 }:
 lib.module config "hyprland" false {
+
+  includes = [
+    "wayland"
+  ];
+
   config = {
     programs.hyprland = {
       enable = true;

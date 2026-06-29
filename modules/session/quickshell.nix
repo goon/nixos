@@ -11,15 +11,18 @@ let
   dependencies = with pkgs; [
     gowall
     cava
-    brightnessctl
-    ddcutil
-    wl-clipboard
-    cliphist
     jq
     pywalfox-native
   ];
 in
 lib.module config "quickshell" false {
+
+  includes = [
+    "screenshot"
+    "clipboard"
+    "monitors"
+  ];
+
   config = {
     environment.sessionVariables = {
       QS_ICON_THEME = "Papirus";
