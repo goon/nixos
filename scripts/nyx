@@ -86,8 +86,8 @@ host_dashboard_enabled() {
   local host="$1"
   local dashboard="$HOSTS_DIR/$host/default.nix"
   if [ -f "$dashboard" ]; then
-    grep -E '^[[:space:]]*module\.[a-zA-Z0-9_-]+\.enable[[:space:]]*=[[:space:]]*(true|false);' "$dashboard" | \
-      sed -E 's/.*module\.([a-zA-Z0-9_-]+)\.enable.*=.*(true|false).*/\1 \2/'
+    grep -E '^[[:space:]]*module\.[a-zA-Z0-9_-]+(\.enable)?[[:space:]]*=[[:space:]]*(true|false);' "$dashboard" | \
+      sed -E 's/.*module\.([a-zA-Z0-9_-]+)(\.enable)?.*=.*(true|false).*/\1 \3/'
   fi
 }
 
@@ -205,11 +205,11 @@ cmd_module_enable() {
     error "Module '$module_name' does not exist."
   fi
   
-  if grep -qE "^[[:space:]]*module\.$module_name\.enable[[:space:]]*=" "$dashboard"; then
-    sed -i -E "s/^[[:space:]]*module\.$module_name\.enable[[:space:]]*=.*$/  module.$module_name.enable = true;/" "$dashboard"
+  if grep -qE "^[[:space:]]*module\.$module_name(\.enable)?[[:space:]]*=" "$dashboard"; then
+    sed -i -E "s/^[[:space:]]*module\.$module_name(\.enable)?[[:space:]]*=.*$/  module.$module_name = true;/" "$dashboard"
   else
     # Insert before the last closing brace
-    sed -i -E "/^}/i \ \ module.$module_name.enable = true;" "$dashboard"
+    sed -i -E "/^}/i \ \ module.$module_name = true;" "$dashboard"
   fi
   
   success "Enabled module '$module_name' on host '$host'."
@@ -223,8 +223,8 @@ cmd_module_disable() {
   local host="$(get_host "${2:-}")"
   local dashboard="$HOSTS_DIR/$host/default.nix"
   
-  if grep -qE "^[[:space:]]*module\.$module_name\.enable[[:space:]]*=" "$dashboard"; then
-    sed -i -E "s/^[[:space:]]*module\.$module_name\.enable[[:space:]]*=.*$/  module.$module_name.enable = false;/" "$dashboard"
+  if grep -qE "^[[:space:]]*module\.$module_name(\.enable)?[[:space:]]*=" "$dashboard"; then
+    sed -i -E "s/^[[:space:]]*module\.$module_name(\.enable)?[[:space:]]*=.*$/  module.$module_name = false;/" "$dashboard"
     success "Disabled module '$module_name' on host '$host'."
   else
     success "Module '$module_name' was not enabled on host '$host'."
@@ -262,7 +262,7 @@ cmd_help() {
   echo -e "  ${GR}module list${NC} ${YE}[host]${NC}            Returns a list of modules enabled/disabled on a host"
   echo -e "  ${GR}module enable${NC} ${YE}<name> [host]${NC}   Enable a module on a host"
   echo -e "  ${GR}module disable${NC} ${YE}<name> [host]${NC}  Disable a module on a host"
-  echo -e "  ${GR}includes${NC} ${YE}[host]${NC}               Visualise the includes tree for a host"
+  echo -e "  ${GR}tree${NC} ${YE}[host]${NC}                   Visualise the dependency tree for a host"
 }
 
 # --- Router ---
@@ -317,10 +317,10 @@ case "$cmd" in
     exec nix repl --file "$REPO/lib/repl.nix"
     ;;
   module) cmd_module "$@" ;;
-  includes)
+  tree)
     host="$(get_host "${1:-}")"
     info "Visualizing DAG tree for $host..."
-    nix eval .#nixosConfigurations."$host".config.system.build.includes --json | nix run nixpkgs#python3 -- -c '
+    nix eval .#nixosConfigurations."$host".config.system.build.tree --json | nix run nixpkgs#python3 -- -c '
 import sys, json
 
 BLUE = "\033[0;34m"
