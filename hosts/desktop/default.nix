@@ -12,7 +12,7 @@
   module.logitech = true;
   module.wooting = true;
 
-  module.creative = true;
+  module.affinity = true;
   module.dev = true;
   module.easyeffects = true;
   module.fastfetch = true;
