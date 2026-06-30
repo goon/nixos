@@ -32,9 +32,9 @@
   security.rtkit.enable = true;
 
   systemd.services.mpd.environment = {
-    XDG_RUNTIME_DIR = "/run/user/${builtins.toString config.users.users.${username}.uid}";
+    XDG_RUNTIME_DIR = "/run/user/${toString config.users.users.${username}.uid}";
     PULSE_SERVER = "unix:/run/user/${
-      builtins.toString config.users.users.${username}.uid
+      toString config.users.users.${username}.uid
     }/pulse/native";
   };
 }

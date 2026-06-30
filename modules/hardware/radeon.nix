@@ -5,11 +5,9 @@
   ...
 }:
 lib.module config "radeon" false {
-  # AMD GPUs
   boot.initrd.kernelModules = [ "amdgpu" ];
   boot.kernelModules = [ "i2c_dev" ];
 
-  # Enable i2c support for things like ddcutil
   hardware.i2c.enable = true;
 
   services.xserver.videoDrivers = [ "amdgpu" ];

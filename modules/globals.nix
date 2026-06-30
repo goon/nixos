@@ -6,8 +6,6 @@
   ...
 }:
 {
-  # ========== Structural Essentials ==========
-
   config = {
     home-manager = {
       useGlobalPkgs = true;
@@ -25,8 +23,6 @@
 
     system.stateVersion = config.globals.stateVersion;
   };
-
-  # ========== System Settings ==========
 
   options.globals = {
     stateVersion = lib.mkOption {
@@ -60,8 +56,6 @@
         default = "Kode Mono";
       };
     };
-
-    # ========== Default Applications ==========
 
     apps = {
       browser = lib.mkOption {
