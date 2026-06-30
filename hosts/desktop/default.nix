@@ -3,9 +3,7 @@
     ./hardware-configuration.nix
   ];
 
-  includes = [
-    "hyprland"
-  ];
+  module.hyprland = true;
 
   module.radeon = true;
   module.monitors = true;

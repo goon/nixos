@@ -6,18 +6,16 @@
 }:
 lib.module config "wayland" false {
 
-  includes = [
-    "clipboard"
-    "screenshot"
-    "xdg"
-    "gtk"
-    "qt"
-    "quickshell"
-    "fonts"
-    "greeter"
-  ];
-
   config = {
+    module.clipboard = true;
+    module.screenshot = true;
+    module.xdg = true;
+    module.gtk = true;
+    module.qt = true;
+    module.quickshell = true;
+    module.fonts = true;
+    module.greeter = true;
+
     environment.sessionVariables = {
       NIXOS_OZONE_WL = "1";
       SDL_VIDEODRIVER = "wayland";

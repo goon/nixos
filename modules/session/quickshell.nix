@@ -17,13 +17,11 @@ let
 in
 lib.module config "quickshell" false {
 
-  includes = [
-    "screenshot"
-    "clipboard"
-    "monitors"
-  ];
-
   config = {
+    module.screenshot = true;
+    module.clipboard = true;
+    module.monitors = true;
+
     environment.sessionVariables = {
       QS_ICON_THEME = "Papirus";
       QT_USE_PORTAL = "1";

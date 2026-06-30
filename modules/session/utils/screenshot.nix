@@ -7,7 +7,9 @@
 
 lib.module config "screenshot" false {
 
-  includes = [ "clipboard" ];
+  config = {
+    module.clipboard = true;
+  };
 
   homeManager = {
     home.packages = with pkgs; [

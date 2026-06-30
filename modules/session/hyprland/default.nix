@@ -6,11 +6,8 @@
 }:
 lib.module config "hyprland" false {
 
-  includes = [
-    "wayland"
-  ];
-
   config = {
+    module.wayland = true;
     programs.hyprland = {
       enable = true;
     };
