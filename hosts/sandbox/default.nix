@@ -3,7 +3,7 @@
     ./hardware-configuration.nix
   ];
 
-  includes = [ "profile.session" ];
+  includes = [ "hyprland" ];
 
   module.monitors = true;
   module.virtualisation = true;

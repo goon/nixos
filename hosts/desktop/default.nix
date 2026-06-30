@@ -4,7 +4,7 @@
   ];
 
   includes = [
-    "profile.session"
+    "hyprland"
   ];
 
   module.radeon = true;
