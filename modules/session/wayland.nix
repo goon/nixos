@@ -13,6 +13,8 @@ lib.module config "wayland" false {
     "gtk"
     "qt"
     "quickshell"
+    "fonts"
+    "greeter"
   ];
 
   config = {

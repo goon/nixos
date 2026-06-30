@@ -5,7 +5,7 @@
   inputs,
   ...
 }:
-lib.module config "creative" false {
+lib.module config "affinity" false {
   config = {
     nixpkgs.overlays = [ inputs.affinity-nix.overlays.default ];
   };

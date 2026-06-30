@@ -36,7 +36,7 @@ hl.config({
         layout = "scrolling",
     },
     decoration = {
-        rounding = 18,
+        rounding = 5,
         rounding_power = 2,
         blur = {
             enabled = true,
@@ -96,7 +96,6 @@ hl.bind(mainMod .. " + ALT + C", hl.dsp.exec_cmd("qs ipc call clipboard toggle")
 -- Screenshot & Recording
 
 hl.bind("Print", hl.dsp.exec_cmd("screenshot area"))
-hl.bind("SHIFT + Print", hl.dsp.exec_cmd("screenshot window"))
 hl.bind("CTRL + Print", hl.dsp.exec_cmd("grim -g \"$(slurp)\" - | satty --filename -"))
 hl.bind(mainMod .. " + R", hl.dsp.exec_cmd("recording screen"))
 hl.bind(mainMod .. " + SHIFT + R", hl.dsp.exec_cmd("recording region"))
