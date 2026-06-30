@@ -2,7 +2,7 @@
 
 set -euo pipefail
 
-MODE="${1:?usage: recording <screen|region|window>}"
+MODE="${1:?usage: recording <screen|region>}"
 
 DIR="$HOME/Videos"
 mkdir -p "$DIR"
@@ -41,21 +41,6 @@ start_region() {
     "Recording" "Started recording region." < /dev/null > /dev/null 2>&1 &
 }
 
-start_window() {
-  if ! command -v hyprctl >/dev/null; then
-    setsid notify-send -a "Quickshell" -i "screen_record" \
-      "Recording" "Window mode requires Hyprland" < /dev/null > /dev/null 2>&1 &
-    return 1
-  fi
-  ACTIVE_WS=$(hyprctl activeworkspace -j | jq '.id')
-  GEOM=$(hyprctl clients -j | jq -r ".[] | select(.workspace.id == $ACTIVE_WS) | \"\(.at[0]),\(.at[1]) \(.size[0])x\(.size[1])\"" | slurp -f "%wx%h+%x+%y") || exit 0
-  [ -z "$GEOM" ] && exit 0
-  setsid gpu-screen-recorder -w region -region "$GEOM" -q ultra -f 144 -a default_output -o "$FILE" \
-    < /dev/null > /dev/null 2>&1 &
-  setsid notify-send -a "Quickshell" -i "screen_record" \
-    "Recording" "Started recording window." < /dev/null > /dev/null 2>&1 &
-}
-
 case "$MODE" in
   screen)
     if pgrep -f "gpu-screen-recorder -w screen" >/dev/null; then
@@ -71,15 +56,8 @@ case "$MODE" in
       start_region
     fi
     ;;
-  window)
-    if pgrep -f "gpu-screen-recorder -w region" >/dev/null; then
-      stop region
-    else
-      start_window
-    fi
-    ;;
   *)
-    echo "usage: recording <screen|region|window>" >&2
+    echo "usage: recording <screen|region>" >&2
     exit 1
     ;;
 esac

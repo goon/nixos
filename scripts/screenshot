@@ -8,18 +8,6 @@ FILE="$DIR/$(date +%Y%m%d_%H%M%S).png"
 MODE="${1:-area}"
 
 case "$MODE" in
-    window)
-        if command -v hyprctl >/dev/null; then
-            ACTIVE_WS=$(hyprctl activeworkspace -j | jq '.id')
-            GEOM=$(hyprctl clients -j | jq -r ".[] | select(.workspace.id == $ACTIVE_WS) | \"\(.at[0]),\(.at[1]) \(.size[0])x\(.size[1])\"" | slurp)
-        else
-            GEOM=$(slurp)
-        fi
-
-        if [ -n "$GEOM" ]; then
-            grim -g "$GEOM" "$FILE"
-        fi
-        ;;
     full)
         grim "$FILE"
         ;;
