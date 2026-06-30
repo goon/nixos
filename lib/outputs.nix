@@ -19,7 +19,7 @@
       tree = import ./recursive.nix ../modules;
 
       baseModules = [
-        ./includes.nix
+        ./tree.nix
         ({ config, ... }: {
           home-manager.extraSpecialArgs = {
             inherit inputs;
