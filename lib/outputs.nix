@@ -28,6 +28,7 @@
         })
         inputs.home-manager.nixosModules.default
         inputs.nix-flatpak.nixosModules.nix-flatpak
+        ../scripts
       ]
       ++ tree;
     in
