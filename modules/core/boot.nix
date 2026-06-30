@@ -1,4 +1,4 @@
-{ pkgs, lib, ... }: {
+{ pkgs, ... }: {
   boot = {
     loader = {
       systemd-boot = {
@@ -19,5 +19,4 @@
     ];
   };
 
-  system.boot.loader.kernelFile = lib.mkForce "vmlinuz";
 }
