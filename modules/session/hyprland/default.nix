@@ -13,23 +13,6 @@ lib.module config "hyprland" false {
   config = {
     programs.hyprland = {
       enable = true;
-      xwayland.enable = true;
-    };
-
-    xdg.portal = {
-      enable = true;
-      extraPortals = [
-        pkgs.xdg-desktop-portal-gtk
-        pkgs.xdg-desktop-portal-hyprland
-      ];
-      configPackages = [
-        pkgs.xdg-desktop-portal-gtk
-        pkgs.xdg-desktop-portal-hyprland
-      ];
-      config.hyprland.default = [
-        "hyprland"
-        "gtk"
-      ];
     };
   };
 
