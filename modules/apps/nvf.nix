@@ -16,30 +16,17 @@ lib.module config "nvf" false {
           vimAlias = true;
 
           options = {
-            number = true;
-            signcolumn = "yes";
-            cursorline = true;
+            clipboard = "unnamedplus";
             scrolloff = 10;
-            showmode = false;
             laststatus = 3;
-            fillchars = "eob: ";
             expandtab = true;
             shiftwidth = 2;
             tabstop = 2;
             softtabstop = 2;
-            ignorecase = true;
-            smartcase = true;
-            clipboard = "unnamedplus";
-            updatetime = 250;
-            timeoutlen = 300;
-            undofile = true;
-            swapfile = false;
-            splitright = true;
-            splitbelow = true;
-            wrap = false;
           };
 
           keymaps = [
+
             {
               mode = "i";
               key = "<C-v>";
@@ -47,7 +34,6 @@ lib.module config "nvf" false {
               silent = true;
               desc = "Paste from system clipboard";
             }
-            # Window navigation
             {
               mode = [
                 "n"
@@ -95,8 +81,6 @@ lib.module config "nvf" false {
               silent = true;
               desc = "Vertical Split";
             }
-            # Window resize
-
             {
               mode = "n";
               key = "<C-Left>";
@@ -111,7 +95,6 @@ lib.module config "nvf" false {
               silent = true;
               desc = "Increase Window Width";
             }
-            # Buffer navigation
             {
               mode = "n";
               key = "<Tab>";
@@ -140,7 +123,6 @@ lib.module config "nvf" false {
               silent = true;
               desc = "Delete Other Buffers";
             }
-            # File operations
             {
               mode = [
                 "i"
@@ -181,77 +163,83 @@ lib.module config "nvf" false {
               silent = true;
               desc = "New File";
             }
-
             {
               mode = "n";
               key = "<leader>ff";
-              action = ":lua Snacks.picker.files()<cr>";
+              action = ":Pick files<cr>";
               silent = true;
               desc = "Find Files";
             }
             {
               mode = "n";
               key = "<leader>fg";
-              action = ":lua Snacks.picker.grep()<cr>";
+              action = ":Pick grep_live<cr>";
               silent = true;
               desc = "Live Grep";
             }
             {
               mode = "n";
               key = "<leader>fb";
-              action = ":lua Snacks.picker.buffers()<cr>";
+              action = ":Pick buffers<cr>";
               silent = true;
               desc = "Find Buffers";
             }
-
             {
               mode = "n";
-              key = "<leader>fr";
-              action = ":lua Snacks.picker.registers()<cr>";
+              key = "<leader>fh";
+              action = ":Pick history<cr>";
               silent = true;
-              desc = "Registers";
+              desc = "Find History";
+            }
+            {
+              mode = "n";
+              key = "<leader>fk";
+              action = ":Pick keymaps<cr>";
+              silent = true;
+              desc = "Find Keymaps";
             }
             {
               mode = "n";
               key = "<leader>fm";
-              action = ":lua Snacks.picker.marks()<cr>";
+              action = ":Pick marks<cr>";
               silent = true;
-              desc = "Marks";
+              desc = "Find Marks";
+            }
+            {
+              mode = "n";
+              key = "<leader>fr";
+              action = ":Pick registers<cr>";
+              silent = true;
+              desc = "Find Registers";
             }
             {
               mode = "n";
               key = "<leader>t";
-              action = ":lua Snacks.terminal.toggle(nil, { win = { position = 'float', border = 'rounded', height = 0.6, width = 0.75 } })<cr>";
+              action = "<cmd>ToggleTerm direction=float<cr>";
               silent = true;
               desc = "Terminal";
             }
-            {
-              mode = "n";
-              key = "<leader>g";
-              action = ":lua Snacks.lazygit.open()<cr>";
-              silent = true;
-              desc = "LazyGit";
-            }
+
             {
               mode = "n";
               key = "<leader>e";
-              action = ":lua Snacks.explorer({ layout = { preset = 'default' } })<cr>";
+              action = "<cmd>lua MiniFiles.open()<cr>";
               silent = true;
-              desc = "Explorer";
+              desc = "Files";
             }
             {
               mode = "n";
               key = "<leader>bd";
-              action = ":lua Snacks.bufdelete()<cr>";
+              action = ":lua MiniBufremove.delete()<cr>";
               silent = true;
               desc = "Delete Buffer";
             }
             {
               mode = "t";
               key = "<esc><esc>";
-              action = "<C-\\><C-n>";
+              action = "<C-\\><C-n><cmd>close<cr>";
               silent = true;
-              desc = "Exit terminal mode";
+              desc = "Close terminal window";
             }
           ];
 
@@ -263,6 +251,16 @@ lib.module config "nvf" false {
               };
             };
           };
+
+          ui = {
+            noice.enable = true;
+            fastaction.enable = true;
+          };
+
+          lsp = {
+            enable = true;
+          };
+
           languages = {
             enableFormat = true;
             enableTreesitter = true;
@@ -281,18 +279,6 @@ lib.module config "nvf" false {
             css.enable = true;
           };
 
-          lsp = {
-            enable = true;
-            mappings = {
-              documentHighlight = null;
-              listDocumentSymbols = null;
-              addWorkspaceFolder = null;
-              removeWorkspaceFolder = null;
-              listWorkspaceFolders = null;
-            };
-          };
-
-          autocomplete.blink-cmp.enable = true;
           formatter.conform-nvim = {
             enable = true;
             setupOpts = {
@@ -302,81 +288,62 @@ lib.module config "nvf" false {
               };
             };
           };
-          statusline.lualine.enable = true;
 
           mini = {
-            comment.enable = true;
+            basics = {
+              enable = true;
+              setupOpts = {
+                options = {
+                  basic = true;
+                };
+                autocommands = {
+                  basic = true;
+                };
+              };
+            };
+            starter = {
+              enable = true;
+              setupOpts = {
+                footer = "";
+              };
+            };
+            animate.enable = true;
+            bufremove.enable = true;
+            completion.enable = true;
+            cursorword.enable = true;
             diff.enable = true;
+            extra.enable = true;
+            files.enable = true;
             hipatterns.enable = true;
             icons.enable = true;
+            indentscope.enable = true;
+            notify.enable = true;
             pairs.enable = true;
+            pick.enable = true;
+            statusline.enable = true;
           };
 
-          utility.snacks-nvim = {
+          terminal.toggleterm = {
             enable = true;
+            lazygit.enable = true;
             setupOpts = {
-              dashboard = {
-                enabled = true;
-                sections = [
-                  {
-                    section = "keys";
-                    gap = 1;
-                    padding = 1;
-                  }
-                ];
-              };
-              explorer.enabled = true;
-              notifier.enabled = true;
-              indent.enabled = true;
-              scroll.enabled = true;
-              bigfile.enabled = true;
-              quickfile.enabled = true;
-              statuscolumn.enabled = true;
-              scope.enabled = true;
-              rename.enabled = true;
-              bufdelete.enabled = true;
-              words.enabled = true;
-              terminal.enabled = true;
-              input.enabled = true;
-              lazygit.enabled = true;
-              picker = {
-                enabled = true;
-                auto_cd = true;
-                sources = {
-                  explorer = {
-                    layout = {
-                      preset = "default";
-                      preview = true;
-                    };
-                    jump = {
-                      close = true;
-                    };
-                  };
-                };
+              direction = "float";
+              float_opts = {
+                border = "curved";
               };
             };
           };
 
+          autocmds = [
+            {
+              event = [ "FileType" ];
+              pattern = [ "markdown" ];
+              command = "setlocal wrap linebreak breakindent";
+              desc = "Markdown Wrapping";
+            }
+          ];
+
           luaConfigPost = ''
-            -- Highlight On Yank
-            vim.api.nvim_create_autocmd("TextYankPost", {
-              callback = function() vim.highlight.on_yank() end,
-            })
-
-            -- Go To Last Cursor Position
-            vim.api.nvim_create_autocmd("BufReadPost", {
-              callback = function()
-                local mark = vim.api.nvim_buf_get_mark(0, '"')
-                local lcount = vim.api.nvim_buf_line_count(0)
-                if mark[1] > 0 and mark[1] <= lcount then pcall(vim.api.nvim_win_set_cursor, 0, mark) end
-              end,
-            })
-
-            -- Markdown Wrapping
-            vim.api.nvim_create_autocmd("FileType", {
-              pattern = "markdown",
-              command = "setlocal wrap linebreak breakindent",
-            })
 
             -- Theme & Signal Reloading
             local theme_path = vim.fn.expand("$HOME/.cache/quickshell/themes/nvim.lua")
