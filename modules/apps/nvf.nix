@@ -4,7 +4,6 @@
   inputs,
   ...
 }:
-
 lib.module config "nvf" false {
   homeManager = {
     imports = [ inputs.nvf.homeManagerModules.default ];
@@ -265,9 +264,12 @@ lib.module config "nvf" false {
             };
           };
           languages = {
+            enableFormat = true;
             enableTreesitter = true;
-            nix.enable = true;
-            qml.enable = true;
+            nix = {
+              enable = true;
+              format.type = [ "nixfmt" ];
+            };
             lua.enable = true;
             bash.enable = true;
             typescript.enable = true;
@@ -370,13 +372,13 @@ lib.module config "nvf" false {
               end,
             })
 
-            -- Markdown Wrapping 
+            -- Markdown Wrapping
             vim.api.nvim_create_autocmd("FileType", {
               pattern = "markdown",
               command = "setlocal wrap linebreak breakindent",
             })
 
-            -- Theme & Signal Reloading 
+            -- Theme & Signal Reloading
             local theme_path = vim.fn.expand("$HOME/.cache/quickshell/themes/nvim.lua")
 
             local function apply_theme()
@@ -384,13 +386,13 @@ lib.module config "nvf" false {
             end
 
             local signal = vim.uv.new_signal()
-            if signal then 
-              vim.uv.signal_start(signal, "sigusr1", function() 
-                vim.schedule(function() 
+            if signal then
+              vim.uv.signal_start(signal, "sigusr1", function()
+                vim.schedule(function()
                   apply_theme()
                   print("Theme Reloaded")
-                end) 
-              end) 
+                end)
+              end)
             end
 
             apply_theme()
@@ -398,6 +400,5 @@ lib.module config "nvf" false {
         };
       };
     };
-
   };
 }
