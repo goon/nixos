@@ -307,20 +307,29 @@ lib.module config "nvf" false {
                 footer = "";
               };
             };
+            files = {
+              enable = true;
+              setupOpts = {
+                windows = {
+                  preview = true;
+                };
+              };
+            };
             animate.enable = true;
             bufremove.enable = true;
             completion.enable = true;
             cursorword.enable = true;
             diff.enable = true;
             extra.enable = true;
-            files.enable = true;
             hipatterns.enable = true;
             icons.enable = true;
             indentscope.enable = true;
+            move.enable = true;
             notify.enable = true;
             pairs.enable = true;
             pick.enable = true;
             statusline.enable = true;
+            surround.enable = true;
           };
 
           terminal.toggleterm = {
