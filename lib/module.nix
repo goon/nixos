@@ -2,7 +2,6 @@
 # Core architecture engine for the dendritic module system.
 # Wraps module definitions with automatic boolean enable options,
 # home-manager wiring, and handles conditional evaluation based on host dashboards.
-
 { lib }:
 lib.extend (
   final: _prev: {

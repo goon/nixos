@@ -2,7 +2,6 @@
 # Helper function that recursively traverses the modules/ directory.
 # Finds all valid .nix files and returns them as a flat list of paths
 # to be natively ingested by the NixOS module system.
-
 dir:
 let
   recurse =

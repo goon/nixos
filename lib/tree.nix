@@ -1,11 +1,12 @@
 # ── TREE.NIX ───────────────
 # Core DAG dependency resolver for the Dendritic architecture.
 # Reads the global module definitions and dynamically extracts dependencies.
-
-{ lib, options, ... }:
-
+{
+  lib,
+  options,
+  ...
+}:
 let
-
   modNames = builtins.attrNames options.module;
 
   # Reverse mapping: file -> module name
@@ -68,7 +69,6 @@ let
             { };
       }) targetList
     );
-
 in
 {
   # We still define this so nyx tree can read it
