@@ -37,6 +37,7 @@
     options = [
       "defaults"
       "nofail"
+      "x-gvfs-show"
     ];
   };
 
