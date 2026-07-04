@@ -7,6 +7,7 @@
 lib.module config "nix" true {
   config = {
     nixpkgs.config.allowUnfree = true;
+    nixpkgs.config.permittedInsecurePackages = [ "pnpm-10.29.2" ];
 
     documentation = {
       enable = false;
