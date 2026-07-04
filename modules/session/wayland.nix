@@ -5,7 +5,6 @@
   ...
 }:
 lib.module config "wayland" false {
-
   config = {
     module.clipboard = true;
     module.screenshot = true;

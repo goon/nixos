@@ -16,7 +16,6 @@ let
   ];
 in
 lib.module config "quickshell" false {
-
   config = {
     module.screenshot = true;
     module.clipboard = true;

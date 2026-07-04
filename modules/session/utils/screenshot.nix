@@ -4,9 +4,7 @@
   pkgs,
   ...
 }:
-
 lib.module config "screenshot" false {
-
   config = {
     module.clipboard = true;
   };

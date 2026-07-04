@@ -5,7 +5,6 @@
   ...
 }:
 lib.module config "hyprland" false {
-
   config = {
     module.wayland = true;
     programs.hyprland = {
