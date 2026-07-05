@@ -86,12 +86,6 @@ Every `.nix` file under `modules/` is automatically discovered and imported by `
 
 Hosts are formed by combining the auto discovered modules with host specific overrides in `hosts/<hostname>/default.nix`. Where the host file serves as a **dendritic dashboard** for enabling hardware support, and documenting which modules are explicitly enabled or disabled.
 
-### Profiles 
-
-To avoid manually enabling douzens of individual modules on every host, the configuration uses a high-level profile system defined in `modules/profiles.nix`. 
-
-Profiles bundle related modules together. For example, setting `profile.session = true;` in a host configuration automatically enables the entire desktop session as a cohesive module.
-
 ### Globals 
 
 Global options are defined centrally in `modules/globals.nix` under the `globals.` namespace. They allow hosts to share common system settings and user preferences across both NixOS and Home Manager modules.
@@ -105,7 +99,6 @@ The code quality and formatting is enforced via [**treefmt-nix**](https://github
 - [`statix`](https://github.com/nerdypepper/statix) — Analyses expressions for anti-patterns e.g. unused `args`, unnecessary `with` statements and deprecated idioms.
 
 The formatter module at `lib/formatter.nix` is passed through `treefmt-nix`'s `evalModule`, which outputs a combined wrapper binary. The wrapper runs all three tools in sequence.
-
 
 ## Deployment
 
