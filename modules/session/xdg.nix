@@ -21,6 +21,11 @@ lib.module config "xdg" false {
         enable = true;
         createDirectories = true;
         setSessionVariables = true;
+        desktop = null;
+        documents = null;
+        music = null;
+        publicShare = null;
+        templates = null;
       };
       mimeApps = {
         enable = true;

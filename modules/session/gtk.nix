@@ -51,9 +51,7 @@ lib.module config "gtk" false {
         text = ''
           file://${globals.repo} Nix
           file://${globals.paths.home}/Downloads Downloads
-          file://${globals.paths.home}/Documents Documents
           file://${globals.paths.home}/Pictures Pictures
-          file://${globals.paths.home}/Music Music
           file://${globals.paths.home}/Videos Videos
           file://${config.xdg.configHome} Config
           file:///mnt/rocket Rocket
