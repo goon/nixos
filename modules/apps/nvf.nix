@@ -16,7 +16,6 @@ lib.module config "nvf" false {
           vimAlias = true;
 
           options = {
-            clipboard = "unnamedplus";
             scrolloff = 10;
             laststatus = 3;
             expandtab = true;
@@ -25,76 +24,13 @@ lib.module config "nvf" false {
             softtabstop = 2;
           };
 
+          clipboard = {
+            enable = true;
+            providers.wl-copy.enable = true;
+          };
+
           keymaps = [
 
-            {
-              mode = "i";
-              key = "<C-v>";
-              action = "<C-r>+";
-              silent = true;
-              desc = "Paste from system clipboard";
-            }
-            {
-              mode = [
-                "n"
-                "t"
-              ];
-              key = "<C-h>";
-              action = "<C-\\><C-n><C-w>h";
-              silent = true;
-              desc = "Go to Left Window";
-            }
-            {
-              mode = [
-                "n"
-                "t"
-              ];
-              key = "<C-j>";
-              action = "<C-\\><C-n><C-w>j";
-              silent = true;
-              desc = "Go to Lower Window";
-            }
-            {
-              mode = [
-                "n"
-                "t"
-              ];
-              key = "<C-k>";
-              action = "<C-\\><C-n><C-w>k";
-              silent = true;
-              desc = "Go to Upper Window";
-            }
-            {
-              mode = [
-                "n"
-                "t"
-              ];
-              key = "<C-l>";
-              action = "<C-\\><C-n><C-w>l";
-              silent = true;
-              desc = "Go to Right Window";
-            }
-            {
-              mode = "n";
-              key = "<leader>v";
-              action = "<C-w>v";
-              silent = true;
-              desc = "Vertical Split";
-            }
-            {
-              mode = "n";
-              key = "<C-Left>";
-              action = "<cmd>vertical resize -2<cr>";
-              silent = true;
-              desc = "Decrease Window Width";
-            }
-            {
-              mode = "n";
-              key = "<C-Right>";
-              action = "<cmd>vertical resize +2<cr>";
-              silent = true;
-              desc = "Increase Window Width";
-            }
             {
               mode = "n";
               key = "<Tab>";
@@ -123,39 +59,7 @@ lib.module config "nvf" false {
               silent = true;
               desc = "Delete Other Buffers";
             }
-            {
-              mode = [
-                "i"
-                "x"
-                "n"
-                "s"
-              ];
-              key = "<C-s>";
-              action = "<cmd>w<cr><esc>";
-              silent = true;
-              desc = "Save File";
-            }
-            {
-              mode = "n";
-              key = "<leader>q";
-              action = "<cmd>qa<cr>";
-              silent = true;
-              desc = "Quit";
-            }
-            {
-              mode = "n";
-              key = "<leader>s";
-              action = "<cmd>wqa<cr>";
-              silent = true;
-              desc = "Save and Quit";
-            }
-            {
-              mode = "n";
-              key = "<leader>w";
-              action = "<C-w>c";
-              silent = true;
-              desc = "Close Window";
-            }
+
             {
               mode = "n";
               key = "<leader>n";
@@ -211,13 +115,6 @@ lib.module config "nvf" false {
               action = ":Pick registers<cr>";
               silent = true;
               desc = "Find Registers";
-            }
-            {
-              mode = "n";
-              key = "<leader>t";
-              action = "<cmd>ToggleTerm direction=float<cr>";
-              silent = true;
-              desc = "Terminal";
             }
 
             {
@@ -281,12 +178,6 @@ lib.module config "nvf" false {
 
           formatter.conform-nvim = {
             enable = true;
-            setupOpts = {
-              format_on_save = {
-                timeout_ms = 500;
-                lsp_format = "fallback";
-              };
-            };
           };
 
           mini = {
@@ -295,6 +186,9 @@ lib.module config "nvf" false {
               setupOpts = {
                 options = {
                   basic = true;
+                };
+                mappings = {
+                  windows = true;
                 };
                 autocommands = {
                   basic = true;
@@ -334,6 +228,7 @@ lib.module config "nvf" false {
 
           terminal.toggleterm = {
             enable = true;
+            mappings.open = "<leader>t";
             lazygit.enable = true;
             setupOpts = {
               direction = "float";
