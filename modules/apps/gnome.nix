@@ -27,6 +27,7 @@ lib.module config "gnome" false {
       fragments
       switcheroo
     ];
+
     dconf.settings = {
       "org/gnome/nautilus/preferences" = {
         show-hidden-files = true;
