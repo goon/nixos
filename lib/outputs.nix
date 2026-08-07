@@ -25,6 +25,9 @@
             inherit (config) globals;
           };
         })
+        {
+          nixpkgs.overlays = if builtins.pathExists ../overlays then import ../overlays else [ ];
+        }
         inputs.home-manager.nixosModules.default
         inputs.nix-flatpak.nixosModules.nix-flatpak
         ../scripts
