@@ -9,6 +9,9 @@ lib.module config "fonts" false {
     fonts.packages = with pkgs; [
       google-fonts
       corefonts
+      noto-fonts
+      libertine
+      open-fonts
       material-symbols
       nerd-fonts.symbols-only
     ];
