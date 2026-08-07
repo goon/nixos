@@ -23,7 +23,7 @@ lib.module config "opencode" false {
         };
         build = {
           mode = "primary";
-          model = "opencode-go/deepseek-v4-flash";
+          model = "opencode-go/deepseek-v4-pro";
         };
       };
       mcp = {
