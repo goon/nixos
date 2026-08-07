@@ -12,10 +12,15 @@ lib.module config "gaming" false {
 
   nixpkgs.overlays = [ inputs.millennium.overlays.default ];
 
+  homeManager = _: {
+    home.packages = [ (pkgs.callPackage ../../pkgs/jagex.nix { }) ];
+  };
+
   environment.systemPackages = with pkgs; [
     mangohud
     bolt-launcher
     runelite
+    deadlock-mod-manager
   ];
 
   programs = {
