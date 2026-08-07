@@ -7,7 +7,6 @@
 lib.module config "dev" false {
   homeManager = {
     home.packages = with pkgs; [
-      antigravity
       nixd
     ];
 
