@@ -1,0 +1,21 @@
+#!/usr/bin/env bash
+
+printf "\n"
+
+for line in {1..3}; do
+    for i in {0..7}; do
+        printf "\e[48;5;%sm      \e[0m  " "$i"
+    done
+    printf "\n"
+done
+
+printf "\n"
+
+for line in {1..3}; do
+    for i in {8..15}; do
+        printf "\e[48;5;%sm      \e[0m  " "$i"
+    done
+    printf "\n"
+done
+
+printf "\n"
