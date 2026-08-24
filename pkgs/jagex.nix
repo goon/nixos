@@ -8,11 +8,11 @@
 
 let
   pname = "jagex-launcher";
-  version = "0.0.27";
+  version = "0.1.5";
 
   src = fetchurl {
-    url = "https://rs-launcher-updates.runescape.com/production/linux/x64/releases/${version}/jagex-launcher-beta-linux-x86_64.AppImage";
-    hash = "sha256-smzTPiMVaBQ3IEzU63lxB920LjZAqFTE/udaJ58C8qk=";
+    url = "https://rs-launcher-updates.runescape.com/production/linux/x64/latest/jagex-launcher-beta-linux-x86_64.AppImage";
+    hash = "sha256-9+pwtK/c1vK8gPb/DPIqjK9dNoVDahMWR4hkkUvfhJs=";
   };
 
   appimageContents = appimageTools.extractType2 { inherit pname version src; };
@@ -30,8 +30,8 @@ appimageTools.wrapType2 {
     install -Dm644 ${appimageContents}/jagex-launcher.desktop \
       $out/share/applications/jagex-launcher.desktop
     substituteInPlace $out/share/applications/jagex-launcher.desktop \
-      --replace-fail 'Exec=AppRun --no-sandbox %U' \
-      'Exec=env DESKTOPINTEGRATION=false jagex-launcher --no-sandbox %U'
+      --replace-fail 'Exec=AppRun %U' \
+      'Exec=env DESKTOPINTEGRATION=false jagex-launcher %U'
 
     mkdir -p $out/share/icons
     cp -R ${appimageContents}/usr/share/icons/hicolor $out/share/icons/
