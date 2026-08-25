@@ -9,7 +9,6 @@
   module.virtualisation = true;
 
   module.dev = true;
-  module.fastfetch = true;
   module.firefox = true;
   module.git = true;
   module.kitty = true;

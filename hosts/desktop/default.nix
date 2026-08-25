@@ -13,7 +13,6 @@
   module.affinity = true;
   module.dev = true;
   module.easyeffects = true;
-  module.fastfetch = true;
   module.firefox = true;
   module.flatpak = true;
   module.gaming = true;
