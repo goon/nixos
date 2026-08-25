@@ -23,9 +23,7 @@ lib.module config "gnome" false {
       ffmpegthumbnailer
       totem
       loupe
-      decibels
       fragments
-      switcheroo
     ];
 
     dconf.settings = {
