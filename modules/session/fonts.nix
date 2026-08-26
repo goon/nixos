@@ -14,6 +14,10 @@ lib.module config "fonts" false {
       open-fonts
       material-symbols
       nerd-fonts.symbols-only
+      source-sans
+      source-serif
+      source-code-pro
+      league-of-moveable-type
     ];
 
     fonts.fontconfig = {
