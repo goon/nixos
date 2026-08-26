@@ -55,7 +55,9 @@ lib.module config "gtk" false {
           file://${globals.paths.home}/Pictures Pictures
           file://${globals.paths.home}/Videos Videos
           file://${config.xdg.configHome} Config
-          file:///mnt/rocket Rocket
+          file://${config.xdg.cacheHome} Cache
+          file://${config.xdg.dataHome} Data
+          file://${config.xdg.stateHome} State
         '';
       };
     };
