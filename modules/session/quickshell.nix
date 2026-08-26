@@ -13,6 +13,7 @@ let
     cava
     jq
     pywalfox-native
+    imagemagick
   ];
 in
 lib.module config "quickshell" false {
