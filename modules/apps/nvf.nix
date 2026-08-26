@@ -250,7 +250,7 @@ lib.module config "nvf" false {
           luaConfigPost = ''
 
             -- Theme & Signal Reloading
-            local theme_path = vim.fn.expand("$HOME/.cache/quickshell/themes/nvim.lua")
+            local theme_path = vim.fn.expand("$HOME/.cache/yaks/themes/nvim.lua")
 
             local function apply_theme()
               pcall(dofile, theme_path)

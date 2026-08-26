@@ -36,7 +36,7 @@ lib.module config "quickshell" false {
     }:
     {
       home.packages = [ quickshell ] ++ dependencies;
-      xdg.configFile."quickshell".source =
+      xdg.configFile."yaks".source =
         config.lib.file.mkOutOfStoreSymlink "${globals.repo}/modules/session/yaks";
 
       systemd.user.services.yaks = {
