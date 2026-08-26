@@ -36,6 +36,7 @@ lib.module config "wayland" false {
       playerctl
       libnotify
       zenity
+      unclutter
     ];
   };
 }
