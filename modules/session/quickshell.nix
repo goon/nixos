@@ -14,6 +14,7 @@ let
     jq
     pywalfox-native
     imagemagick
+    matugen
   ];
 in
 lib.module config "quickshell" false {
@@ -41,7 +42,7 @@ lib.module config "quickshell" false {
 
       systemd.user.services.yaks = {
         Unit = {
-          Description = "Quickshell Desktop Shell";
+          Description = "Yaks - Blazingly Mid Desktop Shell";
           PartOf = [ "graphical-session.target" ];
           After = [ "graphical-session-pre.target" ];
         };
