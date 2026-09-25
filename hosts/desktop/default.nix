@@ -12,6 +12,7 @@
 
   module.affinity = true;
   module.dev = true;
+  module.zed = true;
   module.easyeffects = true;
   module.firefox = true;
   module.flatpak = true;
@@ -30,7 +31,7 @@
 
   networking.hostName = "desktop";
 
-  fileSystems."/mnt/rocket" = {
+  fileSystems."/mnt/Rocket" = {
     device = "/dev/disk/by-uuid/f6e17653-e430-487b-ac24-0c509fba3968";
     fsType = "ext4";
     options = [
