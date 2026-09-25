@@ -7,6 +7,7 @@
 lib.module config "dev" false {
   homeManager = {
     home.packages = with pkgs; [
+      nil
       nixd
     ];
 
