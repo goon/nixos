@@ -232,11 +232,11 @@ hl.window_rule({
 })
 
 hl.window_rule({
-    match = { class = "Spotify" },
+    match = { class = "sonora" },
     workspace = "special:scratchpad",
 })
 
--- Layer Rules 
+-- Layer Rules
 
 hl.layer_rule({
     match = { namespace = "yaks.*" },
