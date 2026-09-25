@@ -12,7 +12,7 @@ let
 
   src = fetchurl {
     url = "https://rs-launcher-updates.runescape.com/production/linux/x64/latest/jagex-launcher-beta-linux-x86_64.AppImage";
-    hash = "sha256-9+pwtK/c1vK8gPb/DPIqjK9dNoVDahMWR4hkkUvfhJs=";
+    hash = "sha256-tfkiDUGa3w6PHRgvY62aCRf8al4w0reIoDYC3LLM0io=";
   };
 
   appimageContents = appimageTools.extract { inherit pname version src; };
