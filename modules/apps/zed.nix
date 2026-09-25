@@ -7,6 +7,12 @@ lib.module config "zed" false {
   homeManager = { globals, ... }: {
     programs.zed-editor = {
       enable = true;
+      extensions = [
+        "toml"
+        "lua"
+        "nix"
+        "qml"
+      ];
       userSettings = {
         buffer_font_family = globals.userFonts.monospace;
         ui_font_family = globals.userFonts.sansSerif;
