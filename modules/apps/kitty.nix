@@ -25,6 +25,7 @@ lib.module config "kitty" false {
         tab_bar_style = "powerline";
         tab_powerline_style = "round";
         active_border_color = "none";
+        remember_window_size = "no";
       };
 
       keybindings = {

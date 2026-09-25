@@ -214,7 +214,7 @@ for _, match_criteria in ipairs(float_apps) do
         name = "float_" .. name_suffix,
         match = match_criteria,
         float = true,
-        size = "1000 600",
+        size = { 1000, 600 },
         center = true,
     })
 end
