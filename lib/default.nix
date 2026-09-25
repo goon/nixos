@@ -8,9 +8,8 @@
 }:
 let
   l1 = import ./module.nix { inherit lib; };
-  l1' = l1 // (import ./overlays.nix { lib = l1; });
   l2 = import ./hosts.nix {
-    lib = l1';
+    lib = l1;
     inherit inputs;
   };
   l3 =
