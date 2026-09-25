@@ -24,7 +24,7 @@ lib.module config "flatpak" false {
     overrides = {
       "com.usebottles.bottles" = {
         Context.filesystems = [
-          "/mnt/rocket"
+          "/mnt/Rocket"
           "xdg-data/Steam:ro"
         ];
         Environment = {
