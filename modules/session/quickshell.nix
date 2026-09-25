@@ -26,6 +26,7 @@ lib.module config "quickshell" false {
     environment.sessionVariables = {
       QS_ICON_THEME = "Papirus";
       QT_USE_PORTAL = "1";
+      QS_CONFIG_PATH = "${config.globals.repo}/modules/session/yaks";
     };
   };
 
@@ -48,7 +49,10 @@ lib.module config "quickshell" false {
         };
         Service = {
           ExecStart = "${lib.getExe quickshell}";
-          Environment = "QT_USE_PORTAL=1";
+          Environment = [
+            "QT_USE_PORTAL=1"
+            "QS_CONFIG_PATH=${globals.repo}/modules/session/yaks"
+          ];
           Restart = "on-failure";
           RestartSec = "2";
         };
