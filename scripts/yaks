@@ -15,12 +15,16 @@ error() { echo -e "${RE}[ERROR]${NC} $1"; exit 1; }
 
 cmd="${1:-}"; shift 2>/dev/null || true
 
+yaks_xdg_dir="${XDG_CONFIG_HOME:-$HOME/.config}/yaks"
+yaks_resolved="$(readlink -f "$yaks_xdg_dir" 2>/dev/null || printf '%s' "$yaks_xdg_dir")"
+export QS_CONFIG_PATH="${QS_CONFIG_PATH:-$yaks_resolved}"
+
 notify() {
   if command -v notify-send >/dev/null; then
     notify-send "Yaks" "$1" \
       --app-name="Yaks" \
       --icon="system-software-update" \
-      --urgency=low
+      --urgency=low 2>/dev/null || true
   fi
 }
 
