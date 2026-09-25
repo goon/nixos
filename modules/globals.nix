@@ -49,11 +49,11 @@
     userFonts = {
       sansSerif = lib.mkOption {
         type = lib.types.str;
-        default = "Outfit";
+        default = "Inter";
       };
       monospace = lib.mkOption {
         type = lib.types.str;
-        default = "Kode Mono";
+        default = "JetBrains Mono";
       };
     };
 
