@@ -15,7 +15,6 @@ lib.module config "gaming" false {
 
     environment.systemPackages = with pkgs; [
       mangohud
-      runelite
       deadlock-mod-manager
     ];
 
