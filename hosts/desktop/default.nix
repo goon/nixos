@@ -26,6 +26,7 @@
   module.obsidian = true;
   module.opencode = true;
   module.spicetify = true;
+  module.sonora = true;
   module.starship = true;
   module.yazi = true;
 

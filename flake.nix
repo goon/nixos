@@ -31,6 +31,9 @@
 
     millennium.url = "github:SteamClientHomebrew/Millennium?dir=packages/nix";
     millennium.inputs.nixpkgs.follows = "nixpkgs";
+
+    sonora.url = "github:sonorahq/sonora";
+    sonora.inputs.nixpkgs.follows = "nixpkgs";
   };
 
   outputs =
