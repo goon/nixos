@@ -28,7 +28,7 @@ lib.module config "firefox" false {
             "toolkit.legacyUserProfileCustomizations.stylesheets" = true;
             "widget.gtk.rounded-bottom-corners.enabled" = true;
             "browser.tabs.allow_transparent_browser" = true;
-            "browser.display.use_document_fonts" = 0;
+            "browser.display.use_document_fonts" = 1;
             "font.default.x-western" = "sans-serif";
             "font.name.sans-serif.x-western" = globals.userFonts.sansSerif;
             "font.name.serif.x-western" = globals.userFonts.sansSerif;
