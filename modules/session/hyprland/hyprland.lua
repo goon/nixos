@@ -33,7 +33,7 @@ hl.config({
     },
     general = {
         gaps_in = 5,
-        gaps_out = 10,
+        gaps_out = 8,
         border_size = 2,
         ["col.active_border"] = { colors = { "rgba(707389ff)", "rgba(555560ff)" }, angle = 45 },
         ["col.inactive_border"] = "rgba(252535ff)",
@@ -109,7 +109,6 @@ hl.bind(mainMod .. " + S", hl.dsp.workspace.toggle_special("scratchpad"))
 hl.bind(mainMod .. " + CTRL + S", hl.dsp.window.move({ workspace = "special:scratchpad" }))
 hl.bind(mainMod .. " + P", hl.dsp.exec_cmd("qs ipc call power toggle"))
 hl.bind(mainMod .. " + D", hl.dsp.exec_cmd("qs ipc call dashboard toggle"))
-hl.bind(mainMod .. " + ALT + C", hl.dsp.exec_cmd("qs ipc call clipboard toggle"))
 
 -- Screenshot & Recording
 
