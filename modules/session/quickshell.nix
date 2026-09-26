@@ -9,7 +9,6 @@ let
   quickshell = inputs.quickshell.packages.${pkgs.stdenv.hostPlatform.system}.quickshell;
 
   dependencies = with pkgs; [
-    gowall
     cava
     jq
     pywalfox-native
