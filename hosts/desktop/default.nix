@@ -19,6 +19,7 @@
   module.gaming = true;
   module.git = true;
   module.gnome = true;
+  module.harbor = true;
   module.kitty = true;
   module.localsend = true;
   module.nixcord = true;
