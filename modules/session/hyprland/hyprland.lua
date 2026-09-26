@@ -250,7 +250,7 @@ hl.on("hyprland.start", function()
     hl.exec_cmd("systemctl --user start hyprpolkitagent")
 
     hl.exec_cmd("vesktop")
-    hl.exec_cmd("spotify")
+    hl.exec_cmd("sonora")
 end)
 
 -- Event Listeners
