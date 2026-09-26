@@ -53,7 +53,7 @@
       };
       monospace = lib.mkOption {
         type = lib.types.str;
-        default = "JetBrains Mono";
+        default = "Kode Mono";
       };
     };
 
