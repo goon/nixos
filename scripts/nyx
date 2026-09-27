@@ -251,6 +251,7 @@ cmd_help() {
   echo -e "  ${GR}boot${NC}                          nh os boot"
   echo -e "  ${GR}test${NC}                          nh os test"
   echo -e "  ${GR}update${NC}                        nh os switch -u"
+  echo -e "  ${GR}check${NC}                         nix flake check"
   echo -e "  ${GR}clean${NC}                         nh clean all --keep 5"
   echo -e "  ${GR}fmt${NC}                           nix fmt"
   echo -e "  ${GR}search${NC} ${YE}<pkg>${NC}                  nix search nixpkgs <pkg>"
@@ -270,6 +271,11 @@ cmd="${1:-help}"; shift || true
 case "$cmd" in
   build|boot|switch|test) exec nh os "$cmd" "$@" ;;
   update) exec nh os switch -u "$@" ;;
+  check)
+    info "Checking flake..."
+    nix flake check
+    success "Flake check passed!"
+    ;;
   clean)
     info "Collecting garbage..."
     nh clean all --keep 5
