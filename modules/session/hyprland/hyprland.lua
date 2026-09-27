@@ -104,7 +104,6 @@ hl.bind(mainMod .. " + Z", hl.dsp.exec_cmd("qs ipc call settings toggle"))
 hl.bind(mainMod .. " + S", hl.dsp.workspace.toggle_special("scratchpad"))
 hl.bind(mainMod .. " + CTRL + S", hl.dsp.window.move({ workspace = "special:scratchpad" }))
 hl.bind(mainMod .. " + P", hl.dsp.exec_cmd("qs ipc call power toggle"))
-hl.bind(mainMod .. " + D", hl.dsp.exec_cmd("qs ipc call dashboard toggle"))
 
 -- Screenshot & Recording
 
