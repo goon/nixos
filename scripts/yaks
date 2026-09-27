@@ -63,14 +63,12 @@ cmd_status() {
 }
 
 usage() {
-  echo -e "${BL}yaks${NC} — yaks management"
+
+  echo -e "${GR}yaks${NC} ${YE}<command>${NC}"
   echo ""
-  echo -e "Usage: ${GR}yaks${NC} ${YE}<command>${NC}"
-  echo ""
-  echo "Commands:"
-  echo -e "  ${GR}reload${NC}   Reload or start Quickshell (IPC reload if running, start if not)"
-  echo -e "  ${GR}log${NC}      Tail the quickshell journal"
-  echo -e "  ${GR}status${NC}   Show service status"
+  echo -e "  ${YE}reload${NC}   Reload the shell service or start if not running"
+  echo -e "  ${YE}log${NC}      Tail the shells journal"
+  echo -e "  ${YE}status${NC}   Show the status of the shells service"
 }
 
 case "$cmd" in
