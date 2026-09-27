@@ -17,6 +17,8 @@ lib.module config "zed" false {
         buffer_font_family = globals.userFonts.monospace;
         ui_font_family = globals.userFonts.sansSerif;
 
+        theme = "Yaks";
+
         agent.dock = "right";
         project_panel.dock = "left";
         cursor_animation.enabled = true;
