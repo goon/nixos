@@ -12,6 +12,7 @@ hl.monitor({
 -- Environment Variables
 
 hl.env("XDG_CURRENT_DESKTOP", "Hyprland")
+hl.env("XDG_SESSION_TYPE", "wayland")
 hl.env("XDG_SESSION_DESKTOP", "Hyprland")
 hl.env("XCURSOR_THEME", "Bibata-Modern-Ice")
 hl.env("XCURSOR_SIZE", "28")
@@ -26,28 +27,27 @@ hl.config({
         repeat_delay = 200,
         repeat_rate = 35,
         numlock_by_default = true,
-        follow_mouse = 1,
         accel_profile = "flat",
-        force_no_accel = false,
-        sensitivity = 0.0,
     },
     general = {
         gaps_in = 5,
         gaps_out = 8,
         border_size = 2,
-        ["col.active_border"] = { colors = { "rgba(707389ff)", "rgba(555560ff)" }, angle = 45 },
-        ["col.inactive_border"] = "rgba(252535ff)",
+        col = {
+            active_border = { colors = { "rgba(707389ff)", "rgba(555560ff)" }, angle = 45 },
+            inactive_border = "rgba(252535ff)",
+        },
         layout = "dwindle",
     },
     decoration = {
         rounding = 5,
         rounding_power = 2,
+        active_opacity = 0.95,
+        inactive_opacity = 0.95,
         blur = {
             enabled = true,
             size = 4,
             passes = 4,
-            new_optimizations = true,
-            xray = false,
         },
         shadow = {
             enabled = true,
@@ -61,10 +61,6 @@ hl.config({
     },
     dwindle = {
         preserve_split = true,
-    },
-    master = {
-        orientation = "center",
-        slave_count_for_center_master = 0,
     },
 })
 
@@ -101,7 +97,7 @@ hl.bind(mainMod .. " + E", hl.dsp.exec_cmd("kitty -e yazi"))
 hl.bind(mainMod .. " + N", hl.dsp.exec_cmd("kitty -e nvim"))
 hl.bind(mainMod .. " + B", hl.dsp.exec_cmd("firefox"))
 hl.bind(mainMod .. " + M", hl.dsp.exec_cmd("obsidian"))
-hl.bind(mainMod .. " + T", hl.dsp.exec_cmd("kitty --class float"))
+hl.bind(mainMod .. " + T", hl.dsp.exec_cmd("kitty --title float"))
 hl.bind(mainMod .. " + SPACE", hl.dsp.exec_cmd("qs ipc call launcher toggle"))
 hl.bind(mainMod .. " + G", hl.dsp.exec_cmd("qs ipc call wallpaper toggle"))
 hl.bind(mainMod .. " + Z", hl.dsp.exec_cmd("qs ipc call settings toggle"))
@@ -121,47 +117,26 @@ hl.bind(mainMod .. " + SHIFT + R", hl.dsp.exec_cmd("recording region"))
 
 hl.bind(mainMod .. " + SHIFT + Q", hl.dsp.exit())
 hl.bind("CTRL + ALT + Delete", hl.dsp.exit())
-hl.bind(mainMod .. " + SHIFT + P", hl.dsp.exec_cmd("hyprctl dispatch dpms off"))
+hl.bind(mainMod .. " + SHIFT + P", hl.dsp.dpms({ action = "off" }))
 
 -- Audio & Backlight
 
-hl.bind("XF86AudioRaiseVolume", hl.dsp.exec_cmd("wpctl set-volume @DEFAULT_AUDIO_SINK@ 5%+ -l 1.0"))
-hl.bind("XF86AudioLowerVolume", hl.dsp.exec_cmd("wpctl set-volume @DEFAULT_AUDIO_SINK@ 5%-"))
+hl.bind("XF86AudioRaiseVolume", hl.dsp.exec_cmd("wpctl set-volume @DEFAULT_AUDIO_SINK@ 5%+ -l 1.0"), { locked = true, repeating = true })
+hl.bind("XF86AudioLowerVolume", hl.dsp.exec_cmd("wpctl set-volume @DEFAULT_AUDIO_SINK@ 5%-"), { locked = true, repeating = true })
 hl.bind("XF86AudioMute", hl.dsp.exec_cmd("wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle"), { locked = true })
 hl.bind("XF86AudioMicMute", hl.dsp.exec_cmd("wpctl set-mute @DEFAULT_AUDIO_SOURCE@ toggle"), { locked = true })
 hl.bind("XF86AudioPlay", hl.dsp.exec_cmd("playerctl play-pause"), { locked = true })
 hl.bind("XF86AudioStop", hl.dsp.exec_cmd("playerctl stop"), { locked = true })
 hl.bind("XF86AudioPrev", hl.dsp.exec_cmd("playerctl previous"), { locked = true })
 hl.bind("XF86AudioNext", hl.dsp.exec_cmd("playerctl next"), { locked = true })
-hl.bind("XF86MonBrightnessUp", hl.dsp.exec_cmd("brightnessctl set +10%"))
-hl.bind("XF86MonBrightnessDown", hl.dsp.exec_cmd("brightnessctl set 10%-"))
+hl.bind("XF86MonBrightnessUp", hl.dsp.exec_cmd("brightnessctl set +10%"), { locked = true, repeating = true })
+hl.bind("XF86MonBrightnessDown", hl.dsp.exec_cmd("brightnessctl set 10%-"), { locked = true, repeating = true })
 
 -- Window Management
-
-local layouts = { "scrolling", "dwindle", "master" }
-local workspace_layouts = {}
-
-hl.bind("CTRL + SHIFT + L", function()
-    local ws = hl.get_active_workspace()
-    if not ws then return end
-    local ws_id = tostring(ws.id)
-
-    local current_idx = workspace_layouts[ws_id] or 1
-    local next_idx = (current_idx % #layouts) + 1
-    workspace_layouts[ws_id] = next_idx
-
-    local new_layout = layouts[next_idx]
-    local display_name = new_layout:gsub("^%l", string.upper)
-
-    hl.workspace_rule({ workspace = ws_id, layout = new_layout })
-    local icon_path = os.getenv("HOME") .. "/.config/hypr/hyprland.svg"
-    hl.dispatch(hl.dsp.exec_cmd("notify-send -i " .. icon_path .. " 'Workspace " .. ws_id .. "' 'The layout has been changed to <b>" .. display_name .. "</b>'"))
-end)
 
 hl.bind(mainMod .. " + X", hl.dsp.window.close())
 hl.bind(mainMod .. " + V", hl.dsp.window.float())
 hl.bind(mainMod .. " + F", hl.dsp.window.fullscreen())
-hl.bind(mainMod .. " + SHIFT + F", hl.dsp.window.fullscreen())
 
 local directions = {
     { key = "H",     dir = "l" },
@@ -195,14 +170,8 @@ hl.bind(mainMod .. " + mouse:273", hl.dsp.window.resize(), { mouse = true })
 
 -- Rules
 
-hl.window_rule({
-    match = { title = ".*" },
-    opacity = "0.95 0.95",
-})
-
-
 local float_apps = {
-    { class = "^float$" },
+    { class = "kitty", title = "^float$" },
     { class = "^com.gabm.satty$" },
     { title = "^Picture-in-[Pp]icture$" },
 }
@@ -220,18 +189,8 @@ end
 
 -- Special Workspace Apps
 
-hl.workspace_rule({
-    workspace = "special:scratchpad",
-    layout = "dwindle",
-})
-
 hl.window_rule({
-    match = { class = "vesktop" },
-    workspace = "special:scratchpad",
-})
-
-hl.window_rule({
-    match = { class = "sonora" },
+    match = { class = "^(vesktop|sonora)$" },
     workspace = "special:scratchpad",
 })
 
@@ -251,12 +210,4 @@ hl.on("hyprland.start", function()
 
     hl.exec_cmd("vesktop")
     hl.exec_cmd("sonora")
-end)
-
--- Event Listeners
-hl.on("workspace.active", function()
-    local active_special = hl.get_active_special_workspace()
-    if active_special and active_special ~= "" and active_special ~= false then
-        hl.dispatch(hl.dsp.workspace.toggle_special("scratchpad"))
-    end
 end)
