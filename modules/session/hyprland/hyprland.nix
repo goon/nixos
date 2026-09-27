@@ -24,7 +24,7 @@ lib.module config "hyprland" false {
       ];
       systemd.user.targets.hyprland-session = {
         Unit = {
-          Description = "Hyprland compositor session";
+          Description = "Hyprland Compositor Session";
           Documentation = "man:systemd.special(7)";
           BindsTo = [ "graphical-session.target" ];
           Wants = [ "graphical-session-pre.target" ];
