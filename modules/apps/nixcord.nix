@@ -16,7 +16,7 @@ lib.module config "nixcord" false {
         useQuickCss = true;
         transparent = true;
         themeLinks = [ ];
-        enabledThemes = [ "qsTheme.css" ];
+        enabledThemes = [ "yaks.css" ];
         plugins = {
           alwaysAnimate.enable = true;
           imageZoom.enable = true;
