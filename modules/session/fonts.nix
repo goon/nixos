@@ -4,29 +4,21 @@
   pkgs,
   ...
 }:
-let
-  supplied = builtins.filter lib.isDerivation (
-    builtins.attrValues (pkgs.callPackage ../../pkgs/ag.nix { })
-  );
-in
 lib.module config "fonts" false {
   config = {
-    fonts.packages =
-      with pkgs;
-      [
-        google-fonts
-        corefonts
-        noto-fonts
-        libertine
-        open-fonts
-        material-symbols
-        nerd-fonts.symbols-only
-        source-sans
-        source-serif
-        source-code-pro
-        league-of-moveable-type
-      ]
-      ++ supplied;
+    fonts.packages = with pkgs; [
+      google-fonts
+      corefonts
+      noto-fonts
+      libertine
+      open-fonts
+      material-symbols
+      nerd-fonts.symbols-only
+      source-sans
+      source-serif
+      source-code-pro
+      league-of-moveable-type
+    ];
 
     fonts.fontconfig = {
       enable = true;
