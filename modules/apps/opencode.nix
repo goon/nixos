@@ -18,6 +18,8 @@ lib.module config "opencode" false {
       plugin = [
         "@dietrichgebert/ponytail"
         "@tarquinen/opencode-dcp"
+        "opencode-snip"
+        "opencode-caveman"
       ];
       default_agent = "plan";
       agent = {
