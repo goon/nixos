@@ -17,6 +17,7 @@ lib.module config "kitty" false {
         cursor_trail = 10;
         cursor_trail_start_threshold = 0;
         cursor_trail_decay = "0.01 0.05";
+        custom_shaders = "cursor-trail-blaze";
         window_padding_width = "20";
         resize_in_steps = "yes";
         enabled_layouts = "tall";
