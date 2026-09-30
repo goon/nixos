@@ -13,7 +13,7 @@ lib.module config "starship" false {
         add_newline = false;
         directory.style = "blue";
         character = {
-          success_symbol = "[❯](purple)";
+          success_symbol = "[❯](green)";
           error_symbol = "[❯](red)";
           vimcmd_symbol = "[❮](green)";
         };
