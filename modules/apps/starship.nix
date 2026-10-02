@@ -10,7 +10,7 @@ lib.module config "starship" false {
       settings = {
         "$schema" = "https://starship.rs/config-schema.json";
         format = "$username$hostname$directory$git_branch$cmd_duration$line_break$character";
-        add_newline = false;
+        add_newline = true;
         directory.style = "blue";
         character = {
           success_symbol = "[❯](green)";
