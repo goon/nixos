@@ -13,13 +13,11 @@ let
     jq
     pywalfox-native
     imagemagick
-    matugen
   ];
 in
 lib.module config "quickshell" false {
   config = {
     module.screenshot = true;
-    module.clipboard = true;
     module.monitors = true;
 
     environment.sessionVariables = {
