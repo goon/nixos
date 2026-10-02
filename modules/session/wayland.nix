@@ -6,7 +6,6 @@
 }:
 lib.module config "wayland" false {
   config = {
-    module.clipboard = true;
     module.screenshot = true;
     module.xdg = true;
     module.gtk = true;
@@ -35,7 +34,7 @@ lib.module config "wayland" false {
     home.packages = with pkgs; [
       playerctl
       libnotify
-      unclutter
+      wl-clipboard
     ];
   };
 }
