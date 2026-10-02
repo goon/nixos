@@ -201,6 +201,12 @@ hl.layer_rule({
     ignore_alpha = 0.5,
 })
 
+hl.layer_rule({
+    name = "selection_no_anim",
+    match = { namespace = "selection" },
+    no_anim = true,
+})
+
 -- Autostart
 hl.on("hyprland.start", function()
     hl.exec_cmd("dbus-update-activation-environment --systemd --all")
