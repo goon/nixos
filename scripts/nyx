@@ -184,61 +184,12 @@ cmd_module_list() {
   fi
 }
 
-cmd_module_enable() {
-  local module_name="${1:-}"
-  if [ -z "$module_name" ]; then
-    error "Please specify a module to enable. Usage: nyx module enable <name> [host]"
-  fi
-  local host="$(get_host "${2:-}")"
-  local dashboard="$HOSTS_DIR/$host/default.nix"
-  
-  # Check if module exists
-  local module_exists=false
-  while IFS=' ' read -r category name; do
-    if [ "$name" = "$module_name" ]; then
-      module_exists=true
-      break
-    fi
-  done < <(discover_modules_raw)
-  
-  if ! $module_exists; then
-    error "Module '$module_name' does not exist."
-  fi
-  
-  if grep -qE "^[[:space:]]*module\.$module_name(\.enable)?[[:space:]]*=" "$dashboard"; then
-    sed -i -E "s/^[[:space:]]*module\.$module_name(\.enable)?[[:space:]]*=.*$/  module.$module_name = true;/" "$dashboard"
-  else
-    # Insert before the last closing brace
-    sed -i -E "/^}/i \ \ module.$module_name = true;" "$dashboard"
-  fi
-  
-  success "Enabled module '$module_name' on host '$host'."
-}
-
-cmd_module_disable() {
-  local module_name="${1:-}"
-  if [ -z "$module_name" ]; then
-    error "Please specify a module to disable. Usage: nyx module disable <name> [host]"
-  fi
-  local host="$(get_host "${2:-}")"
-  local dashboard="$HOSTS_DIR/$host/default.nix"
-  
-  if grep -qE "^[[:space:]]*module\.$module_name(\.enable)?[[:space:]]*=" "$dashboard"; then
-    sed -i -E "s/^[[:space:]]*module\.$module_name(\.enable)?[[:space:]]*=.*$/  module.$module_name = false;/" "$dashboard"
-    success "Disabled module '$module_name' on host '$host'."
-  else
-    success "Module '$module_name' was not enabled on host '$host'."
-  fi
-}
-
 cmd_module() {
   local verb="${1:-list}"
   shift 2>/dev/null || true
   case "$verb" in
     list) cmd_module_list "$@" ;;
-    enable) cmd_module_enable "$@" ;;
-    disable) cmd_module_disable "$@" ;;
-    *) error "Unknown module subcommand: $verb. Valid: list, enable, disable" ;;
+    *) error "Unknown module subcommand: $verb. Valid: list" ;;
   esac
 }
 
@@ -261,8 +212,6 @@ cmd_help() {
   echo -e "  ${GR}generations${NC}                   Returns a list of system generations"
 
   echo -e "  ${GR}module list${NC} ${YE}[host]${NC}            Returns a list of modules enabled/disabled on a host"
-  echo -e "  ${GR}module enable${NC} ${YE}<name> [host]${NC}   Enable a module on a host"
-  echo -e "  ${GR}module disable${NC} ${YE}<name> [host]${NC}  Disable a module on a host"
   echo -e "  ${GR}tree${NC} ${YE}[host]${NC}                   Visualise the dependency tree for a host"
 }
 
