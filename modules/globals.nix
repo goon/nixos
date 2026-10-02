@@ -70,21 +70,13 @@
         type = lib.types.str;
         default = "org.gnome.Loupe.desktop";
       };
-      videoPlayer = lib.mkOption {
+      mediaPlayer = lib.mkOption {
         type = lib.types.str;
         default = "org.gnome.Totem.desktop";
-      };
-      musicPlayer = lib.mkOption {
-        type = lib.types.str;
-        default = "com.vixalien.decibels.desktop";
       };
       fileManager = lib.mkOption {
         type = lib.types.str;
         default = "org.gnome.Nautilus.desktop";
-      };
-      pdfViewer = lib.mkOption {
-        type = lib.types.str;
-        default = "org.gnome.Evince.desktop";
       };
     };
   };

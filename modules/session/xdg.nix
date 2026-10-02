@@ -49,13 +49,13 @@ lib.module config "xdg" false {
               "gif"
               "webp"
             ];
-            video = xdgAssociations "video" apps.videoPlayer [
+            video = xdgAssociations "video" apps.mediaPlayer [
               "mp4"
               "avi"
               "mkv"
               "webm"
             ];
-            audio = xdgAssociations "audio" apps.musicPlayer [
+            audio = xdgAssociations "audio" apps.mediaPlayer [
               "mp3"
               "flac"
               "wav"
@@ -82,7 +82,7 @@ lib.module config "xdg" false {
               ]);
           in
           {
-            "application/pdf" = apps.pdfViewer;
+            "application/pdf" = apps.browser;
             "text/plain" = apps.editor;
             "inode/directory" = apps.fileManager;
           }
