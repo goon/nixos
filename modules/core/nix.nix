@@ -62,4 +62,16 @@ lib.module config "nix" true {
       };
     };
   };
+
+  homeManager = _: {
+    home.packages = with pkgs; [
+      nil
+      nixd
+    ];
+
+    programs.direnv = {
+      enable = true;
+      nix-direnv.enable = true;
+    };
+  };
 }
