@@ -59,7 +59,6 @@ lib.module config "shell" true {
           ls = "eza --git";
           tree = "eza --tree";
           rm = "rm -i";
-
         };
 
         sessionVariables = {
