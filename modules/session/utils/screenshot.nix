@@ -5,10 +5,6 @@
   ...
 }:
 lib.module config "screenshot" false {
-  config = {
-    module.clipboard = true;
-  };
-
   homeManager = {
     home.packages = with pkgs; [
       grim
@@ -22,7 +18,6 @@ lib.module config "screenshot" false {
       early-exit = true
       initial-tool = "brush"
       copy-command = "wl-copy"
-      default-hide-toolbars = false
     '';
   };
 }
