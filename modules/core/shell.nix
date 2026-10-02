@@ -30,6 +30,7 @@ lib.module config "shell" true {
         gum
         unzip
         wget
+        jq
       ];
       programs = {
         bat.enable = true;
