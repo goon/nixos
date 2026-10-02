@@ -37,7 +37,7 @@ lib.module config "firefox" false {
             "browser.ml.enable" = false;
             "sidebar.position_start" = false;
             "browser.startup.page" = 1;
-            "browser.startup.homepage" = "https://www.cosmos.so/";
+            "browser.startup.homepage" = "https://duckduckgo.com/";
 
             "media.ffmpeg.vaapi.enabled" = true;
             "media.ffmpeg.vaapi-drm.enabled" = true;
