@@ -11,13 +11,11 @@ let
   dependencies = with pkgs; [
     cava
     jq
-    pywalfox-native
     imagemagick
   ];
 in
 lib.module config "quickshell" false {
   config = {
-    module.screenshot = true;
     module.monitors = true;
 
     environment.sessionVariables = {
