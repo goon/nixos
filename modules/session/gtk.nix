@@ -18,11 +18,11 @@ lib.module config "gtk" false {
     }:
     {
       home.packages = with pkgs; [
+        gtk3
         adw-gtk3
         papirus-icon-theme
         bibata-cursors
         glib
-        gtk3
       ];
       dconf.enable = true;
 
