@@ -7,9 +7,10 @@
 #   2. Clone this repository: nix-shell -p git --run "git clone --recursive https://github.com/goon/nixos ~/.nixos"
 #   3. Run this script: cd ~/.nixos && ./scripts/bootstrap
 
-set -e
+set -euo pipefail
 
 # --- Configuration & Colors ---
+
 RE='\033[0;31m'
 GR='\033[0;32m'
 YE='\033[0;33m'
@@ -22,26 +23,34 @@ warn() { echo -e "${YE}[WARN]${NC} $1"; }
 error() { echo -e "${RE}[ERROR]${NC} $1"; exit 1; }
 
 if [ ! -f "/etc/NIXOS" ]; then
-    error "This script must be run on NixOS."
+    error "/etc/nixos not found."
 fi
 
 if [ ! -f "flake.nix" ] || [ ! -d "modules" ]; then
-    error "This script must be run from the root of the NixOS configuration directory (cd ~/.nixos)."
+    error "The bootstrapping process must be started from the root of the NixOS configuration."
 fi
 
-# Ask for the administrator password upfront
-info "Asking for sudo password upfront..."
+FORCE=""
+case "${1:-}" in
+    "") ;;
+    --force) FORCE=1 ;;
+    *) error "Usage: bootstrap [--force]" ;;
+esac
+
+shopt -s nullglob
+GENERATIONS=(/nix/var/nix/profiles/system-*-link)
+if [ "${#GENERATIONS[@]}" -gt 2 ] && [ "$FORCE" != "1" ]; then
+    error "Multiple ${#GENERATIONS[@]} found, suggesting a non fresh install. Run with --force to override."
+fi
+
+info "Requesting sudo password."
 sudo -v
 
-# Keep-alive: update existing sudo time stamp until the script has finished
 while true; do sudo -n true; sleep 60; kill -0 "$$" || exit; done 2>/dev/null &
 
-# Ensure submodules are up to date in case the user forgot --recursive during clone
 info "Checking submodules..."
 nix-shell -p git --run "git submodule update --init --recursive"
 
-
-# Find available hosts
 HOSTS=()
 for dir in hosts/*/; do
     if [ -d "$dir" ]; then
@@ -50,35 +59,27 @@ for dir in hosts/*/; do
 done
 
 if [ ${#HOSTS[@]} -eq 0 ]; then
-    error "No hosts found in hosts/ directory."
+    error "No hosts found within configuration."
 fi
 
-info "Available hosts:"
+info "Available Hosts:"
+SELECTED_HOST=""
 select SELECTED_HOST in "${HOSTS[@]}"; do
-    if [ -n "$SELECTED_HOST" ]; then
-        break
-    else
-        warn "Invalid selection. Please try again."
-    fi
+    [ -n "$SELECTED_HOST" ] && break
+    error "Invalid selection."
 done
+[ -n "$SELECTED_HOST" ] || error "No host selected."
 
-info "We are about to install the '$SELECTED_HOST' host."
+info "Beginning installation for the '$SELECTED_HOST' host."
 echo -e -n "${YE}Press enter to continue or Ctrl+C to abort...${NC} "
 read -r
 
-# 4. Generate Hardware Configuration
 info "Generating hardware configuration for '$SELECTED_HOST'..."
 mkdir -p "hosts/$SELECTED_HOST"
 nixos-generate-config --show-hardware-config > "hosts/$SELECTED_HOST/hardware-configuration.nix"
 success "Hardware configuration saved to hosts/$SELECTED_HOST/hardware-configuration.nix"
 
-# 5. Rebuild and Switch
-info "Starting NixOS rebuild... this may take a while."
+info "Rebuild initiated... this may take a while."
 sudo nixos-rebuild switch --flake ".#$SELECTED_HOST"
 
-# 6. Update Flake Inputs
-info "Updating flake inputs..."
-sudo nix flake update
-success "Flake inputs updated."
-
-success "Bootstrap complete! Your system is now running the new configuration."
+success "Bootstrapping complete! Your system is now running the new configuration."
