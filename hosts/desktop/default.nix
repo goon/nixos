@@ -11,7 +11,6 @@
   module.wooting = true;
 
   module.affinity = true;
-  module.dev = true;
   module.zed = true;
   module.easyeffects = true;
   module.firefox = true;

@@ -8,7 +8,6 @@
   module.monitors = true;
   module.virtualisation = true;
 
-  module.dev = true;
   module.firefox = true;
   module.git = true;
   module.kitty = true;
