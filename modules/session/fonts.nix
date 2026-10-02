@@ -7,17 +7,10 @@
 lib.module config "fonts" false {
   config = {
     fonts.packages = with pkgs; [
-      google-fonts
       corefonts
+      google-fonts
       noto-fonts
-      libertine
-      open-fonts
-      material-symbols
       nerd-fonts.symbols-only
-      source-sans
-      source-serif
-      source-code-pro
-      league-of-moveable-type
     ];
 
     fonts.fontconfig = {
