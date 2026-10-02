@@ -13,9 +13,10 @@ lib.module config "nix" true {
       man.enable = false;
     };
 
-    nix.channel.enable = false;
-
     nix = {
+      channel.enable = false;
+      gc.automatic = false;
+
       settings = {
         use-xdg-base-directories = true;
         experimental-features = [
@@ -31,8 +32,6 @@ lib.module config "nix" true {
           "nix-community.cachix.org-1:mB9FSh9qf2dCimDSUo8Zy7bkq5CX+/rkCWyvRCYg3Fs="
         ];
       };
-
-      gc.automatic = false;
     };
 
     programs = {
