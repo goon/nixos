@@ -110,16 +110,35 @@ lib.module config "firefox" false {
               --toolbarbutton-outline-color-active: none;
               --toolbarbutton-outline-color-selected: none;
             }
-          '';
-          userContent = ''
-            :root {
-              --button-border-color: transparent;
-              --button-border-color-primary: transparent;
+
+            toolbar .toolbarbutton-1,
+            toolbar .toolbarbutton-1 > *,
+            toolbar .bookmark-item,
+            toolbar .bookmark-item > * {
+              appearance: none !important;
+              border: none !important;
+              box-shadow: none !important;
             }
 
-            #categories > .category:not(:focus-visible) {
-              border: none !important;
+            toolbar .toolbarbutton-1 > :is(.toolbarbutton-icon, .toolbarbutton-text, .toolbarbutton-badge-stack),
+            toolbar .bookmark-item > *,
+            toolbar .bookmark-item:not(:focus-visible) {
               outline: none !important;
+            }
+
+            toolbar .toolbarbutton-1:focus-visible > :is(.toolbarbutton-icon, .toolbarbutton-text, .toolbarbutton-badge-stack),
+            toolbar .bookmark-item:focus-visible {
+              outline: var(--focus-outline) !important;
+              outline-offset: var(--focus-outline-inset) !important;
+            }
+          '';
+          userContent = ''
+            moz-page-nav-button {
+              --page-nav-button-border-color: transparent !important;
+              --page-nav-button-border-color-hover: transparent !important;
+              --page-nav-button-border-color-active: transparent !important;
+              --button-border-color-ghost-hover: transparent !important;
+              --button-border-color-ghost-active: transparent !important;
             }
           '';
         };
