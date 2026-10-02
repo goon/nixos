@@ -47,19 +47,7 @@ lib.module config "nix" true {
         };
       };
 
-      nix-ld = {
-        enable = true;
-        libraries = with pkgs; [
-          stdenv.cc.cc
-          zlib
-          fuse3
-          icu
-          nss
-          openssl
-          curl
-          expat
-        ];
-      };
+      nix-ld.enable = true;
     };
   };
 
