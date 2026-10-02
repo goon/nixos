@@ -23,7 +23,6 @@ notify() {
   if command -v notify-send >/dev/null; then
     notify-send "Yaks" "$1" \
       --app-name="Yaks" \
-      --icon="system-software-update" \
       --urgency=low 2>/dev/null || true
   fi
 }
