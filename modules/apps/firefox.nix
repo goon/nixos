@@ -102,6 +102,25 @@ lib.module config "firefox" false {
           };
           userChrome = ''
             .titlebar-close { display: none !important; }
+
+            :root {
+              --toolbarbutton-outline: none;
+              --toolbarbutton-outline-color: none;
+              --toolbarbutton-outline-color-hover: none;
+              --toolbarbutton-outline-color-active: none;
+              --toolbarbutton-outline-color-selected: none;
+            }
+          '';
+          userContent = ''
+            :root {
+              --button-border-color: transparent;
+              --button-border-color-primary: transparent;
+            }
+
+            #categories > .category:not(:focus-visible) {
+              border: none !important;
+              outline: none !important;
+            }
           '';
         };
       };
