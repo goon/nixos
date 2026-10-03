@@ -39,38 +39,32 @@ lib.module config "xdg" false {
           // lib.listToAttrs (
             (assoc apps.imageViewer [
               "image/png"
-              "image/svg"
+              "image/svg+xml"
               "image/jpeg"
-              "image/jpg"
               "image/gif"
               "image/webp"
             ])
             ++ (assoc apps.mediaPlayer [
-              "video/mp4"
-              "video/avi"
-              "video/mkv"
-              "video/webm"
-              "audio/mp3"
+              "audio/mpeg"
               "audio/flac"
-              "audio/wav"
+              "audio/vnd.wave"
               "audio/aac"
               "audio/ogg"
+              "video/mp4"
+              "video/vnd.avi"
+              "video/matroska"
+              "video/webm"
             ])
             ++ (assoc apps.browser [
+              "text/html"
               "application/pdf"
               "application/json"
               "application/xhtml+xml"
-              "application/x-extension-htm"
-              "application/x-extension-html"
-              "application/x-extension-shtml"
-              "application/x-extension-xht"
-              "application/x-extension-xhtml"
               "x-scheme-handler/about"
               "x-scheme-handler/chrome"
               "x-scheme-handler/ftp"
               "x-scheme-handler/http"
               "x-scheme-handler/https"
-              "x-scheme-handler/unknown"
             ])
           );
       };
