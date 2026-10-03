@@ -6,7 +6,10 @@
 }:
 lib.module config "xdg" false {
   config = {
-    environment.systemPackages = [ pkgs.xdg-user-dirs ];
+    environment.systemPackages = [
+      pkgs.xdg-user-dirs
+      pkgs.xdg-terminal-exec
+    ];
     environment.pathsToLink = [ "/share/applications" ];
     xdg.portal = {
       enable = true;
@@ -21,11 +24,6 @@ lib.module config "xdg" false {
         enable = true;
         createDirectories = true;
         setSessionVariables = true;
-        desktop = null;
-        documents = null;
-        music = null;
-        publicShare = null;
-        templates = null;
       };
       mimeApps = {
         enable = true;
@@ -77,10 +75,5 @@ lib.module config "xdg" false {
           );
       };
     };
-
-    home.packages = [
-      pkgs.xdg-utils
-      pkgs.xdg-terminal-exec
-    ];
   };
 }
