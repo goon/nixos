@@ -11,7 +11,6 @@ lib.module config "zed" false {
         "toml"
         "lua"
         "nix"
-        "qml"
       ];
       userSettings = {
         buffer_font_family = globals.userFonts.monospace;
