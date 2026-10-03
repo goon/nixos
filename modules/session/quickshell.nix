@@ -8,10 +8,14 @@
 let
   quickshell = inputs.quickshell.packages.${pkgs.stdenv.hostPlatform.system}.quickshell;
 
+  # grim screenshots the desktop for the shader wallpaper freeze; qsb re-bakes
+  # assets/shaders/*.qsb and must match quickshell's Qt major/minor.
   dependencies = with pkgs; [
     cava
+    grim
     jq
     imagemagick
+    qt6Packages.qtshadertools
   ];
 in
 lib.module config "quickshell" false {
