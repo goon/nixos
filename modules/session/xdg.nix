@@ -32,72 +32,55 @@ lib.module config "xdg" false {
         defaultApplications =
           let
             inherit (config.globals) apps;
-            xdgAssociations =
-              type: program: list:
-              builtins.listToAttrs (
-                map (e: {
-                  name = "${type}/${e}";
-                  value = program;
-                }) list
-              );
-
-            image = xdgAssociations "image" apps.imageViewer [
-              "png"
-              "svg"
-              "jpeg"
-              "jpg"
-              "gif"
-              "webp"
-            ];
-            video = xdgAssociations "video" apps.mediaPlayer [
-              "mp4"
-              "avi"
-              "mkv"
-              "webm"
-            ];
-            audio = xdgAssociations "audio" apps.mediaPlayer [
-              "mp3"
-              "flac"
-              "wav"
-              "aac"
-              "ogg"
-            ];
-            browserTypes =
-              (xdgAssociations "application" apps.browser [
-                "json"
-                "x-extension-htm"
-                "x-extension-html"
-                "x-extension-shtml"
-                "x-extension-xht"
-                "x-extension-xhtml"
-                "xhtml+xml"
-              ])
-              // (xdgAssociations "x-scheme-handler" apps.browser [
-                "about"
-                "chrome"
-                "ftp"
-                "http"
-                "https"
-                "unknown"
-              ]);
+            assoc = app: map (m: lib.nameValuePair m app);
           in
           {
-            "application/pdf" = apps.browser;
             "text/plain" = apps.editor;
             "inode/directory" = apps.fileManager;
           }
-          // image
-          // video
-          // audio
-          // browserTypes;
+          // lib.listToAttrs (
+            (assoc apps.imageViewer [
+              "image/png"
+              "image/svg"
+              "image/jpeg"
+              "image/jpg"
+              "image/gif"
+              "image/webp"
+            ])
+            ++ (assoc apps.mediaPlayer [
+              "video/mp4"
+              "video/avi"
+              "video/mkv"
+              "video/webm"
+              "audio/mp3"
+              "audio/flac"
+              "audio/wav"
+              "audio/aac"
+              "audio/ogg"
+            ])
+            ++ (assoc apps.browser [
+              "application/pdf"
+              "application/json"
+              "application/xhtml+xml"
+              "application/x-extension-htm"
+              "application/x-extension-html"
+              "application/x-extension-shtml"
+              "application/x-extension-xht"
+              "application/x-extension-xhtml"
+              "x-scheme-handler/about"
+              "x-scheme-handler/chrome"
+              "x-scheme-handler/ftp"
+              "x-scheme-handler/http"
+              "x-scheme-handler/https"
+              "x-scheme-handler/unknown"
+            ])
+          );
       };
     };
 
     home.packages = [
-      (pkgs.writeShellScriptBin "xdg-terminal-exec" ''
-        ${config.globals.userTerminal} "$@"
-      '')
       pkgs.xdg-utils
+      pkgs.xdg-terminal-exec
     ];
   };
 }
