@@ -114,14 +114,17 @@ hl.bind(mainMod .. " + SHIFT + R", hl.dsp.exec_cmd("recording region"))
 
 -- Power
 
-hl.bind(mainMod .. " + SHIFT + Q", hl.dsp.exit())
 hl.bind("CTRL + ALT + Delete", hl.dsp.exit())
-hl.bind(mainMod .. " + SHIFT + P", hl.dsp.dpms({ action = "off" }))
+hl.bind("CTRL + ALT + F10", hl.dsp.exit())
+hl.bind("CTRL + ALT + F11", hl.dsp.exec_cmd("systemctl reboot"))
+hl.bind("CTRL + ALT + F12", hl.dsp.exec_cmd("systemctl poweroff"))
 
 -- Audio & Backlight
 
-hl.bind("XF86AudioRaiseVolume", hl.dsp.exec_cmd("wpctl set-volume @DEFAULT_AUDIO_SINK@ 5%+ -l 1.0"), { locked = true, repeating = true })
-hl.bind("XF86AudioLowerVolume", hl.dsp.exec_cmd("wpctl set-volume @DEFAULT_AUDIO_SINK@ 5%-"), { locked = true, repeating = true })
+hl.bind("XF86AudioRaiseVolume", hl.dsp.exec_cmd("wpctl set-volume @DEFAULT_AUDIO_SINK@ 5%+ -l 1.0"),
+    { locked = true, repeating = true })
+hl.bind("XF86AudioLowerVolume", hl.dsp.exec_cmd("wpctl set-volume @DEFAULT_AUDIO_SINK@ 5%-"),
+    { locked = true, repeating = true })
 hl.bind("XF86AudioMute", hl.dsp.exec_cmd("wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle"), { locked = true })
 hl.bind("XF86AudioMicMute", hl.dsp.exec_cmd("wpctl set-mute @DEFAULT_AUDIO_SOURCE@ toggle"), { locked = true })
 hl.bind("XF86AudioPlay", hl.dsp.exec_cmd("playerctl play-pause"), { locked = true })
@@ -170,7 +173,7 @@ hl.bind(mainMod .. " + mouse:273", hl.dsp.window.resize(), { mouse = true })
 -- Rules
 
 local float_apps = {
-    { class = "kitty", title = "^float$" },
+    { class = "kitty",                  title = "^float$" },
     { class = "^com.gabm.satty$" },
     { title = "^Picture-in-[Pp]icture$" },
 }
