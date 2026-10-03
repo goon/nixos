@@ -115,9 +115,9 @@ hl.bind(mainMod .. " + SHIFT + R", hl.dsp.exec_cmd("recording region"))
 -- Power
 
 hl.bind("CTRL + ALT + Delete", hl.dsp.exit())
-hl.bind("CTRL + ALT + F10", hl.dsp.exit())
-hl.bind("CTRL + ALT + F11", hl.dsp.exec_cmd("systemctl reboot"))
-hl.bind("CTRL + ALT + F12", hl.dsp.exec_cmd("systemctl poweroff"))
+hl.bind("CTRL + SHIFT + F10", hl.dsp.exit())
+hl.bind("CTRL + SHIFT + F11", hl.dsp.exec_cmd("systemctl reboot"))
+hl.bind("CTRL + SHIFT + F12", hl.dsp.exec_cmd("systemctl poweroff"))
 
 -- Audio & Backlight
 
@@ -202,6 +202,7 @@ hl.layer_rule({
     match = { namespace = "yaks.*" },
     blur = true,
     ignore_alpha = 0.5,
+    no_anim = true,
 })
 
 hl.layer_rule({
