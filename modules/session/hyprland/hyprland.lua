@@ -107,10 +107,8 @@ hl.bind(mainMod .. " + P", hl.dsp.exec_cmd("qs ipc call power toggle"))
 
 -- Screenshot & Recording
 
-hl.bind("Print", hl.dsp.exec_cmd("screenshot area"))
-hl.bind("CTRL + Print", hl.dsp.exec_cmd("grim -g \"$(slurp)\" - | satty --filename -"))
-hl.bind(mainMod .. " + R", hl.dsp.exec_cmd("recording screen"))
-hl.bind(mainMod .. " + SHIFT + R", hl.dsp.exec_cmd("recording region"))
+hl.bind("Print", hl.dsp.exec_cmd("qs ipc call screenshot toggle"))
+hl.bind(mainMod .. " + R", hl.dsp.exec_cmd("qs ipc call recording toggle"))
 
 -- Power
 
@@ -174,7 +172,6 @@ hl.bind(mainMod .. " + mouse:273", hl.dsp.window.resize(), { mouse = true })
 
 local float_apps = {
     { class = "kitty",                  title = "^float$" },
-    { class = "^com.gabm.satty$" },
     { title = "^Picture-in-[Pp]icture$" },
 }
 for _, match_criteria in ipairs(float_apps) do
@@ -203,6 +200,13 @@ hl.layer_rule({
     blur = true,
     ignore_alpha = 0.5,
     no_anim = true,
+})
+
+-- The screenshot overlay draws its own scrim over the frozen frame, so a blur
+-- behind it just smears the selection. Later rules win, so this is an override.
+hl.layer_rule({
+    match = { namespace = "yaks:screenshot" },
+    blur = false,
 })
 
 hl.layer_rule({
