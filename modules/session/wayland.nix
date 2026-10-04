@@ -6,7 +6,6 @@
 }:
 lib.module config "wayland" false {
   config = {
-    module.screenshot = true;
     module.xdg = true;
     module.gtk = true;
     module.qt = true;
