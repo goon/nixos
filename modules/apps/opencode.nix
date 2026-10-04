@@ -11,6 +11,7 @@ lib.module config "opencode" false {
       pkgs.rtk
       pkgs.snip
       pkgs.mcp-nixos
+      (pkgs.callPackage ../../pkgs/openchamber.nix { })
     ];
     xdg.configFile."opencode/opencode.json".text = builtins.toJSON {
       "$schema" = "https://opencode.ai/config.json";
@@ -22,16 +23,6 @@ lib.module config "opencode" false {
         "opencode-caveman"
       ];
       default_agent = "plan";
-      agent = {
-        plan = {
-          mode = "primary";
-          model = "opencode-go/minimax-m3";
-        };
-        build = {
-          mode = "primary";
-          model = "opencode-go/minimax-m3";
-        };
-      };
       mcp = {
         nixos = {
           type = "local";
