@@ -103,7 +103,6 @@ hl.bind(mainMod .. " + G", hl.dsp.exec_cmd("qs ipc call wallpaper toggle"))
 hl.bind(mainMod .. " + Z", hl.dsp.exec_cmd("qs ipc call settings toggle"))
 hl.bind(mainMod .. " + S", hl.dsp.workspace.toggle_special("scratchpad"))
 hl.bind(mainMod .. " + CTRL + S", hl.dsp.window.move({ workspace = "special:scratchpad" }))
-hl.bind(mainMod .. " + P", hl.dsp.exec_cmd("qs ipc call power toggle"))
 
 -- Screenshot & Recording
 
@@ -113,7 +112,6 @@ hl.bind(mainMod .. " + R", hl.dsp.exec_cmd("qs ipc call recording toggle"))
 -- Power
 
 hl.bind("CTRL + ALT + Delete", hl.dsp.exit())
-hl.bind("CTRL + SHIFT + F10", hl.dsp.exit())
 hl.bind("CTRL + SHIFT + F11", hl.dsp.exec_cmd("systemctl reboot"))
 hl.bind("CTRL + SHIFT + F12", hl.dsp.exec_cmd("systemctl poweroff"))
 
