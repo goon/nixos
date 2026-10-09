@@ -48,6 +48,9 @@ lib.module config "gaming" false {
   };
 
   homeManager = _: {
-    home.packages = [ (pkgs.callPackage ../../pkgs/jagex.nix { }) ];
+    home.packages = [
+      (pkgs.callPackage ../../pkgs/jagex.nix { })
+      (pkgs.callPackage ../../pkgs/wfhelper.nix { })
+    ];
   };
 }
