@@ -139,8 +139,8 @@ stdenv.mkDerivation {
       --replace-fail 'Exec=AppRun --no-sandbox %U' \
       'Exec=wfhelper %U'
 
-    mkdir -p $out/share/icons
-    cp -R $src/usr/share/icons/hicolor $out/share/icons/
+    install -Dm644 $src/usr/share/icons/hicolor/974x974/apps/wfhelper.png \
+      $out/share/icons/hicolor/512x512/apps/wfhelper.png
 
     install -Dm644 $src/LICENSE.electron.txt \
       $out/share/licenses/${pname}/LICENSE.electron.txt

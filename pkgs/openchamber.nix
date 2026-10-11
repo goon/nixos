@@ -33,8 +33,8 @@ appimageTools.wrapType2 {
       --replace-fail 'Exec=AppRun --no-sandbox %U' \
       'Exec=openchamber --no-sandbox %U'
 
-    mkdir -p $out/share/icons
-    cp -R ${appimageContents}/usr/share/icons/hicolor $out/share/icons/
+    install -Dm644 ${appimageContents}/usr/share/icons/hicolor/scalable/openchamber.svg \
+      $out/share/icons/hicolor/scalable/apps/openchamber.svg
 
     install -Dm644 ${appimageContents}/LICENSE.electron.txt \
       $out/share/licenses/openchamber/LICENSE.electron.txt
