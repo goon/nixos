@@ -38,8 +38,8 @@
     sonora.url = "github:sonorahq/sonora";
     sonora.inputs.nixpkgs.follows = "nixpkgs";
 
-    amethyst.url = "github:ChrisDKN/Amethyst-Mod-Manager";
-    amethyst.inputs.nixpkgs.follows = "nixpkgs";
+    nix-craftapps.url = "github:olafkfreund/nix-craftapps";
+    nix-craftapps.inputs.nixpkgs.follows = "nixpkgs";
   };
 
   outputs =
