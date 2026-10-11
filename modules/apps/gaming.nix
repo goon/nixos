@@ -15,8 +15,6 @@ lib.module config "gaming" false {
 
     environment.systemPackages = with pkgs; [
       mangohud
-      deadlock-mod-manager
-      inputs.amethyst.packages.${pkgs.stdenv.hostPlatform.system}.default
     ];
 
     programs = {
