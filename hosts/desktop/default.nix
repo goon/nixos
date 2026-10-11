@@ -10,7 +10,7 @@
   module.logitech = true;
   module.wooting = true;
 
-  module.affinity = true;
+  module.affinity = false;
   module.zed = true;
   module.easyeffects = true;
   module.firefox = true;
@@ -25,6 +25,7 @@
   module.nvf = true;
   module.obsidian = true;
   module.opencode = true;
+  module.craft = true;
   module.spicetify = true;
   module.sonora = true;
   module.starship = true;
