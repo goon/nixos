@@ -14,10 +14,12 @@ lib.module config "nvf" false {
         vim = {
           globals.mapleader = " ";
           vimAlias = true;
+          lineNumberMode = "none";
 
           options = {
             scrolloff = 10;
             laststatus = 3;
+            signcolumn = "no";
             expandtab = true;
             shiftwidth = 2;
             tabstop = 2;
@@ -167,13 +169,14 @@ lib.module config "nvf" false {
             };
             lua.enable = true;
             bash.enable = true;
-            typescript.enable = true;
+            # ponytail: disabled, typescript-language-server pnpm hash mismatch upstream, re-enable after nvf fix
+            typescript.enable = false;
             markdown.enable = true;
-            json.enable = true;
-            yaml.enable = true;
-            toml.enable = true;
-            html.enable = true;
-            css.enable = true;
+            json.enable = false;
+            yaml.enable = false;
+            toml.enable = false;
+            html.enable = false;
+            css.enable = false;
           };
 
           formatter.conform-nvim = {
@@ -224,6 +227,8 @@ lib.module config "nvf" false {
             pick.enable = true;
             statusline.enable = true;
             surround.enable = true;
+            tabline.enable = true;
+            tabline.setupOpts.show_icons = false;
           };
 
           terminal.toggleterm = {
