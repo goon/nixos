@@ -11,8 +11,6 @@
     kernelPackages = pkgs.linuxPackages_zen;
 
     consoleLogLevel = 0;
-    initrd.verbose = false;
-    initrd.systemd.enable = true;
     kernelParams = [
       "quiet"
       "loglevel=3"
