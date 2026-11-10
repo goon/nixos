@@ -32,11 +32,11 @@ let
 in
 pkgs.stdenv.mkDerivation {
   pname = "harbor";
-  version = "1.0.2-beta-1";
+  version = "1.0.3-1";
 
   src = pkgs.fetchurl {
-    url = "https://github.com/Thunderhawkk/harbor-linux/releases/download/v1.0.2-beta/Harbor_1.0.2-beta-1_amd64.deb";
-    hash = "sha256-YydK0g/IWia0mKUbG0dNCArRm2uARqrRUd2LszpJN7M=";
+    url = "https://github.com/Thunderhawkk/harbor-linux/releases/download/beta-v1.0.3/Harbor_1.0.3-1_amd64.deb";
+    hash = "sha256-Ks7K8VteQk4Mcaw/A2Xn44IbM+YlXP/QQoSJaiZti4g=";
   };
 
   nativeBuildInputs = with pkgs; [
