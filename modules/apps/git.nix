@@ -12,7 +12,7 @@ lib.module config "git" false {
         settings = {
           user = {
             name = "goon";
-            email = "hayhurst@protonmail.com";
+            email = "just@michaelhayhurst.com";
           };
           init.defaultBranch = "main";
           push.autoSetupRemote = true;
