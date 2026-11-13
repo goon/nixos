@@ -12,9 +12,6 @@
     nix-gaming.url = "github:fufexan/nix-gaming";
     nix-gaming.inputs.nixpkgs.follows = "nixpkgs";
 
-    affinity-nix.url = "github:mrshmllow/affinity-nix";
-    affinity-nix.inputs.nixpkgs.follows = "nixpkgs";
-
     nix-flatpak.url = "github:gmodena/nix-flatpak";
 
     spicetify-nix.url = "github:Gerg-L/spicetify-nix";

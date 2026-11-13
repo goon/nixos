@@ -10,7 +10,6 @@
   module.logitech = true;
   module.wooting = true;
 
-  module.affinity = false;
   module.zed = true;
   module.easyeffects = true;
   module.firefox = true;
